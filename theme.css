@@ -1,37 +1,26 @@
 /* ==========================================================
-   KODEV BLUE NIGHT THEME
+   KODEV BLUE NIGHT THEME v2.0
    Engineered for absolute focus, zero light bleed, and high
-   cognitive efficiency. Mac-inspired UI/UX.
+   cognitive efficiency. Mac & Baseline-inspired UI/UX.
    ========================================================== */
 
 /* @settings
 name: Blue Night (Kodev)
 id: kodev-blue-night
 settings:
-  - id: info
-    title: Blue Night (Kodev)
+  - id: appearance-heading
+    title: Appearance
     type: heading
     level: 1
-    collapsed: false
-  - id: info-text
-    title: Elegant Midnight Theme
-    type: info-text
-    description: "Designed for absolute focus and high cognitive efficiency. macOS-inspired UI/UX with Deep Blue accents."
-
-  - id: colors
-    title: Colors & Accents
-    type: heading
-    level: 1
-    collapsed: true
   - id: color-accent-base
-    title: Primary Accent Color
-    description: The core color for links, buttons, and highlights.
+    title: Principal Accent Color
+    description: Your default Blue Tech accent.
     type: variable-color
     format: hex
     default: '#1e3a8a'
   - id: dark-bg-main
     title: Editor Background (Dark Mode)
-    description: Pure OLED black (#000000) or Midnight Blue (#0a0e14).
+    description: '#000000' gives you pure OLED black. Blueish tones like '#0a0e14' also work well.
     type: variable-color
     format: hex
     default: '#000000'
@@ -41,697 +30,1288 @@ settings:
     type: variable-color
     format: hex
     default: '#ffffff'
-
-  - id: interface
-    title: Interface & Layout
+  - id: macos-ui-heading
+    title: macOS & Baseline UI Features
     type: heading
     level: 1
-    collapsed: true
-  - id: density-modifier
-    title: Interface Density
-    type: variable-number-slider
-    default: 1
-    min: 0.75
-    max: 1.25
-    step: 0.125
-  - id: radius-modifier
-    title: Corner Roundness
-    type: variable-number-slider
-    default: 1
-    min: 0.5
-    max: 2
-    step: 0.25
   - id: enable-raycast-prompt
     title: Raycast Style Command Palette
-    description: Floating glass effect with centered prompt.
+    description: Centers the command palette and adds a floating glass effect.
     type: class-toggle
     default: true
   - id: enable-mac-explorer
     title: Minimalist File Explorer
-    description: macOS-style bubble margins and active states.
+    description: Enables macOS-style bubble margins in the file tree.
+    type: class-toggle
+    default: true
+  - id: enable-baseline-metadata
+    title: Baseline Metadata Block
+    description: Wraps note properties in a clean, elegant card.
     type: class-toggle
     default: true
   - id: enable-folder-guides
     title: Folder Indent Guides
+    description: Shows connection lines in the file explorer (VS Code style).
     type: class-toggle
     default: true
-  - id: enable-minimal-statusbar
-    title: Auto-hide Status Bar
-    type: class-toggle
-    default: true
-
-  - id: typography
+  - id: typography-heading
     title: Typography & Content
     type: heading
     level: 1
-    collapsed: true
-  - id: font-interface-override
-    title: Interface Font
-    type: variable-text
-    default: '-apple-system, SF Pro Text, Inter'
-  - id: font-text-override
-    title: Editor Font
-    type: variable-text
-    default: '-apple-system, SF Pro Text, Inter'
   - id: enable-premium-headers
-    title: Premium Heading Styles
+    title: Premium Headers
+    description: Styles H1, H2, H3 with accent colors and distinct formatting.
     type: class-toggle
     default: true
   - id: enable-custom-bullets
     title: Colored List Bullets
+    description: Replaces standard dots with your accent color.
     type: class-toggle
     default: true
-
-  - id: markdown-pro
-    title: Premium Markdown
+  - id: productivity-heading
+    title: Productivity & Focus
     type: heading
     level: 1
-    collapsed: true
-  - id: enable-premium-callouts
-    title: Glassmorphic Callouts
-    type: class-toggle
-    default: true
-  - id: enable-macos-tables
-    title: Elegant Zebra Tables
-    type: class-toggle
-    default: true
-  - id: enable-deep-blue-code
-    title: Deep Blue Syntax Highlighting
-    type: class-toggle
-    default: true
   - id: enable-pill-tags
-    title: iOS Style Pill Tags
+    title: Pill Style Tags (iOS)
+    description: Rounds tags and gives them a translucent background.
     type: class-toggle
     default: true
   - id: enable-custom-checkboxes
-    title: Circular Task Checkboxes
+    title: Circular Checkboxes
+    description: Converts task checkboxes into circles with smooth animations.
     type: class-toggle
     default: true
   - id: enable-ide-blockquotes
-    title: Modern IDE Blockquotes
+    title: IDE Style Blockquotes
+    description: Improves the design of blockquotes with borders and subtle backgrounds.
+    type: class-toggle
+    default: true
+  - id: enable-minimal-statusbar
+    title: Minimalist Status Bar
+    description: Subtly hides the bottom bar until hovered.
     type: class-toggle
     default: true
 */
 
 /* ==========================================================
-   0. ADVANCED SHARED VARIABLES & RESET
+   0. SHARED VARIABLES & RESET
    ========================================================== */
 body {
-  /* Dynamic Modifiers */
-  --font-ui-size: calc(13px * var(--density-modifier, 1));
-  --font-text-size: calc(15px * var(--density-modifier, 1));
-  --p-spacing: calc(1.5rem * var(--density-modifier, 1));
-  --list-spacing: calc(0.175em * var(--density-modifier, 1));
+  /* --- Fonts (Obsidian theme variable names) --- */
+  --font-interface-theme:
+    'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+  --font-text-theme:
+    'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+  --font-monospace-theme:
+    'JetBrains Mono', 'SF Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace;
 
-  /* Core Radii with Modifier */
-  --radius-s: calc(4px * var(--radius-modifier, 1));
-  --radius-m: calc(8px * var(--radius-modifier, 1));
-  --radius-l: calc(12px * var(--radius-modifier, 1));
-  --radius-xl: calc(16px * var(--radius-modifier, 1));
+  /* --- Typography --- */
+  --font-text-size: 15px;
+  --line-height-normal: 1.65;
+  --bold-weight: 600;
+  --file-line-width: 750px;
+  --heading-spacing: 1.5rem;
+  --p-spacing: 0.75rem;
 
-  /* Typography */
-  --font-interface: var(
-    --font-interface-override,
-    -apple-system,
-    BlinkMacSystemFont,
-    'SF Pro Text',
-    'Inter',
-    'Segoe UI',
-    sans-serif
-  );
-  --font-text: var(
-    --font-text-override,
-    -apple-system,
-    BlinkMacSystemFont,
-    'SF Pro Text',
-    'Inter',
-    'Segoe UI',
-    sans-serif
-  );
-  --font-monospace: 'SF Mono', 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace;
+  /* --- Accent HSL (Blue #2563eb ≈ hsl(221, 83%, 53%)) --- */
+  --accent-h: 221;
+  --accent-s: 83%;
+  --accent-l: 53%;
 
-  /* Global UI Scaling */
-  font-size: var(--font-ui-size);
+  /* --- Structural Radii --- */
+  --radius-s: 4px;
+  --radius-m: 8px;
+  --radius-l: 12px;
+  --radius-xl: 16px;
 
-  /* Animation System (Baseline Reference) */
-  --anim-speed-modifier: 1;
-  --anim-duration-superfast: calc(80ms * var(--anim-speed-modifier));
-  --anim-duration-fast: calc(160ms * var(--anim-speed-modifier));
-  --anim-duration-moderate: calc(320ms * var(--anim-speed-modifier));
-  --anim-motion-baseline: cubic-bezier(0.1, 0, 0.1, 1.25);
+  /* --- Baseline UI Element Variables --- */
+  --input-radius: var(--radius-m);
+  --button-radius: var(--radius-m);
+  --toggle-radius: 14px;
+  --toggle-width: 44px;
 
-  /* Shadow System (Premium macOS) */
-  --shadow-mac: 0 10px 30px rgba(0, 0, 0, 0.15);
-  --shadow-mac-heavy: 0 20px 50px rgba(0, 0, 0, 0.3);
-  --shadow-tactile: rgba(0, 0, 0, 0.04) 0px 2px 8px -2px, rgba(0, 0, 0, 0.04) 0px 2px 4px -2px;
-
-  /* Icon Stroke Widths */
-  --icon-stroke-modifier: 1;
-  --icon-s-stroke-width: calc(2px * var(--icon-stroke-modifier));
-  --icon-m-stroke-width: calc(2px * var(--icon-stroke-modifier));
-}
-
-.markdown-rendered p {
-  margin-block-start: var(--p-spacing);
-  margin-block-end: var(--p-spacing);
-}
-
-.markdown-rendered li {
-  margin-block-start: var(--list-spacing);
-  margin-block-end: var(--list-spacing);
+  /* --- Shadows --- */
+  --shadow-s: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-mac: 0 8px 24px rgba(0, 0, 0, 0.18);
+  --shadow-mac-heavy: 0 20px 60px rgba(0, 0, 0, 0.45);
 }
 
 /* ==========================================================
-   1. DARK MODE (Absolute Focus)
+   1. DARK MODE — Midnight Baseline Contrast
    ========================================================== */
 .theme-dark {
-  /* Core Backgrounds */
+  /* --- Base Color Scale --- */
   --color-base-00: var(--dark-bg-main, #000000);
-  --color-base-10: #050911;
-  --color-base-20: #0a1120;
-  --color-base-30: #1b2633;
-  --color-base-40: #2a3b4d;
+  /* OLED black — editor canvas */
+  --color-base-10: #090e16;
+  /* Midnight blue — sidebar panels */
+  --color-base-20: #111827;
+  /* Deep navy — elevated panels */
+  --color-base-25: #182030;
+  /* Mid-depth hover areas */
+  --color-base-30: #1e293b;
+  /* Rich borders */
+  --color-base-35: #253347;
+  /* Hover border emphasis */
+  --color-base-40: #334155;
+  /* Muted / faint borders */
+  --color-base-50: #475569;
+  /* Disabled / faint text support */
+  --color-base-60: #64748b;
+  /* Muted icons */
+  --color-base-70: #94a3b8;
+  /* Muted text */
+  --color-base-100: #e2e8f0;
+  /* Primary text */
 
-  /* Translucency */
-  --translucent-dark-opacity: 50%;
-  --workspace-background-translucent: rgba(0, 0, 0, var(--translucent-dark-opacity));
-
-  /* Blue Accents */
+  /* --- Custom Accent Palette --- */
   --color-accent: var(--color-accent-base, #1e3a8a);
-  --color-accent-1: color-mix(in srgb, var(--color-accent), white 20%);
-  --color-accent-2: color-mix(in srgb, var(--color-accent), black 30%);
+  --color-accent-1: #2563eb;
+  --color-accent-2: #172554;
+  --color-accent-light: #60a5fa;
+  --color-accent-lighter: #93c5fd;
 
-  /* Typography */
-  --text-normal: #e2e8f0;
-  --text-muted: #94a3b8;
-  --text-faint: #475569;
-  --text-selection: color-mix(in srgb, var(--color-accent), transparent 60%);
-
-  --text-accent: var(--color-accent);
-  --text-accent-hover: var(--color-accent-1);
-
-  /* Backgrounds & Borders */
+  /* --- Backgrounds --- */
   --background-primary: var(--color-base-00);
   --background-primary-alt: var(--color-base-10);
   --background-secondary: var(--color-base-10);
+  --background-secondary-alt: var(--color-base-20);
   --background-modifier-border: var(--color-base-30);
-  --background-modifier-hover: color-mix(in srgb, var(--color-accent), transparent 85%);
+  --background-modifier-border-hover: var(--color-base-35);
+  --background-modifier-hover: rgba(60, 130, 241, 0.1);
+  --background-modifier-active-hover: rgba(60, 130, 241, 0.18);
+  --background-modifier-active-line: rgba(60, 130, 241, 0.05);
+  --background-modifier-error: rgba(239, 68, 68, 0.15);
+  --background-modifier-error-rgb: 239, 68, 68;
+  --background-modifier-success: rgba(34, 197, 94, 0.12);
+  --background-modifier-message: var(--color-base-20);
 
-  /* Active Line Highlight (Deep Focus) */
-  --background-modifier-active-line: color-mix(in srgb, var(--color-accent), transparent 92%);
+  /* --- Typography --- */
+  --text-normal: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-faint: #475569;
+  --text-selection: rgba(37, 99, 235, 0.3);
+  --text-accent: var(--color-accent-light);
+  --text-accent-hover: var(--color-accent-lighter);
+  --text-on-accent: #ffffff;
+  --text-on-accent-muted: rgba(255, 255, 255, 0.8);
+  --text-error: #f87171;
+  --text-success: #4ade80;
+  --text-warning: #fbbf24;
 
-  /* Code Blocks */
-  --code-background: #050911;
+  /* --- Interactive Elements --- */
+  --interactive-normal: var(--color-base-20);
+  --interactive-hover: var(--color-base-30);
+  --interactive-accent: var(--color-accent-1);
+  --interactive-accent-hover: #3b82f6;
+
+  /* --- Tab Variables --- */
+  --tab-background-active: var(--color-base-00);
+  --tab-container-background: var(--color-base-10);
+  --tab-divider-color: var(--color-base-30);
+  --tab-outline-color: var(--color-base-30);
+  --tab-outline-width: 1px;
+  --tab-curve: 0px;
+  --tab-radius: var(--radius-m);
+  --tab-radius-active: var(--radius-m);
+  --tab-text-color: var(--text-muted);
+  --tab-text-color-active: var(--text-normal);
+  --tab-text-color-focused: var(--text-muted);
+  --tab-text-color-focused-active: var(--text-normal);
+  --tab-text-color-focused-highlighted: var(--color-accent-light);
+  --tab-text-color-focused-active-current: var(--text-normal);
+  --tab-font-size: 13px;
+  --tab-font-weight: 500;
+
+  /* --- Navigation Variables --- */
+  --nav-item-size: 13px;
+  --nav-item-color: var(--text-muted);
+  --nav-item-color-hover: var(--text-normal);
+  --nav-item-color-active: var(--color-accent-lighter);
+  --nav-item-color-selected: var(--color-accent-lighter);
+  --nav-item-background-hover: rgba(60, 130, 241, 0.1);
+  --nav-item-background-active: rgba(37, 99, 235, 0.15);
+  --nav-item-background-selected: rgba(37, 99, 235, 0.2);
+  --nav-item-weight: 400;
+  --nav-item-weight-hover: 400;
+  --nav-item-weight-active: 600;
+  --nav-item-padding: 4px 8px;
+  --nav-indentation-guide-color: var(--color-base-30);
+  --nav-indentation-guide-width: 1px;
+  --nav-collapse-icon-color: var(--color-base-50);
+  --nav-collapse-icon-color-collapsed: var(--color-base-40);
+  --nav-item-color-highlighted: var(--color-accent-light);
+  --nav-item-parent-padding: var(--nav-item-padding);
+  --nav-item-children-padding-start: 0px;
+  --nav-item-children-margin-start: 18px;
+  --nav-item-white-space: nowrap;
+  /* --- Navigation Heading Variables --- */
+  --nav-heading-color: var(--text-faint);
+  --nav-heading-color-hover: var(--text-muted);
+  --nav-heading-color-collapsed: var(--text-faint);
+  --nav-heading-color-colapsed-hover: var(--text-muted);
+  --nav-heading-weight: 600;
+  --nav-heading-weight-hover: 600;
+
+  /* --- Status Bar Variables --- */
+  --status-bar-background: var(--color-base-10);
+  --status-bar-border-color: transparent;
+  --status-bar-border-width: 0px;
+  --status-bar-font-size: 11px;
+  --status-bar-text-color: var(--text-faint);
+  --status-bar-radius: 0px;
+
+  /* --- Scrollbar Variables (Windows/Linux) --- */
+  --scrollbar-bg: transparent;
+  --scrollbar-thumb-bg: var(--color-base-30);
+  --scrollbar-active-thumb-bg: var(--color-base-40);
+
+  /* --- Code Variables --- */
+  --code-background: #0d131f;
   --code-normal: #a5b4fc;
-  --code-comment: #475569;
-  --code-function: #818cf8;
+  --code-size: 0.875em;
+  --code-comment: var(--color-base-50);
+  --code-function: #7dd3fc;
+  --code-important: #f87171;
   --code-keyword: #c084fc;
-  --code-string: #22d3ee;
-  --code-punctuation: #94a3b8;
-  --code-operator: #818cf8;
+  --code-operator: #60a5fa;
+  --code-property: #a5b4fc;
+  --code-punctuation: var(--text-muted);
+  --code-string: #86efac;
+  --code-tag: #f9a8d4;
+  --code-value: #fde68a;
 
-  /* Tables */
-  --table-header-background: var(--color-base-10);
-  --table-row-alt-background: color-mix(in srgb, var(--color-accent), transparent 95%);
-  --table-border-color: var(--color-base-30);
+  /* --- Inline Title --- */
+  --inline-title-color: var(--color-accent-light);
+  --inline-title-font: var(--font-interface-theme);
+  --inline-title-size: 2em;
+  --inline-title-weight: 700;
+  --inline-title-line-height: 1.2;
 
-  /* Graph View (Data Node Hierarchy) */
+  /* --- Heading Colors (used by Obsidian's default CSS) --- */
+  --h1-color: var(--text-normal);
+  --h2-color: #cbd5e1;
+  --h3-color: var(--text-muted);
+  --h4-color: var(--text-muted);
+  --h5-color: var(--text-faint);
+  --h6-color: var(--text-faint);
+
+  /* --- Link Colors --- */
+  --link-color: var(--color-accent-light);
+  --link-color-hover: var(--color-accent-lighter);
+  --link-external-color: #818cf8;
+  --link-external-color-hover: #a5b4fc;
+  --link-unresolved-color: var(--text-faint);
+  --link-decoration: none;
+  --link-decoration-hover: underline;
+  --link-unresolved-decoration: none;
+
+  /* --- Graph View --- */
   --graph-text: #e2e8f0;
   --graph-line: #1e3a8a;
   --graph-node: #64748b;
   --graph-node-unresolved: #334155;
-  --graph-node-focused: var(--color-accent);
+  --graph-node-focused: var(--color-accent-1);
+  --graph-node-tag: #818cf8;
+  --graph-node-attachment: #22d3ee;
+
+  /* --- Titlebar --- */
+  --titlebar-background: var(--color-base-10);
+  --titlebar-background-focused: var(--color-base-10);
+  --titlebar-border-width: 0px;
+  --titlebar-border-color: transparent;
+  --titlebar-text-color: var(--text-muted);
+  --titlebar-text-color-focused: var(--text-normal);
+  --titlebar-text-weight: 500;
+  --header-height: 40px;
+
+  /* --- Properties (Metadata) Container Variables --- */
+  --metadata-background: var(--color-base-10);
+  --metadata-display-editing: block;
+  --metadata-display-reading: block;
+  --metadata-max-width: 100%;
+  --metadata-padding: 10px 14px;
+  --metadata-border-color: var(--color-base-30);
+  --metadata-border-radius: var(--radius-m);
+  --metadata-border-width: 1px;
+  --metadata-gap: 2px;
+
+  /* --- Properties Individual Row Variables --- */
+  --metadata-divider-color: var(--color-base-25);
+  --metadata-divider-color-hover: var(--color-base-35);
+  --metadata-divider-color-focus: var(--color-accent-1);
+  --metadata-divider-width: 1px;
+  --metadata-property-padding: 3px 6px;
+  --metadata-property-radius: var(--radius-s);
+  --metadata-property-radius-hover: var(--radius-m);
+  --metadata-property-radius-focus: var(--radius-m);
+  --metadata-property-background: transparent;
+  --metadata-property-background-hover: rgba(60, 130, 241, 0.08);
+  --metadata-property-background-active: rgba(37, 99, 235, 0.15);
+  --metadata-label-background-hover: rgba(30, 58, 138, 0.22);
+  --metadata-label-background-active: rgba(37, 99, 235, 0.3);
+  --metadata-label-font-size: 0.8125em;
+  --metadata-label-font-weight: 500;
+  --metadata-sidebar-label-font-size: 0.75em;
+  --metadata-label-text-color: var(--text-muted);
+  --metadata-label-text-color-hover: var(--text-normal);
+  --metadata-label-width: 140px;
+  --metadata-input-height: 26px;
+  --metadata-input-text-color: var(--text-normal);
+  --metadata-input-font-size: 0.875em;
+  --metadata-sidebar-input-font-size: 0.8125em;
+  --metadata-input-background: transparent;
+  --metadata-input-background-hover: var(--color-base-20);
+  --metadata-input-background-active: var(--color-base-20);
+
+  /* --- Tag Variables --- */
+  --tag-size: 0.8em;
+  --tag-color: var(--color-accent-light);
+  --tag-color-hover: var(--text-on-accent);
+  --tag-decoration: none;
+  --tag-decoration-hover: none;
+  --tag-background: rgba(37, 99, 235, 0.12);
+  --tag-background-hover: var(--interactive-accent);
+  --tag-border-color: rgba(96, 165, 250, 0.18);
+  --tag-border-color-hover: var(--interactive-accent);
+  --tag-border-width: 1px;
+  --tag-padding-x: 7px;
+  --tag-padding-y: 1px;
+  --tag-radius: var(--radius-s);
+  --tag-weight: 500;
+
+  /* --- Multi-select Pill Variables (List-type Properties) --- */
+  --pill-color: var(--color-accent-lighter);
+  --pill-color-hover: var(--text-on-accent);
+  --pill-color-remove: var(--text-muted);
+  --pill-color-remove-hover: var(--text-error);
+  --pill-decoration: none;
+  --pill-decoration-hover: none;
+  --pill-background: rgba(37, 99, 235, 0.15);
+  --pill-background-hover: rgba(37, 99, 235, 0.28);
+  --pill-border-color: rgba(96, 165, 250, 0.22);
+  --pill-border-color-hover: var(--color-accent-light);
+  --pill-border-width: 1px;
+  --pill-padding-x: 8px;
+  --pill-padding-y: 2px;
+  --pill-radius: var(--radius-m);
+  --pill-weight: 500;
+
+  /* --- Checkbox Variables --- */
+  --checkbox-radius: var(--radius-s);
+  --checkbox-size: 16px;
+  --checkbox-marker-color: var(--text-on-accent);
+  --checkbox-color: var(--interactive-accent);
+  --checkbox-color-hover: var(--interactive-accent-hover);
+  --checkbox-border-color: var(--color-base-40);
+  --checkbox-border-color-hover: var(--color-accent-1);
+  --checklist-done-decoration: line-through;
+  --checklist-done-color: var(--text-faint);
+
+  /* --- Slider Variables --- */
+  --slider-thumb-border-width: 0px;
+  --slider-thumb-border-color: transparent;
+  --slider-thumb-height: 18px;
+  --slider-thumb-width: 18px;
+  --slider-thumb-y: -6px;
+  --slider-thumb-radius: 50%;
+  --slider-track-background: var(--color-base-30);
+  --slider-track-height: 4px;
+
+  /* --- Popover Variables --- */
+  --popover-width: 450px;
+  --popover-height: 300px;
+  --popover-max-height: 70vh;
+  --popover-font-size: 0.9em;
+  --popover-pdf-width: 600px;
+  --popover-pdf-height: 800px;
+
+  /* --- Glassmorphism helper --- */
+  --glass-bg: rgba(9, 14, 22, 0.75);
+}
+
+/* Premium headers — dark mode heading color overrides */
+body.kodev-blue-night-enable-premium-headers.theme-dark {
+  --h1-color: var(--color-accent-light);
+  --h2-color: var(--text-normal);
+  --h3-color: var(--text-muted);
 }
 
 /* ==========================================================
-   2. LIGHT MODE (Crisp & Clean Slate)
+   2. LIGHT MODE — Crisp & Clean Slate
    ========================================================== */
 .theme-light {
+  /* --- Base Color Scale --- */
   --color-base-00: var(--light-bg-main, #ffffff);
   --color-base-10: #f8fafc;
   --color-base-20: #f1f5f9;
+  --color-base-25: #edf2f7;
   --color-base-30: #e2e8f0;
+  --color-base-35: #d4dde8;
   --color-base-40: #cbd5e1;
+  --color-base-50: #94a3b8;
+  --color-base-60: #64748b;
+  --color-base-70: #475569;
+  --color-base-100: #0f172a;
 
-  /* Translucency */
-  --translucent-light-opacity: 50%;
-  --workspace-background-translucent: rgba(255, 255, 255, var(--translucent-light-opacity));
-
+  /* --- Custom Accent Palette --- */
   --color-accent: var(--color-accent-base, #1e3a8a);
-  --color-accent-1: color-mix(in srgb, var(--color-accent), black 10%);
-  --color-accent-2: color-mix(in srgb, var(--color-accent), black 20%);
+  --color-accent-1: #2563eb;
+  --color-accent-2: #1d4ed8;
+  --color-accent-light: #2563eb;
+  --color-accent-lighter: #1d4ed8;
 
-  --text-normal: #0f172a;
-  --text-muted: #64748b;
-  --text-faint: #94a3b8;
-
+  /* --- Backgrounds --- */
   --background-primary: var(--color-base-00);
   --background-primary-alt: var(--color-base-10);
   --background-secondary: var(--color-base-10);
+  --background-secondary-alt: var(--color-base-20);
   --background-modifier-border: var(--color-base-30);
-  --background-modifier-hover: color-mix(in srgb, var(--color-accent), transparent 95%);
+  --background-modifier-border-hover: var(--color-base-35);
+  --background-modifier-hover: rgba(37, 99, 235, 0.07);
+  --background-modifier-active-hover: rgba(37, 99, 235, 0.12);
+  --background-modifier-active-line: rgba(37, 99, 235, 0.04);
+  --background-modifier-error: rgba(220, 38, 38, 0.1);
+  --background-modifier-error-rgb: 220, 38, 38;
+  --background-modifier-success: rgba(22, 163, 74, 0.1);
+  --background-modifier-message: var(--color-base-10);
 
-  /* Active Line Highlight (Clean Focus) */
-  --background-modifier-active-line: color-mix(in srgb, var(--color-accent), transparent 96%);
+  /* --- Typography --- */
+  --text-normal: #1a1915;
+  --text-muted: #4b5563;
+  --text-faint: #9ca3af;
+  --text-selection: rgba(37, 99, 235, 0.15);
+  --text-accent: var(--color-accent-1);
+  --text-accent-hover: var(--color-accent-2);
+  --text-on-accent: #ffffff;
+  --text-on-accent-muted: rgba(255, 255, 255, 0.85);
+  --text-error: #dc2626;
+  --text-success: #16a34a;
+  --text-warning: #d97706;
 
-  /* Code Blocks */
+  /* --- Interactive Elements --- */
+  --interactive-normal: var(--color-base-20);
+  --interactive-hover: var(--color-base-30);
+  --interactive-accent: var(--color-accent-1);
+  --interactive-accent-hover: #1d4ed8;
+
+  /* --- Tab Variables --- */
+  --tab-background-active: var(--color-base-00);
+  --tab-container-background: var(--color-base-10);
+  --tab-divider-color: var(--color-base-30);
+  --tab-outline-color: var(--color-base-30);
+  --tab-outline-width: 1px;
+  --tab-curve: 0px;
+  --tab-radius: var(--radius-m);
+  --tab-radius-active: var(--radius-m);
+  --tab-text-color: var(--text-muted);
+  --tab-text-color-active: var(--text-normal);
+  --tab-text-color-focused: var(--text-muted);
+  --tab-text-color-focused-active: var(--text-normal);
+  --tab-text-color-focused-highlighted: var(--color-accent-1);
+  --tab-text-color-focused-active-current: #0f172a;
+  --tab-font-size: 13px;
+  --tab-font-weight: 500;
+
+  /* --- Navigation Variables --- */
+  --nav-item-size: 13px;
+  --nav-item-color: var(--text-muted);
+  --nav-item-color-hover: var(--text-normal);
+  --nav-item-color-active: var(--color-accent-1);
+  --nav-item-color-selected: var(--color-accent-2);
+  --nav-item-background-hover: rgba(37, 99, 235, 0.07);
+  --nav-item-background-active: rgba(37, 99, 235, 0.1);
+  --nav-item-background-selected: rgba(37, 99, 235, 0.15);
+  --nav-item-weight: 400;
+  --nav-item-weight-hover: 400;
+  --nav-item-weight-active: 600;
+  --nav-item-padding: 4px 8px;
+  --nav-indentation-guide-color: var(--color-base-30);
+  --nav-indentation-guide-width: 1px;
+  --nav-collapse-icon-color: var(--color-base-50);
+  --nav-collapse-icon-color-collapsed: var(--color-base-60);
+  --nav-item-color-highlighted: var(--color-accent-1);
+  --nav-item-parent-padding: var(--nav-item-padding);
+  --nav-item-children-padding-start: 0px;
+  --nav-item-children-margin-start: 18px;
+  --nav-item-white-space: nowrap;
+  /* --- Navigation Heading Variables --- */
+  --nav-heading-color: var(--text-faint);
+  --nav-heading-color-hover: var(--text-muted);
+  --nav-heading-color-collapsed: var(--text-faint);
+  --nav-heading-color-colapsed-hover: var(--text-muted);
+  --nav-heading-weight: 600;
+  --nav-heading-weight-hover: 600;
+
+  /* --- Status Bar Variables --- */
+  --status-bar-background: var(--color-base-10);
+  --status-bar-border-color: var(--color-base-30);
+  --status-bar-border-width: 1px;
+  --status-bar-font-size: 11px;
+  --status-bar-text-color: var(--text-faint);
+  --status-bar-radius: 0px;
+
+  /* --- Scrollbar Variables (Windows/Linux) --- */
+  --scrollbar-bg: transparent;
+  --scrollbar-thumb-bg: var(--color-base-35);
+  --scrollbar-active-thumb-bg: var(--color-base-50);
+
+  /* --- Code Variables --- */
   --code-background: #f1f5f9;
-  --code-normal: #4f46e5;
-  --code-comment: #94a3b8;
-  --code-function: #2563eb;
+  --code-normal: #4338ca;
+  --code-size: 0.875em;
+  --code-comment: var(--color-base-50);
+  --code-function: #0369a1;
+  --code-important: #dc2626;
   --code-keyword: #7c3aed;
-  --code-string: #0891b2;
+  --code-operator: #2563eb;
+  --code-property: #4338ca;
+  --code-punctuation: var(--text-muted);
+  --code-string: #15803d;
+  --code-tag: #be185d;
+  --code-value: #92400e;
 
-  /* Tables */
-  --table-header-background: var(--color-base-20);
-  --table-row-alt-background: color-mix(in srgb, var(--color-accent), transparent 98%);
-  --table-border-color: var(--color-base-30);
+  /* --- Inline Title --- */
+  --inline-title-color: var(--color-accent-1);
+  --inline-title-font: var(--font-interface-theme);
+  --inline-title-size: 2em;
+  --inline-title-weight: 700;
+  --inline-title-line-height: 1.2;
 
-  /* Graph View (Light Mode) */
+  /* --- Heading Colors --- */
+  --h1-color: #0f172a;
+  --h2-color: #1e293b;
+  --h3-color: var(--text-muted);
+  --h4-color: var(--text-muted);
+  --h5-color: var(--text-faint);
+  --h6-color: var(--text-faint);
+
+  /* --- Link Colors --- */
+  --link-color: var(--color-accent-1);
+  --link-color-hover: var(--color-accent-2);
+  --link-external-color: #4f46e5;
+  --link-external-color-hover: #4338ca;
+  --link-unresolved-color: var(--text-faint);
+  --link-decoration: none;
+  --link-decoration-hover: underline;
+  --link-unresolved-decoration: none;
+
+  /* --- Graph View --- */
   --graph-text: #0f172a;
   --graph-line: #bfdbfe;
   --graph-node: #94a3b8;
   --graph-node-unresolved: #cbd5e1;
   --graph-node-focused: var(--color-accent);
+  --graph-node-tag: #6366f1;
+  --graph-node-attachment: #0891b2;
+
+  /* --- Titlebar --- */
+  --titlebar-background: var(--color-base-10);
+  --titlebar-background-focused: var(--color-base-00);
+  --titlebar-border-width: 1px;
+  --titlebar-border-color: var(--color-base-30);
+  --titlebar-text-color: var(--text-muted);
+  --titlebar-text-color-focused: var(--text-normal);
+  --titlebar-text-weight: 500;
+  --header-height: 40px;
+
+  /* --- Properties (Metadata) Container Variables --- */
+  --metadata-background: var(--color-base-10);
+  --metadata-display-editing: block;
+  --metadata-display-reading: block;
+  --metadata-max-width: 100%;
+  --metadata-padding: 10px 14px;
+  --metadata-border-color: var(--color-base-30);
+  --metadata-border-radius: var(--radius-m);
+  --metadata-border-width: 1px;
+  --metadata-gap: 2px;
+
+  /* --- Properties Individual Row Variables --- */
+  --metadata-divider-color: var(--color-base-25);
+  --metadata-divider-color-hover: var(--color-base-35);
+  --metadata-divider-color-focus: var(--color-accent-1);
+  --metadata-divider-width: 1px;
+  --metadata-property-padding: 6px;
+  --metadata-property-radius: var(--radius-s);
+  --metadata-property-radius-hover: var(--radius-m);
+  --metadata-property-radius-focus: var(--radius-m);
+  --metadata-property-background: transparent;
+  --metadata-property-background-hover: rgba(37, 99, 235, 0.06);
+  --metadata-property-background-active: rgba(37, 99, 235, 0.1);
+  --metadata-label-background-hover: rgba(37, 99, 235, 0.1);
+  --metadata-label-background-active: rgba(37, 99, 235, 0.16);
+  --metadata-label-font-size: 0.8125em;
+  --metadata-label-font-weight: 500;
+  --metadata-sidebar-label-font-size: 0.75em;
+  --metadata-label-text-color: var(--text-muted);
+  --metadata-label-text-color-hover: var(--text-normal);
+  --metadata-label-width: 140px;
+  --metadata-input-height: 26px;
+  --metadata-input-text-color: var(--text-normal);
+  --metadata-input-font-size: 0.875em;
+  --metadata-sidebar-input-font-size: 0.8125em;
+  --metadata-input-background: transparent;
+  --metadata-input-background-hover: var(--color-base-20);
+  --metadata-input-background-active: var(--color-base-20);
+
+  /* --- Tag Variables --- */
+  --tag-size: 0.8em;
+  --tag-color: var(--color-accent-1);
+  --tag-color-hover: var(--text-on-accent);
+  --tag-decoration: none;
+  --tag-decoration-hover: none;
+  --tag-background: rgba(37, 99, 235, 0.08);
+  --tag-background-hover: var(--interactive-accent);
+  --tag-border-color: rgba(37, 99, 235, 0.18);
+  --tag-border-color-hover: var(--interactive-accent);
+  --tag-border-width: 1px;
+  --tag-padding-x: 7px;
+  --tag-padding-y: 1px;
+  --tag-radius: var(--radius-s);
+  --tag-weight: 500;
+
+  /* --- Multi-select Pill Variables (List-type Properties) --- */
+  --pill-color: var(--color-accent-1);
+  --pill-color-hover: var(--text-on-accent);
+  --pill-color-remove: var(--text-muted);
+  --pill-color-remove-hover: var(--text-error);
+  --pill-decoration: none;
+  --pill-decoration-hover: none;
+  --pill-background: rgba(37, 99, 235, 0.08);
+  --pill-background-hover: rgba(37, 99, 235, 0.18);
+  --pill-border-color: rgba(37, 99, 235, 0.2);
+  --pill-border-color-hover: var(--color-accent-1);
+  --pill-border-width: 1px;
+  --pill-padding-x: 8px;
+  --pill-padding-y: 2px;
+  --pill-radius: var(--radius-m);
+  --pill-weight: 500;
+
+  /* --- Checkbox Variables --- */
+  --checkbox-radius: var(--radius-s);
+  --checkbox-size: 16px;
+  --checkbox-marker-color: var(--text-on-accent);
+  --checkbox-color: var(--interactive-accent);
+  --checkbox-color-hover: var(--interactive-accent-hover);
+  --checkbox-border-color: var(--color-base-40);
+  --checkbox-border-color-hover: var(--color-accent-1);
+  --checklist-done-decoration: line-through;
+  --checklist-done-color: var(--text-faint);
+
+  /* --- Slider Variables --- */
+  --slider-thumb-border-width: 0px;
+  --slider-thumb-border-color: transparent;
+  --slider-thumb-height: 18px;
+  --slider-thumb-width: 18px;
+  --slider-thumb-y: -6px;
+  --slider-thumb-radius: 50%;
+  --slider-track-background: var(--color-base-30);
+  --slider-track-height: 4px;
+
+  /* --- Popover Variables --- */
+  --popover-width: 450px;
+  --popover-height: 300px;
+  --popover-max-height: 70vh;
+  --popover-font-size: 0.9em;
+  --popover-pdf-width: 600px;
+  --popover-pdf-height: 800px;
+
+  /* --- Glassmorphism helper --- */
+  --glass-bg: rgba(248, 250, 252, 0.85);
+}
+
+/* Premium headers — light mode heading color overrides */
+body.kodev-blue-night-enable-premium-headers.theme-light {
+  --h1-color: var(--color-accent-1);
+  --h2-color: #1e293b;
+  --h3-color: var(--text-muted);
 }
 
 /* ==========================================================
-   3. UI/UX UPGRADES (macOS / Minimalist Feel)
+   3. TYPOGRAPHY SMOOTHING & WORKSPACE STRUCTURE
    ========================================================== */
 
-/* Typography Smoothing */
+/* Typography rendering */
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-/* --- THEME DEPTH & CONTRAST (New Shadows and Borders) --- */
-
-/* Main Workspace & Floating Editor Effect */
+/* --- Workspace depth & spatial hierarchy --- */
 .workspace-split.mod-root,
 .workspace-leaf-content {
-  background-color: var(--color-base-00);
+  background-color: var(--background-primary);
 }
 
-/* Darker Sidebars to make the center pop */
 .workspace-ribbon.mod-left,
 .workspace-split.mod-left-split,
 .workspace-split.mod-right-split {
-  background-color: var(--color-base-10);
-  box-shadow: inset -10px 0 20px -10px rgba(0, 0, 0, 0.5);
+  background-color: var(--background-secondary);
+}
+
+/* Dark mode: heavy inset shadows to create the "floating canvas" tunnel effect */
+.theme-dark .workspace-ribbon.mod-left,
+.theme-dark .workspace-split.mod-left-split {
+  box-shadow:
+    inset -1px 0 0 var(--background-modifier-border),
+    0 0 40px rgba(0, 0, 0, 0.6);
+}
+
+.theme-dark .workspace-split.mod-right-split {
+  box-shadow:
+    inset 1px 0 0 var(--background-modifier-border),
+    0 0 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Light mode: subtle shadow for depth */
+.theme-light .workspace-ribbon.mod-left,
+.theme-light .workspace-split.mod-left-split {
+  box-shadow: inset -1px 0 0 var(--background-modifier-border);
+}
+
+.theme-light .workspace-split.mod-right-split {
+  box-shadow: inset 1px 0 0 var(--background-modifier-border);
+}
+
+/* Sidebar border separation */
+.workspace-split.mod-left-split {
+  border-right: 1px solid var(--background-modifier-border);
 }
 
 .workspace-split.mod-right-split {
-  box-shadow: inset 10px 0 20px -10px rgba(0, 0, 0, 0.5);
-  border-left: 1px solid var(--color-base-30);
+  border-left: 1px solid var(--background-modifier-border);
 }
 
-.workspace-split.mod-left-split {
-  border-right: 1px solid var(--color-base-30);
+/* --- Inputs & Buttons (Baseline / Adwaita style) --- */
+button,
+.clickable-icon,
+input[type='text'],
+input[type='search'],
+input[type='password'] {
+  border-radius: var(--input-radius);
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
-/* --- THE WORKSPACE RIBBON (Leftmost Icon Bar Polish) --- */
-.workspace-ribbon.mod-left {
-  background-color: var(--color-base-10);
-  border-right: 1px solid var(--color-base-30);
+.theme-dark input[type='text'],
+.theme-dark input[type='search'],
+.theme-dark input[type='password'] {
+  background-color: var(--color-base-20);
+  border: 1px solid var(--color-base-30);
+  color: var(--text-normal);
+  padding: 6px 12px;
 }
 
-.workspace-ribbon.mod-left .clickable-icon {
+.theme-dark input[type='text']:focus,
+.theme-dark input[type='search']:focus,
+.theme-dark input[type='password']:focus {
+  border-color: var(--color-accent-1);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+  outline: none;
+}
+
+.theme-light input[type='text'],
+.theme-light input[type='search'],
+.theme-light input[type='password'] {
+  background-color: var(--color-base-00);
+  border: 1px solid var(--color-base-30);
+  color: var(--text-normal);
+  padding: 6px 12px;
+}
+
+.theme-light input[type='text']:focus,
+.theme-light input[type='search']:focus,
+.theme-light input[type='password']:focus {
+  border-color: var(--color-accent-1);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.12);
+  outline: none;
+}
+
+/* Settings toggles */
+.checkbox-container {
+  border-radius: var(--toggle-radius);
+  width: var(--toggle-width);
+  transition: background-color 0.2s ease;
+}
+
+.checkbox-container.is-enabled {
+  background-color: var(--interactive-accent);
+}
+
+/* ==========================================================
+   4. PROPERTIES (METADATA / FRONTMATTER)
+   ========================================================== */
+
+/*
+ * Base properties styling is driven entirely by CSS variables defined
+ * in .theme-dark / .theme-light above. This section only adds
+ * structural overrides that cannot be expressed as CSS variables:
+ * shadows, transitions, and card-wrapper margins.
+ */
+
+/* --- Base: always-on property type icons & input colors --- */
+.metadata-property-icon {
+  color: var(--metadata-label-text-color);
+  opacity: 0.7;
+  transition:
+    color 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.metadata-property:hover .metadata-property-icon,
+.metadata-property:focus-within .metadata-property-icon {
+  color: var(--interactive-accent);
+  opacity: 1;
+}
+
+/*
+ * Unified key column: icon + label share the same background.
+ * Without this explicit rule, Obsidian may apply --metadata-label-background-hover
+ * only to the label text, leaving the icon wrapper unstyled — making them look
+ * like two separate elements. This rule enforces the same background on the
+ * entire .metadata-property-key wrapper (which contains both icon and name input).
+ */
+.metadata-property:hover .metadata-property-key {
+  background-color: var(--metadata-label-background-hover);
+  border-radius: var(--radius-s) 0 0 var(--radius-s);
+  transition: background-color 0.15s ease;
+}
+
+.metadata-property:focus-within .metadata-property-key {
+  background-color: var(--metadata-label-background-active);
+  border-radius: var(--radius-s) 0 0 var(--radius-s);
+}
+
+/* Focus ring on the focused property row */
+.metadata-property:focus-within {
+  box-shadow: 0 0 0 1px var(--metadata-divider-color-focus);
+}
+
+/* Input placeholders */
+.metadata-input-field::placeholder {
+  color: var(--text-faint);
+  opacity: 1;
+}
+
+/* Smooth transition on all property interactive states */
+.metadata-property,
+.metadata-input-field {
+  transition:
+    background-color 0.15s ease,
+    box-shadow 0.15s ease,
+    border-radius 0.15s ease;
+}
+
+/* --- "Add property" button — always subtle, brightens on hover --- */
+.metadata-add-button {
+  color: var(--interactive-accent);
+  opacity: 0.5;
+  transition:
+    opacity 0.2s ease,
+    background-color 0.15s ease;
+}
+
+.metadata-add-button:hover {
+  opacity: 1;
+  background-color: var(--metadata-property-background-hover);
   border-radius: var(--radius-m);
-  transition: all 0.2s ease;
-  margin-bottom: 6px;
-  color: var(--text-muted);
 }
 
-.workspace-ribbon.mod-left .clickable-icon:hover,
-.workspace-ribbon.mod-left .clickable-icon.is-active {
-  background-color: var(--background-modifier-hover);
-  color: var(--color-accent);
-  transform: scale(1.1);
+/* --- Properties heading divider --- */
+.metadata-properties-heading {
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: var(--metadata-divider-width) solid var(--metadata-divider-color);
 }
 
-/* --- SEARCH BARS & INPUTS (Capsule Style) --- */
-.search-input-container input,
-.search-input-container input:focus,
-.canvas-search-container input,
-.setting-search-container input {
-  border-radius: 20px !important;
-  background-color: var(--color-base-20) !important;
-  border: 1px solid var(--color-base-30) !important;
-  padding: 6px 15px !important;
-  font-size: 0.9em;
-  transition: all 0.2s ease;
+.metadata-properties-heading:hover {
+  border-bottom-color: var(--metadata-divider-color-hover);
 }
 
-.search-input-container input:focus {
-  border-color: var(--color-accent) !important;
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-accent), transparent 80%);
+/* ---- CARD MODE (enable-baseline-metadata toggle) ----
+ *
+ * Overrides the metadata CSS variables for a more dramatic card look
+ * and adds shadow + margin that CSS variables cannot provide.
+ */
+body.kodev-blue-night-enable-baseline-metadata {
+  /* Escalate the card appearance: larger radius, more padding */
+  --metadata-border-radius: var(--radius-l);
+  --metadata-padding: 14px 18px;
+  --metadata-border-width: 1px;
 }
 
-/* --- ACTIVE TAB DESIGN (Safari Style) --- */
+/* Card wrapper: shadow + margin (not controllable via CSS vars) */
+body.kodev-blue-night-enable-baseline-metadata .metadata-content {
+  margin-top: 1.5em;
+  margin-bottom: 2em;
+  box-shadow: var(--shadow-s);
+  transition:
+    box-shadow 0.25s ease,
+    border-color 0.2s ease;
+}
+
+/* Card hover: accent border + lifted shadow */
+.theme-dark body.kodev-blue-night-enable-baseline-metadata .metadata-content:hover {
+  box-shadow:
+    0 4px 20px rgba(37, 99, 235, 0.12),
+    var(--shadow-s);
+}
+
+.theme-light body.kodev-blue-night-enable-baseline-metadata .metadata-content:hover {
+  box-shadow:
+    0 4px 20px rgba(37, 99, 235, 0.08),
+    var(--shadow-s);
+}
+
+/* Dark mode card: slightly more distinct background to lift off the OLED canvas */
+body.kodev-blue-night-enable-baseline-metadata.theme-dark {
+  --metadata-background: var(--color-base-10);
+  --metadata-border-color: var(--color-base-30);
+  --metadata-property-background-hover: rgba(60, 130, 241, 0.1);
+}
+
+/* Light mode card: clean white card lifted off the page */
+body.kodev-blue-night-enable-baseline-metadata.theme-light {
+  --metadata-background: var(--color-base-00);
+  --metadata-border-color: var(--color-base-30);
+  --metadata-property-background-hover: rgba(37, 99, 235, 0.06);
+}
+
+/* ==========================================================
+   5. TABS & VIEW HEADER
+   ========================================================== */
+
+/* Tab container — uses CSS variables from .theme-dark/.theme-light */
+.workspace-tab-header-container {
+  background-color: var(--tab-container-background);
+  border-bottom: 1px solid var(--tab-divider-color);
+}
+
 .workspace-tab-header {
-  border-radius: var(--radius-m) var(--radius-m) 0 0;
-  margin: 4px 2px 0 2px;
+  border-radius: var(--tab-radius) var(--tab-radius) 0 0;
+  margin-top: 4px;
   background-color: transparent;
   border: 1px solid transparent;
   border-bottom: none;
-  transition: all 0.2s ease;
-  padding: 4px 12px;
+  transition: background-color 0.15s ease;
+  font-size: var(--tab-font-size);
+  font-weight: var(--tab-font-weight);
+  color: var(--tab-text-color);
 }
 
 .workspace-tab-header:not(.is-active):hover {
   background-color: var(--background-modifier-hover);
+  color: var(--tab-text-color-focused);
 }
 
 .workspace-tab-header.is-active {
-  background-color: var(--color-base-00);
-  border: 1px solid var(--color-base-30);
-  border-bottom: 2px solid var(--color-base-00);
-  border-top: none; /* Let the ::after handle the accent border */
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
-  font-weight: 500;
-  z-index: 5;
-  position: relative;
+  background-color: var(--tab-background-active);
+  border: 1px solid var(--tab-outline-color);
+  border-bottom: 1px solid var(--tab-background-active);
+  border-top: 2px solid var(--interactive-accent);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
+  font-weight: 600;
+  color: var(--tab-text-color-focused-active-current);
 }
 
-.theme-dark .workspace-tab-header.is-active {
-  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
-}
-
-.workspace-tab-header.is-active::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background-color: var(--color-accent);
-  border-radius: var(--radius-m) var(--radius-m) 0 0;
-}
-
-/* --- VIEW HEADER GLASSMORPHISM (The bar above the text) --- */
+/* View header — glassmorphism with theme-aware background */
 .view-header {
-  background-color: rgba(0, 0, 0, 0.4); /* Transparent for blur */
+  background-color: var(--glass-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--color-base-30);
+  border-bottom: 1px solid var(--background-modifier-border);
   z-index: 10;
 }
-.theme-light .view-header {
-  background-color: rgba(255, 255, 255, 0.6);
-}
 
-/* Raycast Style Command Palette */
+/* ==========================================================
+   6. COMMAND PALETTE — Raycast Style
+   ========================================================== */
 body.kodev-blue-night-enable-raycast-prompt .prompt {
   border-radius: var(--radius-xl);
-  border: 1px solid var(--color-base-30);
+  border: 1px solid var(--background-modifier-border);
   box-shadow: var(--shadow-mac-heavy);
-  background-color: var(--color-base-10);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background-color: var(--background-secondary);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   margin-top: 10vh;
   overflow: hidden;
 }
 
 body.kodev-blue-night-enable-raycast-prompt .prompt-input {
-  border-bottom: 1px solid var(--color-base-30);
-  padding: 24px !important;
-  font-size: 1.3em;
+  border-bottom: 1px solid var(--background-modifier-border);
+  padding: 20px 24px;
+  font-size: 1.25em;
   background: transparent;
+  color: var(--text-normal);
+}
+
+body.kodev-blue-night-enable-raycast-prompt .prompt-input::placeholder {
+  color: var(--text-faint);
 }
 
 body.kodev-blue-night-enable-raycast-prompt .suggestion-item {
   border-radius: var(--radius-m);
-  margin: 4px 12px;
-  padding: 10px 16px;
-}
-
-body.kodev-blue-night-enable-raycast-prompt .suggestion-item.is-selected {
-  background-color: var(--color-accent);
-  color: #ffffff;
-}
-
-/* --- TITLEBAR & TAB CONTAINER --- */
-.titlebar,
-.workspace-tab-header-container {
-  background-color: var(--color-base-10);
-  border-bottom: 1px solid var(--color-base-30);
-}
-
-/* macOS Explorer Style */
-body.kodev-blue-night-enable-mac-explorer .nav-folder-title,
-body.kodev-blue-night-enable-mac-explorer .nav-file-title {
-  border-radius: var(--radius-m);
-  margin: 1px 10px;
-  padding: 4px 10px;
-  transition: all 0.15s ease;
+  margin: 3px 10px;
+  padding: 9px 14px;
   color: var(--text-muted);
+  transition:
+    background-color 0.12s ease,
+    color 0.12s ease;
 }
 
-body.kodev-blue-night-enable-mac-explorer .nav-folder-title:hover,
-body.kodev-blue-night-enable-mac-explorer .nav-file-title:hover {
+body.kodev-blue-night-enable-raycast-prompt .suggestion-item:hover {
   background-color: var(--background-modifier-hover);
   color: var(--text-normal);
 }
 
-/* Active State - Light Mode (Translucent Apple Blue) */
-body.kodev-blue-night-enable-mac-explorer .nav-file-title.is-active {
-  background-color: color-mix(in srgb, var(--color-accent), transparent 85%) !important;
-  color: var(--color-accent) !important;
-  font-weight: 600 !important;
-  box-shadow: none !important;
-  border-left: 3px solid var(--color-accent) !important;
-  transform: none !important;
-}
-
-/* Active State - Dark Mode */
-.theme-dark body.kodev-blue-night-enable-mac-explorer .nav-file-title.is-active {
-  background-color: color-mix(
-    in srgb,
-    var(--color-accent),
-    transparent 80%
-  ) !important; /* Fondo translúcido brillante */
-  color: color-mix(
-    in srgb,
-    var(--color-accent),
-    white 40%
-  ) !important; /* Texto brillante para contraste */
-  border-left: 3px solid var(--color-accent) !important;
-}
-
-/* Folder Indent Guides */
-body.kodev-blue-night-enable-folder-guides .nav-folder-children {
-  border-left: 1px solid var(--color-base-30);
-  margin-left: 18px;
-  padding-left: 6px;
-}
-
-body.kodev-blue-night-enable-folder-guides .nav-folder-children:hover {
-  border-left-color: var(--color-accent);
+body.kodev-blue-night-enable-raycast-prompt .suggestion-item.is-selected {
+  background-color: var(--interactive-accent);
+  color: var(--text-on-accent);
 }
 
 /* ==========================================================
-   4. CONTENT & TYPOGRAPHY POLISH
+   7. FILE EXPLORER — macOS / Finder Style
    ========================================================== */
 
-/* Improved Line Height for Readability */
+/* Base nav items — smooth, tactile transitions */
+body.kodev-blue-night-enable-mac-explorer .nav-folder-title,
+body.kodev-blue-night-enable-mac-explorer .nav-file-title {
+  border-radius: var(--radius-m);
+  margin: 2px 8px;
+  padding: 5px 10px;
+  transition:
+    background-color 0.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+    color 0.15s ease;
+}
+
+/* Folder hover */
+body.kodev-blue-night-enable-mac-explorer .nav-folder-title:hover {
+  background-color: var(--nav-item-background-hover);
+  color: var(--nav-item-color-hover);
+}
+
+/* File hover — subtle right shift */
+body.kodev-blue-night-enable-mac-explorer .nav-file-title:hover {
+  background-color: var(--nav-item-background-hover);
+  color: var(--nav-item-color-hover);
+  transform: translateX(3px);
+}
+
+/* Active file — dark mode: neon celeste glow */
+.theme-dark body.kodev-blue-night-enable-mac-explorer .nav-file-title.is-active {
+  background-color: var(--nav-item-background-active);
+  color: var(--nav-item-color-active);
+  font-weight: var(--nav-item-weight-active);
+  transform: translateX(4px);
+  border-left: 2px solid var(--color-accent-light);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Active file — light mode: clean blue accent */
+.theme-light body.kodev-blue-night-enable-mac-explorer .nav-file-title.is-active {
+  background-color: var(--nav-item-background-active);
+  color: var(--nav-item-color-active);
+  font-weight: var(--nav-item-weight-active);
+  transform: translateX(4px);
+  border-left: 2px solid var(--color-accent-1);
+}
+
+/* --- Folder Indent Guides --- */
+body.kodev-blue-night-enable-folder-guides .nav-folder-children {
+  border-left: var(--nav-indentation-guide-width) solid var(--nav-indentation-guide-color);
+  margin-left: 18px;
+  padding-left: 6px;
+  transition: border-color 0.2s ease;
+}
+
+body.kodev-blue-night-enable-folder-guides .nav-folder-children:hover {
+  border-left-color: var(--color-accent-1);
+}
+
+/* ==========================================================
+   8. CONTENT & TYPOGRAPHY POLISH
+   ========================================================== */
+
+/* --- Improved line height for readability --- */
 .markdown-source-view.mod-cm6 .cm-line,
 .markdown-rendered p,
 .markdown-rendered li {
-  line-height: 1.65;
+  line-height: var(--line-height-normal);
+  color: var(--text-normal);
 }
 
-/* Premium Headers */
+/* --- Premium Headers --- */
+/* Non-variable properties for the premium-headers feature */
 body.kodev-blue-night-enable-premium-headers .markdown-rendered h1,
 body.kodev-blue-night-enable-premium-headers .cm-header-1 {
-  color: var(--color-accent-1);
   font-weight: 700;
   letter-spacing: -0.02em;
-  border-bottom: 1px solid var(--color-base-30);
+  border-bottom: 1px solid var(--background-modifier-border);
   padding-bottom: 8px;
-  margin-top: 1.5em;
+  margin-top: 1.8em;
+  margin-bottom: 0.6em;
 }
 
 body.kodev-blue-night-enable-premium-headers .markdown-rendered h2,
 body.kodev-blue-night-enable-premium-headers .cm-header-2 {
-  color: var(--color-accent);
   font-weight: 600;
   letter-spacing: -0.01em;
-  margin-top: 1.2em;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
 }
 
 body.kodev-blue-night-enable-premium-headers .markdown-rendered h3,
 body.kodev-blue-night-enable-premium-headers .cm-header-3 {
-  color: var(--text-normal);
   font-weight: 600;
+  margin-top: 1.2em;
+  margin-bottom: 0.4em;
 }
 
-/* Colored List Bullets */
-body.kodev-blue-night-enable-custom-bullets .list-bullet:after {
-  background-color: var(--color-accent);
-}
-body.kodev-blue-night-enable-custom-bullets .cm-formatting-list {
-  color: var(--color-accent) !important;
-}
-
-/* ==========================================================
-   5. EXTRA UI/UX POLISH
-   ========================================================== */
-
-/* Premium Callouts */
-body.kodev-blue-night-enable-premium-callouts .callout {
-  border-radius: var(--radius-m);
-  border-left-width: 4px;
-  background-color: color-mix(in srgb, var(--callout-color), transparent 90%);
-  border-color: color-mix(in srgb, var(--callout-color), transparent 50%);
-  padding: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+/* --- Links --- */
+.markdown-rendered a,
+.cm-s-obsidian .cm-link {
+  color: var(--link-color);
+  text-decoration: var(--link-decoration);
+  transition: color 0.15s ease;
 }
 
-body.kodev-blue-night-enable-premium-callouts .callout-title {
-  font-weight: 600;
-  color: var(--callout-color);
-  padding-bottom: 4px;
+.markdown-rendered a:hover,
+.cm-s-obsidian .cm-link:hover {
+  color: var(--link-color-hover);
+  text-decoration: var(--link-decoration-hover);
 }
 
-/* macOS Style Tables */
-body.kodev-blue-night-enable-macos-tables table {
-  border-collapse: collapse;
-  margin: 1.5em 0;
-  width: 100%;
-  border-radius: var(--radius-m);
-  overflow: hidden;
-  border: 1px solid var(--table-border-color);
+.markdown-rendered a.external-link {
+  color: var(--link-external-color);
 }
 
-body.kodev-blue-night-enable-macos-tables th {
-  background-color: var(--table-header-background);
-  color: var(--text-normal);
-  font-weight: 600;
-  text-align: left;
-  padding: 12px 15px;
-  border-bottom: 1px solid var(--table-border-color);
+.markdown-rendered a.external-link:hover {
+  color: var(--link-external-color-hover);
 }
 
-body.kodev-blue-night-enable-macos-tables td {
-  padding: 10px 15px;
-  border-bottom: 1px solid var(--table-border-color);
+/* Unresolved / broken links */
+.cm-s-obsidian span.cm-hmd-internal-link.cm-link-unresolved,
+.markdown-rendered a.is-unresolved {
+  color: var(--link-unresolved-color);
+  text-decoration: none;
 }
 
-body.kodev-blue-night-enable-macos-tables tr:nth-child(even) {
-  background-color: var(--table-row-alt-background);
-}
-
-body.kodev-blue-night-enable-macos-tables tr:last-child td {
-  border-bottom: none;
-}
-
-/* Deep Blue Code Blocks */
-body.kodev-blue-night-enable-deep-blue-code .markdown-rendered code,
-body.kodev-blue-night-enable-deep-blue-code .cm-s-obsidian .cm-inline-code {
+/* --- Inline Code --- */
+.markdown-rendered code,
+.cm-s-obsidian .cm-inline-code {
   background-color: var(--code-background);
   color: var(--code-normal);
   border-radius: var(--radius-s);
-  padding: 0.2em 0.4em;
-  font-size: 0.9em;
-  border: 1px solid var(--color-base-30);
+  padding: 2px 5px;
+  font-size: var(--code-size);
+  font-family: var(--font-monospace-theme);
 }
 
-body.kodev-blue-night-enable-deep-blue-code .markdown-rendered pre {
+/* --- Code Blocks --- */
+pre code,
+.markdown-rendered pre {
   background-color: var(--code-background);
-  border: 1px solid var(--color-base-30);
   border-radius: var(--radius-m);
-  padding: 1.5em;
-  box-shadow: var(--shadow-mac);
+  border: 1px solid var(--background-modifier-border);
+  padding: 16px 20px;
+  font-size: var(--code-size);
 }
 
-/* Images and Media */
-.markdown-rendered img {
-  border-radius: var(--radius-m);
-  box-shadow: var(--shadow-mac);
-  transition: transform 0.3s ease;
-}
-
-.markdown-rendered img:hover {
-  transform: scale(1.02);
-}
-
-/* Obsidian Properties (macOS Style) */
-.metadata-container {
-  background-color: var(--color-base-10);
-  border: 1px solid var(--color-base-30);
-  border-radius: var(--radius-l);
-  margin-bottom: 2em;
+/* --- Callouts (Obsidian native) --- */
+.callout {
+  border-radius: 0 var(--radius-m) var(--radius-m) 0;
+  border-left-width: 3px;
   padding: 12px 16px;
+  margin: 1.2em 0;
 }
 
-.metadata-property-key {
-  color: var(--text-muted); /* Softer key names */
-  font-weight: 500;
+.callout-title {
+  font-weight: 600;
+  font-size: 0.95em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
 }
 
-.metadata-property-key:hover {
-  color: var(--color-accent);
+.callout-content {
+  color: var(--text-normal);
+  font-size: 0.95em;
 }
 
-.metadata-property-value {
-  font-weight: 500;
+/* --- Colored List Bullets --- */
+body.kodev-blue-night-enable-custom-bullets .list-bullet:after {
+  background-color: var(--interactive-accent);
+  opacity: 0.8;
+}
+
+/* ==========================================================
+   9. EXTRA UI/UX POLISH
+   ========================================================== */
+
+/* --- Pill Tags (iOS) — toggle enables pill radius --- */
+/* Base tag colors already set via --tag-* in .theme-dark / .theme-light.
+   This toggle escalates the radius to a full pill and boosts padding. */
+body.kodev-blue-night-enable-pill-tags {
+  --tag-radius: 20px;
+  --tag-padding-x: 10px;
+  --tag-padding-y: 2px;
+}
+
+/* --- Circular Checkboxes — toggle escalates radius to 50% --- */
+/* Base checkbox colors/size already set via --checkbox-* vars.
+   This toggle makes them circular with a smooth checked animation. */
+body.kodev-blue-night-enable-custom-checkboxes {
+  --checkbox-radius: 50%;
+}
+
+/* --- IDE Style Blockquotes --- */
+body.kodev-blue-night-enable-ide-blockquotes blockquote {
+  border-left: 3px solid var(--interactive-accent);
+  background-color: var(--background-secondary);
+  border-radius: 0 var(--radius-m) var(--radius-m) 0;
+  padding: 14px 18px;
+  margin: 1.2em 0;
+  box-shadow: var(--shadow-s);
   color: var(--text-normal);
 }
 
-/* Pill Tags */
-body.kodev-blue-night-enable-pill-tags .tag {
-  border-radius: 20px;
-  padding: 2px 12px;
-  background-color: color-mix(in srgb, var(--color-accent), transparent 90%);
-  color: var(--color-accent);
-  border: 1px solid color-mix(in srgb, var(--color-accent), transparent 80%);
-  font-weight: 500;
+body.kodev-blue-night-enable-ide-blockquotes blockquote p {
+  margin: 0;
 }
 
-/* Circular Checkboxes */
-body.kodev-blue-night-enable-custom-checkboxes input[type='checkbox'] {
-  border-radius: 50%;
-  border: 2px solid var(--color-base-40);
-  width: 18px;
-  height: 18px;
-}
-
-body.kodev-blue-night-enable-custom-checkboxes input[type='checkbox']:checked {
-  background-color: var(--color-accent);
-  border-color: var(--color-accent);
-}
-
-/* IDE Style Blockquotes */
-body.kodev-blue-night-enable-ide-blockquotes blockquote {
-  border-left: 4px solid var(--color-accent);
-  background-color: var(--background-modifier-hover);
-  border-radius: 0 var(--radius-m) var(--radius-m) 0;
-  padding: 16px 20px;
-  margin: 1.5em 0;
-}
-
-/* Minimal Status Bar */
+/* --- Minimalist Status Bar --- */
 body.kodev-blue-night-enable-minimal-statusbar .status-bar {
-  opacity: 0.1;
-  transition: opacity 0.5s ease;
+  opacity: 0.12;
+  transition: opacity 0.4s ease;
 }
 
 body.kodev-blue-night-enable-minimal-statusbar .status-bar:hover {
   opacity: 1;
 }
 
-/* Custom Scrollbars */
+/* --- Custom Scrollbars (Baseline refined) --- */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
+::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-bg, transparent);
+}
+
 ::-webkit-scrollbar-thumb {
-  background-color: var(--color-base-30);
+  background-color: var(--scrollbar-thumb-bg, var(--color-base-30));
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: var(--color-accent);
+  background-color: var(--scrollbar-active-thumb-bg, var(--color-base-40));
 }
