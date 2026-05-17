@@ -218,11 +218,9 @@ body {
 .workspace-split.mod-left-split,
 .workspace-split.mod-right-split {
   background-color: var(--color-base-10);
-  /* Deep shadow to separate sidebars from the main editor */
   box-shadow: inset -10px 0 20px -10px rgba(0, 0, 0, 0.5);
 }
 
-/* Mod right split needs the shadow on the other side */
 .workspace-split.mod-right-split {
   box-shadow: inset 10px 0 20px -10px rgba(0, 0, 0, 0.5);
   border-left: 1px solid var(--color-base-30);
@@ -232,16 +230,26 @@ body {
   border-right: 1px solid var(--color-base-30);
 }
 
-/* --- ACTIVE TAB DESIGN (VS Code / Premium Style) --- */
+/* --- THE WORKSPACE RIBBON (Leftmost Icon Bar Polish) --- */
+.workspace-ribbon.mod-left .clickable-icon {
+  border-radius: var(--radius-m);
+  transition: all 0.2s ease;
+  margin-bottom: 6px;
+}
 
-/* Titlebar & Headers */
+.workspace-ribbon.mod-left .clickable-icon:hover {
+  background-color: var(--background-modifier-hover);
+  color: var(--color-accent-1);
+  transform: scale(1.15); /* Satisfying tactile zoom */
+}
+
+/* --- ACTIVE TAB DESIGN (VS Code / Premium Style) --- */
 .titlebar,
 .workspace-tab-header-container {
   background-color: var(--color-base-10);
   border-bottom: 1px solid var(--color-base-30);
 }
 
-/* Base Tab Styling */
 .workspace-tab-header {
   border-radius: var(--radius-m) var(--radius-m) 0 0;
   margin-top: 4px;
@@ -251,25 +259,34 @@ body {
   transition: background-color 0.2s ease;
 }
 
-/* Hover on inactive tab */
 .workspace-tab-header:not(.is-active):hover {
   background-color: var(--background-modifier-hover);
 }
 
-/* THE ACTIVE TAB */
 .workspace-tab-header.is-active {
-  background-color: var(--color-base-00); /* Matches the editor background */
-  border: 1px solid var(--color-base-30); /* Connects it to the editor */
-  border-bottom: 1px solid var(--color-base-00); /* Removes bottom border to merge with editor */
-  border-top: 2px solid var(--color-accent) !important; /* The bright top highlight */
-  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2); /* Slight shadow to pop up */
+  background-color: var(--color-base-00);
+  border: 1px solid var(--color-base-30);
+  border-bottom: 1px solid var(--color-base-00);
+  border-top: 2px solid var(--color-accent) !important;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
   font-weight: 600;
   color: var(--text-accent-hover);
 }
 
-/* Tweak the text inside the active tab */
 .workspace-tab-header.is-active .workspace-tab-header-inner-title {
   color: var(--text-normal);
+}
+
+/* --- VIEW HEADER GLASSMORPHISM (The bar above the text) --- */
+.view-header {
+  background-color: rgba(0, 0, 0, 0.4); /* Transparent for blur */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-base-30);
+  z-index: 10;
+}
+.theme-light .view-header {
+  background-color: rgba(255, 255, 255, 0.6);
 }
 
 /* Raycast Style Command Palette */
@@ -308,11 +325,35 @@ body.kodev-blue-night-enable-mac-explorer .nav-file-title {
   border-radius: var(--radius-m);
   margin: 2px 12px;
   padding: 6px 10px;
+  border-left: 3px solid transparent; /* Evita que el texto salte al añadir el borde activo */
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+/* Efecto Hover en las notas */
+body.kodev-blue-night-enable-mac-explorer .nav-file-title:hover {
+  background-color: var(--background-modifier-hover);
+  color: var(--color-accent-1);
+  transform: translateX(4px); /* Deslizamiento suave estilo IDE */
+}
+
+/* Efecto en la nota Activa (Seleccionada) - Modo Light por defecto */
 body.kodev-blue-night-enable-mac-explorer .nav-file-title.is-active {
-  background-color: var(--color-accent);
-  color: #ffffff;
+  background-color: var(--color-accent) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3) !important;
+  transform: translateX(6px) !important;
+  font-weight: 700 !important;
+  border-left: 3px solid #60a5fa !important;
+}
+
+/* Efecto en la nota Activa (Seleccionada) - Modo Dark (Máximo Contraste) */
+.theme-dark body.kodev-blue-night-enable-mac-explorer .nav-file-title.is-active {
+  background-color: rgba(60, 130, 241, 0.2) !important; /* Fondo translúcido brillante */
+  color: #93c5fd !important; /* Texto celeste muy brillante para contraste absoluto sobre negro */
+  box-shadow:
+    inset 0 0 10px rgba(60, 130, 241, 0.15),
+    0 5px 15px rgba(0, 0, 0, 0.8) !important; /* Resplandor interior y sombra fuerte exterior */
+  border-left: 3px solid #60a5fa !important; /* Borde neón puro */
 }
 
 /* Folder Indent Guides */
@@ -327,8 +368,15 @@ body.kodev-blue-night-enable-folder-guides .nav-folder-children:hover {
 }
 
 /* ==========================================================
-   4. CONTENT & TYPOGRAPHY POLISH (The "Missing" Element)
+   4. CONTENT & TYPOGRAPHY POLISH
    ========================================================== */
+
+/* Improved Line Height for Readability */
+.markdown-source-view.mod-cm6 .cm-line,
+.markdown-rendered p,
+.markdown-rendered li {
+  line-height: 1.65;
+}
 
 /* Premium Headers */
 body.kodev-blue-night-enable-premium-headers .markdown-rendered h1,
