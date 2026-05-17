@@ -395,9 +395,9 @@ body {
   --pill-border-color: rgba(96, 165, 250, 0.22);
   --pill-border-color-hover: var(--color-accent-light);
   --pill-border-width: 1px;
-  --pill-padding-x: 8px;
-  --pill-padding-y: 2px;
-  --pill-radius: var(--radius-m);
+  --pill-padding-x: 12px;
+  --pill-padding-y: 5px;
+  --pill-radius: 100px;
   --pill-weight: 500;
 
   /* --- Checkbox Variables --- */
@@ -685,9 +685,9 @@ body.kodev-blue-night-enable-premium-headers.theme-dark {
   --pill-border-color: rgba(37, 99, 235, 0.2);
   --pill-border-color-hover: var(--color-accent-1);
   --pill-border-width: 1px;
-  --pill-padding-x: 8px;
-  --pill-padding-y: 2px;
-  --pill-radius: var(--radius-m);
+  --pill-padding-x: 12px;
+  --pill-padding-y: 5px;
+  --pill-radius: 100px;
   --pill-weight: 500;
 
   /* --- Checkbox Variables --- */
@@ -856,6 +856,12 @@ input[type='password'] {
  */
 
 /* --- Base: always-on property type icons & input colors --- */
+
+/* Remove the vertical divider Obsidian draws on the right edge of the key column */
+.metadata-property-key {
+  border-right: none;
+}
+
 .metadata-property-icon {
   color: var(--metadata-label-text-color);
   opacity: 0.7;
