@@ -21,12 +21,14 @@ This project uses `conda` and `pre-commit` for quality control.
 ### Installation
 
 1. Create the environment:
+
    ```bash
    conda env create -f environment.yml
    conda activate dotfiles
    ```
 
-2. Install pre-commit hooks:
+1. Install pre-commit hooks:
+
    ```bash
    pre-commit install
    ```
@@ -41,6 +43,7 @@ This project uses `conda` and `pre-commit` for quality control.
 ## Customization
 
 Install the **Style Settings** plugin in Obsidian to customize:
+
 - Accent colors
 - Background depths
 - UI features (Raycast prompt, minimal sidebar, etc.)

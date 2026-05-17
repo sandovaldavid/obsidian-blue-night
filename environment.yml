@@ -9,9 +9,6 @@ dependencies:
   - nodejs  # Added to support prettier and other JS tools if needed
   - pip:
       - pre-commit>=4.6
-      - ansible-core>=2.19
-      - ansible-lint>=26.0
-      - yamllint>=1.38
       - commitizen>=4.0.0
       - mdformat>=0.7.5
       - mdformat-gfm>=1.0
