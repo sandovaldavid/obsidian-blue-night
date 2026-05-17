@@ -98,23 +98,34 @@ settings:
    0. SHARED VARIABLES & RESET
    ========================================================== */
 body {
-  /* --- Fonts (Obsidian theme variable names) --- */
+  /* --- Fonts (Google Sans / Baseline preference) --- */
   --font-interface-theme:
-    'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial,
-    sans-serif;
+    'Google Sans Flex', 'Google Sans Text', 'Google Sans', 'Product Sans', -apple-system,
+    BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-text-theme:
-    'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial,
-    sans-serif;
+    'Google Sans Flex', 'Google Sans Text', 'Google Sans', 'Product Sans', -apple-system,
+    BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-monospace-theme:
     'JetBrains Mono', 'SF Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace;
+
+  /* --- Font UI scale (Baseline pattern) --- */
+  --font-ui-modifier: 0px;
+  --font-ui-smaller: calc(12px + var(--font-ui-modifier));
+  --font-ui-small: calc(13px + var(--font-ui-modifier));
+  --font-ui-medium: calc(15px + var(--font-ui-modifier));
+  --font-ui-large: calc(20px + var(--font-ui-modifier));
 
   /* --- Typography --- */
   --font-text-size: 15px;
   --line-height-normal: 1.65;
   --bold-weight: 600;
+  --bold-modifier: 300;
   --file-line-width: 750px;
   --heading-spacing: 1.5rem;
   --p-spacing: 0.75rem;
+
+  /* --- Density --- */
+  --density-modifier: 1;
 
   /* --- Accent HSL (Blue #2563eb ≈ hsl(221, 83%, 53%)) --- */
   --accent-h: 221;
@@ -133,10 +144,41 @@ body {
   --toggle-radius: 14px;
   --toggle-width: 44px;
 
-  /* --- Shadows --- */
-  --shadow-s: 0 2px 8px rgba(0, 0, 0, 0.08);
+  /* --- Icon System (Baseline) --- */
+  --icon-size-modifier: 0px;
+  --icon-opacity: 1;
+  --icon-stroke-modifier: 1;
+  --icon-xs-stroke-width: calc(2.25px * var(--icon-stroke-modifier));
+  --icon-s-stroke-width: calc(2px * var(--icon-stroke-modifier));
+  --icon-m-stroke-width: calc(2px * var(--icon-stroke-modifier));
+  --icon-l-stroke-width: calc(2px * var(--icon-stroke-modifier));
+  --icon-xl-stroke-width: calc(1.25px * var(--icon-stroke-modifier));
+
+  /* --- Animation System (Baseline) --- */
+  --anim-speed-modifier: 1;
+  --anim-motion-baseline: cubic-bezier(0.1, 0, 0.1, 1.25);
+  --anim-duration-superfast: calc(80ms * var(--anim-speed-modifier));
+  --anim-duration-fast: calc(160ms * var(--anim-speed-modifier));
+  --anim-duration-moderate: calc(320ms * var(--anim-speed-modifier));
+  --anim-duration-slow: calc(480ms * var(--anim-speed-modifier));
+
+  /* --- Shadows (Baseline format) --- */
+  --shadow-s: rgba(0, 0, 0, 0.08) 0px 12px 24px -4px, rgba(0, 0, 0, 0.04) 0px 8px 16px -4px;
+  --shadow-l: 0 14px 62px #00000040;
+  --shadow-tactile:
+    rgba(0, 0, 0, 0.04) 0px 2px 8px -2px, rgba(var(--mono-rgb-100), 0.04) 0px 2px 4px -2px;
   --shadow-mac: 0 8px 24px rgba(0, 0, 0, 0.18);
   --shadow-mac-heavy: 0 20px 60px rgba(0, 0, 0, 0.45);
+
+  /* --- Semantic Color Aliases (Baseline two-layer pattern) --- */
+  --color-red: rgb(var(--color-red-rgb));
+  --color-orange: rgb(var(--color-orange-rgb));
+  --color-yellow: rgb(var(--color-yellow-rgb));
+  --color-green: rgb(var(--color-green-rgb));
+  --color-cyan: rgb(var(--color-cyan-rgb));
+  --color-blue: rgb(var(--color-blue-rgb));
+  --color-purple: rgb(var(--color-purple-rgb));
+  --color-pink: rgb(var(--color-pink-rgb));
 }
 
 /* ==========================================================
@@ -173,6 +215,16 @@ body {
   --color-accent-2: #172554;
   --color-accent-light: #60a5fa;
   --color-accent-lighter: #93c5fd;
+
+  /* --- Semantic Color RGB Pairs (material-dark, Baseline pattern) --- */
+  --color-red-rgb: 217, 90, 95;
+  --color-orange-rgb: 219, 134, 80;
+  --color-yellow-rgb: 196, 180, 94;
+  --color-green-rgb: 72, 196, 90;
+  --color-cyan-rgb: 63, 186, 182;
+  --color-blue-rgb: 86, 148, 218;
+  --color-purple-rgb: 142, 125, 194;
+  --color-pink-rgb: 222, 103, 147;
 
   /* --- Backgrounds --- */
   --background-primary: var(--color-base-00);
@@ -269,20 +321,20 @@ body {
   --scrollbar-thumb-bg: var(--color-base-30);
   --scrollbar-active-thumb-bg: var(--color-base-40);
 
-  /* --- Code Variables --- */
+  /* --- Code Variables (material-dark, Baseline) --- */
   --code-background: #0d131f;
-  --code-normal: #a5b4fc;
+  --code-normal: #abb2bf;
   --code-size: 0.875em;
-  --code-comment: var(--color-base-50);
-  --code-function: #7dd3fc;
-  --code-important: #f87171;
-  --code-keyword: #c084fc;
-  --code-operator: #60a5fa;
-  --code-property: #a5b4fc;
-  --code-punctuation: var(--text-muted);
-  --code-string: #86efac;
-  --code-tag: #f9a8d4;
-  --code-value: #fde68a;
+  --code-comment: #5c6370;
+  --code-function: #d19a66;
+  --code-important: #d19a66;
+  --code-keyword: #e16d76;
+  --code-operator: #62afef;
+  --code-property: #62afef;
+  --code-punctuation: #abb2bf;
+  --code-string: #58b6c2;
+  --code-tag: #e16d76;
+  --code-value: #c678de;
 
   /* --- Inline Title --- */
   --inline-title-color: var(--color-accent-light);
@@ -298,6 +350,17 @@ body {
   --h4-color: var(--text-muted);
   --h5-color: var(--text-faint);
   --h6-color: var(--text-faint);
+
+  /* --- Heading Sizes & Weights (Style Settings preference) --- */
+  --h1-size: 2.25rem;
+  --h1-weight: 400;
+  --h2-size: 1.75rem;
+  --h2-weight: 400;
+  --h3-size: 1.375rem;
+  --h3-weight: 400;
+  --h4-weight: 500;
+  --h5-weight: 500;
+  --h6-weight: 500;
 
   /* --- Link Colors --- */
   --link-color: var(--color-accent-light);
@@ -464,6 +527,16 @@ body.kodev-blue-night-enable-premium-headers.theme-dark {
   --color-accent-light: #2563eb;
   --color-accent-lighter: #1d4ed8;
 
+  /* --- Semantic Color RGB Pairs (material-light, Baseline pattern) --- */
+  --color-red-rgb: 254, 112, 112;
+  --color-orange-rgb: 242, 154, 100;
+  --color-yellow-rgb: 224, 205, 99;
+  --color-green-rgb: 74, 213, 95;
+  --color-cyan-rgb: 56, 219, 214;
+  --color-blue-rgb: 106, 173, 250;
+  --color-purple-rgb: 187, 158, 245;
+  --color-pink-rgb: 243, 125, 183;
+
   /* --- Backgrounds --- */
   --background-primary: var(--color-base-00);
   --background-primary-alt: var(--color-base-10);
@@ -559,20 +632,20 @@ body.kodev-blue-night-enable-premium-headers.theme-dark {
   --scrollbar-thumb-bg: var(--color-base-35);
   --scrollbar-active-thumb-bg: var(--color-base-50);
 
-  /* --- Code Variables --- */
+  /* --- Code Variables (material-light, Baseline) --- */
   --code-background: #f1f5f9;
-  --code-normal: #4338ca;
+  --code-normal: #383a42;
   --code-size: 0.875em;
-  --code-comment: var(--color-base-50);
-  --code-function: #0369a1;
-  --code-important: #dc2626;
-  --code-keyword: #7c3aed;
+  --code-comment: #b6b9c5;
+  --code-function: #b76b02;
+  --code-important: #b76b02;
+  --code-keyword: #e45749;
   --code-operator: #2563eb;
-  --code-property: #4338ca;
-  --code-punctuation: var(--text-muted);
-  --code-string: #15803d;
-  --code-tag: #be185d;
-  --code-value: #92400e;
+  --code-property: #62afef;
+  --code-punctuation: #383a42;
+  --code-string: #0d97b3;
+  --code-tag: #e45749;
+  --code-value: #a626a4;
 
   /* --- Inline Title --- */
   --inline-title-color: var(--color-accent-1);
@@ -588,6 +661,17 @@ body.kodev-blue-night-enable-premium-headers.theme-dark {
   --h4-color: var(--text-muted);
   --h5-color: var(--text-faint);
   --h6-color: var(--text-faint);
+
+  /* --- Heading Sizes & Weights (Style Settings preference) --- */
+  --h1-size: 2.25rem;
+  --h1-weight: 400;
+  --h2-size: 1.75rem;
+  --h2-weight: 400;
+  --h3-size: 1.375rem;
+  --h3-weight: 400;
+  --h4-weight: 500;
+  --h5-weight: 500;
+  --h6-weight: 500;
 
   /* --- Link Colors --- */
   --link-color: var(--color-accent-1);
@@ -794,9 +878,9 @@ input[type='search'],
 input[type='password'] {
   border-radius: var(--input-radius);
   transition:
-    background-color 0.15s ease,
-    border-color 0.15s ease,
-    box-shadow 0.15s ease;
+    background-color var(--anim-duration-fast) var(--anim-motion-baseline),
+    border-color var(--anim-duration-fast) var(--anim-motion-baseline),
+    box-shadow var(--anim-duration-fast) var(--anim-motion-baseline);
 }
 
 .theme-dark input[type='text'],
@@ -922,9 +1006,9 @@ input[type='password'] {
 .metadata-property,
 .metadata-input-field {
   transition:
-    background-color 0.15s ease,
-    box-shadow 0.15s ease,
-    border-radius 0.15s ease;
+    background-color var(--anim-duration-fast) var(--anim-motion-baseline),
+    box-shadow var(--anim-duration-fast) var(--anim-motion-baseline),
+    border-radius var(--anim-duration-fast) var(--anim-motion-baseline);
 }
 
 /* --- "Add property" button — always subtle, brightens on hover --- */
@@ -1105,9 +1189,9 @@ body.kodev-blue-night-enable-mac-explorer .nav-file-title {
   margin: 2px 8px;
   padding: 5px 10px;
   transition:
-    background-color 0.2s cubic-bezier(0.2, 0.8, 0.2, 1),
-    transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1),
-    color 0.15s ease;
+    background-color var(--anim-duration-fast) var(--anim-motion-baseline),
+    transform var(--anim-duration-fast) var(--anim-motion-baseline),
+    color var(--anim-duration-fast) var(--anim-motion-baseline);
 }
 
 /* Folder hover */
@@ -1170,7 +1254,7 @@ body.kodev-blue-night-enable-folder-guides .nav-folder-children:hover {
 /* Non-variable properties for the premium-headers feature */
 body.kodev-blue-night-enable-premium-headers .markdown-rendered h1,
 body.kodev-blue-night-enable-premium-headers .cm-header-1 {
-  font-weight: 700;
+  font-weight: var(--h1-weight, 400);
   letter-spacing: -0.02em;
   border-bottom: 1px solid var(--background-modifier-border);
   padding-bottom: 8px;
@@ -1180,7 +1264,7 @@ body.kodev-blue-night-enable-premium-headers .cm-header-1 {
 
 body.kodev-blue-night-enable-premium-headers .markdown-rendered h2,
 body.kodev-blue-night-enable-premium-headers .cm-header-2 {
-  font-weight: 600;
+  font-weight: var(--h2-weight, 400);
   letter-spacing: -0.01em;
   margin-top: 1.5em;
   margin-bottom: 0.5em;
@@ -1188,7 +1272,7 @@ body.kodev-blue-night-enable-premium-headers .cm-header-2 {
 
 body.kodev-blue-night-enable-premium-headers .markdown-rendered h3,
 body.kodev-blue-night-enable-premium-headers .cm-header-3 {
-  font-weight: 600;
+  font-weight: var(--h3-weight, 400);
   margin-top: 1.2em;
   margin-bottom: 0.4em;
 }
@@ -1247,7 +1331,7 @@ pre code,
 .callout {
   border-radius: 0 var(--radius-m) var(--radius-m) 0;
   border-left-width: 3px;
-  padding: 12px 16px;
+  padding: 16px 20px;
   margin: 1.2em 0;
 }
 
