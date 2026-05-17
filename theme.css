@@ -67,6 +67,21 @@ settings:
     title: Productivity & Focus
     type: heading
     level: 1
+  - id: enable-premium-callouts
+    title: Premium Callouts
+    description: Styles callouts with translucent backgrounds and macOS rounding.
+    type: class-toggle
+    default: true
+  - id: enable-macos-tables
+    title: macOS Style Tables
+    description: Adds zebra stripes and clean headers to markdown tables.
+    type: class-toggle
+    default: true
+  - id: enable-deep-blue-code
+    title: Deep Blue Code Blocks
+    description: Applies a midnight blue background and refined syntax highlighting.
+    type: class-toggle
+    default: true
   - id: enable-pill-tags
     title: Pill Style Tags (iOS)
     description: Rounds tags and gives them a translucent background.
@@ -146,8 +161,19 @@ body {
   --background-modifier-active-line: color-mix(in srgb, var(--color-accent), transparent 92%);
 
   /* Code Blocks */
-  --code-background: #080c14;
+  --code-background: #050911;
   --code-normal: #a5b4fc;
+  --code-comment: #475569;
+  --code-function: #818cf8;
+  --code-keyword: #c084fc;
+  --code-string: #22d3ee;
+  --code-punctuation: #94a3b8;
+  --code-operator: #818cf8;
+
+  /* Tables */
+  --table-header-background: var(--color-base-10);
+  --table-row-alt-background: rgba(30, 58, 138, 0.05);
+  --table-border-color: var(--color-base-30);
 
   /* Graph View (Data Node Hierarchy) */
   --graph-text: #e2e8f0;
@@ -184,8 +210,18 @@ body {
   /* Active Line Highlight (Clean Focus) */
   --background-modifier-active-line: color-mix(in srgb, var(--color-accent), transparent 96%);
 
+  /* Code Blocks */
   --code-background: #f1f5f9;
   --code-normal: #4f46e5;
+  --code-comment: #94a3b8;
+  --code-function: #2563eb;
+  --code-keyword: #7c3aed;
+  --code-string: #0891b2;
+
+  /* Tables */
+  --table-header-background: var(--color-base-20);
+  --table-row-alt-background: rgba(30, 58, 138, 0.02);
+  --table-border-color: var(--color-base-30);
 
   /* Graph View (Light Mode) */
   --graph-text: #0f172a;
@@ -422,6 +458,98 @@ body.kodev-blue-night-enable-custom-bullets .cm-formatting-list {
 /* ==========================================================
    5. EXTRA UI/UX POLISH
    ========================================================== */
+
+/* Premium Callouts */
+body.kodev-blue-night-enable-premium-callouts .callout {
+  border-radius: var(--radius-m);
+  border-left-width: 4px;
+  background-color: color-mix(in srgb, var(--callout-color), transparent 90%);
+  border-color: color-mix(in srgb, var(--callout-color), transparent 50%);
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+body.kodev-blue-night-enable-premium-callouts .callout-title {
+  font-weight: 600;
+  color: var(--callout-color);
+  padding-bottom: 4px;
+}
+
+/* macOS Style Tables */
+body.kodev-blue-night-enable-macos-tables table {
+  border-collapse: collapse;
+  margin: 1.5em 0;
+  width: 100%;
+  border-radius: var(--radius-m);
+  overflow: hidden;
+  border: 1px solid var(--table-border-color);
+}
+
+body.kodev-blue-night-enable-macos-tables th {
+  background-color: var(--table-header-background);
+  color: var(--text-normal);
+  font-weight: 600;
+  text-align: left;
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--table-border-color);
+}
+
+body.kodev-blue-night-enable-macos-tables td {
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--table-border-color);
+}
+
+body.kodev-blue-night-enable-macos-tables tr:nth-child(even) {
+  background-color: var(--table-row-alt-background);
+}
+
+body.kodev-blue-night-enable-macos-tables tr:last-child td {
+  border-bottom: none;
+}
+
+/* Deep Blue Code Blocks */
+body.kodev-blue-night-enable-deep-blue-code .markdown-rendered code,
+body.kodev-blue-night-enable-deep-blue-code .cm-s-obsidian .cm-inline-code {
+  background-color: var(--code-background);
+  color: var(--code-normal);
+  border-radius: var(--radius-s);
+  padding: 0.2em 0.4em;
+  font-size: 0.9em;
+  border: 1px solid var(--color-base-30);
+}
+
+body.kodev-blue-night-enable-deep-blue-code .markdown-rendered pre {
+  background-color: var(--code-background);
+  border: 1px solid var(--color-base-30);
+  border-radius: var(--radius-m);
+  padding: 1.5em;
+  box-shadow: var(--shadow-mac);
+}
+
+/* Images and Media */
+.markdown-rendered img {
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-mac);
+  transition: transform 0.3s ease;
+}
+
+.markdown-rendered img:hover {
+  transform: scale(1.02);
+}
+
+/* Obsidian Properties (macOS Style) */
+.metadata-container {
+  background-color: var(--color-base-10);
+  border: 1px solid var(--color-base-30);
+  border-radius: var(--radius-l);
+  margin-bottom: 2em;
+  padding: 16px;
+}
+
+.metadata-property-key {
+  color: var(--color-accent);
+  font-weight: 600;
+}
 
 /* Pill Tags */
 body.kodev-blue-night-enable-pill-tags .tag {
