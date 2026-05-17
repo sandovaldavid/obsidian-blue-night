@@ -1,5 +1,5 @@
 ---
-name: dotfiles
+name: blue_night_env
 channels:
   - conda-forge
   - defaults
