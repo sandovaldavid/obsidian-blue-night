@@ -872,20 +872,33 @@ input[type='password'] {
 
 /*
  * Unified key column: icon + label share the same background.
- * Without this explicit rule, Obsidian may apply --metadata-label-background-hover
- * only to the label text, leaving the icon wrapper unstyled — making them look
- * like two separate elements. This rule enforces the same background on the
- * entire .metadata-property-key wrapper (which contains both icon and name input).
+ *
+ * In Obsidian's DOM, .metadata-property-icon is a SIBLING of .metadata-property-key
+ * (not a child), so setting background on the key wrapper alone never covers the icon.
+ *
+ * Default state → --color-base-20 (subtle elevation, differentiates key from value)
+ * Hover state   → transparent: the row's --metadata-property-background-hover covers
+ *                 everything uniformly. Keeping a separate color here causes a
+ *                 "floating box" misalignment because Obsidian uses align-items:center
+ *                 on the row, so child backgrounds don't fill the full row height.
+ * Active state  → --metadata-label-background-active (accent tint, only on focus)
  */
-.metadata-property:hover .metadata-property-key {
-  background-color: var(--metadata-label-background-hover);
-  border-radius: var(--radius-s) 0 0 var(--radius-s);
+.metadata-property-icon,
+.metadata-property-key {
+  background-color: var(--color-base-20);
   transition: background-color 0.15s ease;
 }
 
+/* On hover: revert to transparent so the row's single uniform background shows.
+   This eliminates the misaligned double-shade effect. */
+.metadata-property:hover .metadata-property-icon,
+.metadata-property:hover .metadata-property-key {
+  background-color: transparent;
+}
+
+.metadata-property:focus-within .metadata-property-icon,
 .metadata-property:focus-within .metadata-property-key {
   background-color: var(--metadata-label-background-active);
-  border-radius: var(--radius-s) 0 0 var(--radius-s);
 }
 
 /* Focus ring on the focused property row */
