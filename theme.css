@@ -123,14 +123,14 @@ body {
 
   /* Blue Accents */
   --color-accent: var(--color-accent-base, #1e3a8a);
-  --color-accent-1: #2a4db3; /* Subtle glow for hover */
-  --color-accent-2: #172554; /* Deep depressed state */
+  --color-accent-1: color-mix(in srgb, var(--color-accent), white 20%);
+  --color-accent-2: color-mix(in srgb, var(--color-accent), black 30%);
 
   /* Typography */
   --text-normal: #e2e8f0;
   --text-muted: #94a3b8;
   --text-faint: #475569;
-  --text-selection: rgba(30, 58, 138, 0.4);
+  --text-selection: color-mix(in srgb, var(--color-accent), transparent 60%);
 
   --text-accent: var(--color-accent);
   --text-accent-hover: var(--color-accent-1);
@@ -140,10 +140,10 @@ body {
   --background-primary-alt: var(--color-base-10);
   --background-secondary: var(--color-base-10);
   --background-modifier-border: var(--color-base-30);
-  --background-modifier-hover: rgba(30, 58, 138, 0.15);
+  --background-modifier-hover: color-mix(in srgb, var(--color-accent), transparent 85%);
 
   /* Active Line Highlight (Deep Focus) */
-  --background-modifier-active-line: rgba(30, 58, 138, 0.08);
+  --background-modifier-active-line: color-mix(in srgb, var(--color-accent), transparent 92%);
 
   /* Code Blocks */
   --code-background: #080c14;
@@ -168,8 +168,8 @@ body {
   --color-base-40: #cbd5e1;
 
   --color-accent: var(--color-accent-base, #1e3a8a);
-  --color-accent-1: #2563eb;
-  --color-accent-2: #172554;
+  --color-accent-1: color-mix(in srgb, var(--color-accent), black 10%);
+  --color-accent-2: color-mix(in srgb, var(--color-accent), black 20%);
 
   --text-normal: #0f172a;
   --text-muted: #64748b;
@@ -179,10 +179,10 @@ body {
   --background-primary-alt: var(--color-base-10);
   --background-secondary: var(--color-base-10);
   --background-modifier-border: var(--color-base-30);
-  --background-modifier-hover: rgba(60, 130, 241, 0.05);
+  --background-modifier-hover: color-mix(in srgb, var(--color-accent), transparent 95%);
 
   /* Active Line Highlight (Clean Focus) */
-  --background-modifier-active-line: rgba(60, 130, 241, 0.04);
+  --background-modifier-active-line: color-mix(in srgb, var(--color-accent), transparent 96%);
 
   --code-background: #f1f5f9;
   --code-normal: #4f46e5;
@@ -340,20 +340,28 @@ body.kodev-blue-night-enable-mac-explorer .nav-file-title:hover {
 body.kodev-blue-night-enable-mac-explorer .nav-file-title.is-active {
   background-color: var(--color-accent) !important;
   color: #ffffff !important;
-  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3) !important;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--color-accent), transparent 70%) !important;
   transform: translateX(6px) !important;
   font-weight: 700 !important;
-  border-left: 3px solid #60a5fa !important;
+  border-left: 3px solid color-mix(in srgb, var(--color-accent), white 30%) !important;
 }
 
 /* Efecto en la nota Activa (Seleccionada) - Modo Dark (Máximo Contraste) */
 .theme-dark body.kodev-blue-night-enable-mac-explorer .nav-file-title.is-active {
-  background-color: rgba(60, 130, 241, 0.2) !important; /* Fondo translúcido brillante */
-  color: #93c5fd !important; /* Texto celeste muy brillante para contraste absoluto sobre negro */
+  background-color: color-mix(
+    in srgb,
+    var(--color-accent),
+    transparent 80%
+  ) !important; /* Fondo translúcido brillante */
+  color: color-mix(
+    in srgb,
+    var(--color-accent),
+    white 40%
+  ) !important; /* Texto brillante para contraste */
   box-shadow:
-    inset 0 0 10px rgba(60, 130, 241, 0.15),
+    inset 0 0 10px color-mix(in srgb, var(--color-accent), transparent 85%),
     0 5px 15px rgba(0, 0, 0, 0.8) !important; /* Resplandor interior y sombra fuerte exterior */
-  border-left: 3px solid #60a5fa !important; /* Borde neón puro */
+  border-left: 3px solid var(--color-accent) !important; /* Borde neón puro */
 }
 
 /* Folder Indent Guides */
@@ -419,9 +427,9 @@ body.kodev-blue-night-enable-custom-bullets .cm-formatting-list {
 body.kodev-blue-night-enable-pill-tags .tag {
   border-radius: 20px;
   padding: 2px 12px;
-  background-color: var(--background-modifier-hover);
+  background-color: color-mix(in srgb, var(--color-accent), transparent 90%);
   color: var(--color-accent);
-  border: 1px solid rgba(60, 130, 241, 0.2);
+  border: 1px solid color-mix(in srgb, var(--color-accent), transparent 80%);
   font-weight: 500;
 }
 
