@@ -267,32 +267,52 @@ body {
 }
 
 /* --- THE WORKSPACE RIBBON (Leftmost Icon Bar Polish) --- */
+.workspace-ribbon.mod-left {
+  background-color: var(--color-base-10);
+  border-right: 1px solid var(--color-base-30);
+}
+
 .workspace-ribbon.mod-left .clickable-icon {
   border-radius: var(--radius-m);
   transition: all 0.2s ease;
   margin-bottom: 6px;
+  color: var(--text-muted);
 }
 
-.workspace-ribbon.mod-left .clickable-icon:hover {
+.workspace-ribbon.mod-left .clickable-icon:hover,
+.workspace-ribbon.mod-left .clickable-icon.is-active {
   background-color: var(--background-modifier-hover);
-  color: var(--color-accent-1);
-  transform: scale(1.15); /* Satisfying tactile zoom */
+  color: var(--color-accent);
+  transform: scale(1.1);
 }
 
-/* --- ACTIVE TAB DESIGN (VS Code / Premium Style) --- */
-.titlebar,
-.workspace-tab-header-container {
-  background-color: var(--color-base-10);
-  border-bottom: 1px solid var(--color-base-30);
+/* --- SEARCH BARS & INPUTS (Capsule Style) --- */
+.search-input-container input,
+.search-input-container input:focus,
+.canvas-search-container input,
+.setting-search-container input {
+  border-radius: 20px !important;
+  background-color: var(--color-base-20) !important;
+  border: 1px solid var(--color-base-30) !important;
+  padding: 6px 15px !important;
+  font-size: 0.9em;
+  transition: all 0.2s ease;
 }
 
+.search-input-container input:focus {
+  border-color: var(--color-accent) !important;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-accent), transparent 80%);
+}
+
+/* --- ACTIVE TAB DESIGN (Safari Style) --- */
 .workspace-tab-header {
   border-radius: var(--radius-m) var(--radius-m) 0 0;
-  margin-top: 4px;
+  margin: 4px 2px 0 2px;
   background-color: transparent;
   border: 1px solid transparent;
   border-bottom: none;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
+  padding: 4px 12px;
 }
 
 .workspace-tab-header:not(.is-active):hover {
@@ -302,15 +322,27 @@ body {
 .workspace-tab-header.is-active {
   background-color: var(--color-base-00);
   border: 1px solid var(--color-base-30);
-  border-bottom: 1px solid var(--color-base-00);
-  border-top: 2px solid var(--color-accent) !important;
-  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
-  font-weight: 600;
-  color: var(--text-accent-hover);
+  border-bottom: 2px solid var(--color-base-00);
+  border-top: 1px solid var(--color-base-30);
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+  font-weight: 500;
+  z-index: 5;
+  position: relative;
 }
 
-.workspace-tab-header.is-active .workspace-tab-header-inner-title {
-  color: var(--text-normal);
+.theme-dark .workspace-tab-header.is-active {
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.workspace-tab-header.is-active::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--color-accent);
+  border-radius: 2px 2px 0 0;
 }
 
 /* --- VIEW HEADER GLASSMORPHISM (The bar above the text) --- */
@@ -355,34 +387,40 @@ body.kodev-blue-night-enable-raycast-prompt .suggestion-item.is-selected {
   color: #ffffff;
 }
 
+/* --- TITLEBAR & TAB CONTAINER --- */
+.titlebar,
+.workspace-tab-header-container {
+  background-color: var(--color-base-10);
+  border-bottom: 1px solid var(--color-base-30);
+}
+
 /* macOS Explorer Style */
 body.kodev-blue-night-enable-mac-explorer .nav-folder-title,
 body.kodev-blue-night-enable-mac-explorer .nav-file-title {
   border-radius: var(--radius-m);
-  margin: 2px 12px;
-  padding: 6px 10px;
-  border-left: 3px solid transparent; /* Evita que el texto salte al añadir el borde activo */
-  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  margin: 1px 10px;
+  padding: 4px 10px;
+  transition: all 0.15s ease;
+  color: var(--text-muted);
 }
 
-/* Efecto Hover en las notas */
+body.kodev-blue-night-enable-mac-explorer .nav-folder-title:hover,
 body.kodev-blue-night-enable-mac-explorer .nav-file-title:hover {
   background-color: var(--background-modifier-hover);
-  color: var(--color-accent-1);
-  transform: translateX(4px); /* Deslizamiento suave estilo IDE */
+  color: var(--text-normal);
 }
 
-/* Efecto en la nota Activa (Seleccionada) - Modo Light por defecto */
+/* Active State - Light Mode (Translucent Apple Blue) */
 body.kodev-blue-night-enable-mac-explorer .nav-file-title.is-active {
-  background-color: var(--color-accent) !important;
-  color: #ffffff !important;
-  box-shadow: 0 4px 12px color-mix(in srgb, var(--color-accent), transparent 70%) !important;
-  transform: translateX(6px) !important;
-  font-weight: 700 !important;
-  border-left: 3px solid color-mix(in srgb, var(--color-accent), white 30%) !important;
+  background-color: color-mix(in srgb, var(--color-accent), transparent 85%) !important;
+  color: var(--color-accent) !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
+  border-left: 3px solid var(--color-accent) !important;
+  transform: none !important;
 }
 
-/* Efecto en la nota Activa (Seleccionada) - Modo Dark (Máximo Contraste) */
+/* Active State - Dark Mode */
 .theme-dark body.kodev-blue-night-enable-mac-explorer .nav-file-title.is-active {
   background-color: color-mix(
     in srgb,
@@ -394,10 +432,7 @@ body.kodev-blue-night-enable-mac-explorer .nav-file-title.is-active {
     var(--color-accent),
     white 40%
   ) !important; /* Texto brillante para contraste */
-  box-shadow:
-    inset 0 0 10px color-mix(in srgb, var(--color-accent), transparent 85%),
-    0 5px 15px rgba(0, 0, 0, 0.8) !important; /* Resplandor interior y sombra fuerte exterior */
-  border-left: 3px solid var(--color-accent) !important; /* Borde neón puro */
+  border-left: 3px solid var(--color-accent) !important;
 }
 
 /* Folder Indent Guides */
@@ -543,12 +578,21 @@ body.kodev-blue-night-enable-deep-blue-code .markdown-rendered pre {
   border: 1px solid var(--color-base-30);
   border-radius: var(--radius-l);
   margin-bottom: 2em;
-  padding: 16px;
+  padding: 12px 16px;
 }
 
 .metadata-property-key {
+  color: var(--text-muted); /* Softer key names */
+  font-weight: 500;
+}
+
+.metadata-property-key:hover {
   color: var(--color-accent);
-  font-weight: 600;
+}
+
+.metadata-property-value {
+  font-weight: 500;
+  color: var(--text-normal);
 }
 
 /* Pill Tags */
