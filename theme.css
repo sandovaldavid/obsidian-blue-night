@@ -8,19 +8,30 @@
 name: Blue Night (Kodev)
 id: kodev-blue-night
 settings:
-  - id: appearance-heading
-    title: Appearance
+  - id: info
+    title: Blue Night (Kodev)
     type: heading
     level: 1
+    collapsed: false
+  - id: info-text
+    title: Elegant Midnight Theme
+    type: info-text
+    description: "Designed for absolute focus and high cognitive efficiency. macOS-inspired UI/UX with Deep Blue accents."
+
+  - id: colors
+    title: Colors & Accents
+    type: heading
+    level: 1
+    collapsed: true
   - id: color-accent-base
-    title: Principal Accent Color
-    description: Your default Blue Tech accent.
+    title: Primary Accent Color
+    description: The core color for links, buttons, and highlights.
     type: variable-color
     format: hex
     default: '#1e3a8a'
   - id: dark-bg-main
     title: Editor Background (Dark Mode)
-    description: #000000 gives you pure OLED black. Blueish tones like #0a0e14 also work well.
+    description: Pure OLED black (#000000) or Midnight Blue (#0a0e14).
     type: variable-color
     format: hex
     default: '#000000'
@@ -30,99 +41,164 @@ settings:
     type: variable-color
     format: hex
     default: '#ffffff'
-  - id: macos-ui-heading
-    title: macOS UI Features
+
+  - id: interface
+    title: Interface & Layout
     type: heading
     level: 1
+    collapsed: true
+  - id: density-modifier
+    title: Interface Density
+    type: variable-number-slider
+    default: 1
+    min: 0.75
+    max: 1.25
+    step: 0.125
+  - id: radius-modifier
+    title: Corner Roundness
+    type: variable-number-slider
+    default: 1
+    min: 0.5
+    max: 2
+    step: 0.25
   - id: enable-raycast-prompt
     title: Raycast Style Command Palette
-    description: Centers the command palette and adds a floating glass effect.
+    description: Floating glass effect with centered prompt.
     type: class-toggle
     default: true
   - id: enable-mac-explorer
     title: Minimalist File Explorer
-    description: Enables macOS-style bubble margins in the file tree.
+    description: macOS-style bubble margins and active states.
     type: class-toggle
     default: true
   - id: enable-folder-guides
     title: Folder Indent Guides
-    description: Shows connection lines in the file explorer (VS Code style).
     type: class-toggle
     default: true
-  - id: typography-heading
+  - id: enable-minimal-statusbar
+    title: Auto-hide Status Bar
+    type: class-toggle
+    default: true
+
+  - id: typography
     title: Typography & Content
     type: heading
     level: 1
+    collapsed: true
+  - id: font-interface-override
+    title: Interface Font
+    type: variable-text
+    default: '-apple-system, SF Pro Text, Inter'
+  - id: font-text-override
+    title: Editor Font
+    type: variable-text
+    default: '-apple-system, SF Pro Text, Inter'
   - id: enable-premium-headers
-    title: Premium Headers
-    description: Styles H1, H2, H3 with accent colors and distinct formatting.
+    title: Premium Heading Styles
     type: class-toggle
     default: true
   - id: enable-custom-bullets
     title: Colored List Bullets
-    description: Replaces standard dots with your accent color.
     type: class-toggle
     default: true
-  - id: productivity-heading
-    title: Productivity & Focus
+
+  - id: markdown-pro
+    title: Premium Markdown
     type: heading
     level: 1
+    collapsed: true
   - id: enable-premium-callouts
-    title: Premium Callouts
-    description: Styles callouts with translucent backgrounds and macOS rounding.
+    title: Glassmorphic Callouts
     type: class-toggle
     default: true
   - id: enable-macos-tables
-    title: macOS Style Tables
-    description: Adds zebra stripes and clean headers to markdown tables.
+    title: Elegant Zebra Tables
     type: class-toggle
     default: true
   - id: enable-deep-blue-code
-    title: Deep Blue Code Blocks
-    description: Applies a midnight blue background and refined syntax highlighting.
+    title: Deep Blue Syntax Highlighting
     type: class-toggle
     default: true
   - id: enable-pill-tags
-    title: Pill Style Tags (iOS)
-    description: Rounds tags and gives them a translucent background.
+    title: iOS Style Pill Tags
     type: class-toggle
     default: true
   - id: enable-custom-checkboxes
-    title: Circular Checkboxes
-    description: Converts task checkboxes into circles with smooth animations.
+    title: Circular Task Checkboxes
     type: class-toggle
     default: true
   - id: enable-ide-blockquotes
-    title: IDE Style Blockquotes
-    description: Improves the design of blockquotes with borders and subtle backgrounds.
-    type: class-toggle
-    default: true
-  - id: enable-minimal-statusbar
-    title: Minimalist Status Bar
-    description: Subtly hides the bottom bar until hovered.
+    title: Modern IDE Blockquotes
     type: class-toggle
     default: true
 */
 
 /* ==========================================================
-   0. SHARED VARIABLES & RESET
+   0. ADVANCED SHARED VARIABLES & RESET
    ========================================================== */
 body {
-  --font-interface:
-    -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', Roboto, Helvetica, Arial,
-    sans-serif;
-  --font-text:
-    -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', Roboto, Helvetica, Arial,
-    sans-serif;
+  /* Dynamic Modifiers */
+  --font-ui-size: calc(13px * var(--density-modifier, 1));
+  --font-text-size: calc(15px * var(--density-modifier, 1));
+  --p-spacing: calc(1.5rem * var(--density-modifier, 1));
+  --list-spacing: calc(0.175em * var(--density-modifier, 1));
+
+  /* Core Radii with Modifier */
+  --radius-s: calc(4px * var(--radius-modifier, 1));
+  --radius-m: calc(8px * var(--radius-modifier, 1));
+  --radius-l: calc(12px * var(--radius-modifier, 1));
+  --radius-xl: calc(16px * var(--radius-modifier, 1));
+
+  /* Typography */
+  --font-interface: var(
+    --font-interface-override,
+    -apple-system,
+    BlinkMacSystemFont,
+    'SF Pro Text',
+    'Inter',
+    'Segoe UI',
+    sans-serif
+  );
+  --font-text: var(
+    --font-text-override,
+    -apple-system,
+    BlinkMacSystemFont,
+    'SF Pro Text',
+    'Inter',
+    'Segoe UI',
+    sans-serif
+  );
   --font-monospace: 'SF Mono', 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace;
 
-  --radius-s: 4px;
-  --radius-m: 8px;
-  --radius-l: 12px;
-  --radius-xl: 16px;
+  /* Global UI Scaling */
+  font-size: var(--font-ui-size);
 
+  /* Animation System (Baseline Reference) */
+  --anim-speed-modifier: 1;
+  --anim-duration-superfast: calc(80ms * var(--anim-speed-modifier));
+  --anim-duration-fast: calc(160ms * var(--anim-speed-modifier));
+  --anim-duration-moderate: calc(320ms * var(--anim-speed-modifier));
+  --anim-motion-baseline: cubic-bezier(0.1, 0, 0.1, 1.25);
+
+  /* Shadow System (Premium macOS) */
   --shadow-mac: 0 10px 30px rgba(0, 0, 0, 0.15);
   --shadow-mac-heavy: 0 20px 50px rgba(0, 0, 0, 0.3);
+  --shadow-tactile: rgba(0, 0, 0, 0.04) 0px 2px 8px -2px, rgba(0, 0, 0, 0.04) 0px 2px 4px -2px;
+
+  /* Icon Stroke Widths */
+  --icon-stroke-modifier: 1;
+  --icon-s-stroke-width: calc(2px * var(--icon-stroke-modifier));
+  --icon-m-stroke-width: calc(2px * var(--icon-stroke-modifier));
+}
+
+.markdown-rendered p {
+  margin-block-start: var(--p-spacing);
+  margin-block-end: var(--p-spacing);
+}
+
+.markdown-rendered li {
+  margin-block-start: var(--list-spacing);
+  margin-block-end: var(--list-spacing);
 }
 
 /* ==========================================================
@@ -131,10 +207,14 @@ body {
 .theme-dark {
   /* Core Backgrounds */
   --color-base-00: var(--dark-bg-main, #000000);
-  --color-base-10: #050911; /* Slightly darker than before for better contrast */
+  --color-base-10: #050911;
   --color-base-20: #0a1120;
   --color-base-30: #1b2633;
   --color-base-40: #2a3b4d;
+
+  /* Translucency */
+  --translucent-dark-opacity: 50%;
+  --workspace-background-translucent: rgba(0, 0, 0, var(--translucent-dark-opacity));
 
   /* Blue Accents */
   --color-accent: var(--color-accent-base, #1e3a8a);
@@ -172,7 +252,7 @@ body {
 
   /* Tables */
   --table-header-background: var(--color-base-10);
-  --table-row-alt-background: rgba(30, 58, 138, 0.05);
+  --table-row-alt-background: color-mix(in srgb, var(--color-accent), transparent 95%);
   --table-border-color: var(--color-base-30);
 
   /* Graph View (Data Node Hierarchy) */
@@ -192,6 +272,10 @@ body {
   --color-base-20: #f1f5f9;
   --color-base-30: #e2e8f0;
   --color-base-40: #cbd5e1;
+
+  /* Translucency */
+  --translucent-light-opacity: 50%;
+  --workspace-background-translucent: rgba(255, 255, 255, var(--translucent-light-opacity));
 
   --color-accent: var(--color-accent-base, #1e3a8a);
   --color-accent-1: color-mix(in srgb, var(--color-accent), black 10%);
@@ -220,7 +304,7 @@ body {
 
   /* Tables */
   --table-header-background: var(--color-base-20);
-  --table-row-alt-background: rgba(30, 58, 138, 0.02);
+  --table-row-alt-background: color-mix(in srgb, var(--color-accent), transparent 98%);
   --table-border-color: var(--color-base-30);
 
   /* Graph View (Light Mode) */
