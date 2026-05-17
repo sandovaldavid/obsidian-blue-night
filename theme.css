@@ -1,0 +1,300 @@
+/* ==========================================================
+   KODEV BLUE NIGHT THEME
+   Engineered for absolute focus, zero light bleed, and high 
+   cognitive efficiency. Mac-inspired UI/UX.
+   ========================================================== */
+
+/* @settings
+name: Blue Night (Kodev)
+id: kodev-blue-night
+settings:
+  - id: appearance-heading
+    title: Appearance
+    type: heading
+    level: 1
+  - id: color-accent-base
+    title: Principal Accent Color
+    description: Your default Blue Tech accent.
+    type: variable-color
+    format: hex
+    default: '#3c82f1'
+  - id: dark-bg-main
+    title: Editor Background (Dark Mode)
+    description: #000000 gives you pure OLED black. Blueish tones like #0a0e14 also work well.
+    type: variable-color
+    format: hex
+    default: '#000000'
+  - id: light-bg-main
+    title: Editor Background (Light Mode)
+    description: Clean white or very light blue.
+    type: variable-color
+    format: hex
+    default: '#ffffff'
+  - id: macos-ui-heading
+    title: macOS UI Features
+    type: heading
+    level: 1
+  - id: enable-raycast-prompt
+    title: Raycast Style Command Palette
+    description: Centers the command palette and adds a floating glass effect.
+    type: class-toggle
+    default: true
+  - id: enable-mac-explorer
+    title: Minimalist File Explorer
+    description: Enables macOS-style bubble margins in the file tree.
+    type: class-toggle
+    default: true
+  - id: enable-folder-guides
+    title: Folder Indent Guides
+    description: Shows connection lines in the file explorer (VS Code style).
+    type: class-toggle
+    default: true
+  - id: productivity-heading
+    title: Productivity & Focus
+    type: heading
+    level: 1
+  - id: enable-pill-tags
+    title: Pill Style Tags (iOS)
+    description: Rounds tags and gives them a translucent background.
+    type: class-toggle
+    default: true
+  - id: enable-custom-checkboxes
+    title: Circular Checkboxes
+    description: Converts task checkboxes into circles with smooth animations.
+    type: class-toggle
+    default: true
+  - id: enable-ide-blockquotes
+    title: IDE Style Blockquotes
+    description: Improves the design of blockquotes with borders and subtle backgrounds.
+    type: class-toggle
+    default: true
+  - id: enable-minimal-statusbar
+    title: Minimalist Status Bar
+    description: Subtly hides the bottom bar until hovered.
+    type: class-toggle
+    default: true
+*/
+
+/* ==========================================================
+   0. SHARED VARIABLES & RESET
+   ========================================================== */
+body {
+  --font-interface:
+    -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+  --font-text:
+    -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+  --font-monospace: 'SF Mono', 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace;
+
+  --radius-s: 4px;
+  --radius-m: 8px;
+  --radius-l: 12px;
+  --radius-xl: 16px;
+
+  --shadow-mac: 0 10px 30px rgba(0, 0, 0, 0.15);
+  --shadow-mac-heavy: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================================================
+   1. DARK MODE (Absolute Focus)
+   ========================================================== */
+.theme-dark {
+  /* Core Backgrounds */
+  --color-base-00: var(--dark-bg-main, #000000);
+  --color-base-10: #0a0e14;
+  --color-base-20: #111821;
+  --color-base-30: #1b2633;
+  --color-base-40: #2a3b4d;
+
+  /* Blue Accents */
+  --color-accent: var(--color-accent-base, #3c82f1);
+  --color-accent-1: #5a9cf8;
+  --color-accent-2: #1e3a8a;
+
+  /* Typography */
+  --text-normal: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-faint: #475569;
+  --text-selection: rgba(60, 130, 241, 0.3);
+
+  --text-accent: var(--color-accent);
+  --text-accent-hover: var(--color-accent-1);
+
+  /* Backgrounds & Borders */
+  --background-primary: var(--color-base-00);
+  --background-primary-alt: var(--color-base-10);
+  --background-secondary: var(--color-base-10);
+  --background-modifier-border: var(--color-base-30);
+  --background-modifier-hover: rgba(60, 130, 241, 0.1);
+
+  /* Code Blocks */
+  --code-background: #0d1117;
+  --code-normal: #a5b4fc;
+}
+
+/* ==========================================================
+   2. LIGHT MODE (Crisp & Clean Slate)
+   ========================================================== */
+.theme-light {
+  --color-base-00: var(--light-bg-main, #ffffff);
+  --color-base-10: #f8fafc;
+  --color-base-20: #f1f5f9;
+  --color-base-30: #e2e8f0;
+  --color-base-40: #cbd5e1;
+
+  --color-accent: var(--color-accent-base, #3c82f1);
+  --color-accent-1: #2563eb;
+  --color-accent-2: #bfdbfe;
+
+  --text-normal: #0f172a;
+  --text-muted: #64748b;
+  --text-faint: #94a3b8;
+
+  --background-primary: var(--color-base-00);
+  --background-primary-alt: var(--color-base-10);
+  --background-secondary: var(--color-base-10);
+  --background-modifier-border: var(--color-base-30);
+  --background-modifier-hover: rgba(60, 130, 241, 0.05);
+
+  --code-background: #f1f5f9;
+  --code-normal: #4f46e5;
+}
+
+/* ==========================================================
+   3. UI/UX UPGRADES (macOS / Minimalist Feel)
+   ========================================================== */
+
+/* Typography Smoothing */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Main Workspace */
+.workspace-split.mod-root,
+.workspace-leaf-content {
+  background-color: var(--color-base-00);
+}
+
+/* Titlebar & Headers */
+.titlebar,
+.workspace-tab-header-container {
+  background-color: var(--color-base-10);
+  border-bottom: 1px solid var(--color-base-30);
+}
+
+/* Raycast Style Command Palette */
+body.kodev-blue-night-enable-raycast-prompt .prompt {
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-base-30);
+  box-shadow: var(--shadow-mac-heavy);
+  background-color: var(--color-base-10);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  margin-top: 10vh;
+  overflow: hidden;
+}
+
+body.kodev-blue-night-enable-raycast-prompt .prompt-input {
+  border-bottom: 1px solid var(--color-base-30);
+  padding: 24px !important;
+  font-size: 1.3em;
+  background: transparent;
+}
+
+body.kodev-blue-night-enable-raycast-prompt .suggestion-item {
+  border-radius: var(--radius-m);
+  margin: 4px 12px;
+  padding: 10px 16px;
+}
+
+body.kodev-blue-night-enable-raycast-prompt .suggestion-item.is-selected {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
+
+/* macOS Explorer Style */
+body.kodev-blue-night-enable-mac-explorer .nav-folder-title,
+body.kodev-blue-night-enable-mac-explorer .nav-file-title {
+  border-radius: var(--radius-m);
+  margin: 2px 12px;
+  padding: 6px 10px;
+}
+
+body.kodev-blue-night-enable-mac-explorer .nav-file-title.is-active {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
+
+/* Folder Indent Guides */
+body.kodev-blue-night-enable-folder-guides .nav-folder-children {
+  border-left: 1px solid var(--color-base-30);
+  margin-left: 18px;
+  padding-left: 6px;
+}
+
+body.kodev-blue-night-enable-folder-guides .nav-folder-children:hover {
+  border-left-color: var(--color-accent);
+}
+
+/* ==========================================================
+   4. EXTRA UI/UX POLISH
+   ========================================================== */
+
+/* Pill Tags */
+body.kodev-blue-night-enable-pill-tags .tag {
+  border-radius: 20px;
+  padding: 2px 12px;
+  background-color: var(--background-modifier-hover);
+  color: var(--color-accent);
+  border: 1px solid rgba(60, 130, 241, 0.2);
+  font-weight: 500;
+}
+
+/* Circular Checkboxes */
+body.kodev-blue-night-enable-custom-checkboxes input[type='checkbox'] {
+  border-radius: 50%;
+  border: 2px solid var(--color-base-40);
+  width: 18px;
+  height: 18px;
+}
+
+body.kodev-blue-night-enable-custom-checkboxes input[type='checkbox']:checked {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* IDE Style Blockquotes */
+body.kodev-blue-night-enable-ide-blockquotes blockquote {
+  border-left: 4px solid var(--color-accent);
+  background-color: var(--background-modifier-hover);
+  border-radius: 0 var(--radius-m) var(--radius-m) 0;
+  padding: 16px 20px;
+  margin: 1.5em 0;
+}
+
+/* Minimal Status Bar */
+body.kodev-blue-night-enable-minimal-statusbar .status-bar {
+  opacity: 0.1;
+  transition: opacity 0.5s ease;
+}
+
+body.kodev-blue-night-enable-minimal-statusbar .status-bar:hover {
+  opacity: 1;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-base-30);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-accent);
+}
