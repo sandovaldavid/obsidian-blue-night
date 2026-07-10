@@ -1,6 +1,6 @@
 /* ==========================================================
-   KODEV BLUE NIGHT — CSS Snippet
-   Deep-Tech Blue / OLED Black / macOS-Baseline Philosophy
+   KODEV BLUE NIGHT — CSS Snippet v3
+   Night Blue / Pastel Accents / Minimalist Philosophy
    Pure token declarations — works on any Obsidian theme.
    github.com/sandovaldavid/blue-night
    ========================================================== */
@@ -10,66 +10,76 @@
    ────────────────────────────────────────────────────────── */
 .theme-dark {
   /* Base Color Scale ---------------------------------------- */
-  --color-base-00: #000000; /* OLED canvas          */
-  --color-base-10: #090e16; /* sidebar / panels     */
-  --color-base-20: #111827;
-  --color-base-25: #182030;
-  --color-base-30: #1e293b;
-  --color-base-35: #253347;
-  --color-base-40: #334155;
-  --color-base-50: #475569;
-  --color-base-60: #64748b;
-  --color-base-70: #94a3b8;
-  --color-base-100: #e2e8f0;
+  --color-base-00: #0f1523; /* night-blue canvas     */
+  --color-base-10: #0b1019; /* sidebar / panels      */
+  --color-base-20: #151d2e;
+  --color-base-25: #1a2336;
+  --color-base-30: #232e45;
+  --color-base-35: #2b3852;
+  --color-base-40: #31405e;
+  --color-base-50: #4a5a7a;
+  --color-base-60: #6b7da0;
+  --color-base-70: #9db0d0;
+  --color-base-100: #cdd9f0;
 
   /* Accent Palette ------------------------------------------ */
-  --color-accent: #1e3a8a; /* deep blue            */
-  --color-accent-1: #2563eb; /* primary action blue  */
-  --color-accent-2: #172554; /* pressed / dark       */
-  --color-accent-light: #60a5fa; /* text on dark bg      */
-  --color-accent-lighter: #93c5fd; /* subtle highlights    */
+  --color-accent: #5b8def; /* primary action blue   */
+  --color-accent-1: #5b8def;
+  --color-accent-2: #24406e; /* pressed / dark        */
+  --color-accent-light: #8ab4fa; /* pastel text accent    */
+  --color-accent-lighter: #a5c4fc; /* subtle highlights     */
+
+  /* Semantic Pastels (Catppuccin-style) ---------------------- */
+  --color-red-rgb: 242, 135, 155;
+  --color-orange-rgb: 245, 169, 127;
+  --color-yellow-rgb: 238, 212, 159;
+  --color-green-rgb: 166, 218, 149;
+  --color-cyan-rgb: 139, 213, 202;
+  --color-blue-rgb: 138, 180, 250;
+  --color-purple-rgb: 180, 190, 254;
+  --color-pink-rgb: 245, 189, 230;
 
   /* Backgrounds --------------------------------------------- */
-  --background-primary: #000000;
-  --background-primary-alt: #090e16;
-  --background-secondary: #090e16;
-  --background-secondary-alt: #111827;
-  --background-modifier-border: #1e293b;
-  --background-modifier-border-hover: #253347;
-  --background-modifier-hover: rgba(60, 130, 241, 0.1);
-  --background-modifier-active-hover: rgba(60, 130, 241, 0.18);
-  --background-modifier-active-line: rgba(60, 130, 241, 0.05);
-  --background-modifier-error: rgba(239, 68, 68, 0.15);
-  --background-modifier-error-rgb: 239, 68, 68;
-  --background-modifier-success: rgba(34, 197, 94, 0.12);
-  --background-modifier-message: #111827;
+  --background-primary: #0f1523;
+  --background-primary-alt: #0b1019;
+  --background-secondary: #0b1019;
+  --background-secondary-alt: #151d2e;
+  --background-modifier-border: #232e45;
+  --background-modifier-border-hover: #2b3852;
+  --background-modifier-hover: rgba(138, 180, 250, 0.08);
+  --background-modifier-active-hover: rgba(138, 180, 250, 0.14);
+  --background-modifier-active-line: rgba(138, 180, 250, 0.04);
+  --background-modifier-error: rgba(242, 135, 155, 0.14);
+  --background-modifier-error-rgb: 242, 135, 155;
+  --background-modifier-success: rgba(166, 218, 149, 0.12);
+  --background-modifier-message: #151d2e;
 
   /* Typography ---------------------------------------------- */
-  --text-normal: #e2e8f0;
-  --text-muted: #94a3b8;
-  --text-faint: #475569;
-  --text-selection: rgba(37, 99, 235, 0.3);
-  --text-accent: #60a5fa;
-  --text-accent-hover: #93c5fd;
-  --text-on-accent: #ffffff;
-  --text-on-accent-muted: rgba(255, 255, 255, 0.8);
-  --text-error: #f87171;
-  --text-success: #4ade80;
-  --text-warning: #fbbf24;
+  --text-normal: #cdd9f0;
+  --text-muted: #9db0d0;
+  --text-faint: #5a6b8c;
+  --text-selection: rgba(138, 180, 250, 0.25);
+  --text-accent: #8ab4fa;
+  --text-accent-hover: #a5c4fc;
+  --text-on-accent: #0b1019;
+  --text-on-accent-muted: rgba(11, 16, 25, 0.75);
+  --text-error: #f2879b;
+  --text-success: #a6da95;
+  --text-warning: #eed49f;
 
   /* Interactive --------------------------------------------- */
-  --interactive-normal: #111827;
-  --interactive-hover: #1e293b;
-  --interactive-accent: #2563eb;
-  --interactive-accent-hover: #3b82f6;
+  --interactive-normal: #151d2e;
+  --interactive-hover: #232e45;
+  --interactive-accent: #5b8def;
+  --interactive-accent-hover: #6d9af1;
 
   /* Headings ------------------------------------------------- */
-  --h1-color: #e2e8f0;
-  --h2-color: #cbd5e1;
-  --h3-color: #94a3b8;
-  --h4-color: #94a3b8;
-  --h5-color: #475569;
-  --h6-color: #475569;
+  --h1-color: #cdd9f0;
+  --h2-color: #b9c8e8;
+  --h3-color: #9db0d0;
+  --h4-color: #9db0d0;
+  --h5-color: #5a6b8c;
+  --h6-color: #5a6b8c;
   --h1-size: 2.25rem;
   --h1-weight: 400;
   --h2-size: 1.75rem;
@@ -81,138 +91,138 @@
   --h6-weight: 500;
 
   /* Inline Title -------------------------------------------- */
-  --inline-title-color: #60a5fa;
+  --inline-title-color: #8ab4fa;
   --inline-title-size: 2em;
   --inline-title-weight: 700;
   --inline-title-line-height: 1.2;
 
   /* Links ---------------------------------------------------- */
-  --link-color: #60a5fa;
-  --link-color-hover: #93c5fd;
-  --link-external-color: #818cf8;
-  --link-external-color-hover: #a5b4fc;
-  --link-unresolved-color: #475569;
+  --link-color: #8ab4fa;
+  --link-color-hover: #a5c4fc;
+  --link-external-color: #b4befe;
+  --link-external-color-hover: #c7cdff;
+  --link-unresolved-color: #5a6b8c;
   --link-decoration: none;
   --link-decoration-hover: underline;
   --link-unresolved-decoration: none;
 
-  /* Code ----------------------------------------------------- */
-  --code-background: #0d131f;
+  /* Code (Catppuccin-style pastel syntax) -------------------- */
+  --code-background: #121a2c;
   --code-size: 0.875em;
-  --code-normal: #abb2bf;
-  --code-comment: #5c6370;
-  --code-function: #d19a66;
-  --code-important: #d19a66;
-  --code-keyword: #e16d76;
-  --code-property: #62afef;
-  --code-punctuation: #abb2bf;
-  --code-string: #58b6c2;
-  --code-tag: #e16d76;
-  --code-value: #c678de;
-  --code-operator: #62afef;
+  --code-normal: #cdd9f0;
+  --code-comment: #5a6b8c;
+  --code-function: #8ab4fa;
+  --code-important: #f5a97f;
+  --code-keyword: #b4befe;
+  --code-property: #8ab4fa;
+  --code-punctuation: #9db0d0;
+  --code-string: #a6da95;
+  --code-tag: #f2879b;
+  --code-value: #f5a97f;
+  --code-operator: #8bd5ca;
 
   /* Graph ---------------------------------------------------- */
-  --graph-text: #e2e8f0;
-  --graph-line: #1e3a8a;
-  --graph-node: #64748b;
-  --graph-node-unresolved: #334155;
-  --graph-node-focused: #2563eb;
-  --graph-node-tag: #818cf8;
-  --graph-node-attachment: #22d3ee;
+  --graph-text: #cdd9f0;
+  --graph-line: #2a3a5e;
+  --graph-node: #6b7da0;
+  --graph-node-unresolved: #31405e;
+  --graph-node-focused: #8ab4fa;
+  --graph-node-tag: #b4befe;
+  --graph-node-attachment: #8bd5ca;
 
   /* Tabs ----------------------------------------------------- */
-  --tab-background-active: #000000;
-  --tab-container-background: #090e16;
-  --tab-divider-color: #1e293b;
-  --tab-outline-color: #1e293b;
-  --tab-text-color: #94a3b8;
-  --tab-text-color-active: #e2e8f0;
-  --tab-text-color-focused: #94a3b8;
-  --tab-text-color-focused-active: #e2e8f0;
-  --tab-text-color-focused-highlighted: #60a5fa;
-  --tab-text-color-focused-active-current: #e2e8f0;
+  --tab-background-active: #0f1523;
+  --tab-container-background: #0b1019;
+  --tab-divider-color: #232e45;
+  --tab-outline-color: #232e45;
+  --tab-text-color: #9db0d0;
+  --tab-text-color-active: #cdd9f0;
+  --tab-text-color-focused: #9db0d0;
+  --tab-text-color-focused-active: #cdd9f0;
+  --tab-text-color-focused-highlighted: #8ab4fa;
+  --tab-text-color-focused-active-current: #cdd9f0;
   --tab-font-size: 13px;
   --tab-font-weight: 500;
 
   /* Navigation ---------------------------------------------- */
   --nav-item-size: 13px;
-  --nav-item-color: #94a3b8;
-  --nav-item-color-hover: #e2e8f0;
-  --nav-item-color-active: #93c5fd;
-  --nav-item-color-selected: #93c5fd;
-  --nav-item-color-highlighted: #60a5fa;
-  --nav-item-background-hover: rgba(60, 130, 241, 0.1);
-  --nav-item-background-active: rgba(37, 99, 235, 0.15);
-  --nav-item-background-selected: rgba(37, 99, 235, 0.2);
+  --nav-item-color: #9db0d0;
+  --nav-item-color-hover: #cdd9f0;
+  --nav-item-color-active: #a5c4fc;
+  --nav-item-color-selected: #a5c4fc;
+  --nav-item-color-highlighted: #8ab4fa;
+  --nav-item-background-hover: rgba(138, 180, 250, 0.08);
+  --nav-item-background-active: rgba(138, 180, 250, 0.12);
+  --nav-item-background-selected: rgba(138, 180, 250, 0.16);
   --nav-item-weight: 400;
   --nav-item-weight-hover: 400;
   --nav-item-weight-active: 600;
   --nav-item-white-space: nowrap;
-  --nav-indentation-guide-color: #1e293b;
+  --nav-indentation-guide-color: #232e45;
   --nav-indentation-guide-width: 1px;
-  --nav-collapse-icon-color: #475569;
-  --nav-collapse-icon-color-collapsed: #334155;
-  --nav-heading-color: #475569;
-  --nav-heading-color-hover: #94a3b8;
+  --nav-collapse-icon-color: #4a5a7a;
+  --nav-collapse-icon-color-collapsed: #31405e;
+  --nav-heading-color: #5a6b8c;
+  --nav-heading-color-hover: #9db0d0;
   --nav-heading-weight: 600;
 
   /* Titlebar ------------------------------------------------- */
-  --titlebar-background: #090e16;
-  --titlebar-background-focused: #090e16;
+  --titlebar-background: #0b1019;
+  --titlebar-background-focused: #0b1019;
   --titlebar-border-width: 0px;
   --titlebar-border-color: transparent;
-  --titlebar-text-color: #94a3b8;
-  --titlebar-text-color-focused: #e2e8f0;
+  --titlebar-text-color: #9db0d0;
+  --titlebar-text-color-focused: #cdd9f0;
   --titlebar-text-weight: 500;
 
   /* Status Bar ----------------------------------------------- */
-  --status-bar-background: #090e16;
+  --status-bar-background: #0b1019;
   --status-bar-border-color: transparent;
   --status-bar-border-width: 0px;
   --status-bar-font-size: 11px;
-  --status-bar-text-color: #475569;
+  --status-bar-text-color: #5a6b8c;
 
   /* Scrollbar ------------------------------------------------ */
   --scrollbar-bg: transparent;
-  --scrollbar-thumb-bg: #1e293b;
-  --scrollbar-active-thumb-bg: #334155;
+  --scrollbar-thumb-bg: #232e45;
+  --scrollbar-active-thumb-bg: #31405e;
 
   /* Properties / Metadata ----------------------------------- */
-  --metadata-background: #090e16;
-  --metadata-border-color: #1e293b;
+  --metadata-background: #0b1019;
+  --metadata-border-color: #232e45;
   --metadata-border-radius: 8px;
   --metadata-border-width: 1px;
   --metadata-padding: 10px 14px;
   --metadata-gap: 2px;
-  --metadata-divider-color: #182030;
-  --metadata-divider-color-hover: #253347;
-  --metadata-divider-color-focus: #2563eb;
+  --metadata-divider-color: #1a2336;
+  --metadata-divider-color-hover: #2b3852;
+  --metadata-divider-color-focus: #5b8def;
   --metadata-divider-width: 1px;
   --metadata-property-padding: 3px 6px;
   --metadata-property-background: transparent;
-  --metadata-property-background-hover: rgba(60, 130, 241, 0.08);
-  --metadata-property-background-active: rgba(37, 99, 235, 0.15);
+  --metadata-property-background-hover: rgba(138, 180, 250, 0.07);
+  --metadata-property-background-active: rgba(138, 180, 250, 0.12);
   --metadata-label-font-size: 0.8125em;
   --metadata-label-font-weight: 500;
-  --metadata-label-text-color: #94a3b8;
-  --metadata-label-text-color-hover: #e2e8f0;
+  --metadata-label-text-color: #9db0d0;
+  --metadata-label-text-color-hover: #cdd9f0;
   --metadata-label-width: 140px;
-  --metadata-input-text-color: #e2e8f0;
+  --metadata-input-text-color: #cdd9f0;
   --metadata-input-font-size: 0.875em;
   --metadata-input-background: transparent;
-  --metadata-input-background-hover: #111827;
-  --metadata-input-background-active: #111827;
+  --metadata-input-background-hover: #151d2e;
+  --metadata-input-background-active: #151d2e;
 
   /* Tags ----------------------------------------------------- */
   --tag-size: 0.8em;
-  --tag-color: #60a5fa;
-  --tag-color-hover: #ffffff;
+  --tag-color: #8ab4fa;
+  --tag-color-hover: #a5c4fc;
   --tag-decoration: none;
   --tag-decoration-hover: none;
-  --tag-background: rgba(37, 99, 235, 0.12);
-  --tag-background-hover: #2563eb;
-  --tag-border-color: rgba(96, 165, 250, 0.18);
-  --tag-border-color-hover: #2563eb;
+  --tag-background: rgba(138, 180, 250, 0.1);
+  --tag-background-hover: rgba(138, 180, 250, 0.2);
+  --tag-border-color: rgba(138, 180, 250, 0.16);
+  --tag-border-color-hover: rgba(138, 180, 250, 0.35);
   --tag-border-width: 1px;
   --tag-padding-x: 7px;
   --tag-padding-y: 1px;
@@ -220,12 +230,12 @@
   --tag-weight: 500;
 
   /* Pills (multi-select) ------------------------------------- */
-  --pill-color: #93c5fd;
-  --pill-color-hover: #ffffff;
-  --pill-background: rgba(37, 99, 235, 0.15);
-  --pill-background-hover: rgba(37, 99, 235, 0.28);
-  --pill-border-color: rgba(96, 165, 250, 0.22);
-  --pill-border-color-hover: #60a5fa;
+  --pill-color: #a5c4fc;
+  --pill-color-hover: #a5c4fc;
+  --pill-background: rgba(138, 180, 250, 0.12);
+  --pill-background-hover: rgba(138, 180, 250, 0.22);
+  --pill-border-color: rgba(138, 180, 250, 0.2);
+  --pill-border-color-hover: #8ab4fa;
   --pill-border-width: 1px;
   --pill-padding-x: 12px;
   --pill-padding-y: 5px;
@@ -234,13 +244,13 @@
 
   /* Checkboxes ----------------------------------------------- */
   --checkbox-size: 16px;
-  --checkbox-color: #2563eb;
-  --checkbox-color-hover: #3b82f6;
-  --checkbox-border-color: #334155;
-  --checkbox-border-color-hover: #2563eb;
-  --checkbox-marker-color: #ffffff;
+  --checkbox-color: #5b8def;
+  --checkbox-color-hover: #6d9af1;
+  --checkbox-border-color: #31405e;
+  --checkbox-border-color-hover: #5b8def;
+  --checkbox-marker-color: #0b1019;
   --checklist-done-decoration: line-through;
-  --checklist-done-color: #475569;
+  --checklist-done-color: #5a6b8c;
 }
 
 /* ──────────────────────────────────────────────────────────
@@ -248,66 +258,76 @@
    ────────────────────────────────────────────────────────── */
 .theme-light {
   /* Base Color Scale ---------------------------------------- */
-  --color-base-00: #ffffff;
-  --color-base-10: #f8fafc;
-  --color-base-20: #f1f5f9;
-  --color-base-25: #edf2f7;
-  --color-base-30: #e2e8f0;
-  --color-base-35: #d4dde8;
-  --color-base-40: #cbd5e1;
-  --color-base-50: #94a3b8;
+  --color-base-00: #f7f9fc;
+  --color-base-10: #eef2f8;
+  --color-base-20: #e5ebf4;
+  --color-base-25: #dfe6f1;
+  --color-base-30: #dde5f0;
+  --color-base-35: #cbd7e8;
+  --color-base-40: #b8c7dd;
+  --color-base-50: #8fa3c0;
   --color-base-60: #64748b;
-  --color-base-70: #475569;
-  --color-base-100: #0f172a;
+  --color-base-70: #43506a;
+  --color-base-100: #1c2433;
 
   /* Accent Palette ------------------------------------------ */
-  --color-accent: #1e3a8a;
+  --color-accent: #2563eb;
   --color-accent-1: #2563eb;
   --color-accent-2: #1d4ed8;
   --color-accent-light: #2563eb;
   --color-accent-lighter: #1d4ed8;
 
+  /* Semantic Pastels (saturated for light bg) ----------------- */
+  --color-red-rgb: 210, 15, 57;
+  --color-orange-rgb: 254, 100, 11;
+  --color-yellow-rgb: 223, 142, 29;
+  --color-green-rgb: 64, 160, 43;
+  --color-cyan-rgb: 23, 146, 153;
+  --color-blue-rgb: 37, 99, 235;
+  --color-purple-rgb: 114, 135, 253;
+  --color-pink-rgb: 234, 118, 203;
+
   /* Backgrounds --------------------------------------------- */
-  --background-primary: #ffffff;
-  --background-primary-alt: #f8fafc;
-  --background-secondary: #f8fafc;
-  --background-secondary-alt: #f1f5f9;
-  --background-modifier-border: #e2e8f0;
-  --background-modifier-border-hover: #d4dde8;
+  --background-primary: #f7f9fc;
+  --background-primary-alt: #eef2f8;
+  --background-secondary: #eef2f8;
+  --background-secondary-alt: #e5ebf4;
+  --background-modifier-border: #dde5f0;
+  --background-modifier-border-hover: #cbd7e8;
   --background-modifier-hover: rgba(37, 99, 235, 0.07);
   --background-modifier-active-hover: rgba(37, 99, 235, 0.12);
   --background-modifier-active-line: rgba(37, 99, 235, 0.04);
-  --background-modifier-error: rgba(220, 38, 38, 0.1);
-  --background-modifier-error-rgb: 220, 38, 38;
-  --background-modifier-success: rgba(22, 163, 74, 0.1);
-  --background-modifier-message: #f8fafc;
+  --background-modifier-error: rgba(210, 15, 57, 0.1);
+  --background-modifier-error-rgb: 210, 15, 57;
+  --background-modifier-success: rgba(64, 160, 43, 0.1);
+  --background-modifier-message: #eef2f8;
 
   /* Typography ---------------------------------------------- */
-  --text-normal: #1a1915;
-  --text-muted: #4b5563;
-  --text-faint: #9ca3af;
+  --text-normal: #1c2433;
+  --text-muted: #4b5a75;
+  --text-faint: #93a3bd;
   --text-selection: rgba(37, 99, 235, 0.15);
   --text-accent: #2563eb;
   --text-accent-hover: #1d4ed8;
   --text-on-accent: #ffffff;
   --text-on-accent-muted: rgba(255, 255, 255, 0.85);
-  --text-error: #dc2626;
-  --text-success: #16a34a;
-  --text-warning: #d97706;
+  --text-error: #d20f39;
+  --text-success: #40a02b;
+  --text-warning: #df8e1d;
 
   /* Interactive --------------------------------------------- */
-  --interactive-normal: #f1f5f9;
-  --interactive-hover: #e2e8f0;
+  --interactive-normal: #e5ebf4;
+  --interactive-hover: #dde5f0;
   --interactive-accent: #2563eb;
   --interactive-accent-hover: #1d4ed8;
 
   /* Headings ------------------------------------------------- */
-  --h1-color: #0f172a;
-  --h2-color: #1e293b;
-  --h3-color: #4b5563;
-  --h4-color: #4b5563;
-  --h5-color: #9ca3af;
-  --h6-color: #9ca3af;
+  --h1-color: #1c2433;
+  --h2-color: #2a3550;
+  --h3-color: #4b5a75;
+  --h4-color: #4b5a75;
+  --h5-color: #93a3bd;
+  --h6-color: #93a3bd;
   --h1-size: 2.25rem;
   --h1-weight: 400;
   --h2-size: 1.75rem;
@@ -327,55 +347,55 @@
   /* Links ---------------------------------------------------- */
   --link-color: #2563eb;
   --link-color-hover: #1d4ed8;
-  --link-external-color: #4f46e5;
-  --link-external-color-hover: #4338ca;
-  --link-unresolved-color: #9ca3af;
+  --link-external-color: #7287fd;
+  --link-external-color-hover: #5a6be0;
+  --link-unresolved-color: #93a3bd;
   --link-decoration: none;
   --link-decoration-hover: underline;
   --link-unresolved-decoration: none;
 
-  /* Code ----------------------------------------------------- */
-  --code-background: #f1f5f9;
+  /* Code (Catppuccin Latte-style syntax) --------------------- */
+  --code-background: #eef2f8;
   --code-size: 0.875em;
-  --code-normal: #383a42;
-  --code-comment: #b6b9c5;
-  --code-function: #b76b02;
-  --code-important: #b76b02;
-  --code-keyword: #e45749;
-  --code-property: #62afef;
-  --code-punctuation: #383a42;
-  --code-string: #0d97b3;
-  --code-tag: #e45749;
-  --code-value: #a626a4;
-  --code-operator: #2563eb;
+  --code-normal: #1c2433;
+  --code-comment: #9aa7bd;
+  --code-function: #1e66f5;
+  --code-important: #fe640b;
+  --code-keyword: #8839ef;
+  --code-property: #1e66f5;
+  --code-punctuation: #4b5a75;
+  --code-string: #40a02b;
+  --code-tag: #d20f39;
+  --code-value: #fe640b;
+  --code-operator: #179299;
 
   /* Graph ---------------------------------------------------- */
-  --graph-text: #0f172a;
-  --graph-line: #bfdbfe;
-  --graph-node: #94a3b8;
-  --graph-node-unresolved: #cbd5e1;
-  --graph-node-focused: #1e3a8a;
-  --graph-node-tag: #6366f1;
-  --graph-node-attachment: #0891b2;
+  --graph-text: #1c2433;
+  --graph-line: #c9d8f0;
+  --graph-node: #8fa3c0;
+  --graph-node-unresolved: #cbd7e8;
+  --graph-node-focused: #2563eb;
+  --graph-node-tag: #7287fd;
+  --graph-node-attachment: #179299;
 
   /* Tabs ----------------------------------------------------- */
-  --tab-background-active: #ffffff;
-  --tab-container-background: #f8fafc;
-  --tab-divider-color: #e2e8f0;
-  --tab-outline-color: #e2e8f0;
-  --tab-text-color: #64748b;
-  --tab-text-color-active: #1a1915;
-  --tab-text-color-focused: #64748b;
-  --tab-text-color-focused-active: #1a1915;
+  --tab-background-active: #f7f9fc;
+  --tab-container-background: #eef2f8;
+  --tab-divider-color: #dde5f0;
+  --tab-outline-color: #dde5f0;
+  --tab-text-color: #4b5a75;
+  --tab-text-color-active: #1c2433;
+  --tab-text-color-focused: #4b5a75;
+  --tab-text-color-focused-active: #1c2433;
   --tab-text-color-focused-highlighted: #2563eb;
-  --tab-text-color-focused-active-current: #0f172a;
+  --tab-text-color-focused-active-current: #1c2433;
   --tab-font-size: 13px;
   --tab-font-weight: 500;
 
   /* Navigation ---------------------------------------------- */
   --nav-item-size: 13px;
-  --nav-item-color: #64748b;
-  --nav-item-color-hover: #1a1915;
+  --nav-item-color: #4b5a75;
+  --nav-item-color-hover: #1c2433;
   --nav-item-color-active: #2563eb;
   --nav-item-color-selected: #1d4ed8;
   --nav-item-color-highlighted: #2563eb;
@@ -386,44 +406,44 @@
   --nav-item-weight-hover: 400;
   --nav-item-weight-active: 600;
   --nav-item-white-space: nowrap;
-  --nav-indentation-guide-color: #e2e8f0;
+  --nav-indentation-guide-color: #dde5f0;
   --nav-indentation-guide-width: 1px;
-  --nav-collapse-icon-color: #94a3b8;
+  --nav-collapse-icon-color: #8fa3c0;
   --nav-collapse-icon-color-collapsed: #64748b;
-  --nav-heading-color: #9ca3af;
-  --nav-heading-color-hover: #64748b;
+  --nav-heading-color: #93a3bd;
+  --nav-heading-color-hover: #4b5a75;
   --nav-heading-weight: 600;
 
   /* Titlebar ------------------------------------------------- */
-  --titlebar-background: #f8fafc;
-  --titlebar-background-focused: #ffffff;
+  --titlebar-background: #eef2f8;
+  --titlebar-background-focused: #f7f9fc;
   --titlebar-border-width: 1px;
-  --titlebar-border-color: #e2e8f0;
-  --titlebar-text-color: #64748b;
-  --titlebar-text-color-focused: #1a1915;
+  --titlebar-border-color: #dde5f0;
+  --titlebar-text-color: #4b5a75;
+  --titlebar-text-color-focused: #1c2433;
   --titlebar-text-weight: 500;
 
   /* Status Bar ----------------------------------------------- */
-  --status-bar-background: #f8fafc;
-  --status-bar-border-color: #e2e8f0;
+  --status-bar-background: #eef2f8;
+  --status-bar-border-color: #dde5f0;
   --status-bar-border-width: 1px;
   --status-bar-font-size: 11px;
-  --status-bar-text-color: #9ca3af;
+  --status-bar-text-color: #93a3bd;
 
   /* Scrollbar ------------------------------------------------ */
   --scrollbar-bg: transparent;
-  --scrollbar-thumb-bg: #d4dde8;
-  --scrollbar-active-thumb-bg: #94a3b8;
+  --scrollbar-thumb-bg: #cbd7e8;
+  --scrollbar-active-thumb-bg: #8fa3c0;
 
   /* Properties / Metadata ----------------------------------- */
-  --metadata-background: #f8fafc;
-  --metadata-border-color: #e2e8f0;
+  --metadata-background: #eef2f8;
+  --metadata-border-color: #dde5f0;
   --metadata-border-radius: 8px;
   --metadata-border-width: 1px;
   --metadata-padding: 10px 14px;
   --metadata-gap: 2px;
-  --metadata-divider-color: #edf2f7;
-  --metadata-divider-color-hover: #d4dde8;
+  --metadata-divider-color: #dfe6f1;
+  --metadata-divider-color-hover: #cbd7e8;
   --metadata-divider-color-focus: #2563eb;
   --metadata-divider-width: 1px;
   --metadata-property-padding: 6px;
@@ -432,25 +452,25 @@
   --metadata-property-background-active: rgba(37, 99, 235, 0.1);
   --metadata-label-font-size: 0.8125em;
   --metadata-label-font-weight: 500;
-  --metadata-label-text-color: #64748b;
-  --metadata-label-text-color-hover: #1a1915;
+  --metadata-label-text-color: #4b5a75;
+  --metadata-label-text-color-hover: #1c2433;
   --metadata-label-width: 140px;
-  --metadata-input-text-color: #1a1915;
+  --metadata-input-text-color: #1c2433;
   --metadata-input-font-size: 0.875em;
   --metadata-input-background: transparent;
-  --metadata-input-background-hover: #f1f5f9;
-  --metadata-input-background-active: #f1f5f9;
+  --metadata-input-background-hover: #e5ebf4;
+  --metadata-input-background-active: #e5ebf4;
 
   /* Tags ----------------------------------------------------- */
   --tag-size: 0.8em;
   --tag-color: #2563eb;
-  --tag-color-hover: #ffffff;
+  --tag-color-hover: #1d4ed8;
   --tag-decoration: none;
   --tag-decoration-hover: none;
   --tag-background: rgba(37, 99, 235, 0.08);
-  --tag-background-hover: #2563eb;
+  --tag-background-hover: rgba(37, 99, 235, 0.16);
   --tag-border-color: rgba(37, 99, 235, 0.18);
-  --tag-border-color-hover: #2563eb;
+  --tag-border-color-hover: rgba(37, 99, 235, 0.35);
   --tag-border-width: 1px;
   --tag-padding-x: 7px;
   --tag-padding-y: 1px;
@@ -459,9 +479,9 @@
 
   /* Pills (multi-select) ------------------------------------- */
   --pill-color: #2563eb;
-  --pill-color-hover: #ffffff;
+  --pill-color-hover: #1d4ed8;
   --pill-background: rgba(37, 99, 235, 0.08);
-  --pill-background-hover: rgba(37, 99, 235, 0.18);
+  --pill-background-hover: rgba(37, 99, 235, 0.16);
   --pill-border-color: rgba(37, 99, 235, 0.2);
   --pill-border-color-hover: #2563eb;
   --pill-border-width: 1px;
@@ -474,11 +494,11 @@
   --checkbox-size: 16px;
   --checkbox-color: #2563eb;
   --checkbox-color-hover: #1d4ed8;
-  --checkbox-border-color: #cbd5e1;
+  --checkbox-border-color: #b8c7dd;
   --checkbox-border-color-hover: #2563eb;
   --checkbox-marker-color: #ffffff;
   --checklist-done-decoration: line-through;
-  --checklist-done-color: #9ca3af;
+  --checklist-done-color: #93a3bd;
 }
 
 /* ──────────────────────────────────────────────────────────
@@ -488,7 +508,7 @@
    the theme, ensure our blue always wins.
    ────────────────────────────────────────────────────────── */
 body.theme-dark {
-  --interactive-accent: #2563eb;
+  --interactive-accent: #5b8def;
 }
 body.theme-light {
   --interactive-accent: #2563eb;
