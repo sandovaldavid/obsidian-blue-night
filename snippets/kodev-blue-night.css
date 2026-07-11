@@ -57,7 +57,7 @@
   /* Typography ---------------------------------------------- */
   --text-normal: #cdd9f0;
   --text-muted: #9db0d0;
-  --text-faint: #5a6b8c;
+  --text-faint: #64769a;
   --text-selection: rgba(138, 180, 250, 0.25);
   --text-accent: #8ab4fa;
   --text-accent-hover: #a5c4fc;
@@ -78,8 +78,8 @@
   --h2-color: #b9c8e8;
   --h3-color: #9db0d0;
   --h4-color: #9db0d0;
-  --h5-color: #5a6b8c;
-  --h6-color: #5a6b8c;
+  --h5-color: #64769a;
+  --h6-color: #64769a;
   --h1-size: 2.25rem;
   --h1-weight: 400;
   --h2-size: 1.75rem;
@@ -101,7 +101,7 @@
   --link-color-hover: #a5c4fc;
   --link-external-color: #b4befe;
   --link-external-color-hover: #c7cdff;
-  --link-unresolved-color: #5a6b8c;
+  --link-unresolved-color: #64769a;
   --link-decoration: none;
   --link-decoration-hover: underline;
   --link-unresolved-decoration: none;
@@ -162,7 +162,7 @@
   --nav-indentation-guide-width: 1px;
   --nav-collapse-icon-color: #4a5a7a;
   --nav-collapse-icon-color-collapsed: #31405e;
-  --nav-heading-color: #5a6b8c;
+  --nav-heading-color: #64769a;
   --nav-heading-color-hover: #9db0d0;
   --nav-heading-weight: 600;
 
@@ -180,7 +180,7 @@
   --status-bar-border-color: transparent;
   --status-bar-border-width: 0px;
   --status-bar-font-size: 11px;
-  --status-bar-text-color: #5a6b8c;
+  --status-bar-text-color: #64769a;
 
   /* Scrollbar ------------------------------------------------ */
   --scrollbar-bg: transparent;
@@ -250,7 +250,7 @@
   --checkbox-border-color-hover: #5b8def;
   --checkbox-marker-color: #0b1019;
   --checklist-done-decoration: line-through;
-  --checklist-done-color: #5a6b8c;
+  --checklist-done-color: #64769a;
 }
 
 /* ──────────────────────────────────────────────────────────

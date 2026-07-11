@@ -1,0 +1,48 @@
+/* ==========================================================
+   BLUE NIGHT — Rainbow Folders Snippet
+   Tints each top-level folder in the file explorer with a
+   different pastel from the Blue Night palette. Falls back
+   to sensible pastels on other themes.
+   ========================================================== */
+
+/* Top-level folders cycle through 8 pastel tints */
+.nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 1) > .nav-folder-title {
+  color: rgb(var(--color-blue-rgb, 138, 180, 250));
+}
+
+.nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 2) > .nav-folder-title {
+  color: rgb(var(--color-purple-rgb, 180, 190, 254));
+}
+
+.nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 3) > .nav-folder-title {
+  color: rgb(var(--color-cyan-rgb, 139, 213, 202));
+}
+
+.nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 4) > .nav-folder-title {
+  color: rgb(var(--color-green-rgb, 166, 218, 149));
+}
+
+.nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 5) > .nav-folder-title {
+  color: rgb(var(--color-yellow-rgb, 238, 212, 159));
+}
+
+.nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 6) > .nav-folder-title {
+  color: rgb(var(--color-orange-rgb, 245, 169, 127));
+}
+
+.nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 7) > .nav-folder-title {
+  color: rgb(var(--color-red-rgb, 242, 135, 155));
+}
+
+.nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 8) > .nav-folder-title {
+  color: rgb(var(--color-pink-rgb, 245, 189, 230));
+}
+
+/* Folder icons (Blue Night's ::before masks) follow the text color */
+.nav-folder.mod-root
+  > .nav-folder-children
+  > .nav-folder
+  > .nav-folder-title
+  > .nav-folder-title-content::before {
+  background-color: currentColor;
+}
