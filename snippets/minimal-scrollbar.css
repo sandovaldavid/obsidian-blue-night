@@ -1,0 +1,27 @@
+/* ==========================================================
+   BLUE NIGHT — Minimal Scrollbar Snippet
+   Makes scrollbars ultra-thin, rounded, and blends them into
+   the theme colors. Scrollbars are semi-transparent and fade
+   in opacity on hover.
+   ========================================================== */
+
+/* Webkit Scrollbars (Chrome/Obsidian native) */
+::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-base-30, rgba(141, 161, 196, 0.15)) !important;
+  border-radius: 10px !important;
+  border: 1px solid transparent !important;
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-accent-light, var(--interactive-accent)) !important;
+}
