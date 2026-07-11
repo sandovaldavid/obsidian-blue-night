@@ -1,42 +1,64 @@
-# Blue Night — Obsidian Theme
+# Blue Night
 
-A minimalist night-blue Obsidian theme with pastel accents. Catppuccin-inspired palette over a
-deep night-blue base, engineered for low eye strain and a software developer's daily workflow.
+A minimalist night-blue theme for Obsidian with Catppuccin-inspired pastel accents. Engineered
+for low eye strain and a software developer's daily workflow.
+
+![Blue Night theme screenshot](https://raw.githubusercontent.com/sandovaldavid/obsidian-blue-night/main/screenshot.png)
 
 **Website**: [sandovaldavid.github.io/obsidian-blue-night](https://sandovaldavid.github.io/obsidian-blue-night/)
 
 ## Features
 
-- **Night Blue Palette**: `#0f1523` canvas with pastel accents (blue, lavender, teal, pink) in
-  dark mode; crisp bluish slate in light mode.
-- **Preset Flavors**: dark canvas variants (Blue Night, Dark Charcoal/OLED, Cozy Pastels) and
-  light variants (Clean Blue, Cozy Pastels Light), selectable via Style Settings.
-- **Pastel Syntax Highlighting**: Catppuccin-style code colors tuned for both modes.
-- **Minimalist SVG Icons**: Embedded (offline, no network) icons for callouts, task checkboxes,
-  file-explorer folders/files, and the vault name — thin 1.75px strokes, mask-based so they
-  follow your accent.
-- **Extra Task States**: `[x]` done · `[-]` cancelled · `[/]` in progress · `[?]` question ·
+- **Night Blue Palette** — deep `#0f1523` canvas with pastel accents (blue, lavender, teal,
+  pink) in dark mode; crisp bluish slate in light mode.
+- **Preset Flavors** — dark canvas variants (Blue Night, Dark Charcoal/OLED, Cozy Pastels) and
+  light variants (Clean Blue, Cozy Pastels Light).
+- **Pastel Syntax Highlighting** — Catppuccin-style code colors tuned for both modes, with a
+  language badge on code blocks.
+- **Minimalist SVG Icons** — embedded, fully offline icons for callouts, task checkboxes,
+  file-explorer folders/files, and the vault name. Thin 1.75px strokes, mask-based so they
+  follow your accent color.
+- **Extra Task States** — `[x]` done · `[-]` cancelled · `[/]` in progress · `[?]` question ·
   `[!]` important · `[>]` forwarded.
-- **Raycast-Style Palette & Switcher**: Wide floating glass prompt with visible file paths,
+- **Raycast-Style Palette & Switcher** — wide floating glass prompt with visible file paths,
   keyboard-hint pills, and soft accent selection.
-- **Floating Status Bar**: Glass pill in the bottom-right corner, optional auto-hide.
-- **Style Settings Integration**: Accent flavors, preset canvas variants, and every UI feature is
-  a toggle via the [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) plugin.
-- **Plugin-Aware**: Extra styling for Dataview (inline fields, tables) and Quick Switcher++
+- **Floating Status Bar** — glass pill in the bottom-right corner, with optional auto-hide.
+- **Plugin-Aware** — extra styling for Dataview (inline fields, tables) and Quick Switcher++
   (paths, mode indicators, heading levels) that activates only when those plugins are installed.
-- **Full Native Coverage**: Tables, Canvas (pastel node colors), global search highlights,
+- **Full Native Coverage** — tables, Canvas (pastel node colors), global search highlights,
   settings modal, mobile adjustments, `prefers-reduced-motion`, and ink-friendly PDF export.
 
 ## Installation
 
+### From the community theme store
+
+Search for **Blue Night** under **Settings → Appearance → Themes → Manage** (once the theme is
+published to the gallery).
+
 ### Manual
 
-1. Copy `theme.css` and `manifest.json` into your vault at `.obsidian/themes/Blue Night/`.
+1. Download `theme.css` and `manifest.json` from the
+   [latest release](https://github.com/sandovaldavid/obsidian-blue-night/releases/latest).
+1. Copy both files into your vault at `.obsidian/themes/Blue Night/`.
 1. In Obsidian go to **Settings → Appearance → Themes** and select **Blue Night**.
 
-### Optional snippets
+## Customization
 
-Each file in `snippets/` is independent — copy the ones you want into `.obsidian/snippets/`:
+Install the [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) plugin to
+customize:
+
+- Accent flavor (Night Blue / Lavender / Teal / Pink) and principal accent color
+- Preset canvas variants — dark: Blue Night, Dark Charcoal/OLED, Cozy Pastels; light: Clean Blue,
+  Cozy Pastels Light — plus custom editor backgrounds per mode
+- UI features: Raycast prompt, minimalist explorer, metadata card, folder guides, vault name icon
+- Content: premium headers, accent bullets, pill tags, circular checkboxes, IDE blockquotes
+- Status bar: floating pill and auto-hide
+
+## Optional snippets
+
+Each file in [`snippets/`](https://github.com/sandovaldavid/obsidian-blue-night/tree/main/snippets)
+is independent — copy the ones you want into `.obsidian/snippets/` and enable them under
+**Settings → Appearance → CSS snippets**:
 
 | Snippet                 | What it does                                                    |
 | ----------------------- | --------------------------------------------------------------- |
@@ -57,73 +79,11 @@ Each file in `snippets/` is independent — copy the ones you want into `.obsidi
   theme's prompt styling. The native Page Preview (hover a result with `Ctrl`/`Cmd`) is styled by
   the theme as a closer built-in alternative.
 
-## Development Setup
+## Contributing
 
-This project uses `conda` and `pre-commit` for quality control.
+Development setup, project structure, and the branching/release flow are documented in
+[CONTRIBUTING.md](https://github.com/sandovaldavid/obsidian-blue-night/blob/main/CONTRIBUTING.md).
 
-### Prerequisites
+## License
 
-- Conda or Mamba
-- Node.js (for Prettier)
-
-### Installation
-
-1. Create the environment:
-
-   ```bash
-   conda env create -f environment.yml
-   conda activate dotfiles
-   ```
-
-1. Install pre-commit hooks:
-
-   ```bash
-   pre-commit install
-   ```
-
-### Project Structure
-
-- `theme.css`: The theme (palette, Style Settings block, embedded SVG assets).
-- `manifest.json`: Obsidian theme metadata (version managed by Release Please).
-- `versions.json`: Theme version → minimum Obsidian version map (manual, see below).
-- `release-please-config.json` + `.release-please-manifest.json`: single-channel Release Please
-  config — runs **only on `main`**.
-- `.github/workflows/release-please.yml`: cuts releases and attaches `theme.css` +
-  `manifest.json` as assets.
-- `snippets/`: Standalone snippets usable with any theme.
-- `spec/`: Design specification and requirements.
-- `docs/`: Jekyll landing page, deployed to
-  [GitHub Pages](https://sandovaldavid.github.io/obsidian-blue-night/) on every push to `main`
-  that touches this folder.
-
-### Branching & Releasing (Git Flow + Release Please)
-
-- `develop` is the integration branch, `main` is the release branch. **Never commit directly to
-  either** — always use an intermediate branch + PR.
-- Release Please runs only on pushes to `main`. Merging `develop → main` triggers it; it opens a
-  `chore(main): release X.Y.Z` PR; squash-merging that PR publishes the GitHub release with
-  `theme.css` and `manifest.json` attached.
-
-Merge method per PR type (prevents spurious version bumps from concatenated squash bodies):
-
-| PR type                                    | Method       |
-| ------------------------------------------ | ------------ |
-| Feature/fix → `develop` (1-2 commits)      | Squash       |
-| Feature/fix → `develop` (many commits)     | Rebase       |
-| `develop → main` (sync)                    | Merge commit |
-| `main → develop` (catch-up)                | Rebase       |
-| Release Please PR (`chore(main): release`) | Squash       |
-
-`versions.json` is updated by hand, and only when `minAppVersion` changes: add a
-`"<new-theme-version>": "<min-app-version>"` entry in the same PR that changes the manifest.
-
-## Customization
-
-Install the **Style Settings** plugin in Obsidian to customize:
-
-- Accent flavor (Night Blue / Lavender / Teal / Pink) and principal accent color
-- Preset canvas variants — dark: Blue Night, Dark Charcoal/OLED, Cozy Pastels; light: Clean Blue,
-  Cozy Pastels Light — plus custom editor backgrounds per mode
-- UI features: Raycast prompt, minimalist explorer, metadata card, folder guides, vault name icon
-- Content: premium headers, accent bullets, pill tags, circular checkboxes, IDE blockquotes
-- Status bar: floating pill and auto-hide
+[MIT](https://github.com/sandovaldavid/obsidian-blue-night/blob/main/LICENSE)
