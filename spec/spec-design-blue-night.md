@@ -14,7 +14,6 @@ This document specifies the design system, architecture, and requirements for **
 The purpose of the **Blue Night** theme is to provide a unified, responsive, and distraction-free visual environment inside the Obsidian note-taking app. 
 The scope covers:
 - Core dark/light mode Obsidian themes using CSS variables.
-- Standalone color palette overrides (`snippets/kodev-blue-night.css`).
 - Optional CSS snippets for extra layout modifiers (`focus-mode.css`, `rainbow-folders.css`, etc.).
 - Embedded SVG icons via CSS masks for high-fidelity custom visuals without network requests.
 
@@ -27,7 +26,7 @@ The scope covers:
 
 ## 3. Requirements, Constraints & Guidelines
 
-- **REQ-001**: The canvas color palette must use a desaturated night-blue/charcoal base (`#090c10` for canvas and `#05070a` for panels) to reduce visual fatigue.
+- **REQ-001**: The canvas color palette must use a desaturated night-blue base (`#0f1523` for canvas and `#0b1019` for panels) to reduce visual fatigue. Darker charcoal values (`#090c10`, `#05070a`) are reserved for the Dark Charcoal/OLED preset flavor.
 - **REQ-002**: Heading levels (H1 to H6) must support colored variants using pastel accents (blue, lavender, teal, green, yellow, orange).
 - **REQ-003**: Search bars must prevent text overlap with the search icon and the delete button by setting a padding-left and padding-right of at least 32px.
 - **REQ-004**: The search clear/delete button must be styled with a visible red accent color (`var(--text-error)`) by default with an opacity of 0.65, transitioning to full opacity on hover, instead of remaining dark/invisible.
