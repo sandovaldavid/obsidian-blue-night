@@ -17,6 +17,10 @@ deep night-blue base, engineered for low eye strain and a software developer's d
 - **Floating Status Bar**: Glass pill in the bottom-right corner, optional auto-hide.
 - **Style Settings Integration**: Accent flavors, OLED mode, and every UI feature is a toggle via
   the [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) plugin.
+- **Plugin-Aware**: Extra styling for Dataview (inline fields, tables) and Quick Switcher++
+  (paths, mode indicators, heading levels) that activates only when those plugins are installed.
+- **Full Native Coverage**: Tables, Canvas (pastel node colors), global search highlights,
+  settings modal, mobile adjustments, `prefers-reduced-motion`, and ink-friendly PDF export.
 
 ## Installation
 
@@ -29,6 +33,18 @@ deep night-blue base, engineered for low eye strain and a software developer's d
 
 If you only want the color tokens on top of another theme, copy `snippets/kodev-blue-night.css`
 into `.obsidian/snippets/` and enable it under **Settings → Appearance → CSS snippets**.
+
+### Optional snippets
+
+Each file in `snippets/` is independent — copy the ones you want into `.obsidian/snippets/`:
+
+| Snippet                | What it does                                                    |
+| ---------------------- | --------------------------------------------------------------- |
+| `kodev-blue-night.css` | Full color-token palette usable on any theme                    |
+| `focus-mode.css`       | Hides ribbon, tabs and status bar until hovered (zen writing)   |
+| `rainbow-folders.css`  | Tints each top-level folder with a different pastel             |
+| `colored-headings.css` | Gives every heading level its own pastel color                  |
+| `wide-code.css`        | Lets code blocks, tables and Dataview results exceed line width |
 
 ## Recommended plugins
 
