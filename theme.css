@@ -1,5 +1,5 @@
 /* ==========================================================
-   BLUE NIGHT THEME v3.0 (Kodev)
+   BLUE NIGHT THEME v1.0 (Kodev)
    Minimalist night-blue theme with pastel accents.
    Low eye strain, developer-focused. Catppuccin-inspired
    palette over a deep night-blue base.
@@ -20,17 +20,41 @@ settings:
     format: hex
     default: '#5b8def'
   - id: dark-bg-main
-    title: Editor Background (Dark Mode)
-    description: Night blue '#0f1523' by default. Use '#000000' for pure OLED black.
+    title: Custom Editor Background (Dark)
+    description: Custom hex background if no preset flavor is selected.
     type: variable-color
     format: hex
     default: '#0f1523'
   - id: light-bg-main
-    title: Editor Background (Light Mode)
-    description: Clean bluish white.
+    title: Custom Editor Background (Light)
+    description: Custom hex background if no preset flavor is selected.
     type: variable-color
     format: hex
     default: '#f7f9fc'
+  - id: kodev-theme-flavor
+    title: Dark Mode Variant
+    description: Choose your dark mode canvas and panel base style.
+    type: class-select
+    allowEmpty: false
+    default: kodev-flavor-blue-night
+    options:
+      - label: Blue Night (Deep Night Blue #0f1523)
+        value: kodev-flavor-blue-night
+      - label: Dark Charcoal / OLED (Ultra Dark Black #000000)
+        value: kodev-flavor-dark-oled
+      - label: Cozy Pastels (Warm Slate / Lilac Gray #1b1924)
+        value: kodev-flavor-cozy-pastels
+  - id: kodev-light-theme-flavor
+    title: Light Mode Variant
+    description: Choose your light mode canvas and panel base style.
+    type: class-select
+    allowEmpty: false
+    default: kodev-light-flavor-clean-blue
+    options:
+      - label: Clean Blue (Pure White with Night Blue accents)
+        value: kodev-light-flavor-clean-blue
+      - label: Cozy Pastels Light (Soft Lilac Cream #faf4fc)
+        value: kodev-light-flavor-cozy-pastels-light
   - id: kodev-accent-flavor
     title: Accent Flavor
     description: Pastel accent family used across the whole UI.
@@ -46,11 +70,6 @@ settings:
         value: kodev-accent-teal
       - label: Pink
         value: kodev-accent-pink
-  - id: kodev-blue-night-enable-oled-black
-    title: OLED Black Mode
-    description: Pure black canvas and deeper panels in dark mode (overrides the color above).
-    type: class-toggle
-    default: false
   - id: macos-ui-heading
     title: UI Features
     type: heading
@@ -563,15 +582,6 @@ body.kodev-blue-night-enable-premium-headers.theme-dark {
   --h3-color: var(--text-muted);
 }
 
-/* OLED Black Mode — pure black canvas, deeper panels */
-body.kodev-blue-night-enable-oled-black.theme-dark {
-  --color-base-00: #000000;
-  --color-base-10: #05080f;
-  --color-base-20: #0b1019;
-  --color-base-25: #10141f;
-  --code-background: #0a0f1c;
-  --glass-bg: rgba(0, 0, 0, 0.72);
-}
 
 /* ==========================================================
    2. LIGHT MODE — Crisp bluish slate
@@ -968,6 +978,111 @@ body.kodev-accent-pink.theme-light {
 }
 
 /* ==========================================================
+   2c. THEME PRESET VARIANT FLAVORS
+   ========================================================== */
+
+/* Dark Mode Variation: Dark Charcoal / OLED Black */
+body.kodev-flavor-dark-oled.theme-dark {
+  --color-base-00: #000000; /* Pure OLED Black */
+  --color-base-10: #05070a; /* Darkest panels */
+  --color-base-20: #090c10; /* Elevated panels */
+  --color-base-25: #10141b;
+  --color-base-30: #1e2533; /* Borders */
+  --color-base-35: #252e3f;
+  --color-base-40: #2c374b;
+  --color-base-50: #424e68;
+  --color-base-60: #627293;
+  --color-base-70: #8da1c4;
+  --color-base-100: #cbd5e1;
+
+  --background-primary: var(--color-base-00);
+  --background-primary-alt: var(--color-base-10);
+  --background-secondary: var(--color-base-10);
+  --background-secondary-alt: var(--color-base-20);
+  --background-modifier-border: var(--color-base-30);
+  --background-modifier-border-hover: var(--color-base-35);
+  --code-background: #090c10;
+  --glass-bg: rgba(0, 0, 0, 0.72);
+}
+
+/* Dark Mode Variation: Cozy Pastels (Warm Slate / Lilac Gray) */
+body.kodev-flavor-cozy-pastels.theme-dark {
+  --color-base-00: #1b1924; /* Cozy warm slate background */
+  --color-base-10: #15121c; /* Deep cozy dark panels */
+  --color-base-20: #221e2c; /* Elevated cozy panels */
+  --color-base-25: #2c2738;
+  --color-base-30: #3c354d; /* Cozy borders */
+  --color-base-35: #4b4260;
+  --color-base-40: #5b5074;
+  --color-base-50: #7b6c9b;
+  --color-base-60: #9385b2;
+  --color-base-70: #b0a4cb;
+  --color-base-100: #e3def2; /* Warm cream/lilac text */
+
+  /* Accent: Cozy pastel lavender/mauve */
+  --accent-rgb: 203, 166, 247;
+  --color-accent: #cba6f7;
+  --color-accent-1: #cba6f7;
+  --color-accent-2: #8839ef;
+  --color-accent-light: #cba6f7;
+  --color-accent-lighter: #f5c2e7;
+  --color-accent-hover: #d8bbf9;
+
+  --background-primary: var(--color-base-00);
+  --background-primary-alt: var(--color-base-10);
+  --background-secondary: var(--color-base-10);
+  --background-secondary-alt: var(--color-base-20);
+  --background-modifier-border: var(--color-base-30);
+  --background-modifier-border-hover: var(--color-base-35);
+  --code-background: #221e2c;
+}
+
+/* Light Mode Variation: Clean Blue */
+body.kodev-light-flavor-clean-blue.theme-light {
+  --color-base-00: var(--light-bg-main, #f7f9fc);
+  --color-base-10: #eef2f8;
+  --color-base-20: #e5ebf4;
+  --color-base-30: #dde5f0;
+  --background-primary: var(--color-base-00);
+  --background-primary-alt: var(--color-base-10);
+  --background-secondary: var(--color-base-10);
+  --background-secondary-alt: var(--color-base-20);
+  --background-modifier-border: var(--color-base-30);
+}
+
+/* Light Mode Variation: Cozy Pastels Light (Creamy Lilac) */
+body.kodev-light-flavor-cozy-pastels-light.theme-light {
+  --color-base-00: #faf4fc; /* Soft cream lilac background */
+  --color-base-10: #f2e9f5; /* Lavender sidebars */
+  --color-base-20: #eae0ee;
+  --color-base-25: #e1d5e6;
+  --color-base-30: #d7c9db; /* Cozy borders */
+  --color-base-35: #ccbcd1;
+  --color-base-40: #bfaec4;
+  --color-base-50: #9c89a3;
+  --color-base-60: #7e6c85;
+  --color-base-70: #67546d;
+  --color-base-100: #422f47; /* Deep purple text */
+
+  /* Accent: Warm dusty violet */
+  --accent-rgb: 144, 122, 169;
+  --color-accent: #907aa9;
+  --color-accent-1: #907aa9;
+  --color-accent-2: #6d5487;
+  --color-accent-light: #907aa9;
+  --color-accent-lighter: #b19ec3;
+  --color-accent-hover: #9f8bb5;
+
+  --background-primary: var(--color-base-00);
+  --background-primary-alt: var(--color-base-10);
+  --background-secondary: var(--color-base-10);
+  --background-secondary-alt: var(--color-base-20);
+  --background-modifier-border: var(--color-base-30);
+  --background-modifier-border-hover: var(--color-base-35);
+  --code-background: #f2e9f5;
+}
+
+/* ==========================================================
    3. TYPOGRAPHY SMOOTHING & WORKSPACE STRUCTURE
    ========================================================== */
 
@@ -1080,6 +1195,19 @@ input[type='password'] {
   outline: none;
 }
 
+/* Warning / Destructive buttons in confirmation modals */
+button.mod-warning {
+  background-color: var(--color-red);
+  color: var(--text-on-accent);
+  border: 1px solid var(--color-red);
+}
+
+button.mod-warning:hover {
+  background-color: var(--color-red);
+  color: var(--text-on-accent);
+  filter: brightness(1.15);
+}
+
 /* Settings toggles */
 .checkbox-container {
   border-radius: var(--toggle-radius);
@@ -1127,58 +1255,61 @@ input[type='password'] {
 /* --- Base: always-on property type icons & input colors --- */
 
 /* Remove the vertical divider Obsidian draws on the right edge of the key column */
-.metadata-property-key {
-  border-right: none;
-}
-
+/* --- Unified key column: icon + label share borders and backgrounds to form a single pill --- */
 .metadata-property-icon {
   color: var(--metadata-label-text-color);
   opacity: 0.7;
   transition:
     color 0.15s ease,
-    opacity 0.15s ease;
+    opacity 0.15s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+  border-top-left-radius: var(--radius-s);
+  border-bottom-left-radius: var(--radius-s);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border: 1px solid var(--metadata-border-color, var(--color-base-30));
+  border-right: none;
+  background-color: var(--color-base-20);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.metadata-property-key {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: var(--radius-s);
+  border-bottom-right-radius: var(--radius-s);
+  border: 1px solid var(--metadata-border-color, var(--color-base-30));
+  border-left: none;
+  background-color: var(--color-base-20);
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+/* Hover state: highlight the unified pill background */
 .metadata-property:hover .metadata-property-icon,
-.metadata-property:focus-within .metadata-property-icon {
+.metadata-property:hover .metadata-property-key {
+  background-color: var(--metadata-property-background-hover);
   color: var(--interactive-accent);
+}
+
+.metadata-property:hover .metadata-property-icon {
   opacity: 1;
 }
 
-/*
- * Unified key column: icon + label share the same background.
- *
- * In Obsidian's DOM, .metadata-property-icon is a SIBLING of .metadata-property-key
- * (not a child), so setting background on the key wrapper alone never covers the icon.
- *
- * Default state → --color-base-20 (subtle elevation, differentiates key from value)
- * Hover state   → transparent: the row's --metadata-property-background-hover covers
- *                 everything uniformly. Keeping a separate color here causes a
- *                 "floating box" misalignment because Obsidian uses align-items:center
- *                 on the row, so child backgrounds don't fill the full row height.
- * Active state  → --metadata-label-background-active (accent tint, only on focus)
- */
-.metadata-property-icon,
-.metadata-property-key {
-  background-color: var(--color-base-20);
-  transition: background-color 0.15s ease;
-}
-
-/* On hover: revert to transparent so the row's single uniform background shows.
-   This eliminates the misaligned double-shade effect. */
-.metadata-property:hover .metadata-property-icon,
-.metadata-property:hover .metadata-property-key {
-  background-color: transparent;
-}
-
+/* Focus state: highlight borders and background */
 .metadata-property:focus-within .metadata-property-icon,
 .metadata-property:focus-within .metadata-property-key {
-  background-color: var(--metadata-label-background-active);
+  background-color: var(--metadata-property-background-active);
+  border-color: var(--metadata-divider-color-focus, var(--color-accent-1));
 }
 
-/* Focus ring on the focused property row */
-.metadata-property:focus-within {
-  box-shadow: 0 0 0 1px var(--metadata-divider-color-focus);
+.metadata-property:focus-within .metadata-property-icon {
+  color: var(--interactive-accent);
+  opacity: 1;
 }
 
 /* Input placeholders */
@@ -1551,8 +1682,7 @@ body.kodev-blue-night-enable-folder-guides .nav-folder-children:hover {
 
 /* --- Premium Headers --- */
 /* Non-variable properties for the premium-headers feature */
-body.kodev-blue-night-enable-premium-headers .markdown-rendered h1,
-body.kodev-blue-night-enable-premium-headers .cm-header-1 {
+body.kodev-blue-night-enable-premium-headers .markdown-rendered h1 {
   font-weight: var(--h1-weight, 400);
   letter-spacing: -0.02em;
   border-bottom: 1px solid var(--background-modifier-border);
@@ -1560,20 +1690,40 @@ body.kodev-blue-night-enable-premium-headers .cm-header-1 {
   margin-top: 1.8em;
   margin-bottom: 0.6em;
 }
+body.kodev-blue-night-enable-premium-headers .cm-header-1 {
+  font-weight: var(--h1-weight, 400);
+  letter-spacing: -0.02em;
+  border-bottom: 1px solid var(--background-modifier-border);
+  padding-bottom: 8px;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 1.2em;
+}
 
-body.kodev-blue-night-enable-premium-headers .markdown-rendered h2,
-body.kodev-blue-night-enable-premium-headers .cm-header-2 {
+body.kodev-blue-night-enable-premium-headers .markdown-rendered h2 {
   font-weight: var(--h2-weight, 400);
   letter-spacing: -0.01em;
   margin-top: 1.5em;
   margin-bottom: 0.5em;
 }
+body.kodev-blue-night-enable-premium-headers .cm-header-2 {
+  font-weight: var(--h2-weight, 400);
+  letter-spacing: -0.01em;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 1em;
+}
 
-body.kodev-blue-night-enable-premium-headers .markdown-rendered h3,
-body.kodev-blue-night-enable-premium-headers .cm-header-3 {
+body.kodev-blue-night-enable-premium-headers .markdown-rendered h3 {
   font-weight: var(--h3-weight, 400);
   margin-top: 1.2em;
   margin-bottom: 0.4em;
+}
+body.kodev-blue-night-enable-premium-headers .cm-header-3 {
+  font-weight: var(--h3-weight, 400);
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0.8em;
 }
 
 /* --- Links --- */
@@ -1643,6 +1793,32 @@ pre code,
 .markdown-rendered pre .copy-code-button:hover {
   color: var(--text-normal);
   border-color: var(--background-modifier-border-hover);
+}
+
+/* Language badge on code blocks (flair) */
+.code-block-flair {
+  display: block !important;
+  font-family: var(--font-monospace-theme, monospace);
+  font-size: 0.72rem;
+  color: var(--text-muted) !important;
+  background-color: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s);
+  padding: 2px 8px;
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+  z-index: 10;
+  pointer-events: none;
+  transition: opacity var(--anim-duration-fast) var(--anim-motion-baseline);
+}
+
+/* Fade out language badge on hover in Reading View to show copy button in same spot */
+.markdown-rendered pre:hover .code-block-flair {
+  opacity: 0;
 }
 
 /* --- Horizontal rules: hairline gradient --- */
@@ -2022,6 +2198,26 @@ body {
 
 .search-result-container .search-result-file-title {
   color: var(--text-accent);
+}
+
+/* --- Search Input UI Fixes --- */
+.theme-dark .search-input-container input[type='search'],
+.theme-light .search-input-container input[type='search'] {
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.theme-dark .search-input-clear-button,
+.theme-light .search-input-clear-button {
+  color: var(--text-error);
+  opacity: 0.65;
+  transition: opacity var(--anim-duration-fast) ease;
+}
+
+.theme-dark .search-input-clear-button:hover,
+.theme-light .search-input-clear-button:hover {
+  color: var(--text-error);
+  opacity: 1;
 }
 
 /* ==========================================================
