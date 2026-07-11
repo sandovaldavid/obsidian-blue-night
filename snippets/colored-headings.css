@@ -1,0 +1,15 @@
+/* ==========================================================
+   BLUE NIGHT — Colored Headings Snippet
+   Gives every heading level its own pastel color, in both
+   editing and reading views. Falls back to Blue Night
+   pastels on other themes.
+   ========================================================== */
+
+body {
+  --h1-color: rgb(var(--color-blue-rgb, 138, 180, 250));
+  --h2-color: rgb(var(--color-purple-rgb, 180, 190, 254));
+  --h3-color: rgb(var(--color-cyan-rgb, 139, 213, 202));
+  --h4-color: rgb(var(--color-green-rgb, 166, 218, 149));
+  --h5-color: rgb(var(--color-yellow-rgb, 238, 212, 159));
+  --h6-color: rgb(var(--color-orange-rgb, 245, 169, 127));
+}

@@ -1,0 +1,25 @@
+/* ==========================================================
+   BLUE NIGHT — Wide Code & Tables Snippet
+   Lets code blocks, tables and Dataview results extend
+   beyond the readable line width — handy for logs, diffs
+   and wide query results.
+   ========================================================== */
+
+/* Reading view */
+.markdown-rendered pre,
+.markdown-rendered table,
+.markdown-rendered .block-language-dataview {
+  max-width: min(95%, 1100px);
+  width: max-content;
+  min-width: 100%;
+}
+
+/* Keep horizontal scroll inside the block instead of the page */
+.markdown-rendered pre {
+  overflow-x: auto;
+}
+
+.markdown-rendered table {
+  display: block;
+  overflow-x: auto;
+}
