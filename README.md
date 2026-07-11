@@ -82,21 +82,35 @@ This project uses `conda` and `pre-commit` for quality control.
 ### Project Structure
 
 - `theme.css`: The theme (palette, Style Settings block, embedded SVG assets).
-- `manifest.json`: Obsidian theme metadata.
-- `versions.json`: Theme version → minimum Obsidian version map.
-- `version-bump.mjs` + `package.json`: `npm run version` bumps manifest and versions files.
-- `.github/workflows/release-version.yml`: Publishes `theme.css` + `manifest.json` on tag push.
-- `snippets/`: Standalone token-only snippet usable with any theme.
+- `manifest.json`: Obsidian theme metadata (version managed by Release Please).
+- `versions.json`: Theme version → minimum Obsidian version map (manual, see below).
+- `release-please-config.json` + `.release-please-manifest.json`: single-channel Release Please
+  config — runs **only on `main`**.
+- `.github/workflows/release-please.yml`: cuts releases and attaches `theme.css` +
+  `manifest.json` as assets.
+- `snippets/`: Standalone snippets usable with any theme.
 - `themes/baseline.css`: Development reference only (not distributed).
 
-### Releasing
+### Branching & Releasing (Git Flow + Release Please)
 
-```bash
-npm version patch   # or minor / major — updates manifest.json + versions.json
-git push --follow-tags
-```
+- `develop` is the integration branch, `main` is the release branch. **Never commit directly to
+  either** — always use an intermediate branch + PR.
+- Release Please runs only on pushes to `main`. Merging `develop → main` triggers it; it opens a
+  `chore(main): release X.Y.Z` PR; squash-merging that PR publishes the GitHub release with
+  `theme.css` and `manifest.json` attached.
 
-The GitHub Action attaches `manifest.json` and `theme.css` to the release automatically.
+Merge method per PR type (prevents spurious version bumps from concatenated squash bodies):
+
+| PR type                                    | Method       |
+| ------------------------------------------ | ------------ |
+| Feature/fix → `develop` (1-2 commits)      | Squash       |
+| Feature/fix → `develop` (many commits)     | Rebase       |
+| `develop → main` (sync)                    | Merge commit |
+| `main → develop` (catch-up)                | Rebase       |
+| Release Please PR (`chore(main): release`) | Squash       |
+
+`versions.json` is updated by hand, and only when `minAppVersion` changes: add a
+`"<new-theme-version>": "<min-app-version>"` entry in the same PR that changes the manifest.
 
 ## Customization
 
