@@ -5,37 +5,59 @@
    to sensible pastels on other themes.
    ========================================================== */
 
+body.theme-dark {
+  --rf-blue: rgb(var(--color-blue-rgb, 138, 180, 250));
+  --rf-purple: rgb(var(--color-purple-rgb, 180, 190, 254));
+  --rf-cyan: rgb(var(--color-cyan-rgb, 139, 213, 202));
+  --rf-green: rgb(var(--color-green-rgb, 166, 218, 149));
+  --rf-yellow: rgb(var(--color-yellow-rgb, 238, 212, 159));
+  --rf-orange: rgb(var(--color-orange-rgb, 245, 169, 127));
+  --rf-red: rgb(var(--color-red-rgb, 242, 135, 155));
+  --rf-pink: rgb(var(--color-pink-rgb, 245, 189, 230));
+}
+
+body.theme-light {
+  --rf-blue: rgb(var(--color-blue-rgb, 37, 99, 235));
+  --rf-purple: rgb(var(--color-purple-rgb, 114, 135, 253));
+  --rf-cyan: rgb(var(--color-cyan-rgb, 23, 146, 153));
+  --rf-green: rgb(var(--color-green-rgb, 64, 160, 43));
+  --rf-yellow: rgb(var(--color-yellow-rgb, 223, 142, 29));
+  --rf-orange: rgb(var(--color-orange-rgb, 254, 100, 11));
+  --rf-red: rgb(var(--color-red-rgb, 210, 15, 57));
+  --rf-pink: rgb(var(--color-pink-rgb, 234, 118, 203));
+}
+
 /* Top-level folders cycle through 8 pastel tints */
 .nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 1) > .nav-folder-title {
-  color: rgb(var(--color-blue-rgb, 138, 180, 250));
+  color: var(--rf-blue);
 }
 
 .nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 2) > .nav-folder-title {
-  color: rgb(var(--color-purple-rgb, 180, 190, 254));
+  color: var(--rf-purple);
 }
 
 .nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 3) > .nav-folder-title {
-  color: rgb(var(--color-cyan-rgb, 139, 213, 202));
+  color: var(--rf-cyan);
 }
 
 .nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 4) > .nav-folder-title {
-  color: rgb(var(--color-green-rgb, 166, 218, 149));
+  color: var(--rf-green);
 }
 
 .nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 5) > .nav-folder-title {
-  color: rgb(var(--color-yellow-rgb, 238, 212, 159));
+  color: var(--rf-yellow);
 }
 
 .nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 6) > .nav-folder-title {
-  color: rgb(var(--color-orange-rgb, 245, 169, 127));
+  color: var(--rf-orange);
 }
 
 .nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 7) > .nav-folder-title {
-  color: rgb(var(--color-red-rgb, 242, 135, 155));
+  color: var(--rf-red);
 }
 
 .nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 8) > .nav-folder-title {
-  color: rgb(var(--color-pink-rgb, 245, 189, 230));
+  color: var(--rf-pink);
 }
 
 /* Folder icons (Blue Night's ::before masks) follow the text color */

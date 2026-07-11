@@ -5,11 +5,28 @@
    pastels on other themes.
    ========================================================== */
 
-body {
-  --h1-color: rgb(var(--color-blue-rgb, 138, 180, 250));
-  --h2-color: rgb(var(--color-purple-rgb, 180, 190, 254));
-  --h3-color: rgb(var(--color-cyan-rgb, 139, 213, 202));
-  --h4-color: rgb(var(--color-green-rgb, 166, 218, 149));
-  --h5-color: rgb(var(--color-yellow-rgb, 238, 212, 159));
-  --h6-color: rgb(var(--color-orange-rgb, 245, 169, 127));
+body.theme-dark {
+  --h1-color: rgb(var(--color-blue-rgb, 138, 180, 250)) !important;
+  --h2-color: rgb(var(--color-purple-rgb, 180, 190, 254)) !important;
+  --h3-color: rgb(var(--color-cyan-rgb, 139, 213, 202)) !important;
+  --h4-color: rgb(var(--color-green-rgb, 166, 218, 149)) !important;
+  --h5-color: rgb(var(--color-yellow-rgb, 238, 212, 159)) !important;
+  --h6-color: rgb(var(--color-orange-rgb, 245, 169, 127)) !important;
 }
+
+body.theme-light {
+  --h1-color: rgb(var(--color-blue-rgb, 37, 99, 235)) !important;
+  --h2-color: rgb(var(--color-purple-rgb, 114, 135, 253)) !important;
+  --h3-color: rgb(var(--color-cyan-rgb, 23, 146, 153)) !important;
+  --h4-color: rgb(var(--color-green-rgb, 64, 160, 43)) !important;
+  --h5-color: rgb(var(--color-yellow-rgb, 223, 142, 29)) !important;
+  --h6-color: rgb(var(--color-orange-rgb, 254, 100, 11)) !important;
+}
+
+/* Force direct heading colors in both Reading view and Editing/Live Preview view */
+.markdown-rendered h1, .cm-header-1 { color: var(--h1-color) !important; }
+.markdown-rendered h2, .cm-header-2 { color: var(--h2-color) !important; }
+.markdown-rendered h3, .cm-header-3 { color: var(--h3-color) !important; }
+.markdown-rendered h4, .cm-header-4 { color: var(--h4-color) !important; }
+.markdown-rendered h5, .cm-header-5 { color: var(--h5-color) !important; }
+.markdown-rendered h6, .cm-header-6 { color: var(--h6-color) !important; }
