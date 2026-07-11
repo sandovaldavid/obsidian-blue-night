@@ -1,8 +1,5 @@
 {
   "name": "blue-night",
   "version": "2.0.0",
-  "description": "Blue Night — a minimalist night-blue Obsidian theme with pastel accents, built for software developers.",
-  "scripts": {
-    "version": "node version-bump.mjs && git add manifest.json versions.json"
-  }
+  "description": "Blue Night — a minimalist night-blue Obsidian theme with pastel accents, built for software developers."
 }
