@@ -52,16 +52,18 @@ pre-commit hook: `type(scope): imperative description`.
   `chore(main): release X.Y.Z` PR; squash-merging that PR publishes the GitHub release with
   `theme.css` and `manifest.json` attached.
 - Merged PR branches are deleted automatically; `main` and `develop` are protected against
-  deletion and force-pushes by repository rulesets.
+  deletion and force-pushes by repository rulesets. Both branches allow **merge commit and
+  squash** only.
 
-Merge method per PR type (prevents spurious version bumps from concatenated squash bodies):
+Merge method per PR type — never squash a multi-commit PR: the concatenated body buries
+conventional-commit markers (`feat!`, `Release-As:`) and causes wrong version bumps:
 
 | PR type                                    | Method       |
 | ------------------------------------------ | ------------ |
 | Feature/fix → `develop` (1-2 commits)      | Squash       |
-| Feature/fix → `develop` (many commits)     | Rebase       |
+| Feature/fix → `develop` (many commits)     | Merge commit |
 | `develop → main` (sync)                    | Merge commit |
-| `main → develop` (catch-up)                | Rebase       |
+| `main → develop` (catch-up)                | Merge commit |
 | Release Please PR (`chore(main): release`) | Squash       |
 
 `versions.json` is updated by hand, and only when `minAppVersion` changes: add a
