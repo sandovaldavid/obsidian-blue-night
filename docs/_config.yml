@@ -1,0 +1,8 @@
+title: Blue Night
+description: A minimalist night-blue Obsidian theme with pastel accents, built for developers.
+url: https://sandovaldavid.github.io
+baseurl: /obsidian-blue-night
+repository: sandovaldavid/obsidian-blue-night
+markdown: kramdown
+exclude:
+  - README.md

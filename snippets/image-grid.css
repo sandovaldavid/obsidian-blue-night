@@ -1,0 +1,39 @@
+/* ==========================================================
+   BLUE NIGHT — Image Grid / Gallery Snippet
+   Renders consecutive images on a single line in a clean,
+   responsive flex grid.
+   To use, place images side-by-side in your note without
+   blank lines between them.
+   ========================================================== */
+
+.markdown-rendered p:has(> span > img + span > img),
+.markdown-rendered p:has(> img + img) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  align-items: stretch;
+  margin: 1.2em 0;
+}
+
+.markdown-rendered p:has(> span > img + span > img) span,
+.markdown-rendered p:has(> img + img) img {
+  flex: 1 1 200px;
+  max-width: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-m);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.markdown-rendered p:has(> span > img + span > img) img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-m);
+}
+
+.markdown-rendered p:has(> span > img + span > img) span:hover,
+.markdown-rendered p:has(> img + img) img:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-s);
+}
