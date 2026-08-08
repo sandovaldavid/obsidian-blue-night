@@ -1,39 +1,63 @@
 /* ==========================================================
    BLUE NIGHT — Image Grid / Gallery Snippet
-   Renders consecutive images on a single line in a clean,
-   responsive flex grid.
-   To use, place images side-by-side in your note without
-   blank lines between them.
+   Opt-in per note with:
+
+   ---
+   cssclasses:
+     - image-grid
+   ---
+
+   :has() is intentionally scoped to image-grid notes only so
+   it does not run across every rendered note in the vault.
    ========================================================== */
 
-.markdown-rendered p:has(> span > img + span > img),
-.markdown-rendered p:has(> img + img) {
-  display: flex;
-  flex-wrap: wrap;
+.markdown-preview-view.image-grid p:has(> .image-embed + .image-embed),
+.markdown-preview-view.image-grid p:has(> img + img) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
   gap: 8px;
-  justify-content: center;
-  align-items: stretch;
-  margin: 1.2em 0;
+  align-items: start;
+  margin-block: 1.2em;
 }
 
-.markdown-rendered p:has(> span > img + span > img) span,
-.markdown-rendered p:has(> img + img) img {
-  flex: 1 1 200px;
+.markdown-preview-view.image-grid
+  p:has(> .image-embed + .image-embed)
+  > .image-embed,
+.markdown-preview-view.image-grid p:has(> img + img) > img {
+  display: block;
+  min-width: 0;
   max-width: 100%;
-  object-fit: cover;
-  border-radius: var(--radius-m);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: var(--radius-m, 8px);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.markdown-rendered p:has(> span > img + span > img) img {
+.markdown-preview-view.image-grid
+  p:has(> .image-embed + .image-embed)
+  > .image-embed
+  img {
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: var(--radius-m);
+  height: auto;
+  border-radius: inherit;
 }
 
-.markdown-rendered p:has(> span > img + span > img) span:hover,
-.markdown-rendered p:has(> img + img) img:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-s);
+@media (hover: hover) {
+  .markdown-preview-view.image-grid
+    p:has(> .image-embed + .image-embed)
+    > .image-embed:hover,
+  .markdown-preview-view.image-grid p:has(> img + img) > img:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-s, 0 8px 24px rgba(0, 0, 0, 0.14));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .markdown-preview-view.image-grid
+    p:has(> .image-embed + .image-embed)
+    > .image-embed,
+  .markdown-preview-view.image-grid p:has(> img + img) > img {
+    transition: none;
+  }
 }
