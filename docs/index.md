@@ -116,7 +116,7 @@ title: Blue Night
   <h2>Optional snippets</h2>
   <p class="section-lead">
     Each file in <a href="https://github.com/{{ site.repository }}/tree/main/snippets"><code>snippets/</code></a>
-    is independent and avoids <code>!important</code>, so your own snippets can still override it.
+    is independent, avoids <code>!important</code>, and stays as variable-driven and low-specificity as its feature allows.
   </p>
   <div class="table-wrap">
     <table>
@@ -124,14 +124,23 @@ title: Blue Night
         <tr><th>Snippet</th><th>What it does</th></tr>
       </thead>
       <tbody>
-        <tr><td><code>focus-mode.css</code></td><td>Hides ribbon, tabs and status bar until hovered (zen writing)</td></tr>
-        <tr><td><code>rainbow-folders.css</code></td><td>Tints each top-level folder with a different pastel</td></tr>
+        <tr><td><code>focus-mode.css</code></td><td>Dims desktop chrome until hover or keyboard focus</td></tr>
+        <tr><td><code>rainbow-folders.css</code></td><td>Tints top-level folders with Blue Night/Catppuccin-inspired pastels</td></tr>
         <tr><td><code>colored-headings.css</code></td><td>Sets heading colors through Obsidian's heading variables</td></tr>
-        <tr><td><code>wide-code.css</code></td><td>Lets code blocks, tables and Dataview results exceed line width</td></tr>
-        <tr><td><code>clean-embeds.css</code></td><td>Removes borders and padding from note embeds for seamless transclusion</td></tr>
-        <tr><td><code>image-grid.css</code></td><td>Lays out consecutive images in a responsive grid</td></tr>
+        <tr><td><code>wide-code.css</code></td><td>Lets code blocks, tables and Dataview results exceed readable line width</td></tr>
+        <tr><td><code>wide-note.css</code></td><td>Opt-in <code>wide-note</code> cssclass for a wider whole-note layout</td></tr>
+        <tr><td><code>clean-embeds.css</code></td><td>Makes note embeds seamless while preserving the source-note affordance</td></tr>
+        <tr><td><code>image-grid.css</code></td><td>Opt-in <code>image-grid</code> cssclass for responsive galleries</td></tr>
+        <tr><td><code>compact-tables.css</code></td><td>Reduces table padding and density through table variables</td></tr>
+        <tr><td><code>compact-callouts.css</code></td><td>Makes native callouts denser without replacing their colors or icons</td></tr>
+        <tr><td><code>math-accent.css</code></td><td>Adds a restrained Blue Night accent to MathJax and editor math</td></tr>
         <tr><td><code>minimal-scrollbar.css</code></td><td>Uses public scrollbar color variables with a slim 6px track</td></tr>
       </tbody>
     </table>
   </div>
+  <p class="section-lead">
+    <code>wide-note.css</code> and <code>image-grid.css</code> are per-note modifiers. Add
+    <code>wide-note</code> and/or <code>image-grid</code> to the note's <code>cssclasses</code>
+    property. The gallery's <code>:has()</code> selector is therefore evaluated only in notes that explicitly opt in.
+  </p>
 </section>
