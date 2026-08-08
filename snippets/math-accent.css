@@ -1,0 +1,23 @@
+/* ==========================================================
+   BLUE NIGHT — Math Accent Snippet
+   Gives rendered MathJax and editor math a restrained accent
+   that follows Blue Night's supporting palette when available.
+   ========================================================== */
+
+body.theme-dark {
+  --bn-math-accent: var(--bn-cyan, var(--text-accent));
+}
+
+body.theme-light {
+  --bn-math-accent: #147d83;
+}
+
+.markdown-rendered mjx-container,
+.markdown-rendered .math,
+.markdown-source-view.mod-cm6 .cm-math {
+  color: var(--bn-math-accent, var(--text-accent));
+}
+
+.markdown-rendered mjx-container[display='true'] {
+  padding-block: 0.15em;
+}
