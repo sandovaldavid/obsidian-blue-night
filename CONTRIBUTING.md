@@ -63,12 +63,31 @@ Blue Night follows the official Obsidian theme guidance:
 
 ### Accent contract
 
-`--accent-h`, `--accent-s`, and `--accent-l` are the single source of truth for the accent. The
-Style Settings `accent` color picker uses `format: hsl-split`, so changing it updates the same
-variables consumed by Obsidian core.
+`--accent-h`, `--accent-s`, and `--accent-l` are the single runtime source of truth for the
+interactive accent.
 
-Do not reintroduce parallel accent systems such as `--color-accent-base`, `--color-accent-1`, or a
-separate flavor-specific accent unless there is a documented compatibility reason.
+Style Settings exposes a `class-select` named `bn-accent-flavor` with these choices:
+
+- `bn-accent-blue-night`;
+- `bn-accent-lavender`;
+- `bn-accent-teal`;
+- `bn-accent-pink`;
+- `bn-accent-custom`.
+
+Each preset class may set only the native `--accent-h`, `--accent-s`, and `--accent-l` primitives.
+The Custom picker uses `id: bn-custom-accent` with `format: hsl-split`, producing
+`--bn-custom-accent-h`, `--bn-custom-accent-s`, and `--bn-custom-accent-l`. Only
+`body.bn-accent-custom` maps those custom values into the native accent primitives.
+
+This arrangement lets presets and a custom picker coexist without competing CSS sources.
+
+Do not reintroduce independently consumed accent systems such as `--color-accent-base`, custom
+`--color-accent-1` values, or `--accent-rgb`. If a compatibility alias is ever required, derive it
+from the native HSL source of truth.
+
+The Catppuccin-inspired supporting palette (`--bn-blue`, `--bn-purple`, `--bn-cyan`,
+`--bn-green`, `--bn-yellow`, `--bn-orange`, `--bn-red`, `--bn-pink`) is separate from the
+interactive accent. Switching accents must not flatten syntax or semantic states into one color.
 
 ### Callout compatibility
 
@@ -125,7 +144,10 @@ Verify at minimum:
 
 - dark and light mode;
 - every dark/light canvas preset;
-- custom accent color through Style Settings;
+- Blue Night, Lavender, Teal, and Pink accent flavors;
+- Custom accent flavor plus multiple custom picker values;
+- switching between preset accents and Custom without stale styles;
+- syntax and semantic supporting colors remain multi-color under every accent flavor;
 - editor Source mode, Live Preview, and Reading view;
 - file explorer, tabs, ribbon, prompts, properties, tags, callouts, task states, tables, search,
   Canvas, and status bar;
@@ -155,5 +177,6 @@ Before opening a PR:
 pre-commit run --all-files
 ```
 
-Also inspect `theme.css` for accidental `!important`, remote `url(http...)` assets, duplicate
-accent systems, and broad global selectors that override native component geometry.
+Also inspect `theme.css` for accidental `!important`, remote `url(http...)` assets, independently
+consumed duplicate accent systems, and broad global selectors that override native component
+geometry.
