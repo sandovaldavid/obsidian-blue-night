@@ -1,8 +1,8 @@
 ---
 title: Blue Night Obsidian Theme Specification
-version: 4.1.0
+version: 4.2.0
 date_created: 2026-07-10
-date_updated: 2026-08-07
+date_updated: 2026-08-08
 tags: [design, app, theme, css, obsidian]
 ---
 
@@ -79,10 +79,13 @@ All accent choices converge on one Obsidian-native sink:
 Blue Night exposes these Style Settings accent flavors:
 
 1. Blue Night — `218 / 92% / 76%`.
-2. Lavender — `232 / 97% / 85%`.
-3. Teal — `171 / 47% / 69%`.
-4. Pink — `316 / 74% / 85%`.
-5. Custom — user-selected HSL values.
+2. Sapphire — `199 / 66% / 69%` (`#7dc4e4`).
+3. Lavender — `232 / 97% / 85%`.
+4. Mauve — `267 / 83% / 80%` (`#c6a0f6`).
+5. Teal — `171 / 47% / 69%`.
+6. Pink — `316 / 74% / 85%`.
+7. Peach — `21 / 86% / 73%` (`#f5a97f`).
+8. Custom — user-selected HSL values.
 
 The preset selector is a `class-select`. Each preset class may set **only** the native
 `--accent-h`, `--accent-s`, and `--accent-l` primitives. It must not introduce a second accent
@@ -133,8 +136,17 @@ Canvas presets may alter background/base tokens but must never replace the selec
 Dark canvas variants:
 
 1. Blue Night — default night-blue palette.
-2. Dark Charcoal / OLED — black and near-black surfaces.
-3. Cozy Pastels — warm slate/lilac surfaces.
+2. Midnight Navy — deeper blue surfaces without becoming pure black.
+3. Storm Blue — desaturated blue-gray surfaces for reduced visual intensity.
+4. Dark Charcoal / OLED — black and near-black surfaces.
+5. Cozy Pastels — warm slate/lilac surfaces.
+
+Reference surface tokens for the additional variants:
+
+| Variant | Canvas | Sidebar | Surface | Border |
+| --- | --- | --- | --- | --- |
+| Midnight Navy | `#080d18` | `#060a12` | `#101827` | `#1d2a40` |
+| Storm Blue | `#161b2a` | `#111622` | `#1d2435` | `#313a52` |
 
 ### 5.2 Light default
 
@@ -150,7 +162,17 @@ Dark canvas variants:
 Light canvas variants:
 
 1. Clean Blue — default bluish white palette.
-2. Cozy Pastels Light — soft lilac/cream surfaces.
+2. Blue Mist — softer blue-tinted surfaces for lower contrast against white surroundings.
+3. Cozy Pastels Light — soft lilac/cream surfaces.
+
+Blue Mist reference tokens:
+
+| Token | Value |
+| --- | --- |
+| Canvas | `#f1f5fb` |
+| Sidebar | `#e8eef7` |
+| Surface | `#dde6f2` |
+| Border | `#cad6e6` |
 
 ### 5.3 Catppuccin-inspired supporting palette
 
@@ -168,8 +190,18 @@ the selected interactive accent:
 | `--bn-red` | `#f2879b` | errors/tags |
 | `--bn-pink` | `#f5bde6` | decorative/special states |
 
-Choosing Teal, Lavender, Pink, or a custom accent changes the interactive accent family. It must
-not flatten syntax highlighting or semantic states into a single color.
+Choosing Sapphire, Lavender, Mauve, Teal, Pink, Peach, or a custom accent changes the interactive
+accent family. It must not flatten syntax highlighting or semantic states into a single color.
+
+### 5.4 Canvas/accent matrix
+
+Canvas and accent selection are independent axes. With five dark canvases and eight accents, Blue
+Night supports 40 dark combinations. With three light canvases and eight accents, it supports 24
+light combinations. These are compositional combinations, not 64 separately maintained themes.
+
+Canvas classes may override `--color-base-*` and directly related surface tokens such as
+`--code-background` and `--glass-bg`. Canvas classes must not set `--accent-h`, `--accent-s`, or
+`--accent-l`.
 
 ## 6. Component contracts
 
@@ -245,12 +277,16 @@ width variable.
 
 Style Settings is optional. Blue Night must render correctly without the plugin.
 
+The root Style Settings identifier is `kodev-blue-night`. Keep it stable to preserve persisted user
+preferences across theme updates.
+
 Exposed settings:
 
-- accent flavor: Blue Night, Lavender, Teal, Pink, or Custom;
+- accent flavor: Blue Night, Sapphire, Lavender, Mauve, Teal, Pink, Peach, or Custom;
 - custom accent color, active only through the Custom accent class;
 - custom dark/light editor background;
-- dark and light canvas variants;
+- dark canvas: Blue Night, Midnight Navy, Storm Blue, Dark Charcoal/OLED, or Cozy Pastels;
+- light canvas: Clean Blue, Blue Mist, or Cozy Pastels Light;
 - Raycast prompt;
 - minimalist explorer;
 - metadata card;
@@ -307,10 +343,14 @@ Before release, manually verify:
 - latest public Obsidian build;
 - latest Catalyst build when relevant;
 - dark/light modes;
-- all canvas variants;
-- Blue Night, Lavender, Teal, and Pink accent flavors;
+- Blue Night, Midnight Navy, Storm Blue, Dark Charcoal/OLED, and Cozy Pastels dark canvases;
+- Clean Blue, Blue Mist, and Cozy Pastels Light light canvases;
+- Blue Night, Sapphire, Lavender, Mauve, Teal, Pink, and Peach accent flavors;
 - Custom accent selection and picker changes;
 - switching repeatedly between presets and Custom without stale accent variables;
+- switching canvas variants without changing the selected accent;
+- representative cross-axis combinations: Midnight Navy + Sapphire, Storm Blue + Peach,
+  Dark Charcoal/OLED + Mauve, Cozy Pastels + Teal, and Blue Mist + Pink;
 - supporting syntax/semantic colors remain multi-color under every accent flavor;
 - theme with Style Settings disabled;
 - Source mode, Live Preview, Reading view;
@@ -329,6 +369,7 @@ Static review must also confirm:
 - no remote runtime assets;
 - every accent preset converges on `--accent-h/s/l`;
 - Custom is the only consumer of `--bn-custom-accent-h/s/l`;
+- canvas preset classes never write `--accent-h/s/l`;
 - no independently consumed duplicate accent source of truth;
 - no `rgb(var(--callout-color))`;
 - no broad global input padding override;

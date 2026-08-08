@@ -20,14 +20,16 @@ with the CSS-color contract introduced in Obsidian 1.13.
 
 - **Night Blue Palette** — deep `#0f1523` canvas with pastel accents in dark mode and a crisp
   bluish slate palette in light mode.
-- **Selectable Accent Flavors** — Blue Night, Lavender, Teal, Pink, or Custom. Every choice feeds
-  the same native `--accent-h`, `--accent-s`, and `--accent-l` variables used by Obsidian, so tabs,
-  links, graph focus, tags, prompts, and Blue Night enhancements stay synchronized.
+- **Selectable Accent Flavors** — Blue Night, Sapphire, Lavender, Mauve, Teal, Pink, Peach, or
+  Custom. Every choice feeds the same native `--accent-h`, `--accent-s`, and `--accent-l`
+  variables used by Obsidian, so tabs, links, graph focus, tags, prompts, and Blue Night
+  enhancements stay synchronized.
 - **Catppuccin-Inspired Supporting Palette** — blue, lavender, cyan, green, yellow, peach, red, and
   pink remain available for syntax highlighting and semantic states regardless of the selected
   interactive accent.
-- **Preset Flavors** — dark canvas variants (Blue Night, Dark Charcoal/OLED, Cozy Pastels) and
-  light variants (Clean Blue, Cozy Pastels Light) without replacing the selected accent.
+- **Preset Flavors** — dark canvas variants (Blue Night, Midnight Navy, Storm Blue, Dark
+  Charcoal/OLED, Cozy Pastels) and light variants (Clean Blue, Blue Mist, Cozy Pastels Light)
+  without replacing the selected accent.
 - **Pastel Syntax Highlighting** — Catppuccin-inspired code colors tuned for both modes.
 - **Minimalist SVG Icons** — embedded, fully offline icons for task checkboxes, file-explorer
   folders/files, and the vault name. Callouts intentionally retain Obsidian's native icon system
@@ -62,17 +64,19 @@ published to the gallery.
 Install the [Style Settings](https://github.com/obsidian-community/obsidian-style-settings) plugin
 to customize:
 
-- Accent Flavor: Blue Night, Lavender, Teal, Pink, or Custom
+- Accent Flavor: Blue Night, Sapphire, Lavender, Mauve, Teal, Pink, Peach, or Custom
 - Custom Accent Color, used only when `Accent Flavor = Custom`
-- Preset canvas variants — dark: Blue Night, Dark Charcoal/OLED, Cozy Pastels; light: Clean Blue,
-  Cozy Pastels Light — plus custom editor backgrounds per mode
+- Preset canvas variants — dark: Blue Night, Midnight Navy, Storm Blue, Dark Charcoal/OLED, Cozy
+  Pastels; light: Clean Blue, Blue Mist, Cozy Pastels Light — plus custom editor backgrounds per
+  mode
 - UI features: Raycast prompt, minimalist explorer, metadata card, folder guides, vault name icon
 - Content: premium headers, accent bullets, pill tags, circular checkboxes, IDE blockquotes
 - Status bar: floating pill and optional fade-until-hover behavior
 
-Accent flavors and canvas variants are intentionally independent. For example, you can use the
-Dark Charcoal/OLED canvas with the Lavender accent, or Cozy Pastels with Teal. The selected accent
-changes interactive emphasis while the Catppuccin-inspired supporting palette remains multi-color.
+Accent flavors and canvas variants are intentionally independent. For example, you can use
+Midnight Navy with Sapphire, Storm Blue with Peach, Dark Charcoal/OLED with Mauve, or Blue Mist
+with Teal. The selected accent changes interactive emphasis while the Catppuccin-inspired
+supporting palette remains multi-color.
 
 Blue Night still works without Style Settings; the plugin only exposes the optional controls.
 
@@ -134,6 +138,10 @@ Accent presets are not a second color system: each preset only sets Obsidian's n
 `--accent-h`, `--accent-s`, and `--accent-l` values. The Custom picker writes separate
 `--bn-custom-accent-*` values that are mapped into those native variables only when Custom is
 selected.
+
+Canvas variants form a second, independent axis. They override background/base palette tokens only;
+they never redefine the selected accent. This keeps the theme maintainable while allowing 40 dark
+and 24 light canvas/accent combinations without implementing 64 separate themes.
 
 ## Contributing
 

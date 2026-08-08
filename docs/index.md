@@ -28,7 +28,7 @@ title: Blue Night
     </div>
     <div class="feature-card" data-accent="teal">
       <h3>Selectable accent flavors</h3>
-      <p>Choose Blue Night, Lavender, Teal, Pink, or Custom. Every option converges on Obsidian's native <code>--accent-h</code>, <code>--accent-s</code>, and <code>--accent-l</code> variables.</p>
+      <p>Choose Blue Night, Sapphire, Lavender, Mauve, Teal, Pink, Peach, or Custom. Every option converges on Obsidian's native <code>--accent-h</code>, <code>--accent-s</code>, and <code>--accent-l</code> variables.</p>
     </div>
     <div class="feature-card" data-accent="lavender">
       <h3>Catppuccin-inspired support colors</h3>
@@ -52,7 +52,9 @@ title: Blue Night
 <section id="flavors">
   <h2>Canvas and accent combinations</h2>
   <p class="section-lead">
-    Canvas variants and accent flavors are independent. Mix Blue Night, OLED, or Cozy Pastels surfaces with Blue Night, Lavender, Teal, Pink, or your own custom accent.
+    Canvas variants and accent flavors are independent. Dark mode offers Blue Night, Midnight Navy,
+    Storm Blue, OLED, and Cozy Pastels; light mode offers Clean Blue, Blue Mist, and Cozy Pastels
+    Light. Mix any of them with Blue Night, Sapphire, Lavender, Mauve, Teal, Pink, Peach, or your own custom accent.
   </p>
   <div class="flavor-row">
     <div class="flavor">
@@ -65,12 +67,30 @@ title: Blue Night
       </div>
     </div>
     <div class="flavor">
-      <div class="swatch" style="background:#000000">
-        <span style="background:#b4befe"></span><span style="background:#8ab4fa"></span><span style="background:#8bd5ca"></span><span style="background:#f5bde6"></span>
+      <div class="swatch" style="background:#080d18">
+        <span style="background:#7dc4e4"></span><span style="background:#8ab4fa"></span><span style="background:#b4befe"></span><span style="background:#8bd5ca"></span>
       </div>
       <div class="flavor-info">
-        <h3>OLED + Lavender</h3>
-        <p>Pure black canvas with Lavender as the interactive accent while syntax and semantic colors remain multi-color.</p>
+        <h3>Midnight Navy + Sapphire</h3>
+        <p>A deeper blue canvas paired with a cool sapphire accent without crossing into pure-black OLED territory.</p>
+      </div>
+    </div>
+    <div class="flavor">
+      <div class="swatch" style="background:#161b2a">
+        <span style="background:#f5a97f"></span><span style="background:#7dc4e4"></span><span style="background:#a6da95"></span><span style="background:#c6a0f6"></span>
+      </div>
+      <div class="flavor-info">
+        <h3>Storm Blue + Peach</h3>
+        <p>Desaturated blue-gray surfaces with a warm peach accent for contrast during long writing sessions.</p>
+      </div>
+    </div>
+    <div class="flavor">
+      <div class="swatch" style="background:#000000">
+        <span style="background:#c6a0f6"></span><span style="background:#8ab4fa"></span><span style="background:#8bd5ca"></span><span style="background:#f5bde6"></span>
+      </div>
+      <div class="flavor-info">
+        <h3>OLED + Mauve</h3>
+        <p>Pure black canvas with a richer violet accent while syntax and semantic colors remain multi-color.</p>
       </div>
     </div>
     <div class="flavor">
@@ -83,12 +103,12 @@ title: Blue Night
       </div>
     </div>
     <div class="flavor">
-      <div class="swatch" style="background:#f7f9fc">
+      <div class="swatch" style="background:#f1f5fb">
         <span style="background:#f5bde6"></span><span style="background:#1e66f5"></span><span style="background:#147d83"></span><span style="background:#7048c9"></span>
       </div>
       <div class="flavor-info">
-        <h3>Clean Blue + Pink</h3>
-        <p>Bluish white surfaces with Pink as the interactive accent and high-contrast supporting colors for daylight work.</p>
+        <h3>Blue Mist + Pink</h3>
+        <p>A softer blue-tinted light canvas with Pink as the interactive accent and high-contrast support colors.</p>
       </div>
     </div>
   </div>
