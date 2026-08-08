@@ -1,30 +1,38 @@
 /* ==========================================================
    BLUE NIGHT — Focus Mode Snippet
-   Hides the ribbon, tab bar and status bar until hovered,
-   leaving only the editor. Great for long writing sessions.
+   Dims desktop chrome until it is hovered or keyboard-focused,
+   leaving the editor visually dominant without hiding controls.
    Works with any theme.
    ========================================================== */
 
-.workspace-ribbon.mod-left,
-.workspace-tab-header-container,
-.status-bar {
-  opacity: 0;
+body:not(.is-mobile) .workspace-ribbon.mod-left,
+body:not(.is-mobile) .workspace-tab-header-container,
+body:not(.is-mobile) .status-bar {
+  opacity: 0.08;
   transition: opacity 0.3s ease;
 }
 
-.workspace-ribbon.mod-left:hover,
-.workspace-tab-header-container:hover,
-.status-bar:hover {
+body:not(.is-mobile) .workspace-ribbon.mod-left:is(:hover, :focus-within),
+body:not(.is-mobile) .workspace-tab-header-container:is(:hover, :focus-within),
+body:not(.is-mobile) .status-bar:is(:hover, :focus-within) {
   opacity: 1;
 }
 
-/* Keep the view header (note title + actions) barely visible */
-.view-header {
+/* Keep the note header available as a subtle affordance. */
+body:not(.is-mobile) .view-header {
   opacity: 0.35;
   transition: opacity 0.3s ease;
 }
 
-.view-header:hover,
-.workspace-leaf.mod-active .view-header {
+body:not(.is-mobile) .view-header:is(:hover, :focus-within) {
   opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:not(.is-mobile) .workspace-ribbon.mod-left,
+  body:not(.is-mobile) .workspace-tab-header-container,
+  body:not(.is-mobile) .status-bar,
+  body:not(.is-mobile) .view-header {
+    transition: none;
+  }
 }
