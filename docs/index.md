@@ -27,12 +27,12 @@ title: Blue Night
       <p>A deep <code>#0f1523</code> canvas with pastel accents in dark mode, and a crisp bluish slate in light mode.</p>
     </div>
     <div class="feature-card" data-accent="teal">
-      <h3>Native accent integration</h3>
-      <p>The accent picker writes directly to Obsidian's <code>--accent-h</code>, <code>--accent-s</code>, and <code>--accent-l</code> variables so core UI and Blue Night stay synchronized.</p>
+      <h3>Selectable accent flavors</h3>
+      <p>Choose Blue Night, Lavender, Teal, Pink, or Custom. Every option converges on Obsidian's native <code>--accent-h</code>, <code>--accent-s</code>, and <code>--accent-l</code> variables.</p>
     </div>
     <div class="feature-card" data-accent="lavender">
-      <h3>Minimalist SVG icons</h3>
-      <p>Local mask-based icons for task states, explorer folders/files, and the vault decoration. Callouts keep Obsidian's native icon system for forward compatibility.</p>
+      <h3>Catppuccin-inspired support colors</h3>
+      <p>Blue, lavender, cyan, green, yellow, peach, red, and pink remain available for syntax and semantic states regardless of the selected accent.</p>
     </div>
     <div class="feature-card" data-accent="green">
       <h3>Extra task states</h3>
@@ -50,9 +50,9 @@ title: Blue Night
 </section>
 
 <section id="flavors">
-  <h2>Canvas variants</h2>
+  <h2>Canvas and accent combinations</h2>
   <p class="section-lead">
-    Choose a base canvas in Style Settings, then pick one accent color that remains the shared source of truth across every variant.
+    Canvas variants and accent flavors are independent. Mix Blue Night, OLED, or Cozy Pastels surfaces with Blue Night, Lavender, Teal, Pink, or your own custom accent.
   </p>
   <div class="flavor-row">
     <div class="flavor">
@@ -61,34 +61,34 @@ title: Blue Night
       </div>
       <div class="flavor-info">
         <h3>Blue Night</h3>
-        <p>The default deep night-blue canvas with pastel supporting colors.</p>
+        <p>The default deep night-blue canvas with the Blue Night accent and pastel supporting colors.</p>
       </div>
     </div>
     <div class="flavor">
       <div class="swatch" style="background:#000000">
-        <span style="background:#8ab4fa"></span><span style="background:#b4befe"></span><span style="background:#8bd5ca"></span><span style="background:#f5bde6"></span>
+        <span style="background:#b4befe"></span><span style="background:#8ab4fa"></span><span style="background:#8bd5ca"></span><span style="background:#f5bde6"></span>
       </div>
       <div class="flavor-info">
-        <h3>Dark Charcoal / OLED</h3>
-        <p>Pure black canvas for OLED displays with deeper neutral panels.</p>
+        <h3>OLED + Lavender</h3>
+        <p>Pure black canvas with Lavender as the interactive accent while syntax and semantic colors remain multi-color.</p>
       </div>
     </div>
     <div class="flavor">
       <div class="swatch" style="background:#1b1924">
-        <span style="background:#8ab4fa"></span><span style="background:#b4befe"></span><span style="background:#8bd5ca"></span><span style="background:#f5bde6"></span>
+        <span style="background:#8bd5ca"></span><span style="background:#b4befe"></span><span style="background:#eed49f"></span><span style="background:#f5bde6"></span>
       </div>
       <div class="flavor-info">
-        <h3>Cozy Pastels</h3>
-        <p>Warm slate and lilac-gray surfaces while preserving the selected accent.</p>
+        <h3>Cozy Pastels + Teal</h3>
+        <p>Warm slate and lilac-gray surfaces with Teal as the shared interactive accent.</p>
       </div>
     </div>
     <div class="flavor">
       <div class="swatch" style="background:#f7f9fc">
-        <span style="background:#1e66f5"></span><span style="background:#8ab4fa"></span><span style="background:#147d83"></span><span style="background:#7048c9"></span>
+        <span style="background:#f5bde6"></span><span style="background:#1e66f5"></span><span style="background:#147d83"></span><span style="background:#7048c9"></span>
       </div>
       <div class="flavor-info">
-        <h3>Clean Blue (Light)</h3>
-        <p>Bluish white surfaces with high-contrast text for daylight work.</p>
+        <h3>Clean Blue + Pink</h3>
+        <p>Bluish white surfaces with Pink as the interactive accent and high-contrast supporting colors for daylight work.</p>
       </div>
     </div>
   </div>
@@ -106,8 +106,8 @@ title: Blue Night
     <li>In Obsidian, open <strong>Settings → Appearance → Themes</strong> and select <strong>Blue Night</strong>.</li>
     <li>
       Optional: install the
-      <a href="https://github.com/mgmeyers/obsidian-style-settings">Style Settings</a> plugin to
-      expose the accent, canvas variants, custom backgrounds, and feature toggles.
+      <a href="https://github.com/obsidian-community/obsidian-style-settings">Style Settings</a> plugin to
+      expose accent flavors, custom accent color, canvas variants, custom backgrounds, and feature toggles.
     </li>
   </ol>
 </section>
