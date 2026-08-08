@@ -11,7 +11,7 @@
 
 /* @settings
 name: Blue Night
-id: blue-night
+id: kodev-blue-night
 settings:
   - id: appearance-heading
     title: Appearance
@@ -26,12 +26,18 @@ settings:
     options:
       - label: Blue Night
         value: bn-accent-blue-night
+      - label: Sapphire
+        value: bn-accent-sapphire
       - label: Lavender
         value: bn-accent-lavender
+      - label: Mauve
+        value: bn-accent-mauve
       - label: Teal
         value: bn-accent-teal
       - label: Pink
         value: bn-accent-pink
+      - label: Peach
+        value: bn-accent-peach
       - label: Custom
         value: bn-accent-custom
   - id: bn-custom-accent
@@ -61,6 +67,10 @@ settings:
     options:
       - label: Blue Night
         value: kodev-flavor-blue-night
+      - label: Midnight Navy
+        value: kodev-flavor-midnight-navy
+      - label: Storm Blue
+        value: kodev-flavor-storm-blue
       - label: Dark Charcoal / OLED
         value: kodev-flavor-dark-oled
       - label: Cozy Pastels
@@ -74,6 +84,8 @@ settings:
     options:
       - label: Clean Blue
         value: kodev-light-flavor-clean-blue
+      - label: Blue Mist
+        value: kodev-light-flavor-blue-mist
       - label: Cozy Pastels Light
         value: kodev-light-flavor-cozy-pastels-light
   - id: ui-heading
@@ -236,10 +248,22 @@ body.bn-accent-blue-night {
   --accent-l: 76%;
 }
 
+body.bn-accent-sapphire {
+  --accent-h: 199;
+  --accent-s: 66%;
+  --accent-l: 69%;
+}
+
 body.bn-accent-lavender {
   --accent-h: 232;
   --accent-s: 97%;
   --accent-l: 85%;
+}
+
+body.bn-accent-mauve {
+  --accent-h: 267;
+  --accent-s: 83%;
+  --accent-l: 80%;
 }
 
 body.bn-accent-teal {
@@ -252,6 +276,12 @@ body.bn-accent-pink {
   --accent-h: 316;
   --accent-s: 74%;
   --accent-l: 85%;
+}
+
+body.bn-accent-peach {
+  --accent-h: 21;
+  --accent-s: 86%;
+  --accent-l: 73%;
 }
 
 body.bn-accent-custom {
@@ -665,6 +695,38 @@ body.bn-accent-custom {
    Presets only change palette tokens. They do not redefine
    unrelated UI behavior or the user-selected accent.
    ========================================================== */
+body.kodev-flavor-midnight-navy.theme-dark {
+  --color-base-00: #080d18;
+  --color-base-10: #060a12;
+  --color-base-20: #101827;
+  --color-base-25: #131d2e;
+  --color-base-30: #1d2a40;
+  --color-base-35: #25344e;
+  --color-base-40: #2e3f5d;
+  --color-base-50: #465a7c;
+  --color-base-60: #657a9d;
+  --color-base-70: #93a7c8;
+  --color-base-100: #d1dcf0;
+  --code-background: #0d1422;
+  --glass-bg: rgba(8, 13, 24, 0.9);
+}
+
+body.kodev-flavor-storm-blue.theme-dark {
+  --color-base-00: #161b2a;
+  --color-base-10: #111622;
+  --color-base-20: #1d2435;
+  --color-base-25: #242c40;
+  --color-base-30: #313a52;
+  --color-base-35: #3b4660;
+  --color-base-40: #46536f;
+  --color-base-50: #60708f;
+  --color-base-60: #7c8ba8;
+  --color-base-70: #a3aec5;
+  --color-base-100: #d9deeb;
+  --code-background: #1a2131;
+  --glass-bg: rgba(22, 27, 42, 0.9);
+}
+
 body.kodev-flavor-dark-oled.theme-dark {
   --color-base-00: #000000;
   --color-base-10: #05070a;
@@ -695,6 +757,22 @@ body.kodev-flavor-cozy-pastels.theme-dark {
   --color-base-100: #e3def2;
   --code-background: #221e2c;
   --glass-bg: rgba(27, 25, 36, 0.9);
+}
+
+body.kodev-light-flavor-blue-mist.theme-light {
+  --color-base-00: #f1f5fb;
+  --color-base-10: #e8eef7;
+  --color-base-20: #dde6f2;
+  --color-base-25: #d5e0ed;
+  --color-base-30: #cad6e6;
+  --color-base-35: #bdccdf;
+  --color-base-40: #acbdd4;
+  --color-base-50: #879bb9;
+  --color-base-60: #647895;
+  --color-base-70: #4e607a;
+  --color-base-100: #20293a;
+  --code-background: #e8eef7;
+  --glass-bg: rgba(241, 245, 251, 0.92);
 }
 
 body.kodev-light-flavor-cozy-pastels-light.theme-light {
