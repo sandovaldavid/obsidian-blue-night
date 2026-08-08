@@ -20,9 +20,12 @@ with the CSS-color contract introduced in Obsidian 1.13.
 
 - **Night Blue Palette** — deep `#0f1523` canvas with pastel accents in dark mode and a crisp
   bluish slate palette in light mode.
-- **Native Accent Integration** — the Style Settings accent picker writes directly to Obsidian's
-  `--accent-h`, `--accent-s`, and `--accent-l` variables, so core UI and theme enhancements use the
-  same source of truth.
+- **Selectable Accent Flavors** — Blue Night, Lavender, Teal, Pink, or Custom. Every choice feeds
+  the same native `--accent-h`, `--accent-s`, and `--accent-l` variables used by Obsidian, so tabs,
+  links, graph focus, tags, prompts, and Blue Night enhancements stay synchronized.
+- **Catppuccin-Inspired Supporting Palette** — blue, lavender, cyan, green, yellow, peach, red, and
+  pink remain available for syntax highlighting and semantic states regardless of the selected
+  interactive accent.
 - **Preset Flavors** — dark canvas variants (Blue Night, Dark Charcoal/OLED, Cozy Pastels) and
   light variants (Clean Blue, Cozy Pastels Light) without replacing the selected accent.
 - **Pastel Syntax Highlighting** — Catppuccin-inspired code colors tuned for both modes.
@@ -56,15 +59,20 @@ published to the gallery.
 
 ## Customization
 
-Install the [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) plugin to
-customize:
+Install the [Style Settings](https://github.com/obsidian-community/obsidian-style-settings) plugin
+to customize:
 
-- Accent color through Obsidian's native HSL accent variables
+- Accent Flavor: Blue Night, Lavender, Teal, Pink, or Custom
+- Custom Accent Color, used only when `Accent Flavor = Custom`
 - Preset canvas variants — dark: Blue Night, Dark Charcoal/OLED, Cozy Pastels; light: Clean Blue,
   Cozy Pastels Light — plus custom editor backgrounds per mode
 - UI features: Raycast prompt, minimalist explorer, metadata card, folder guides, vault name icon
 - Content: premium headers, accent bullets, pill tags, circular checkboxes, IDE blockquotes
 - Status bar: floating pill and optional fade-until-hover behavior
+
+Accent flavors and canvas variants are intentionally independent. For example, you can use the
+Dark Charcoal/OLED canvas with the Lavender accent, or Cozy Pastels with Teal. The selected accent
+changes interactive emphasis while the Catppuccin-inspired supporting palette remains multi-color.
 
 Blue Night still works without Style Settings; the plugin only exposes the optional controls.
 
@@ -88,8 +96,8 @@ The bundled snippets avoid `!important` so users can still override them with th
 
 ## Recommended plugins
 
-- [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) — exposes the accent,
-  canvas variants, backgrounds, and feature toggles.
+- [Style Settings](https://github.com/obsidian-community/obsidian-style-settings) — exposes accent
+  flavors, custom accent color, canvas variants, backgrounds, and feature toggles.
 - [Quick Switcher++](https://github.com/darlal/obsidian-switcher-plus) — note *preview while you
   navigate* the switcher is not possible with CSS alone; this plugin provides it and inherits the
   theme's prompt styling. The native Page Preview remains the closest built-in alternative.
@@ -104,6 +112,11 @@ Blue Night follows three rules for maintainability:
    variable. If one of those selectors changes upstream, the enhancement should disappear rather
    than break the underlying UI.
 3. Do not use `!important`; snippets and user styles must remain able to override the theme.
+
+Accent presets are not a second color system: each preset only sets Obsidian's native
+`--accent-h`, `--accent-s`, and `--accent-l` values. The Custom picker writes separate
+`--bn-custom-accent-*` values that are mapped into those native variables only when Custom is
+selected.
 
 ## Contributing
 
