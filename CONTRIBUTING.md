@@ -1,13 +1,15 @@
 # Contributing to Blue Night
 
-## Development Setup
+## Development setup
 
-This project uses `conda` and `pre-commit` for quality control.
+This project uses `conda` and `pre-commit` for repository quality checks.
 
 ### Prerequisites
 
 - Conda or Mamba
-- Node.js (for Prettier)
+- Node.js (for formatting tooling)
+- Obsidian 1.12.7 or newer
+- A disposable test vault
 
 ### Installation
 
@@ -24,39 +26,77 @@ This project uses `conda` and `pre-commit` for quality control.
    pre-commit install
    ```
 
-## Project Structure
+## Project structure
 
-- `theme.css`: The theme (palette, Style Settings block, embedded SVG assets).
-- `manifest.json`: Obsidian theme metadata (version managed by Release Please).
-- `versions.json`: Theme version → minimum Obsidian version map (manual, see below).
+- `theme.css`: production theme, Style Settings metadata, palette, and local SVG assets.
+- `manifest.json`: Obsidian theme metadata; the version is managed by Release Please.
 - `release-please-config.json` + `.release-please-manifest.json`: single-channel Release Please
-  config — runs **only on `main`**.
-- `.github/workflows/release-please.yml`: cuts releases and attaches `theme.css` +
-  `manifest.json` as assets.
-- `snippets/`: Standalone snippets usable with any theme.
-- `spec/`: Design specification and requirements.
-- `docs/`: Jekyll landing page, deployed to
-  [GitHub Pages](https://sandovaldavid.github.io/obsidian-blue-night/) on every push to `main`
-  that touches this folder.
+  configuration; releases run only from `main`.
+- `.github/workflows/release-please.yml`: creates releases and attaches `theme.css` and
+  `manifest.json`, matching Obsidian's theme distribution contract.
+- `snippets/`: standalone optional snippets usable with Blue Night or other themes.
+- `spec/`: current design and compatibility specification.
+- `docs/`: Jekyll landing page deployed from `main`.
 
-## Commit Convention
+`versions.json` is intentionally not used. Obsidian documents that fallback map as part of the
+community **plugin** compatibility flow. A theme release is distributed through the version in
+`manifest.json` plus the matching GitHub release assets.
 
-Conventional Commits 1.0.0 with a **required scope** and no emojis, enforced by a commitizen
-pre-commit hook: `type(scope): imperative description`.
+## CSS architecture rules
 
-## Branching & Releasing (Git Flow + Release Please)
+Blue Night follows the official Obsidian theme guidance:
 
-- `develop` is the integration branch, `main` is the release branch. **Never commit directly to
-  either** — always use an intermediate branch + PR.
-- Release Please runs only on pushes to `main`. Merging `develop → main` triggers it; it opens a
-  `chore(main): release X.Y.Z` PR; squash-merging that PR publishes the GitHub release with
-  `theme.css` and `manifest.json` attached.
+1. Prefer documented CSS variables over direct component selectors.
+2. Put shared variables under `body`; put mode-specific colors under `.theme-dark` and
+   `.theme-light`.
+3. Keep selectors low-specificity. Direct DOM selectors are reserved for optional enhancements
+   that cannot be expressed with public variables.
+4. Never use `!important`. Users must remain able to override the theme with snippets.
+5. Keep every asset local. Do not add remote fonts, images, stylesheets, or runtime network calls.
+6. Do not override global input padding or other geometry owned by Obsidian unless no public
+   variable exists and the selector is narrowly scoped.
+7. Do not change vertical margins on CodeMirror/Live Preview lines. Use padding for decorative
+   heading spacing to avoid cursor and virtualization issues.
+8. Treat classes such as `.workspace-*`, `.cm-*`, `.metadata-*`, and plugin-specific classes as
+   implementation details. An upstream class change should disable only the enhancement, not the
+   underlying UI.
+
+### Accent contract
+
+`--accent-h`, `--accent-s`, and `--accent-l` are the single source of truth for the accent. The
+Style Settings `accent` color picker uses `format: hsl-split`, so changing it updates the same
+variables consumed by Obsidian core.
+
+Do not reintroduce parallel accent systems such as `--color-accent-base`, `--color-accent-1`, or a
+separate flavor-specific accent unless there is a documented compatibility reason.
+
+### Callout compatibility
+
+Do not wrap `--callout-color` with `rgb(...)`. Obsidian 1.13 changed `--callout-color` from an RGB
+triplet to a complete valid CSS color. Blue Night therefore styles callouts through documented
+callout variables and leaves icon/color rendering to Obsidian.
+
+## Commit convention
+
+Use Conventional Commits 1.0.0 with a required scope and no emojis, enforced by the repository
+commitizen/pre-commit configuration:
+
+```text
+<type>(<scope>): imperative description
+```
+
+## Branching and releasing
+
+- `develop` is the integration branch and `main` is the release branch. Never commit directly to
+  either; use an intermediate branch and PR.
+- Release Please runs only on pushes to `main`. Merging `develop → main` opens a
+  `chore(main): release X.Y.Z` PR when releasable commits exist.
+- The release workflow attaches `theme.css` and `manifest.json` to the GitHub release.
 - Merged PR branches are deleted automatically; `main` and `develop` are protected against
-  deletion and force-pushes by repository rulesets. Both branches allow **merge commit and
-  squash** only.
+  deletion and force-pushes. Both branches allow merge commit and squash only.
 
-Merge method per PR type — never squash a multi-commit PR: the concatenated body buries
-conventional-commit markers (`feat!`, `Release-As:`) and causes wrong version bumps:
+Merge method per PR type — never squash a multi-commit integration PR when its individual
+Conventional Commit markers need to remain visible to Release Please:
 
 | PR type                                    | Method       |
 | ------------------------------------------ | ------------ |
@@ -66,11 +106,54 @@ conventional-commit markers (`feat!`, `Release-As:`) and causes wrong version bu
 | `main → develop` (catch-up)                | Merge commit |
 | Release Please PR (`chore(main): release`) | Squash       |
 
-`versions.json` is updated by hand, and only when `minAppVersion` changes: add a
-`"<new-theme-version>": "<min-app-version>"` entry in the same PR that changes the manifest.
+When a theme change requires a newer Obsidian version, update `minAppVersion` in `manifest.json`
+in the same PR and explain the dependency in the PR description.
 
 ## Testing changes
 
-Copy `theme.css` and `manifest.json` into a test vault at `.obsidian/themes/Blue Night/` and
-reload Obsidian (`Ctrl+R`). Verify both dark and light modes, every preset flavor, and the
-Style Settings toggles.
+Copy `theme.css` and `manifest.json` into a disposable vault at:
+
+```text
+.obsidian/themes/Blue Night/
+```
+
+Reload Obsidian after CSS changes. Restart Obsidian after changing `manifest.json`.
+
+### Required visual matrix
+
+Verify at minimum:
+
+- dark and light mode;
+- every dark/light canvas preset;
+- custom accent color through Style Settings;
+- editor Source mode, Live Preview, and Reading view;
+- file explorer, tabs, ribbon, prompts, properties, tags, callouts, task states, tables, search,
+  Canvas, and status bar;
+- keyboard focus and navigation states;
+- desktop and mobile-responsive behavior;
+- reduced-motion mode;
+- PDF/print output;
+- theme with Style Settings disabled;
+- Dataview and Quick Switcher++ both absent and installed.
+
+### Compatibility matrix
+
+For releases, test against:
+
+1. the latest public Obsidian release;
+2. the latest Catalyst build when it contains announced developer/theme breaking changes.
+
+A Catalyst-only regression must not force the public `minAppVersion` upward until the affected
+Obsidian version is public, but the theme should be forward-compatible when a safe compatibility
+path exists.
+
+### Static checks
+
+Before opening a PR:
+
+```bash
+pre-commit run --all-files
+```
+
+Also inspect `theme.css` for accidental `!important`, remote `url(http...)` assets, duplicate
+accent systems, and broad global selectors that override native component geometry.
