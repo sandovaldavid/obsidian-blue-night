@@ -1,136 +1,292 @@
 ---
 title: Blue Night Obsidian Theme Specification
-version: 3.1.0
+version: 4.0.0
 date_created: 2026-07-10
-tags: [design, app, theme, css]
+date_updated: 2026-08-07
+tags: [design, app, theme, css, obsidian]
 ---
 
-# Introduction
+# Blue Night theme specification
 
-This document specifies the design system, architecture, and requirements for **Blue Night**, a minimalist dark theme for Obsidian with pastel accents. It is designed for software developers, prioritizing low eye strain, clean layout hierarchy, and seamless integration with developer-focused plugins.
+## 1. Purpose
 
-## 1. Purpose & Scope
+Blue Night is a minimalist Obsidian theme for software-development and long-form note-taking
+workflows. It provides a deep night-blue dark palette, a high-contrast light palette, pastel code
+syntax colors, optional interface enhancements, and Style Settings customization without replacing
+Obsidian's own CSS architecture.
 
-The purpose of the **Blue Night** theme is to provide a unified, responsive, and distraction-free visual environment inside the Obsidian note-taking app. 
-The scope covers:
-- Core dark/light mode Obsidian themes using CSS variables.
-- Optional CSS snippets for extra layout modifiers (`focus-mode.css`, `rainbow-folders.css`, etc.).
-- Embedded SVG icons via CSS masks for high-fidelity custom visuals without network requests.
+The primary engineering goal is **forward-compatible theming**: core behavior must depend on
+Obsidian's documented CSS variables, while DOM-specific selectors are allowed only for optional
+visual enhancements whose failure cannot make the underlying UI unusable.
 
-## 2. Definitions
+## 2. Supported Obsidian versions
 
-- **Vault**: The directory where Obsidian stores all user notes, settings, attachments, and style configurations.
-- **CSS Snippet**: An independent CSS file placed in `.obsidian/snippets` that adds or overrides style layers on top of the active theme.
-- **CSS Variable (Custom Property)**: A dynamic token declared inside CSS (e.g., `--color-base-00`) used to control colors, spacing, and styling variables globally.
-- **Style Settings Plugin**: A popular community plugin that parses special YAML comments in the theme file to build a GUI in settings, allowing users to toggle features and customize colors.
+- Minimum public version: **Obsidian 1.12.7**.
+- Catalyst builds are tested when they announce theme/developer breaking changes.
+- Obsidian 1.13 compatibility is required for the announced callout color contract, Settings
+  redesign, and CodeMirror upgrade.
 
-## 3. Requirements, Constraints & Guidelines
+`minAppVersion` in `manifest.json` is the source of truth for the minimum supported public build.
 
-- **REQ-001**: The canvas color palette must use a desaturated night-blue base (`#0f1523` for canvas and `#0b1019` for panels) to reduce visual fatigue. Darker charcoal values (`#090c10`, `#05070a`) are reserved for the Dark Charcoal/OLED preset flavor.
-- **REQ-002**: Heading levels (H1 to H6) must support colored variants using pastel accents (blue, lavender, teal, green, yellow, orange).
-- **REQ-003**: Search bars must prevent text overlap with the search icon and the delete button by setting a padding-left and padding-right of at least 32px.
-- **REQ-004**: The search clear/delete button must be styled with a visible red accent color (`var(--text-error)`) by default with an opacity of 0.65, transitioning to full opacity on hover, instead of remaining dark/invisible.
-- **REQ-005**: All custom icons (folders, checkboxes, files) must be embedded locally as URL-encoded SVG variables in the CSS and rendered using CSS mask properties (`-webkit-mask-image`).
-- **REQ-006**: Warning and destructive confirmation modal buttons (`button.mod-warning`) must be styled with a solid, high-contrast red background (`var(--color-red)`) and readable text by default, instead of inheriting a transparent dark background.
-- **REQ-007**: Metadata property labels and their respective type icons (`.metadata-property-key` and `.metadata-property-icon`) must be unified into a single visual pill by removing the dividing borders and setting matching outer border-radiuses.
-- **REQ-008**: Code blocks must display their declared programming language as a stylized, semi-transparent badge (`.code-block-flair`) in the top-right corner, fading out smoothly on hover in Reading View to yield space to the copy button.
-- **CON-001**: The theme must function completely offline. No external fonts, icons, or stylesheets can be imported via HTTP/HTTPS URLs.
-- **GUD-001**: Focus on a clean, minimal UI. Unnecessary borders should be omitted; layout sections should be distinguished by subtle color depth differences (e.g., base-00 vs base-10).
-- **PAT-001**: Maintain compatibility with the Style Settings plugin schema for user customizations.
+## 3. Architecture principles
 
-## 4. Interfaces & Data Contracts
+### 3.1 Prefer the public CSS-variable API
 
-### 4.1. Core Color Variables (Dark Mode Override)
-The theme overrides Obsidian's standard design tokens using the following color values:
+Shared variables belong under `body`. Mode-specific colors belong under `.theme-dark` and
+`.theme-light`.
 
-| Token Name | Color Hex | Description |
-| :--- | :--- | :--- |
-| `--color-base-00` | `#090c10` | Workspace canvas background |
-| `--color-base-10` | `#05070a` | Sidebars and navigation panel background |
-| `--color-base-20` | `#10141b` | Secondary panels and inactive tab background |
-| `--color-base-30` | `#1e2533` | Border color and inactive checkbox borders |
-| `--text-error` | `#f2879b` | Clear button, deletion, and error text |
-| `--color-accent-light`| `#8ab4fa` | Light accent color (blue pastel) |
+The theme must prefer Obsidian variables for:
 
-### 4.2. Core Color Variables (Light Mode Override)
-For light mode (Latte-style adaptation), the theme uses:
+- backgrounds and text;
+- tabs and navigation;
+- prompts;
+- properties/metadata;
+- tags and pills;
+- checkboxes;
+- syntax highlighting;
+- links and graph colors;
+- tables;
+- scrollbars;
+- callouts;
+- title bar and status bar.
 
-| Token Name | Color Hex | Description |
-| :--- | :--- | :--- |
-| `--color-base-00` | `#f7f9fc` | Clean bluish white editor background |
-| `--color-base-10` | `#eef2f8` | Sidebar and panel backgrounds |
-| `--color-base-20` | `#e5ebf4` | Secondary panel backgrounds |
-| `--color-base-30` | `#dde5f0` | Outer border outline color |
-| `--text-normal` | `#1c2433` | Dark charcoal slate primary text |
-| `--text-muted` | `#4b5a75` | Medium gray slate secondary text |
-| `--color-accent` | `#2563eb` | Vibrant primary blue accent |
+Direct selectors may be used for decorations such as the explorer SVG icons, Raycast-style prompt
+surface, metadata shadow, or floating status bar, but those features must degrade safely when an
+upstream class changes.
 
-### 4.3. Embedded SVG Masks
-Custom vector assets are URL-encoded and stored as variables:
+### 3.2 Low specificity and user overrides
+
+- Do not use `!important` in `theme.css` or bundled snippets.
+- Do not build selectors around deep DOM nesting when a variable exists.
+- User snippets must remain able to override Blue Night.
+- Avoid global element geometry overrides such as changing every `input[type='search']` padding.
+
+### 3.3 Keep assets offline
+
+All theme-owned icons must be embedded locally as URL-encoded SVG data. The production theme must
+not load remote fonts, images, stylesheets, or other runtime network resources.
+
+## 4. Accent contract
+
+The accent has one source of truth:
+
 ```css
---bn-icon-folder: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z'/%3E%3C/svg%3E");
+--accent-h
+--accent-s
+--accent-l
 ```
 
-### 4.4. Theme Preset Variations
-The theme implements variations selectable under Style Settings:
-1. **Blue Night (Default)**: Deep night blue editor canvas (`#0f1523`) with neon-pastel accent overlays.
-2. **Dark Charcoal / OLED Black**: Pure black canvas (`#000000`) and charcoal panels (`#05070a` / `#090c10`), moving the legacy dark mode snippet directly into a built-in toggle.
-3. **Cozy Pastels (Dark)**: Cozy warm lavender/slate base (`#1b1924`) with warm lilac-cream text and soft mauve accents.
-4. **Clean Blue (Light Default)**: Pure white with slate accents and night blue text details.
-5. **Cozy Pastels (Light)**: Soft creamy lilac base (`#faf4fc`) with dusty violet text and warm purple accents.
+The Style Settings accent picker uses:
 
-### 4.5. Accompanying Snippets
-To enhance layout capabilities, the workspace bundles:
-- **`colored-headings.css`**: Dual light/dark custom pastel headings (Mocha pastels for dark, Latte pastels for light).
-- **`rainbow-folders.css`**: Rotates folder title colors through 8 responsive pastel hues with proper light/dark contrast.
-- **`clean-embeds.css`**: Seamless note transclusions by removing border enclosures, padding, and embedded headers.
-- **`image-grid.css`**: Responsive flexbox grids for consecutive inline images.
-- **`minimal-scrollbar.css`**: Thin, semi-transparent rounded scrollbars that highlight on hover.
-
-## 5. Acceptance Criteria
-
-- **AC-001**: Heading levels H1–H6 must receive their designated pastel colors when `colored-headings.css` is active.
-- **AC-002**: When entering text into Obsidian's global search or file search bar, the characters must not overlap with the search magnifying glass icon on the left.
-- **AC-003**: The search clear button (X) must show a red tint (`#f2879b` / `#d20f39`) at 65% opacity when text is typed, and must highlight to 100% opacity on hover.
-- **AC-004**: The release pipeline version bump must successfully propagate when `npm version` is run, updating `manifest.json` and `versions.json` through the `version-bump.mjs` script.
-
-## 6. Test Automation / Validation Strategy
-
-Since Obsidian themes are client-side CSS files, automated testing focuses on layout validation and syntax linting:
-- **Linting**: Prettier is used to validate that the CSS styling is properly formatted and does not contain syntax errors.
-- **Manual Verification**: Launch Obsidian with the development theme enabled to visually verify the search layout padding, color visibility of the clear button, and heading colors across various resolutions.
-
-## 7. Rationale & Context
-
-- **Specificity Override**: The heading snippet failed to override theme heading variables because tag-level selector (`body`) has a lower specificity weight than the theme's class-based selector (`.theme-dark`, `.theme-light`). Using `body.theme-dark` with `!important` ensures the snippet overrides any internal active theme options or external variables.
-- **Layout Overlap**: Obsidian search icon is positioned absolute on the left inside the container. Overriding padding with a global input declaration resets the padding-left, causing characters to start immediately behind the absolute icon. Forcing `padding-left: 32px !important` guarantees the input text clears the icon boundaries.
-
-## 8. Dependencies & External Integrations
-
-- **EXT-001**: Obsidian App (v1.0.0 or higher) - Required hosting environment.
-- **SVC-001**: Style Settings Plugin (optional) - Parses UI configuration tokens defined in theme headers.
-- **SVC-002**: Quick Switcher++ (optional) - Third-party plugin, styling adjustments are embedded to match Blue Night UI.
-
-## 9. Examples & Edge Cases
-
-### Specificity Hierarchy
-Correct usage to target and override the heading colors within a snippet:
-```css
-body.theme-dark, body.theme-light {
-  --h1-color: rgb(var(--color-blue-rgb, 138, 180, 250)) !important;
-}
+```yaml
+id: accent
+type: variable-color
+format: hsl-split
 ```
 
-### Search UI Layout Customization
-Correct wrapper layout styling:
+That makes Style Settings write directly to the variables Obsidian consumes. Blue Night-specific
+transparent accents are derived from those same HSL values.
+
+Do not reintroduce a parallel system such as `--color-accent-base`, custom accent-flavor classes,
+or independent `--accent-rgb` values unless an upstream API requires it.
+
+Canvas presets may alter background/base tokens but must not replace the selected accent.
+
+## 5. Palette requirements
+
+### 5.1 Dark default
+
+| Token | Value | Role |
+| --- | --- | --- |
+| `--color-base-00` | `#0f1523` | editor/workspace canvas |
+| `--color-base-10` | `#0b1019` | sidebars and recessed panels |
+| `--color-base-20` | `#151d2e` | elevated surfaces |
+| `--color-base-30` | `#232e45` | borders |
+| `--text-normal` | `#cdd9f0` | primary text |
+| `--text-muted` | `#9db0d0` | secondary text |
+
+Dark canvas variants:
+
+1. Blue Night — default night-blue palette.
+2. Dark Charcoal / OLED — black and near-black surfaces.
+3. Cozy Pastels — warm slate/lilac surfaces.
+
+### 5.2 Light default
+
+| Token | Value | Role |
+| --- | --- | --- |
+| `--color-base-00` | `#f7f9fc` | editor/workspace canvas |
+| `--color-base-10` | `#eef2f8` | sidebars and recessed panels |
+| `--color-base-20` | `#e5ebf4` | elevated surfaces |
+| `--color-base-30` | `#d7e0ec` | borders |
+| `--text-normal` | `#1c2433` | primary text |
+| `--text-muted` | `#4b5a75` | secondary text |
+
+Light canvas variants:
+
+1. Clean Blue — default bluish white palette.
+2. Cozy Pastels Light — soft lilac/cream surfaces.
+
+## 6. Component contracts
+
+### 6.1 Inputs and search
+
+Blue Night may set public input variables such as radius or border width. It must not globally
+replace native input padding because search inputs contain app-owned icons and clear buttons whose
+geometry can change between Obsidian releases.
+
+Acceptance criterion: typing in global/file search must never overlap the search icon or clear
+button because of theme CSS.
+
+### 6.2 Live Preview headings
+
+Reading-view headings may use normal block margins. CodeMirror/Live Preview heading decorations
+must use padding rather than vertical margins so cursor positioning and virtualized line geometry
+remain controlled by Obsidian.
+
+### 6.3 Callouts
+
+Blue Night uses documented callout variables and retains Obsidian's native callout icon rendering.
+
+Obsidian 1.13 changed `--callout-color` from an RGB triplet to a complete valid CSS color. Therefore
+Blue Night must never use:
+
 ```css
-.theme-dark .search-input-container input[type='search'],
-.theme-light .search-input-container input[type='search'] {
-  padding-left: 32px;
-  padding-right: 32px;
-}
+rgb(var(--callout-color))
 ```
 
-## 10. Validation Criteria
-- Execute `npm run version` using Node.js to verify `version-bump.mjs` works as intended.
-- Validate CSS formatting using Prettier rules.
+The theme must remain valid whether the app provides legacy or new callout internals by avoiding
+manual conversion of that variable.
+
+### 6.4 File explorer icons
+
+Folder/file/vault icons are optional SVG-mask enhancements. They may target current explorer DOM
+classes, but their failure must only remove the decoration. Core file/folder text, selection,
+indentation, and navigation must remain driven by Obsidian variables.
+
+### 6.5 Custom task states
+
+Blue Night supports:
+
+- `[x]` complete;
+- `[-]` cancelled;
+- `[/]` in progress;
+- `[?]` question;
+- `[!]` important;
+- `[>]` forwarded.
+
+The custom marks are local SVG masks. Standard checkbox size, radius, border, completion color, and
+decoration use Obsidian checkbox variables.
+
+### 6.6 Prompts
+
+Prompt width, maximum width/height, input height, and border use the documented prompt variables.
+The Raycast-style effect may add surface blur, shadow, selected-item decoration, and spacing without
+replacing core prompt sizing behavior.
+
+### 6.7 Scrollbars
+
+Scrollbar colors use:
+
+```css
+--scrollbar-bg
+--scrollbar-thumb-bg
+--scrollbar-active-thumb-bg
+```
+
+The theme/snippet may directly set scrollbar thickness because Obsidian does not expose a public
+width variable.
+
+## 7. Style Settings contract
+
+Style Settings is optional. Blue Night must render correctly without the plugin.
+
+Exposed settings:
+
+- accent color through native HSL variables;
+- custom dark/light editor background;
+- dark and light canvas variants;
+- Raycast prompt;
+- minimalist explorer;
+- metadata card;
+- folder guides;
+- vault icon;
+- premium headings;
+- custom bullets;
+- pill tags;
+- circular/custom task states;
+- IDE blockquotes;
+- floating status bar;
+- fade-until-hover status bar.
+
+Class-based settings must alter only their named feature.
+
+## 8. Optional plugin styling
+
+Blue Night may provide inert styling for:
+
+- Dataview;
+- Quick Switcher++.
+
+Plugin-specific selectors must not affect core Obsidian components when the plugin is absent.
+
+## 9. Accessibility and responsive behavior
+
+- Respect `prefers-reduced-motion`.
+- Hover-only features must also expose keyboard focus where applicable.
+- Mobile disables expensive backdrop blur and desktop-only floating status-bar positioning.
+- Text and interactive states must remain legible in dark and light palettes.
+- Print/PDF mode uses an ink-friendly light surface.
+
+## 10. Release contract
+
+A community theme release consists of:
+
+- `manifest.json` committed at the repository default branch;
+- a GitHub release whose tag matches the manifest version;
+- `manifest.json` attached to that release;
+- `theme.css` attached to that release.
+
+The project does not use `versions.json`; that fallback map belongs to Obsidian's community plugin
+compatibility flow.
+
+Release Please owns the theme version. Do not document or add a separate `npm version` /
+`version-bump.mjs` release path unless the repository actually adopts it again.
+
+## 11. Validation matrix
+
+Before release, manually verify:
+
+- latest public Obsidian build;
+- latest Catalyst build when relevant;
+- dark/light modes;
+- all canvas variants;
+- custom accent changes through Style Settings;
+- theme with Style Settings disabled;
+- Source mode, Live Preview, Reading view;
+- search inputs and clear buttons;
+- file explorer and navigation states;
+- tabs, ribbon, prompts, properties, tags, callouts, tasks, tables, Canvas, status bar;
+- keyboard focus states;
+- mobile-responsive behavior;
+- reduced-motion mode;
+- PDF/print output;
+- Dataview and Quick Switcher++ absent and installed.
+
+Static review must also confirm:
+
+- no `!important`;
+- no remote runtime assets;
+- no duplicate accent source of truth;
+- no `rgb(var(--callout-color))`;
+- no broad global input padding override;
+- no Live Preview vertical-margin override.
+
+## 12. References
+
+- Obsidian Developer Documentation — Theme guidelines
+- Obsidian Developer Documentation — Build a theme
+- Obsidian Developer Documentation — CSS variable reference
+- Obsidian Developer Documentation — Submit your theme
+- Style Settings — setting-definition documentation
+- Obsidian 1.13 developer changelog for the callout-color and CodeMirror changes
