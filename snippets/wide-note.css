@@ -1,0 +1,20 @@
+/* ==========================================================
+   BLUE NIGHT — Wide Note Snippet
+   Opt-in per note with:
+
+   ---
+   cssclasses:
+     - wide-note
+   ---
+
+   Uses Obsidian's native --file-line-width instead of forcing
+   individual block geometry.
+   ========================================================== */
+
+.wide-note {
+  --file-line-width: min(1100px, calc(100vw - 64px));
+}
+
+body.is-mobile .wide-note {
+  --file-line-width: 100%;
+}
