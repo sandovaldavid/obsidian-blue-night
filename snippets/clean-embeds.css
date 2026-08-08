@@ -1,25 +1,22 @@
 /* ==========================================================
    BLUE NIGHT — Clean Embeds Snippet
-   Removes border boxes, header titles and internal padding
-   from embedded notes (![[Note]]), making them display
-   seamlessly inside the parent note.
+   Removes border boxes, headers, and inner spacing from note
+   embeds without blocking later user overrides.
    ========================================================== */
 
 .markdown-rendered .internal-embed {
-  border: none !important;
-  background-color: transparent !important;
-  padding: 0 !important;
-  margin: 0 !important;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
 }
 
-/* Hide the embedded note title and link header */
 .markdown-rendered .internal-embed .markdown-embed-title,
 .markdown-rendered .internal-embed .markdown-embed-link {
-  display: none !important;
+  display: none;
 }
 
-/* Tweak embedded content alignment */
 .markdown-rendered .internal-embed .markdown-embed-content {
-  margin: 0 !important;
-  padding: 0 !important;
+  margin: 0;
+  padding: 0;
 }
