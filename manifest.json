@@ -1,8 +1,7 @@
 {
   "name": "Blue Night",
   "version": "0.9.0",
-  "minAppVersion": "1.0.0",
-  "description": "Minimalist night-blue theme with pastel accents. Low eye strain, developer-focused, with Style Settings support.",
+  "minAppVersion": "1.12.7",
   "author": "sandovaldavid",
   "authorUrl": "https://github.com/sandovaldavid"
 }
