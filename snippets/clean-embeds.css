@@ -1,7 +1,7 @@
 /* ==========================================================
    BLUE NIGHT — Clean Embeds Snippet
-   Removes border boxes, headers, and inner spacing from note
-   embeds without blocking later user overrides.
+   Removes border boxes, embedded titles, and inner spacing
+   while keeping the source-note link available on hover/focus.
    ========================================================== */
 
 .markdown-rendered .internal-embed {
@@ -11,12 +11,27 @@
   background-color: transparent;
 }
 
-.markdown-rendered .internal-embed .markdown-embed-title,
-.markdown-rendered .internal-embed .markdown-embed-link {
+.markdown-rendered .internal-embed .markdown-embed-title {
   display: none;
 }
 
 .markdown-rendered .internal-embed .markdown-embed-content {
   margin: 0;
   padding: 0;
+}
+
+/* Preserve the affordance for opening the embedded source note. */
+.markdown-rendered .internal-embed .markdown-embed-link {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.markdown-rendered .internal-embed:is(:hover, :focus-within) .markdown-embed-link {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .markdown-rendered .internal-embed .markdown-embed-link {
+    transition: none;
+  }
 }
