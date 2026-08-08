@@ -69,9 +69,12 @@ interactive accent.
 Style Settings exposes a `class-select` named `bn-accent-flavor` with these choices:
 
 - `bn-accent-blue-night`;
+- `bn-accent-sapphire`;
 - `bn-accent-lavender`;
+- `bn-accent-mauve`;
 - `bn-accent-teal`;
 - `bn-accent-pink`;
+- `bn-accent-peach`;
 - `bn-accent-custom`.
 
 Each preset class may set only the native `--accent-h`, `--accent-s`, and `--accent-l` primitives.
@@ -88,6 +91,17 @@ from the native HSL source of truth.
 The Catppuccin-inspired supporting palette (`--bn-blue`, `--bn-purple`, `--bn-cyan`,
 `--bn-green`, `--bn-yellow`, `--bn-orange`, `--bn-red`, `--bn-pink`) is separate from the
 interactive accent. Switching accents must not flatten syntax or semantic states into one color.
+
+### Canvas contract
+
+Canvas variants are independent from the selected accent. Dark variants are Blue Night, Midnight
+Navy, Storm Blue, Dark Charcoal/OLED, and Cozy Pastels. Light variants are Clean Blue, Blue Mist,
+and Cozy Pastels Light.
+
+A canvas class may override background/base palette tokens plus closely related surface tokens such
+as `--code-background` and `--glass-bg`. It must not write `--accent-h`, `--accent-s`, or
+`--accent-l`. This separation lets every canvas combine with every accent without duplicated preset
+classes.
 
 ### Callout compatibility
 
@@ -143,10 +157,14 @@ Reload Obsidian after CSS changes. Restart Obsidian after changing `manifest.jso
 Verify at minimum:
 
 - dark and light mode;
-- every dark/light canvas preset;
-- Blue Night, Lavender, Teal, and Pink accent flavors;
+- Blue Night, Midnight Navy, Storm Blue, Dark Charcoal/OLED, and Cozy Pastels dark canvases;
+- Clean Blue, Blue Mist, and Cozy Pastels Light light canvases;
+- Blue Night, Sapphire, Lavender, Mauve, Teal, Pink, and Peach accent flavors;
 - Custom accent flavor plus multiple custom picker values;
 - switching between preset accents and Custom without stale styles;
+- switching between canvas variants without changing the selected accent;
+- representative cross-axis combinations, including Midnight Navy + Sapphire, Storm Blue + Peach,
+  OLED + Mauve, Cozy Pastels + Teal, and Blue Mist + Pink;
 - syntax and semantic supporting colors remain multi-color under every accent flavor;
 - editor Source mode, Live Preview, and Reading view;
 - file explorer, tabs, ribbon, prompts, properties, tags, callouts, task states, tables, search,
@@ -178,5 +196,5 @@ pre-commit run --all-files
 ```
 
 Also inspect `theme.css` for accidental `!important`, remote `url(http...)` assets, independently
-consumed duplicate accent systems, and broad global selectors that override native component
-geometry.
+consumed duplicate accent systems, canvas classes that write native accent primitives, and broad
+global selectors that override native component geometry.
