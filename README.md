@@ -7,36 +7,51 @@ for low eye strain and a software developer's daily workflow.
 
 **Website**: [sandovaldavid.github.io/obsidian-blue-night](https://sandovaldavid.github.io/obsidian-blue-night/)
 
+## Compatibility
+
+Blue Night targets **Obsidian 1.12.7 or newer**. The theme is built primarily on Obsidian's
+public CSS variables and keeps DOM-dependent selectors isolated to optional visual enhancements.
+This reduces breakage when Obsidian changes internal markup or component nesting.
+
+The theme also avoids the legacy `rgb(var(--callout-color))` pattern so callouts remain compatible
+with the CSS-color contract introduced in Obsidian 1.13.
+
 ## Features
 
-- **Night Blue Palette** — deep `#0f1523` canvas with pastel accents (blue, lavender, teal,
-  pink) in dark mode; crisp bluish slate in light mode.
+- **Night Blue Palette** — deep `#0f1523` canvas with pastel accents in dark mode and a crisp
+  bluish slate palette in light mode.
+- **Selectable Accent Flavors** — Blue Night, Lavender, Teal, Pink, or Custom. Every choice feeds
+  the same native `--accent-h`, `--accent-s`, and `--accent-l` variables used by Obsidian, so tabs,
+  links, graph focus, tags, prompts, and Blue Night enhancements stay synchronized.
+- **Catppuccin-Inspired Supporting Palette** — blue, lavender, cyan, green, yellow, peach, red, and
+  pink remain available for syntax highlighting and semantic states regardless of the selected
+  interactive accent.
 - **Preset Flavors** — dark canvas variants (Blue Night, Dark Charcoal/OLED, Cozy Pastels) and
-  light variants (Clean Blue, Cozy Pastels Light).
-- **Pastel Syntax Highlighting** — Catppuccin-style code colors tuned for both modes, with a
-  language badge on code blocks.
-- **Minimalist SVG Icons** — embedded, fully offline icons for callouts, task checkboxes,
-  file-explorer folders/files, and the vault name. Thin 1.75px strokes, mask-based so they
-  follow your accent color.
+  light variants (Clean Blue, Cozy Pastels Light) without replacing the selected accent.
+- **Pastel Syntax Highlighting** — Catppuccin-inspired code colors tuned for both modes.
+- **Minimalist SVG Icons** — embedded, fully offline icons for task checkboxes, file-explorer
+  folders/files, and the vault name. Callouts intentionally retain Obsidian's native icon system
+  for forward compatibility.
 - **Extra Task States** — `[x]` done · `[-]` cancelled · `[/]` in progress · `[?]` question ·
   `[!]` important · `[>]` forwarded.
-- **Raycast-Style Palette & Switcher** — wide floating glass prompt with visible file paths,
-  keyboard-hint pills, and soft accent selection.
-- **Floating Status Bar** — glass pill in the bottom-right corner, with optional auto-hide.
-- **Plugin-Aware** — extra styling for Dataview (inline fields, tables) and Quick Switcher++
-  (paths, mode indicators, heading levels) that activates only when those plugins are installed.
-- **Full Native Coverage** — tables, Canvas (pastel node colors), global search highlights,
-  settings modal, mobile adjustments, `prefers-reduced-motion`, and ink-friendly PDF export.
+- **Raycast-Style Palette & Switcher** — floating prompt styling layered on top of Obsidian's
+  documented prompt variables.
+- **Floating Status Bar** — glass pill in the bottom-right corner on desktop, with optional fade.
+- **Plugin-Aware** — extra styling for Dataview and Quick Switcher++ that remains inert when those
+  plugins are not installed.
+- **Responsive & Accessible** — mobile adjustments, keyboard-focus-aware states,
+  `prefers-reduced-motion`, and ink-friendly PDF export.
 
 ## Installation
 
 ### From the community theme store
 
-Search for **Blue Night** under **Settings → Appearance → Themes → Manage** (once the theme is
-published to the gallery).
+Search for **Blue Night** under **Settings → Appearance → Themes → Manage** once the theme is
+published to the gallery.
 
 ### Manual
 
+1. Make sure you are running Obsidian **1.12.7 or newer**.
 1. Download `theme.css` and `manifest.json` from the
    [latest release](https://github.com/sandovaldavid/obsidian-blue-night/releases/latest).
 1. Copy both files into your vault at `.obsidian/themes/Blue Night/`.
@@ -44,15 +59,22 @@ published to the gallery).
 
 ## Customization
 
-Install the [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) plugin to
-customize:
+Install the [Style Settings](https://github.com/obsidian-community/obsidian-style-settings) plugin
+to customize:
 
-- Accent flavor (Night Blue / Lavender / Teal / Pink) and principal accent color
+- Accent Flavor: Blue Night, Lavender, Teal, Pink, or Custom
+- Custom Accent Color, used only when `Accent Flavor = Custom`
 - Preset canvas variants — dark: Blue Night, Dark Charcoal/OLED, Cozy Pastels; light: Clean Blue,
   Cozy Pastels Light — plus custom editor backgrounds per mode
 - UI features: Raycast prompt, minimalist explorer, metadata card, folder guides, vault name icon
 - Content: premium headers, accent bullets, pill tags, circular checkboxes, IDE blockquotes
-- Status bar: floating pill and auto-hide
+- Status bar: floating pill and optional fade-until-hover behavior
+
+Accent flavors and canvas variants are intentionally independent. For example, you can use the
+Dark Charcoal/OLED canvas with the Lavender accent, or Cozy Pastels with Teal. The selected accent
+changes interactive emphasis while the Catppuccin-inspired supporting palette remains multi-color.
+
+Blue Night still works without Style Settings; the plugin only exposes the optional controls.
 
 ## Optional snippets
 
@@ -68,20 +90,38 @@ is independent — copy the ones you want into `.obsidian/snippets/` and enable 
 | `wide-code.css`         | Lets code blocks, tables and Dataview results exceed line width |
 | `clean-embeds.css`      | Removes borders and padding from note embeds (seamless)         |
 | `image-grid.css`        | Lays out consecutive images in a responsive grid                |
-| `minimal-scrollbar.css` | Ultra-thin rounded scrollbars that blend into the theme         |
+| `minimal-scrollbar.css` | Ultra-thin rounded scrollbars that use Obsidian scrollbar vars  |
+
+The bundled snippets avoid `!important` so users can still override them with their own CSS.
 
 ## Recommended plugins
 
-- [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) — unlocks accent flavors,
-  preset canvas variants and all feature toggles.
+- [Style Settings](https://github.com/obsidian-community/obsidian-style-settings) — exposes accent
+  flavors, custom accent color, canvas variants, backgrounds, and feature toggles.
 - [Quick Switcher++](https://github.com/darlal/obsidian-switcher-plus) — note *preview while you
   navigate* the switcher is not possible with CSS alone; this plugin provides it and inherits the
-  theme's prompt styling. The native Page Preview (hover a result with `Ctrl`/`Cmd`) is styled by
-  the theme as a closer built-in alternative.
+  theme's prompt styling. The native Page Preview remains the closest built-in alternative.
+
+## Theme architecture
+
+Blue Night follows three rules for maintainability:
+
+1. Prefer documented Obsidian CSS variables for core colors, typography, tabs, navigation,
+   metadata, prompts, tables, checkboxes, scrollbars, and callouts.
+2. Use direct DOM selectors only for optional enhancements that cannot be represented by a public
+   variable. If one of those selectors changes upstream, the enhancement should disappear rather
+   than break the underlying UI.
+3. Do not use `!important`; snippets and user styles must remain able to override the theme.
+
+Accent presets are not a second color system: each preset only sets Obsidian's native
+`--accent-h`, `--accent-s`, and `--accent-l` values. The Custom picker writes separate
+`--bn-custom-accent-*` values that are mapped into those native variables only when Custom is
+selected.
 
 ## Contributing
 
-Development setup, project structure, and the branching/release flow are documented in
+Development setup, project structure, compatibility checks, and the branching/release flow are
+documented in
 [CONTRIBUTING.md](https://github.com/sandovaldavid/obsidian-blue-night/blob/main/CONTRIBUTING.md).
 
 ## License

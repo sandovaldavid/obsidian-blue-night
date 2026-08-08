@@ -20,19 +20,19 @@ title: Blue Night
 
 <section id="features">
   <h2>Features</h2>
-  <p class="section-lead">Everything is embedded and offline — no external fonts, icons, or network requests.</p>
+  <p class="section-lead">Built on Obsidian's public CSS variables, fully offline, and designed to stay override-friendly.</p>
   <div class="feature-grid">
     <div class="feature-card" data-accent="blue">
       <h3>Night-blue palette</h3>
       <p>A deep <code>#0f1523</code> canvas with pastel accents in dark mode, and a crisp bluish slate in light mode.</p>
     </div>
     <div class="feature-card" data-accent="teal">
-      <h3>Pastel syntax highlighting</h3>
-      <p>Catppuccin-style code colors tuned for both dark and light modes, plus a language badge on code blocks.</p>
+      <h3>Selectable accent flavors</h3>
+      <p>Choose Blue Night, Lavender, Teal, Pink, or Custom. Every option converges on Obsidian's native <code>--accent-h</code>, <code>--accent-s</code>, and <code>--accent-l</code> variables.</p>
     </div>
     <div class="feature-card" data-accent="lavender">
-      <h3>Minimalist SVG icons</h3>
-      <p>Mask-based icons for callouts, checkboxes, explorer folders and files, and the vault name — they follow your accent.</p>
+      <h3>Catppuccin-inspired support colors</h3>
+      <p>Blue, lavender, cyan, green, yellow, peach, red, and pink remain available for syntax and semantic states regardless of the selected accent.</p>
     </div>
     <div class="feature-card" data-accent="green">
       <h3>Extra task states</h3>
@@ -40,19 +40,19 @@ title: Blue Night
     </div>
     <div class="feature-card" data-accent="pink">
       <h3>Raycast-style switcher</h3>
-      <p>Wide floating glass prompt with visible file paths, keyboard-hint pills, and soft accent selection.</p>
+      <p>A floating glass treatment layered over Obsidian's documented prompt sizing and border variables.</p>
     </div>
     <div class="feature-card" data-accent="yellow">
-      <h3>Plugin-aware</h3>
-      <p>Extra styling for Style Settings, Dataview, and Quick Switcher++ that activates only when installed.</p>
+      <h3>Forward-compatible</h3>
+      <p>Core styling is variable-driven. DOM selectors are isolated to optional enhancements so upstream markup changes do not break the base UI.</p>
     </div>
   </div>
 </section>
 
 <section id="flavors">
-  <h2>Flavors</h2>
+  <h2>Canvas and accent combinations</h2>
   <p class="section-lead">
-    Pick your base canvas and accent family from Style Settings — every combination stays readable.
+    Canvas variants and accent flavors are independent. Mix Blue Night, OLED, or Cozy Pastels surfaces with Blue Night, Lavender, Teal, Pink, or your own custom accent.
   </p>
   <div class="flavor-row">
     <div class="flavor">
@@ -61,34 +61,34 @@ title: Blue Night
       </div>
       <div class="flavor-info">
         <h3>Blue Night</h3>
-        <p>The default deep night-blue canvas with the full pastel accent set.</p>
+        <p>The default deep night-blue canvas with the Blue Night accent and pastel supporting colors.</p>
       </div>
     </div>
     <div class="flavor">
       <div class="swatch" style="background:#000000">
-        <span style="background:#8ab4fa"></span><span style="background:#b4befe"></span><span style="background:#8bd5ca"></span><span style="background:#f5bde6"></span>
+        <span style="background:#b4befe"></span><span style="background:#8ab4fa"></span><span style="background:#8bd5ca"></span><span style="background:#f5bde6"></span>
       </div>
       <div class="flavor-info">
-        <h3>Dark Charcoal / OLED</h3>
-        <p>Pure black canvas for OLED displays with deeper panels.</p>
+        <h3>OLED + Lavender</h3>
+        <p>Pure black canvas with Lavender as the interactive accent while syntax and semantic colors remain multi-color.</p>
       </div>
     </div>
     <div class="flavor">
       <div class="swatch" style="background:#1b1924">
-        <span style="background:#cba6f7"></span><span style="background:#f5c2e7"></span><span style="background:#b4befe"></span><span style="background:#f5bde6"></span>
+        <span style="background:#8bd5ca"></span><span style="background:#b4befe"></span><span style="background:#eed49f"></span><span style="background:#f5bde6"></span>
       </div>
       <div class="flavor-info">
-        <h3>Cozy Pastels</h3>
-        <p>Warm slate and lilac gray with a lavender-mauve accent.</p>
+        <h3>Cozy Pastels + Teal</h3>
+        <p>Warm slate and lilac-gray surfaces with Teal as the shared interactive accent.</p>
       </div>
     </div>
     <div class="flavor">
       <div class="swatch" style="background:#f7f9fc">
-        <span style="background:#2563eb"></span><span style="background:#8ab4fa"></span><span style="background:#8bd5ca"></span><span style="background:#f5bde6"></span>
+        <span style="background:#f5bde6"></span><span style="background:#1e66f5"></span><span style="background:#147d83"></span><span style="background:#7048c9"></span>
       </div>
       <div class="flavor-info">
-        <h3>Clean Blue (Light)</h3>
-        <p>Pure bluish white with night-blue accents for daylight work.</p>
+        <h3>Clean Blue + Pink</h3>
+        <p>Bluish white surfaces with Pink as the interactive accent and high-contrast supporting colors for daylight work.</p>
       </div>
     </div>
   </div>
@@ -97,6 +97,7 @@ title: Blue Night
 <section id="install">
   <h2>Installation</h2>
   <ol class="steps">
+    <li>Use Obsidian <strong>1.12.7 or newer</strong>.</li>
     <li>
       Download <code>theme.css</code> and <code>manifest.json</code> from the
       <a href="https://github.com/{{ site.repository }}/releases/latest">latest release</a>.
@@ -105,8 +106,8 @@ title: Blue Night
     <li>In Obsidian, open <strong>Settings → Appearance → Themes</strong> and select <strong>Blue Night</strong>.</li>
     <li>
       Optional: install the
-      <a href="https://github.com/mgmeyers/obsidian-style-settings">Style Settings</a> plugin to
-      unlock flavors, accents, and every feature toggle.
+      <a href="https://github.com/obsidian-community/obsidian-style-settings">Style Settings</a> plugin to
+      expose accent flavors, custom accent color, canvas variants, custom backgrounds, and feature toggles.
     </li>
   </ol>
 </section>
@@ -115,8 +116,7 @@ title: Blue Night
   <h2>Optional snippets</h2>
   <p class="section-lead">
     Each file in <a href="https://github.com/{{ site.repository }}/tree/main/snippets"><code>snippets/</code></a>
-    is independent — copy the ones you want into <code>.obsidian/snippets/</code> and enable them
-    under <strong>Settings → Appearance → CSS snippets</strong>.
+    is independent and avoids <code>!important</code>, so your own snippets can still override it.
   </p>
   <div class="table-wrap">
     <table>
@@ -126,11 +126,11 @@ title: Blue Night
       <tbody>
         <tr><td><code>focus-mode.css</code></td><td>Hides ribbon, tabs and status bar until hovered (zen writing)</td></tr>
         <tr><td><code>rainbow-folders.css</code></td><td>Tints each top-level folder with a different pastel</td></tr>
-        <tr><td><code>colored-headings.css</code></td><td>Gives every heading level its own pastel color</td></tr>
+        <tr><td><code>colored-headings.css</code></td><td>Sets heading colors through Obsidian's heading variables</td></tr>
         <tr><td><code>wide-code.css</code></td><td>Lets code blocks, tables and Dataview results exceed line width</td></tr>
         <tr><td><code>clean-embeds.css</code></td><td>Removes borders and padding from note embeds for seamless transclusion</td></tr>
         <tr><td><code>image-grid.css</code></td><td>Lays out consecutive images in a responsive grid</td></tr>
-        <tr><td><code>minimal-scrollbar.css</code></td><td>Slim, unobtrusive scrollbars that match the palette</td></tr>
+        <tr><td><code>minimal-scrollbar.css</code></td><td>Uses public scrollbar color variables with a slim 6px track</td></tr>
       </tbody>
     </table>
   </div>
