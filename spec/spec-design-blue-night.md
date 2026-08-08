@@ -1,6 +1,6 @@
 ---
 title: Blue Night Obsidian Theme Specification
-version: 4.0.0
+version: 4.1.0
 date_created: 2026-07-10
 date_updated: 2026-08-07
 tags: [design, app, theme, css, obsidian]
@@ -11,9 +11,9 @@ tags: [design, app, theme, css, obsidian]
 ## 1. Purpose
 
 Blue Night is a minimalist Obsidian theme for software-development and long-form note-taking
-workflows. It provides a deep night-blue dark palette, a high-contrast light palette, pastel code
-syntax colors, optional interface enhancements, and Style Settings customization without replacing
-Obsidian's own CSS architecture.
+workflows. It provides a deep night-blue dark palette, a high-contrast light palette, a
+Catppuccin-inspired supporting pastel palette, selectable accent flavors, optional interface
+enhancements, and Style Settings customization without replacing Obsidian's own CSS architecture.
 
 The primary engineering goal is **forward-compatible theming**: core behavior must depend on
 Obsidian's documented CSS variables, while DOM-specific selectors are allowed only for optional
@@ -68,7 +68,7 @@ not load remote fonts, images, stylesheets, or other runtime network resources.
 
 ## 4. Accent contract
 
-The accent has one source of truth:
+All accent choices converge on one Obsidian-native sink:
 
 ```css
 --accent-h
@@ -76,21 +76,46 @@ The accent has one source of truth:
 --accent-l
 ```
 
-The Style Settings accent picker uses:
+Blue Night exposes these Style Settings accent flavors:
+
+1. Blue Night — `218 / 92% / 76%`.
+2. Lavender — `232 / 97% / 85%`.
+3. Teal — `171 / 47% / 69%`.
+4. Pink — `316 / 74% / 85%`.
+5. Custom — user-selected HSL values.
+
+The preset selector is a `class-select`. Each preset class may set **only** the native
+`--accent-h`, `--accent-s`, and `--accent-l` primitives. It must not introduce a second accent
+system.
+
+The custom picker is intentionally separate:
 
 ```yaml
-id: accent
+id: bn-custom-accent
 type: variable-color
 format: hsl-split
 ```
 
-That makes Style Settings write directly to the variables Obsidian consumes. Blue Night-specific
-transparent accents are derived from those same HSL values.
+Style Settings therefore generates:
 
-Do not reintroduce a parallel system such as `--color-accent-base`, custom accent-flavor classes,
-or independent `--accent-rgb` values unless an upstream API requires it.
+```css
+--bn-custom-accent-h
+--bn-custom-accent-s
+--bn-custom-accent-l
+```
 
-Canvas presets may alter background/base tokens but must not replace the selected accent.
+Those custom variables are consumed only by `body.bn-accent-custom`, which maps them into
+Obsidian's native `--accent-h`, `--accent-s`, and `--accent-l` primitives. This prevents the custom
+picker from overriding preset classes when Custom is not selected.
+
+Blue Night-specific transparent accent tokens such as `--bn-accent-soft` must derive from those
+same native HSL primitives.
+
+Do not reintroduce independently consumed accent sources such as `--color-accent-base`, custom
+`--color-accent-1` values, or `--accent-rgb`. Compatibility aliases are acceptable only if an
+upstream API requires them and they are derived from the native HSL source of truth.
+
+Canvas presets may alter background/base tokens but must never replace the selected accent.
 
 ## 5. Palette requirements
 
@@ -126,6 +151,25 @@ Light canvas variants:
 
 1. Clean Blue — default bluish white palette.
 2. Cozy Pastels Light — soft lilac/cream surfaces.
+
+### 5.3 Catppuccin-inspired supporting palette
+
+The supporting palette is part of Blue Night's visual identity and remains available regardless of
+the selected interactive accent:
+
+| Token | Dark value | Typical role |
+| --- | --- | --- |
+| `--bn-blue` | `#8ab4fa` | functions, properties, blue semantic states |
+| `--bn-purple` | `#b4befe` | keywords, secondary emphasis |
+| `--bn-cyan` | `#8bd5ca` | operators, informational states |
+| `--bn-green` | `#a6da95` | strings, success |
+| `--bn-yellow` | `#eed49f` | warning/highlight |
+| `--bn-orange` | `#f5a97f` | values, important states |
+| `--bn-red` | `#f2879b` | errors/tags |
+| `--bn-pink` | `#f5bde6` | decorative/special states |
+
+Choosing Teal, Lavender, Pink, or a custom accent changes the interactive accent family. It must
+not flatten syntax highlighting or semantic states into a single color.
 
 ## 6. Component contracts
 
@@ -203,7 +247,8 @@ Style Settings is optional. Blue Night must render correctly without the plugin.
 
 Exposed settings:
 
-- accent color through native HSL variables;
+- accent flavor: Blue Night, Lavender, Teal, Pink, or Custom;
+- custom accent color, active only through the Custom accent class;
 - custom dark/light editor background;
 - dark and light canvas variants;
 - Raycast prompt;
@@ -219,7 +264,9 @@ Exposed settings:
 - floating status bar;
 - fade-until-hover status bar.
 
-Class-based settings must alter only their named feature.
+Class-based settings must alter only their named feature. Accent flavor classes are the exception
+only in the sense that they intentionally feed the shared native accent primitives consumed across
+Obsidian; they must not change canvas/background palettes.
 
 ## 8. Optional plugin styling
 
@@ -261,7 +308,10 @@ Before release, manually verify:
 - latest Catalyst build when relevant;
 - dark/light modes;
 - all canvas variants;
-- custom accent changes through Style Settings;
+- Blue Night, Lavender, Teal, and Pink accent flavors;
+- Custom accent selection and picker changes;
+- switching repeatedly between presets and Custom without stale accent variables;
+- supporting syntax/semantic colors remain multi-color under every accent flavor;
 - theme with Style Settings disabled;
 - Source mode, Live Preview, Reading view;
 - search inputs and clear buttons;
@@ -277,7 +327,9 @@ Static review must also confirm:
 
 - no `!important`;
 - no remote runtime assets;
-- no duplicate accent source of truth;
+- every accent preset converges on `--accent-h/s/l`;
+- Custom is the only consumer of `--bn-custom-accent-h/s/l`;
+- no independently consumed duplicate accent source of truth;
 - no `rgb(var(--callout-color))`;
 - no broad global input padding override;
 - no Live Preview vertical-margin override.
