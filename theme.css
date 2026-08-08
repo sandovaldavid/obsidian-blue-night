@@ -17,9 +17,26 @@ settings:
     title: Appearance
     type: heading
     level: 1
-  - id: accent
-    title: Accent Color
-    description: Uses Obsidian's native accent HSL variables so the accent propagates consistently across core UI and Blue Night enhancements.
+  - id: bn-accent-flavor
+    title: Accent Flavor
+    description: Choose the interactive accent while keeping the Blue Night / Catppuccin-inspired supporting palette intact.
+    type: class-select
+    allowEmpty: false
+    default: bn-accent-blue-night
+    options:
+      - label: Blue Night
+        value: bn-accent-blue-night
+      - label: Lavender
+        value: bn-accent-lavender
+      - label: Teal
+        value: bn-accent-teal
+      - label: Pink
+        value: bn-accent-pink
+      - label: Custom
+        value: bn-accent-custom
+  - id: bn-custom-accent
+    title: Custom Accent Color
+    description: Used only when Accent Flavor is set to Custom. Presets and custom colors share Obsidian's native accent HSL contract.
     type: variable-color
     format: hsl-split
     default: '#8ab4fa'
@@ -153,8 +170,8 @@ body {
   --heading-spacing: 1.5rem;
   --p-spacing: 0.75rem;
 
-  /* Obsidian's native accent contract. Style Settings writes to
-     these exact variables when installed. */
+  /* One accent contract for presets, custom colors, Obsidian core UI,
+     and Blue Night enhancements. The default remains Blue Night. */
   --accent-h: 218;
   --accent-s: 92%;
   --accent-l: 76%;
@@ -187,8 +204,8 @@ body {
   --shadow-l: 0 14px 52px rgba(2, 6, 16, 0.28);
   --shadow-prompt: 0 20px 60px rgba(2, 6, 16, 0.34);
 
-  /* Theme-owned semantic colors. These do not replace Obsidian's
-     internal color model and remain stable across base-color changes. */
+  /* Theme-owned Catppuccin-inspired supporting colors. They remain
+     independent from the selected interactive accent. */
   --bn-red: #f2879b;
   --bn-orange: #f5a97f;
   --bn-yellow: #eed49f;
@@ -209,6 +226,38 @@ body {
   --bn-icon-folder-open: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2'/%3E%3C/svg%3E");
   --bn-icon-vault: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z'/%3E%3C/svg%3E");
   --bn-icon-file: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z'/%3E%3Cpath d='M14 2v6h6'/%3E%3C/svg%3E");
+}
+
+/* Accent flavors intentionally set only Obsidian's native accent
+   primitives. All semantic UI variables continue to derive from them. */
+body.bn-accent-blue-night {
+  --accent-h: 218;
+  --accent-s: 92%;
+  --accent-l: 76%;
+}
+
+body.bn-accent-lavender {
+  --accent-h: 232;
+  --accent-s: 97%;
+  --accent-l: 85%;
+}
+
+body.bn-accent-teal {
+  --accent-h: 171;
+  --accent-s: 47%;
+  --accent-l: 69%;
+}
+
+body.bn-accent-pink {
+  --accent-h: 316;
+  --accent-s: 74%;
+  --accent-l: 85%;
+}
+
+body.bn-accent-custom {
+  --accent-h: var(--bn-custom-accent-h, 218);
+  --accent-s: var(--bn-custom-accent-s, 92%);
+  --accent-l: var(--bn-custom-accent-l, 76%);
 }
 
 /* ==========================================================
@@ -240,7 +289,7 @@ body {
   --text-muted: #9db0d0;
   --text-faint: #64769a;
   --text-accent: var(--bn-accent);
-  --text-accent-hover: #a5c4fc;
+  --text-accent-hover: hsl(var(--accent-h), var(--accent-s), 88%);
   --text-error: var(--bn-red);
   --text-success: var(--bn-green);
   --text-warning: var(--bn-yellow);
@@ -327,7 +376,7 @@ body {
   --h6-weight: 500;
 
   --link-color: var(--text-accent);
-  --link-color-hover: #a5c4fc;
+  --link-color-hover: var(--text-accent-hover);
   --link-external-color: var(--bn-purple);
   --link-external-color-hover: #c7cdff;
   --link-unresolved-color: var(--text-faint);
@@ -439,8 +488,8 @@ body {
   --text-normal: #1c2433;
   --text-muted: #4b5a75;
   --text-faint: #7889a5;
-  --text-accent: hsl(var(--accent-h), 74%, 48%);
-  --text-accent-hover: hsl(var(--accent-h), 74%, 40%);
+  --text-accent: hsl(var(--accent-h), var(--accent-s), 48%);
+  --text-accent-hover: hsl(var(--accent-h), var(--accent-s), 40%);
   --text-error: #d20f39;
   --text-success: #287d21;
   --text-warning: #a86400;
