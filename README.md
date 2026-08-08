@@ -82,17 +82,34 @@ Each file in [`snippets/`](https://github.com/sandovaldavid/obsidian-blue-night/
 is independent — copy the ones you want into `.obsidian/snippets/` and enable them under
 **Settings → Appearance → CSS snippets**:
 
-| Snippet                 | What it does                                                    |
-| ----------------------- | --------------------------------------------------------------- |
-| `focus-mode.css`        | Hides ribbon, tabs and status bar until hovered (zen writing)   |
-| `rainbow-folders.css`   | Tints each top-level folder with a different pastel             |
-| `colored-headings.css`  | Gives every heading level its own pastel color                  |
-| `wide-code.css`         | Lets code blocks, tables and Dataview results exceed line width |
-| `clean-embeds.css`      | Removes borders and padding from note embeds (seamless)         |
-| `image-grid.css`        | Lays out consecutive images in a responsive grid                |
-| `minimal-scrollbar.css` | Ultra-thin rounded scrollbars that use Obsidian scrollbar vars  |
+| Snippet                 | What it does                                                               |
+| ----------------------- | -------------------------------------------------------------------------- |
+| `focus-mode.css`        | Dims desktop chrome until hover or keyboard focus for distraction-free work |
+| `rainbow-folders.css`   | Tints each top-level folder with a Blue Night/Catppuccin-inspired pastel   |
+| `colored-headings.css`  | Gives every heading level its own pastel color                             |
+| `wide-code.css`         | Lets code blocks, tables and Dataview results exceed readable line width   |
+| `wide-note.css`         | Opt-in `wide-note` cssclass that increases the whole note line width       |
+| `clean-embeds.css`      | Makes note embeds seamless while preserving the source-note link           |
+| `image-grid.css`        | Opt-in `image-grid` cssclass for responsive multi-image galleries          |
+| `compact-tables.css`    | Reduces native table padding and row density                               |
+| `compact-callouts.css`  | Makes native callouts denser without replacing their colors or icons       |
+| `math-accent.css`       | Applies a restrained Blue Night accent to rendered and editor math         |
+| `minimal-scrollbar.css` | Ultra-thin rounded scrollbars that use Obsidian scrollbar vars             |
 
-The bundled snippets avoid `!important` so users can still override them with their own CSS.
+The bundled snippets avoid `!important` so users can still override them with their own CSS. DOM-
+dependent selectors are kept isolated, and the only bundled `:has()` usage is scoped to notes that
+explicitly enable the `image-grid` cssclass.
+
+`wide-note.css` and `image-grid.css` are intentionally opt-in per note. Add the corresponding class
+to Properties/frontmatter, for example:
+
+```yaml
+---
+cssclasses:
+  - wide-note
+  - image-grid
+---
+```
 
 ## Recommended plugins
 
