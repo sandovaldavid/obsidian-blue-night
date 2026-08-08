@@ -1,32 +1,26 @@
 /* ==========================================================
    BLUE NIGHT — Colored Headings Snippet
-   Gives every heading level its own pastel color, in both
-   editing and reading views. Falls back to Blue Night
-   pastels on other themes.
+   Gives every heading level a pastel color while remaining
+   override-friendly for other snippets and themes.
    ========================================================== */
 
 body.theme-dark {
-  --h1-color: rgb(var(--color-blue-rgb, 138, 180, 250)) !important;
-  --h2-color: rgb(var(--color-purple-rgb, 180, 190, 254)) !important;
-  --h3-color: rgb(var(--color-cyan-rgb, 139, 213, 202)) !important;
-  --h4-color: rgb(var(--color-green-rgb, 166, 218, 149)) !important;
-  --h5-color: rgb(var(--color-yellow-rgb, 238, 212, 159)) !important;
-  --h6-color: rgb(var(--color-orange-rgb, 245, 169, 127)) !important;
+  --h1-color: var(--bn-blue, #8ab4fa);
+  --h2-color: var(--bn-purple, #b4befe);
+  --h3-color: var(--bn-cyan, #8bd5ca);
+  --h4-color: var(--bn-green, #a6da95);
+  --h5-color: var(--bn-yellow, #eed49f);
+  --h6-color: var(--bn-orange, #f5a97f);
 }
 
 body.theme-light {
-  --h1-color: rgb(var(--color-blue-rgb, 37, 99, 235)) !important;
-  --h2-color: rgb(var(--color-purple-rgb, 114, 135, 253)) !important;
-  --h3-color: rgb(var(--color-cyan-rgb, 23, 146, 153)) !important;
-  --h4-color: rgb(var(--color-green-rgb, 64, 160, 43)) !important;
-  --h5-color: rgb(var(--color-yellow-rgb, 223, 142, 29)) !important;
-  --h6-color: rgb(var(--color-orange-rgb, 254, 100, 11)) !important;
+  --h1-color: #1e66f5;
+  --h2-color: #7048c9;
+  --h3-color: #147d83;
+  --h4-color: #287d21;
+  --h5-color: #a86400;
+  --h6-color: #c44f00;
 }
 
-/* Force direct heading colors in both Reading view and Editing/Live Preview view */
-.markdown-rendered h1, .cm-header-1 { color: var(--h1-color) !important; }
-.markdown-rendered h2, .cm-header-2 { color: var(--h2-color) !important; }
-.markdown-rendered h3, .cm-header-3 { color: var(--h3-color) !important; }
-.markdown-rendered h4, .cm-header-4 { color: var(--h4-color) !important; }
-.markdown-rendered h5, .cm-header-5 { color: var(--h5-color) !important; }
-.markdown-rendered h6, .cm-header-6 { color: var(--h6-color) !important; }
+/* Obsidian consumes the heading variables in Reading view and Live
+   Preview. No direct color selector or !important is required. */
