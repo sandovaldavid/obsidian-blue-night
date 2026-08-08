@@ -1,33 +1,33 @@
 /* ==========================================================
    BLUE NIGHT — Rainbow Folders Snippet
-   Tints each top-level folder in the file explorer with a
-   different pastel from the Blue Night palette. Falls back
-   to sensible pastels on other themes.
+   Tints each top-level folder with a different pastel.
+   Blue Night tokens are preferred in dark mode; sensible
+   standalone fallbacks keep the snippet portable.
    ========================================================== */
 
 body.theme-dark {
-  --rf-blue: rgb(var(--color-blue-rgb, 138, 180, 250));
-  --rf-purple: rgb(var(--color-purple-rgb, 180, 190, 254));
-  --rf-cyan: rgb(var(--color-cyan-rgb, 139, 213, 202));
-  --rf-green: rgb(var(--color-green-rgb, 166, 218, 149));
-  --rf-yellow: rgb(var(--color-yellow-rgb, 238, 212, 159));
-  --rf-orange: rgb(var(--color-orange-rgb, 245, 169, 127));
-  --rf-red: rgb(var(--color-red-rgb, 242, 135, 155));
-  --rf-pink: rgb(var(--color-pink-rgb, 245, 189, 230));
+  --rf-blue: var(--bn-blue, #8ab4fa);
+  --rf-purple: var(--bn-purple, #b4befe);
+  --rf-cyan: var(--bn-cyan, #8bd5ca);
+  --rf-green: var(--bn-green, #a6da95);
+  --rf-yellow: var(--bn-yellow, #eed49f);
+  --rf-orange: var(--bn-orange, #f5a97f);
+  --rf-red: var(--bn-red, #f2879b);
+  --rf-pink: var(--bn-pink, #f5bde6);
 }
 
 body.theme-light {
-  --rf-blue: rgb(var(--color-blue-rgb, 37, 99, 235));
-  --rf-purple: rgb(var(--color-purple-rgb, 114, 135, 253));
-  --rf-cyan: rgb(var(--color-cyan-rgb, 23, 146, 153));
-  --rf-green: rgb(var(--color-green-rgb, 64, 160, 43));
-  --rf-yellow: rgb(var(--color-yellow-rgb, 223, 142, 29));
-  --rf-orange: rgb(var(--color-orange-rgb, 254, 100, 11));
-  --rf-red: rgb(var(--color-red-rgb, 210, 15, 57));
-  --rf-pink: rgb(var(--color-pink-rgb, 234, 118, 203));
+  --rf-blue: #1e66f5;
+  --rf-purple: #7048c9;
+  --rf-cyan: #147d83;
+  --rf-green: #287d21;
+  --rf-yellow: #a86400;
+  --rf-orange: #c44f00;
+  --rf-red: #d20f39;
+  --rf-pink: #b6409f;
 }
 
-/* Top-level folders cycle through 8 pastel tints */
+/* Top-level folders cycle through 8 Blue Night/Catppuccin-inspired tints. */
 .nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 1) > .nav-folder-title {
   color: var(--rf-blue);
 }
@@ -60,7 +60,7 @@ body.theme-light {
   color: var(--rf-pink);
 }
 
-/* Folder icons (Blue Night's ::before masks) follow the text color */
+/* Blue Night's optional folder masks inherit the same tint. */
 .nav-folder.mod-root
   > .nav-folder-children
   > .nav-folder

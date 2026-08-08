@@ -1,0 +1,21 @@
+/* ==========================================================
+   BLUE NIGHT — Compact Callouts Snippet
+   Makes native callouts denser using Obsidian's callout
+   variables. Colors and icons remain owned by the app/theme.
+   ========================================================== */
+
+body {
+  --callout-padding: 8px 10px;
+  --callout-title-padding: 0;
+  --callout-content-padding: 4px 0 0;
+  --callout-title-size: 0.9em;
+  --callout-radius: var(--radius-s, 6px);
+}
+
+.callout-content > :first-child {
+  margin-top: 0;
+}
+
+.callout-content > :last-child {
+  margin-bottom: 0;
+}

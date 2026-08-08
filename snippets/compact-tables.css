@@ -1,0 +1,24 @@
+/* ==========================================================
+   BLUE NIGHT — Compact Tables Snippet
+   Reduces table density through Obsidian table variables.
+   Useful for technical notes, inventories, and Dataview-heavy
+   workflows without restyling table colors or borders.
+   ========================================================== */
+
+body {
+  --table-column-min-width: 64px;
+  --table-cell-padding-x: 8px;
+  --table-cell-padding-y: 4px;
+  --table-header-padding-x: 8px;
+  --table-header-padding-y: 5px;
+  --table-line-height: 1.35;
+  --table-text-size: 0.875em;
+  --table-header-size: 0.82em;
+}
+
+body.is-mobile {
+  --table-column-min-width: 48px;
+  --table-cell-padding-x: 6px;
+  --table-cell-padding-y: 4px;
+  --table-header-padding-x: 6px;
+}
