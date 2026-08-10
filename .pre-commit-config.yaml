@@ -1,4 +1,8 @@
 ---
+# Release Please owns CHANGELOG.md. Local mutating hooks must not rewrite
+# generated release notes or create unrelated diffs in release PRs.
+exclude: ^CHANGELOG\.md$
+
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
@@ -12,9 +16,11 @@ repos:
     rev: 0.7.21
     hooks:
       - id: mdformat
+        # Keep human-authored ordered lists as 1., 2., 3. instead of
+        # mdformat's default 1., 1., 1. diff-minimizing style.
+        args: ['--number']
         additional_dependencies:
           - mdformat-gfm
-          - mdformat-tables
           - mdformat-frontmatter
 
   - repo: https://github.com/commitizen-tools/commitizen
