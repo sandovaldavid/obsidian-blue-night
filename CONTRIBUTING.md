@@ -46,21 +46,21 @@ community **plugin** compatibility flow. A theme release is distributed through 
 
 Blue Night follows the official Obsidian theme guidance:
 
-01. Prefer documented CSS variables over direct component selectors.
-02. Put shared variables under `body`; put mode-specific colors under `.theme-dark` and
+1.  Prefer documented CSS variables over direct component selectors.
+2.  Put shared variables under `body`; put mode-specific colors under `.theme-dark` and
     `.theme-light`.
-03. Keep selectors low-specificity. Direct DOM selectors are reserved for optional enhancements
+3.  Keep selectors low-specificity. Direct DOM selectors are reserved for optional enhancements
     that cannot be expressed with public variables.
-04. Never use `!important`. Users must remain able to override the theme with snippets.
-05. Keep every asset local. Do not add remote fonts, images, stylesheets, or runtime network calls.
-06. Do not override global input padding or other geometry owned by Obsidian unless no public
+4.  Never use `!important`. Users must remain able to override the theme with snippets.
+5.  Keep every asset local. Do not add remote fonts, images, stylesheets, or runtime network calls.
+6.  Do not override global input padding or other geometry owned by Obsidian unless no public
     variable exists and the selector is narrowly scoped.
-07. Do not change vertical margins on CodeMirror/Live Preview lines. Use padding for decorative
+7.  Do not change vertical margins on CodeMirror/Live Preview lines. Use padding for decorative
     heading spacing to avoid cursor and virtualization issues.
-08. Treat classes such as `.workspace-*`, `.cm-*`, `.metadata-*`, and plugin-specific classes as
+8.  Treat classes such as `.workspace-*`, `.cm-*`, `.metadata-*`, and plugin-specific classes as
     implementation details. An upstream class change should disable only the enhancement, not the
     underlying UI.
-09. Do not reproduce File Explorer child indentation or guide placement with custom
+9.  Do not reproduce File Explorer child indentation or guide placement with custom
     `margin`/`padding`/`border` geometry. Use Obsidian's `--nav-item-children-*` and
     `--nav-indentation-guide-*` variables.
 10. Bundled snippets must not rely on undocumented custom properties when a documented component

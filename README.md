@@ -121,8 +121,8 @@ cssclasses:
 
 - [Style Settings](https://github.com/obsidian-community/obsidian-style-settings) — exposes accent
   flavors, custom accent color, canvas variants, backgrounds, and feature toggles.
-- [Quick Switcher++](https://github.com/darlal/obsidian-switcher-plus) — note *preview while you
-  navigate* the switcher is not possible with CSS alone; this plugin provides it and inherits the
+- [Quick Switcher++](https://github.com/darlal/obsidian-switcher-plus) — note _preview while you
+  navigate_ the switcher is not possible with CSS alone; this plugin provides it and inherits the
   theme's prompt styling. The native Page Preview remains the closest built-in alternative.
 
 ## Theme architecture
