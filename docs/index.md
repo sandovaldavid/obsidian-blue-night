@@ -28,11 +28,11 @@ title: Blue Night
     </div>
     <div class="feature-card" data-accent="teal">
       <h3>Selectable accent flavors</h3>
-      <p>Choose Blue Night, Sapphire, Lavender, Mauve, Teal, Pink, Peach, or Custom. Every option converges on Obsidian's native <code>--accent-h</code>, <code>--accent-s</code>, and <code>--accent-l</code> variables.</p>
+      <p>Choose Blue Night, Sapphire, Lavender, Mauve, Teal, Pink, Peach, or Custom. Every option converges on Obsidian's native <code>--accent-h</code>, <code>--accent-s</code>, and <code>--accent-l</code> variables; named light-mode presets use contrast-tuned lightness values.</p>
     </div>
     <div class="feature-card" data-accent="lavender">
       <h3>Catppuccin-inspired support colors</h3>
-      <p>Blue, lavender, cyan, green, yellow, peach, red, and pink remain available for syntax and semantic states regardless of the selected accent.</p>
+      <p>Blue, lavender, cyan, green, yellow, peach, red, and pink remain available for syntax and semantic states. Light mode uses darker counterparts so text-level uses stay readable.</p>
     </div>
     <div class="feature-card" data-accent="green">
       <h3>Extra task states</h3>
@@ -104,11 +104,11 @@ title: Blue Night
     </div>
     <div class="flavor">
       <div class="swatch" style="background:#f1f5fb">
-        <span style="background:#f5bde6"></span><span style="background:#1e66f5"></span><span style="background:#147d83"></span><span style="background:#7048c9"></span>
+        <span style="background:#971775"></span><span style="background:#0a53e5"></span><span style="background:#116c71"></span><span style="background:#6f46c9"></span>
       </div>
       <div class="flavor-info">
         <h3>Blue Mist + Pink</h3>
-        <p>A softer blue-tinted light canvas with Pink as the interactive accent and high-contrast support colors.</p>
+        <p>A softer blue-tinted light canvas with contrast-tuned Pink and supporting colors for daylight work.</p>
       </div>
     </div>
   </div>
@@ -145,15 +145,15 @@ title: Blue Night
       </thead>
       <tbody>
         <tr><td><code>focus-mode.css</code></td><td>Dims desktop chrome until hover or keyboard focus</td></tr>
-        <tr><td><code>rainbow-folders.css</code></td><td>Tints top-level folders with Blue Night/Catppuccin-inspired pastels</td></tr>
+        <tr><td><code>rainbow-folders.css</code></td><td>Tints top-level folders with contrast-tuned Blue Night/Catppuccin-inspired colors</td></tr>
         <tr><td><code>colored-headings.css</code></td><td>Sets heading colors through Obsidian's heading variables</td></tr>
         <tr><td><code>wide-code.css</code></td><td>Lets code blocks, tables and Dataview results exceed readable line width</td></tr>
         <tr><td><code>wide-note.css</code></td><td>Opt-in <code>wide-note</code> cssclass for a wider whole-note layout</td></tr>
         <tr><td><code>clean-embeds.css</code></td><td>Makes note embeds seamless while preserving the source-note affordance</td></tr>
         <tr><td><code>image-grid.css</code></td><td>Opt-in <code>image-grid</code> cssclass for responsive galleries</td></tr>
-        <tr><td><code>compact-tables.css</code></td><td>Reduces table padding and density through table variables</td></tr>
+        <tr><td><code>compact-tables.css</code></td><td>Uses native sizing variables plus narrowly scoped cell padding for compact tables</td></tr>
         <tr><td><code>compact-callouts.css</code></td><td>Makes native callouts denser without replacing their colors or icons</td></tr>
-        <tr><td><code>math-accent.css</code></td><td>Adds a restrained Blue Night accent to MathJax and editor math</td></tr>
+        <tr><td><code>math-accent.css</code></td><td>Adds a contrast-tuned Blue Night accent to MathJax and editor math</td></tr>
         <tr><td><code>minimal-scrollbar.css</code></td><td>Uses public scrollbar color variables with a slim 6px track</td></tr>
       </tbody>
     </table>

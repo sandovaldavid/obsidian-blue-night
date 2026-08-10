@@ -16,15 +16,18 @@ body.theme-dark {
   --rf-pink: var(--bn-pink, #f5bde6);
 }
 
+/* Light-mode tints are intentionally darker than their pastel dark-mode
+   counterparts so folder labels remain readable across Blue Night's
+   Clean Blue, Blue Mist, and Cozy Pastels Light canvases. */
 body.theme-light {
-  --rf-blue: #1e66f5;
-  --rf-purple: #7048c9;
-  --rf-cyan: #147d83;
-  --rf-green: #287d21;
-  --rf-yellow: #a86400;
-  --rf-orange: #c44f00;
-  --rf-red: #d20f39;
-  --rf-pink: #b6409f;
+  --rf-blue: #0a53e5;
+  --rf-purple: #6f46c9;
+  --rf-cyan: #116c71;
+  --rf-green: #24701e;
+  --rf-yellow: #8d5400;
+  --rf-orange: #a54300;
+  --rf-red: #c20e35;
+  --rf-pink: #9f388b;
 }
 
 /* Top-level folders cycle through 8 Blue Night/Catppuccin-inspired tints. */

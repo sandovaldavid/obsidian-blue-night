@@ -1,24 +1,24 @@
 /* ==========================================================
    BLUE NIGHT — Compact Tables Snippet
-   Reduces table density through Obsidian table variables.
-   Useful for technical notes, inventories, and Dataview-heavy
-   workflows without restyling table colors or borders.
+   Reduces table density through documented Obsidian table
+   variables, with one narrowly scoped padding fallback because
+   Obsidian does not expose a public cell-padding variable.
    ========================================================== */
 
 body {
-  --table-column-min-width: 64px;
-  --table-cell-padding-x: 8px;
-  --table-cell-padding-y: 4px;
-  --table-header-padding-x: 8px;
-  --table-header-padding-y: 5px;
   --table-line-height: 1.35;
   --table-text-size: 0.875em;
   --table-header-size: 0.82em;
 }
 
-body.is-mobile {
-  --table-column-min-width: 48px;
-  --table-cell-padding-x: 6px;
-  --table-cell-padding-y: 4px;
-  --table-header-padding-x: 6px;
+/* Cell padding is not part of Obsidian's documented table-variable
+   contract, so keep this direct selector narrow and presentation-only. */
+.markdown-rendered table :is(th, td),
+.markdown-source-view.mod-cm6 table :is(th, td) {
+  padding: 4px 8px;
+}
+
+body.is-mobile .markdown-rendered table :is(th, td),
+body.is-mobile .markdown-source-view.mod-cm6 table :is(th, td) {
+  padding-inline: 6px;
 }

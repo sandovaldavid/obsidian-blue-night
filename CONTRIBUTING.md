@@ -20,7 +20,7 @@ This project uses `conda` and `pre-commit` for repository quality checks.
    conda activate dotfiles
    ```
 
-1. Install pre-commit hooks:
+2. Install pre-commit hooks:
 
    ```bash
    pre-commit install
@@ -46,20 +46,25 @@ community **plugin** compatibility flow. A theme release is distributed through 
 
 Blue Night follows the official Obsidian theme guidance:
 
-1. Prefer documented CSS variables over direct component selectors.
-2. Put shared variables under `body`; put mode-specific colors under `.theme-dark` and
-   `.theme-light`.
-3. Keep selectors low-specificity. Direct DOM selectors are reserved for optional enhancements
-   that cannot be expressed with public variables.
-4. Never use `!important`. Users must remain able to override the theme with snippets.
-5. Keep every asset local. Do not add remote fonts, images, stylesheets, or runtime network calls.
-6. Do not override global input padding or other geometry owned by Obsidian unless no public
-   variable exists and the selector is narrowly scoped.
-7. Do not change vertical margins on CodeMirror/Live Preview lines. Use padding for decorative
-   heading spacing to avoid cursor and virtualization issues.
-8. Treat classes such as `.workspace-*`, `.cm-*`, `.metadata-*`, and plugin-specific classes as
-   implementation details. An upstream class change should disable only the enhancement, not the
-   underlying UI.
+1.  Prefer documented CSS variables over direct component selectors.
+2.  Put shared variables under `body`; put mode-specific colors under `.theme-dark` and
+    `.theme-light`.
+3.  Keep selectors low-specificity. Direct DOM selectors are reserved for optional enhancements
+    that cannot be expressed with public variables.
+4.  Never use `!important`. Users must remain able to override the theme with snippets.
+5.  Keep every asset local. Do not add remote fonts, images, stylesheets, or runtime network calls.
+6.  Do not override global input padding or other geometry owned by Obsidian unless no public
+    variable exists and the selector is narrowly scoped.
+7.  Do not change vertical margins on CodeMirror/Live Preview lines. Use padding for decorative
+    heading spacing to avoid cursor and virtualization issues.
+8.  Treat classes such as `.workspace-*`, `.cm-*`, `.metadata-*`, and plugin-specific classes as
+    implementation details. An upstream class change should disable only the enhancement, not the
+    underlying UI.
+9.  Do not reproduce File Explorer child indentation or guide placement with custom
+    `margin`/`padding`/`border` geometry. Use Obsidian's `--nav-item-children-*` and
+    `--nav-indentation-guide-*` variables.
+10. Bundled snippets must not rely on undocumented custom properties when a documented component
+    variable exists. If no variable exists, keep any direct selector narrow and presentation-only.
 
 ### Accent contract
 
@@ -78,9 +83,11 @@ Style Settings exposes a `class-select` named `bn-accent-flavor` with these choi
 - `bn-accent-custom`.
 
 Each preset class may set only the native `--accent-h`, `--accent-s`, and `--accent-l` primitives.
-The Custom picker uses `id: bn-custom-accent` with `format: hsl-split`, producing
-`--bn-custom-accent-h`, `--bn-custom-accent-s`, and `--bn-custom-accent-l`. Only
-`body.bn-accent-custom` maps those custom values into the native accent primitives.
+Named light-mode variants may lower only `--accent-l` to meet contrast targets while preserving the
+same hue/saturation and the same native accent sink. The Custom picker uses `id: bn-custom-accent`
+with `format: hsl-split`, producing `--bn-custom-accent-h`, `--bn-custom-accent-s`, and
+`--bn-custom-accent-l`. Only `body.bn-accent-custom` maps those custom values into the native accent
+primitives.
 
 This arrangement lets presets and a custom picker coexist without competing CSS sources.
 
@@ -91,6 +98,8 @@ from the native HSL source of truth.
 The Catppuccin-inspired supporting palette (`--bn-blue`, `--bn-purple`, `--bn-cyan`,
 `--bn-green`, `--bn-yellow`, `--bn-orange`, `--bn-red`, `--bn-pink`) is separate from the
 interactive accent. Switching accents must not flatten syntax or semantic states into one color.
+Dark and light modes may use different values for those support tokens so text-level uses remain
+legible on their respective canvases.
 
 ### Canvas contract
 
@@ -102,6 +111,13 @@ A canvas class may override background/base palette tokens plus closely related 
 as `--code-background` and `--glass-bg`. It must not write `--accent-h`, `--accent-s`, or
 `--accent-l`. This separation lets every canvas combine with every accent without duplicated preset
 classes.
+
+### Contrast contract
+
+For bundled presets, theme-owned normal-sized text roles should target at least **4.5:1** against
+the primary, secondary, and elevated surfaces where they appear. Include `--text-faint`, syntax
+comments, semantic/support colors used as text, and named accents used for links/tags/selected text.
+Custom accent values are user-controlled and are not covered by this guarantee.
 
 ### Callout compatibility
 
@@ -165,10 +181,17 @@ Verify at minimum:
 - switching between canvas variants without changing the selected accent;
 - representative cross-axis combinations, including Midnight Navy + Sapphire, Storm Blue + Peach,
   OLED + Mauve, Cozy Pastels + Teal, and Blue Mist + Pink;
+- named accent text/selected-state contrast across every light canvas;
+- `text-faint`, code comments, supporting semantic colors, checkboxes, and navigation icons across
+  every bundled canvas;
+- nested File Explorer folders with Folder Indent Guides both enabled and disabled; verify the
+  native guide stays aligned at every nesting level;
 - syntax and semantic supporting colors remain multi-color under every accent flavor;
 - editor Source mode, Live Preview, and Reading view;
 - file explorer, tabs, ribbon, prompts, properties, tags, callouts, task states, tables, search,
   Canvas, and status bar;
+- each bundled snippet in its intended view/mode, especially compact tables in Reading/Live Preview
+  and colored headings/rainbow folders/math in every light canvas;
 - keyboard focus and navigation states;
 - desktop and mobile-responsive behavior;
 - reduced-motion mode;
@@ -195,6 +218,8 @@ Before opening a PR:
 pre-commit run --all-files
 ```
 
-Also inspect `theme.css` for accidental `!important`, remote `url(http...)` assets, independently
-consumed duplicate accent systems, canvas classes that write native accent primitives, and broad
-global selectors that override native component geometry.
+Also inspect `theme.css` and bundled snippets for accidental `!important`, remote `url(http...)`
+assets, independently consumed duplicate accent systems, canvas classes that write native accent
+primitives, manual `.nav-folder-children` guide geometry, undocumented custom properties that are
+expected to control Obsidian components, and broad global selectors that override native component
+geometry.

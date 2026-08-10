@@ -172,8 +172,8 @@ body {
   --font-text-theme:
     'Google Sans Flex', 'Google Sans Text', 'Google Sans', 'Product Sans', -apple-system,
     BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-monospace-theme: 'JetBrains Mono', 'SF Mono', 'Fira Code', Menlo, Monaco, Consolas,
-    monospace;
+  --font-monospace-theme:
+    'JetBrains Mono', 'SF Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace;
 
   --font-text-size: 15px;
   --line-height-normal: 1.65;
@@ -290,6 +290,37 @@ body.bn-accent-custom {
   --accent-l: var(--bn-custom-accent-l, 76%);
 }
 
+/* The named light-mode accents keep the same hue/saturation identity but
+   use darker lightness values so accent text and selected states remain
+   legible on every bundled light canvas. Custom remains user-controlled. */
+body.theme-light.bn-accent-blue-night {
+  --accent-l: 40%;
+}
+
+body.theme-light.bn-accent-sapphire {
+  --accent-l: 29%;
+}
+
+body.theme-light.bn-accent-lavender {
+  --accent-l: 51%;
+}
+
+body.theme-light.bn-accent-mauve {
+  --accent-l: 46%;
+}
+
+body.theme-light.bn-accent-teal {
+  --accent-l: 25%;
+}
+
+body.theme-light.bn-accent-pink {
+  --accent-l: 34%;
+}
+
+body.theme-light.bn-accent-peach {
+  --accent-l: 30%;
+}
+
 /* ==========================================================
    1. DARK PALETTE
    ========================================================== */
@@ -317,7 +348,7 @@ body.bn-accent-custom {
 
   --text-normal: #cdd9f0;
   --text-muted: #9db0d0;
-  --text-faint: #64769a;
+  --text-faint: #788bae;
   --text-accent: var(--bn-accent);
   --text-accent-hover: hsl(var(--accent-h), var(--accent-s), 88%);
   --text-error: var(--bn-red);
@@ -355,9 +386,9 @@ body.bn-accent-custom {
   --nav-item-weight-active: 600;
   --nav-item-padding: 4px 8px;
   --nav-indentation-guide-color: var(--color-base-30);
-  --nav-indentation-guide-width: 1px;
-  --nav-collapse-icon-color: var(--color-base-50);
-  --nav-collapse-icon-color-collapsed: var(--color-base-40);
+  --nav-indentation-guide-width: 0px;
+  --nav-collapse-icon-color: var(--text-faint);
+  --nav-collapse-icon-color-collapsed: var(--text-faint);
 
   --status-bar-background: var(--background-secondary);
   --status-bar-border-color: transparent;
@@ -372,7 +403,7 @@ body.bn-accent-custom {
   --code-background: #121a2c;
   --code-normal: #cdd9f0;
   --code-size: 0.875em;
-  --code-comment: #6b7da0;
+  --code-comment: var(--text-faint);
   --code-function: var(--bn-blue);
   --code-important: var(--bn-orange);
   --code-keyword: var(--bn-purple);
@@ -415,7 +446,7 @@ body.bn-accent-custom {
 
   --graph-text: var(--text-normal);
   --graph-line: #2a3a5e;
-  --graph-node: #6b7da0;
+  --graph-node: var(--text-faint);
   --graph-node-unresolved: #31405e;
   --graph-node-focused: var(--bn-accent);
   --graph-node-tag: var(--bn-purple);
@@ -466,7 +497,7 @@ body.bn-accent-custom {
 
   --checkbox-radius: var(--radius-s);
   --checkbox-size: 16px;
-  --checkbox-border-color: var(--color-base-40);
+  --checkbox-border-color: var(--text-faint);
   --checkbox-border-color-hover: var(--bn-accent);
   --checklist-done-decoration: line-through;
   --checklist-done-color: var(--text-faint);
@@ -506,6 +537,22 @@ body.bn-accent-custom {
   --color-base-70: #4b5a75;
   --color-base-100: #1c2433;
 
+  /* Light elevation is intentionally softer than dark mode. The two-layer
+     shadows preserve surface separation without making cards look detached. */
+  --shadow-s: 0 1px 2px rgba(28, 36, 51, 0.04), 0 5px 16px rgba(28, 36, 51, 0.05);
+  --shadow-l: 0 2px 5px rgba(28, 36, 51, 0.05), 0 10px 28px rgba(28, 36, 51, 0.07);
+
+  /* Light-mode support colors preserve Blue Night's hue families but are
+     darkened enough to remain readable on all bundled light canvases. */
+  --bn-red: #c20e35;
+  --bn-orange: #a54300;
+  --bn-yellow: #8d5400;
+  --bn-green: #24701e;
+  --bn-cyan: #116c71;
+  --bn-blue: #0a53e5;
+  --bn-purple: #6f46c9;
+  --bn-pink: #9f388b;
+
   --background-primary: var(--color-base-00);
   --background-primary-alt: var(--color-base-10);
   --background-secondary: var(--color-base-10);
@@ -517,12 +564,12 @@ body.bn-accent-custom {
 
   --text-normal: #1c2433;
   --text-muted: #4b5a75;
-  --text-faint: #7889a5;
-  --text-accent: hsl(var(--accent-h), var(--accent-s), 48%);
-  --text-accent-hover: hsl(var(--accent-h), var(--accent-s), 40%);
-  --text-error: #d20f39;
-  --text-success: #287d21;
-  --text-warning: #a86400;
+  --text-faint: #54667f;
+  --text-accent: var(--bn-accent);
+  --text-accent-hover: hsl(var(--accent-h), var(--accent-s), calc(var(--accent-l) - 6%));
+  --text-error: var(--bn-red);
+  --text-success: var(--bn-green);
+  --text-warning: var(--bn-yellow);
 
   --interactive-normal: var(--color-base-20);
   --interactive-hover: var(--color-base-30);
@@ -555,9 +602,9 @@ body.bn-accent-custom {
   --nav-item-weight-active: 600;
   --nav-item-padding: 4px 8px;
   --nav-indentation-guide-color: var(--color-base-30);
-  --nav-indentation-guide-width: 1px;
-  --nav-collapse-icon-color: var(--color-base-50);
-  --nav-collapse-icon-color-collapsed: var(--color-base-40);
+  --nav-indentation-guide-width: 0px;
+  --nav-collapse-icon-color: var(--text-faint);
+  --nav-collapse-icon-color-collapsed: var(--text-faint);
 
   --status-bar-background: var(--background-secondary);
   --status-bar-border-color: var(--background-modifier-border);
@@ -572,16 +619,16 @@ body.bn-accent-custom {
   --code-background: #eef2f8;
   --code-normal: #1c2433;
   --code-size: 0.875em;
-  --code-comment: #7b89a0;
-  --code-function: #1e66f5;
-  --code-important: #fe640b;
-  --code-keyword: #8839ef;
-  --code-operator: #147d83;
-  --code-property: #1e66f5;
-  --code-punctuation: #4b5a75;
-  --code-string: #287d21;
-  --code-tag: #d20f39;
-  --code-value: #c44f00;
+  --code-comment: var(--text-faint);
+  --code-function: var(--bn-blue);
+  --code-important: var(--bn-orange);
+  --code-keyword: var(--bn-purple);
+  --code-operator: var(--bn-cyan);
+  --code-property: var(--bn-blue);
+  --code-punctuation: var(--text-muted);
+  --code-string: var(--bn-green);
+  --code-tag: var(--bn-red);
+  --code-value: var(--bn-orange);
 
   --inline-title-color: var(--text-accent);
   --inline-title-font: var(--font-interface-theme);
@@ -607,7 +654,7 @@ body.bn-accent-custom {
 
   --link-color: var(--text-accent);
   --link-color-hover: var(--text-accent-hover);
-  --link-external-color: #626dcc;
+  --link-external-color: var(--bn-purple);
   --link-external-color-hover: #4d58b7;
   --link-unresolved-color: var(--text-faint);
   --link-decoration: none;
@@ -615,11 +662,11 @@ body.bn-accent-custom {
 
   --graph-text: var(--text-normal);
   --graph-line: #c9d8f0;
-  --graph-node: #8fa3c0;
+  --graph-node: var(--text-faint);
   --graph-node-unresolved: #cbd7e8;
   --graph-node-focused: var(--text-accent);
-  --graph-node-tag: #626dcc;
-  --graph-node-attachment: #147d83;
+  --graph-node-tag: var(--bn-purple);
+  --graph-node-attachment: var(--bn-cyan);
 
   --titlebar-background: var(--background-secondary);
   --titlebar-background-focused: var(--background-primary);
@@ -630,18 +677,32 @@ body.bn-accent-custom {
 
   --metadata-background: var(--background-secondary);
   --metadata-max-width: 100%;
-  --metadata-padding: 10px 14px;
+  --metadata-padding: 12px 14px;
   --metadata-border-color: var(--background-modifier-border);
-  --metadata-border-radius: var(--radius-m);
+  --metadata-border-radius: var(--radius-l);
   --metadata-border-width: 1px;
+  --metadata-gap: 2px;
   --metadata-divider-color: var(--color-base-25);
-  --metadata-divider-color-hover: var(--color-base-35);
+  --metadata-divider-color-hover: var(--color-base-30);
   --metadata-divider-color-focus: var(--text-accent);
-  --metadata-property-radius: var(--radius-s);
+  --metadata-property-padding: 4px 6px;
+  --metadata-property-radius: var(--radius-m);
   --metadata-property-radius-hover: var(--radius-m);
   --metadata-property-radius-focus: var(--radius-m);
-  --metadata-property-background-hover: var(--bn-accent-soft);
-  --metadata-property-background-active: var(--bn-accent-medium);
+  --metadata-property-background: transparent;
+  --metadata-property-background-hover: hsla(
+    var(--accent-h),
+    var(--accent-s),
+    var(--accent-l),
+    0.07
+  );
+  --metadata-property-background-active: var(--bn-accent-soft);
+  --metadata-label-background-hover: transparent;
+  --metadata-label-background-active: transparent;
+  --metadata-label-font-weight: 500;
+  --metadata-label-text-color: var(--text-muted);
+  --metadata-label-text-color-hover: var(--text-normal);
+  --metadata-input-text-color: var(--text-normal);
   --metadata-input-background: transparent;
   --metadata-input-background-hover: var(--color-base-20);
   --metadata-input-background-active: var(--color-base-20);
@@ -666,7 +727,7 @@ body.bn-accent-custom {
 
   --checkbox-radius: var(--radius-s);
   --checkbox-size: 16px;
-  --checkbox-border-color: var(--color-base-40);
+  --checkbox-border-color: var(--text-faint);
   --checkbox-border-color-hover: var(--text-accent);
   --checklist-done-decoration: line-through;
   --checklist-done-color: var(--text-faint);
@@ -1034,10 +1095,10 @@ body.kodev-blue-night-enable-mac-explorer .nav-file-title-content::before {
   -webkit-mask-image: var(--bn-icon-file);
 }
 
-body.kodev-blue-night-enable-folder-guides .nav-folder-children {
-  margin-inline-start: 18px;
-  padding-inline-start: 6px;
-  border-inline-start: var(--nav-indentation-guide-width) solid var(--nav-indentation-guide-color);
+/* Let Obsidian own child indentation geometry. Its documented navigation
+   variables keep the guide aligned with the current File Explorer layout. */
+body.kodev-blue-night-enable-folder-guides {
+  --nav-indentation-guide-width: 1px;
 }
 
 /* This selector is intentionally isolated. If Obsidian replaces the

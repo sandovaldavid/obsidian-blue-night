@@ -20,9 +20,7 @@
   margin-block: 1.2em;
 }
 
-.markdown-preview-view.image-grid
-  p:has(> .image-embed + .image-embed)
-  > .image-embed,
+.markdown-preview-view.image-grid p:has(> .image-embed + .image-embed) > .image-embed,
 .markdown-preview-view.image-grid p:has(> img + img) > img {
   display: block;
   min-width: 0;
@@ -33,10 +31,7 @@
     box-shadow 0.2s ease;
 }
 
-.markdown-preview-view.image-grid
-  p:has(> .image-embed + .image-embed)
-  > .image-embed
-  img {
+.markdown-preview-view.image-grid p:has(> .image-embed + .image-embed) > .image-embed img {
   display: block;
   width: 100%;
   height: auto;
@@ -44,9 +39,7 @@
 }
 
 @media (hover: hover) {
-  .markdown-preview-view.image-grid
-    p:has(> .image-embed + .image-embed)
-    > .image-embed:hover,
+  .markdown-preview-view.image-grid p:has(> .image-embed + .image-embed) > .image-embed:hover,
   .markdown-preview-view.image-grid p:has(> img + img) > img:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-s, 0 8px 24px rgba(0, 0, 0, 0.14));
@@ -54,9 +47,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .markdown-preview-view.image-grid
-    p:has(> .image-embed + .image-embed)
-    > .image-embed,
+  .markdown-preview-view.image-grid p:has(> .image-embed + .image-embed) > .image-embed,
   .markdown-preview-view.image-grid p:has(> img + img) > img {
     transition: none;
   }

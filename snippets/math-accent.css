@@ -9,7 +9,7 @@ body.theme-dark {
 }
 
 body.theme-light {
-  --bn-math-accent: #147d83;
+  --bn-math-accent: var(--bn-cyan, #116c71);
 }
 
 .markdown-rendered mjx-container,
