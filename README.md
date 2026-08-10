@@ -55,10 +55,10 @@ published to the gallery.
 ### Manual
 
 1. Make sure you are running Obsidian **1.12.7 or newer**.
-1. Download `theme.css` and `manifest.json` from the
+2. Download `theme.css` and `manifest.json` from the
    [latest release](https://github.com/sandovaldavid/obsidian-blue-night/releases/latest).
-1. Copy both files into your vault at `.obsidian/themes/Blue Night/`.
-1. In Obsidian go to **Settings → Appearance → Themes** and select **Blue Night**.
+3. Copy both files into your vault at `.obsidian/themes/Blue Night/`.
+4. In Obsidian go to **Settings → Appearance → Themes** and select **Blue Night**.
 
 ## Customization
 
@@ -87,19 +87,19 @@ Each file in [`snippets/`](https://github.com/sandovaldavid/obsidian-blue-night/
 is independent — copy the ones you want into `.obsidian/snippets/` and enable them under
 **Settings → Appearance → CSS snippets**:
 
-| Snippet                 | What it does                                                               |
-| ----------------------- | -------------------------------------------------------------------------- |
+| Snippet                 | What it does                                                                |
+| ----------------------- | --------------------------------------------------------------------------- |
 | `focus-mode.css`        | Dims desktop chrome until hover or keyboard focus for distraction-free work |
-| `rainbow-folders.css`   | Tints each top-level folder with a Blue Night/Catppuccin-inspired pastel   |
-| `colored-headings.css`  | Gives every heading level its own pastel color                             |
-| `wide-code.css`         | Lets code blocks, tables and Dataview results exceed readable line width   |
-| `wide-note.css`         | Opt-in `wide-note` cssclass that increases the whole note line width       |
-| `clean-embeds.css`      | Makes note embeds seamless while preserving the source-note link           |
-| `image-grid.css`        | Opt-in `image-grid` cssclass for responsive multi-image galleries          |
-| `compact-tables.css`    | Reduces table sizing and cell padding with a narrowly scoped fallback      |
-| `compact-callouts.css`  | Makes native callouts denser without replacing their colors or icons       |
-| `math-accent.css`       | Applies a restrained Blue Night accent to rendered and editor math         |
-| `minimal-scrollbar.css` | Ultra-thin rounded scrollbars that use Obsidian scrollbar vars             |
+| `rainbow-folders.css`   | Tints each top-level folder with a Blue Night/Catppuccin-inspired pastel    |
+| `colored-headings.css`  | Gives every heading level its own pastel color                              |
+| `wide-code.css`         | Lets code blocks, tables and Dataview results exceed readable line width    |
+| `wide-note.css`         | Opt-in `wide-note` cssclass that increases the whole note line width        |
+| `clean-embeds.css`      | Makes note embeds seamless while preserving the source-note link            |
+| `image-grid.css`        | Opt-in `image-grid` cssclass for responsive multi-image galleries           |
+| `compact-tables.css`    | Reduces table sizing and cell padding with a narrowly scoped fallback       |
+| `compact-callouts.css`  | Makes native callouts denser without replacing their colors or icons        |
+| `math-accent.css`       | Applies a restrained Blue Night accent to rendered and editor math          |
+| `minimal-scrollbar.css` | Ultra-thin rounded scrollbars that use Obsidian scrollbar vars              |
 
 The bundled snippets avoid `!important` so users can still override them with their own CSS. DOM-
 dependent selectors are kept isolated, and the only bundled `:has()` usage is scoped to notes that

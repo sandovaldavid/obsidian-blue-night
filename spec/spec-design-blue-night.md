@@ -97,15 +97,15 @@ Named presets may use mode-specific lightness values while preserving their hue/
 and the same native HSL sink. In light mode the bundled presets use these contrast-tuned lightness
 values:
 
-| Accent | Light-mode `--accent-l` |
-| --- | ---: |
-| Blue Night | `40%` |
-| Sapphire | `29%` |
-| Lavender | `51%` |
-| Mauve | `46%` |
-| Teal | `25%` |
-| Pink | `34%` |
-| Peach | `30%` |
+| Accent     | Light-mode `--accent-l` |
+| ---------- | ----------------------: |
+| Blue Night |                   `40%` |
+| Sapphire   |                   `29%` |
+| Lavender   |                   `51%` |
+| Mauve      |                   `46%` |
+| Teal       |                   `25%` |
+| Pink       |                   `34%` |
+| Peach      |                   `30%` |
 
 This is not a second accent system: the light-mode rules still write only `--accent-l` and all
 consumers continue to resolve through the native `--accent-h/s/l` primitives. Custom remains
@@ -144,15 +144,15 @@ Canvas presets may alter background/base tokens but must never replace the selec
 
 ### 5.1 Dark default
 
-| Token | Value | Role |
-| --- | --- | --- |
-| `--color-base-00` | `#0f1523` | editor/workspace canvas |
-| `--color-base-10` | `#0b1019` | sidebars and recessed panels |
-| `--color-base-20` | `#151d2e` | elevated surfaces |
-| `--color-base-30` | `#232e45` | borders |
-| `--text-normal` | `#cdd9f0` | primary text |
-| `--text-muted` | `#9db0d0` | secondary text |
-| `--text-faint` | `#788bae` | subdued but readable text/icons |
+| Token             | Value     | Role                            |
+| ----------------- | --------- | ------------------------------- |
+| `--color-base-00` | `#0f1523` | editor/workspace canvas         |
+| `--color-base-10` | `#0b1019` | sidebars and recessed panels    |
+| `--color-base-20` | `#151d2e` | elevated surfaces               |
+| `--color-base-30` | `#232e45` | borders                         |
+| `--text-normal`   | `#cdd9f0` | primary text                    |
+| `--text-muted`    | `#9db0d0` | secondary text                  |
+| `--text-faint`    | `#788bae` | subdued but readable text/icons |
 
 Dark canvas variants:
 
@@ -164,22 +164,22 @@ Dark canvas variants:
 
 Reference surface tokens for the additional variants:
 
-| Variant | Canvas | Sidebar | Surface | Border |
-| --- | --- | --- | --- | --- |
+| Variant       | Canvas    | Sidebar   | Surface   | Border    |
+| ------------- | --------- | --------- | --------- | --------- |
 | Midnight Navy | `#080d18` | `#060a12` | `#101827` | `#1d2a40` |
-| Storm Blue | `#161b2a` | `#111622` | `#1d2435` | `#313a52` |
+| Storm Blue    | `#161b2a` | `#111622` | `#1d2435` | `#313a52` |
 
 ### 5.2 Light default
 
-| Token | Value | Role |
-| --- | --- | --- |
-| `--color-base-00` | `#f7f9fc` | editor/workspace canvas |
-| `--color-base-10` | `#eef2f8` | sidebars and recessed panels |
-| `--color-base-20` | `#e5ebf4` | elevated surfaces |
-| `--color-base-30` | `#d7e0ec` | borders |
-| `--text-normal` | `#1c2433` | primary text |
-| `--text-muted` | `#4b5a75` | secondary text |
-| `--text-faint` | `#54667f` | subdued but readable text/icons |
+| Token             | Value     | Role                            |
+| ----------------- | --------- | ------------------------------- |
+| `--color-base-00` | `#f7f9fc` | editor/workspace canvas         |
+| `--color-base-10` | `#eef2f8` | sidebars and recessed panels    |
+| `--color-base-20` | `#e5ebf4` | elevated surfaces               |
+| `--color-base-30` | `#d7e0ec` | borders                         |
+| `--text-normal`   | `#1c2433` | primary text                    |
+| `--text-muted`    | `#4b5a75` | secondary text                  |
+| `--text-faint`    | `#54667f` | subdued but readable text/icons |
 
 Light canvas variants:
 
@@ -189,12 +189,12 @@ Light canvas variants:
 
 Blue Mist reference tokens:
 
-| Token | Value |
-| --- | --- |
-| Canvas | `#f1f5fb` |
+| Token   | Value     |
+| ------- | --------- |
+| Canvas  | `#f1f5fb` |
 | Sidebar | `#e8eef7` |
 | Surface | `#dde6f2` |
-| Border | `#cad6e6` |
+| Border  | `#cad6e6` |
 
 ### 5.3 Catppuccin-inspired supporting palette
 
@@ -202,16 +202,16 @@ The supporting palette is part of Blue Night's visual identity and remains avail
 the selected interactive accent. Light mode uses darker counterparts rather than reusing pastel
 dark-mode values as text colors.
 
-| Token | Dark value | Light value | Typical role |
-| --- | --- | --- | --- |
-| `--bn-blue` | `#8ab4fa` | `#0a53e5` | functions, properties, blue semantic states |
-| `--bn-purple` | `#b4befe` | `#6f46c9` | keywords, secondary emphasis |
-| `--bn-cyan` | `#8bd5ca` | `#116c71` | operators, informational states |
-| `--bn-green` | `#a6da95` | `#24701e` | strings, success |
-| `--bn-yellow` | `#eed49f` | `#8d5400` | warning/highlight |
-| `--bn-orange` | `#f5a97f` | `#a54300` | values, important states |
-| `--bn-red` | `#f2879b` | `#c20e35` | errors/tags |
-| `--bn-pink` | `#f5bde6` | `#9f388b` | decorative/special states |
+| Token         | Dark value | Light value | Typical role                                |
+| ------------- | ---------- | ----------- | ------------------------------------------- |
+| `--bn-blue`   | `#8ab4fa`  | `#0a53e5`   | functions, properties, blue semantic states |
+| `--bn-purple` | `#b4befe`  | `#6f46c9`   | keywords, secondary emphasis                |
+| `--bn-cyan`   | `#8bd5ca`  | `#116c71`   | operators, informational states             |
+| `--bn-green`  | `#a6da95`  | `#24701e`   | strings, success                            |
+| `--bn-yellow` | `#eed49f`  | `#8d5400`   | warning/highlight                           |
+| `--bn-orange` | `#f5a97f`  | `#a54300`   | values, important states                    |
+| `--bn-red`    | `#f2879b`  | `#c20e35`   | errors/tags                                 |
+| `--bn-pink`   | `#f5bde6`  | `#9f388b`   | decorative/special states                   |
 
 Choosing Sapphire, Lavender, Mauve, Teal, Pink, Peach, or a custom accent changes the interactive
 accent family. It must not flatten syntax highlighting or semantic states into a single color.
