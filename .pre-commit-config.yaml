@@ -1,27 +1,16 @@
 ---
-# Release Please owns CHANGELOG.md. Local mutating hooks must not rewrite
-# generated release notes or create unrelated diffs in release PRs.
-exclude: ^CHANGELOG\.md$
-
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
       - id: trailing-whitespace
+        # Release Please owns CHANGELOG.md; do not mutate generated release notes.
+        exclude: ^CHANGELOG\.md$
       - id: end-of-file-fixer
+        # Release Please owns CHANGELOG.md; do not mutate generated release notes.
+        exclude: ^CHANGELOG\.md$
       - id: check-added-large-files
         args: ['--maxkb=1000']
-
-  - repo: https://github.com/executablebooks/mdformat
-    rev: 0.7.21
-    hooks:
-      - id: mdformat
-        # Keep human-authored ordered lists as 1., 2., 3. instead of
-        # mdformat's default 1., 1., 1. diff-minimizing style.
-        args: ['--number']
-        additional_dependencies:
-          - mdformat-gfm
-          - mdformat-frontmatter
 
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v4.1.0
@@ -32,4 +21,10 @@ repos:
     rev: v3.8.3
     hooks:
       - id: prettier
-        types_or: [css, javascript, json]
+        # Prettier is the single formatter for repo-owned CSS/JS/JSON/Markdown.
+        # It keeps ordered lists consecutive without mdformat's 1./1./1. style
+        # or --number zero-padding on lists with 10+ items.
+        types_or: [css, javascript, json, markdown]
+        args: ['--prose-wrap=preserve', '--embedded-language-formatting=off']
+        # Release Please owns CHANGELOG.md; do not reformat generated release notes.
+        exclude: ^CHANGELOG\.md$
