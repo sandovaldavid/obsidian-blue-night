@@ -23,10 +23,11 @@ with the CSS-color contract introduced in Obsidian 1.13.
 - **Selectable Accent Flavors** — Blue Night, Sapphire, Lavender, Mauve, Teal, Pink, Peach, or
   Custom. Every choice feeds the same native `--accent-h`, `--accent-s`, and `--accent-l`
   variables used by Obsidian, so tabs, links, graph focus, tags, prompts, and Blue Night
-  enhancements stay synchronized.
+  enhancements stay synchronized. Named light-mode presets keep their hue while using
+  contrast-tuned lightness values.
 - **Catppuccin-Inspired Supporting Palette** — blue, lavender, cyan, green, yellow, peach, red, and
   pink remain available for syntax highlighting and semantic states regardless of the selected
-  interactive accent.
+  interactive accent. Light mode uses darker counterparts so text-level uses stay readable.
 - **Preset Flavors** — dark canvas variants (Blue Night, Midnight Navy, Storm Blue, Dark
   Charcoal/OLED, Cozy Pastels) and light variants (Clean Blue, Blue Mist, Cozy Pastels Light)
   without replacing the selected accent.
@@ -41,8 +42,8 @@ with the CSS-color contract introduced in Obsidian 1.13.
 - **Floating Status Bar** — glass pill in the bottom-right corner on desktop, with optional fade.
 - **Plugin-Aware** — extra styling for Dataview and Quick Switcher++ that remains inert when those
   plugins are not installed.
-- **Responsive & Accessible** — mobile adjustments, keyboard-focus-aware states,
-  `prefers-reduced-motion`, and ink-friendly PDF export.
+- **Responsive & Accessible** — contrast-tuned bundled palettes, mobile adjustments,
+  keyboard-focus-aware states, `prefers-reduced-motion`, and ink-friendly PDF export.
 
 ## Installation
 
@@ -95,14 +96,15 @@ is independent — copy the ones you want into `.obsidian/snippets/` and enable 
 | `wide-note.css`         | Opt-in `wide-note` cssclass that increases the whole note line width       |
 | `clean-embeds.css`      | Makes note embeds seamless while preserving the source-note link           |
 | `image-grid.css`        | Opt-in `image-grid` cssclass for responsive multi-image galleries          |
-| `compact-tables.css`    | Reduces native table padding and row density                               |
+| `compact-tables.css`    | Reduces table sizing and cell padding with a narrowly scoped fallback      |
 | `compact-callouts.css`  | Makes native callouts denser without replacing their colors or icons       |
 | `math-accent.css`       | Applies a restrained Blue Night accent to rendered and editor math         |
 | `minimal-scrollbar.css` | Ultra-thin rounded scrollbars that use Obsidian scrollbar vars             |
 
 The bundled snippets avoid `!important` so users can still override them with their own CSS. DOM-
 dependent selectors are kept isolated, and the only bundled `:has()` usage is scoped to notes that
-explicitly enable the `image-grid` cssclass.
+explicitly enable the `image-grid` cssclass. Snippets prefer documented Obsidian variables; direct
+selectors are reserved for presentation details that do not have a public variable.
 
 `wide-note.css` and `image-grid.css` are intentionally opt-in per note. Add the corresponding class
 to Properties/frontmatter, for example:
@@ -135,7 +137,8 @@ Blue Night follows three rules for maintainability:
 3. Do not use `!important`; snippets and user styles must remain able to override the theme.
 
 Accent presets are not a second color system: each preset only sets Obsidian's native
-`--accent-h`, `--accent-s`, and `--accent-l` values. The Custom picker writes separate
+`--accent-h`, `--accent-s`, and `--accent-l` values. Named presets may use a darker lightness in
+light mode while keeping the same native HSL contract. The Custom picker writes separate
 `--bn-custom-accent-*` values that are mapped into those native variables only when Custom is
 selected.
 
