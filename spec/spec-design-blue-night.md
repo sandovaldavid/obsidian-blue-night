@@ -1,8 +1,8 @@
 ---
 title: Blue Night Obsidian Theme Specification
-version: 4.2.0
+version: 4.3.0
 date_created: 2026-07-10
-date_updated: 2026-08-08
+date_updated: 2026-08-10
 tags: [design, app, theme, css, obsidian]
 ---
 
@@ -60,6 +60,8 @@ upstream class changes.
 - Do not build selectors around deep DOM nesting when a variable exists.
 - User snippets must remain able to override Blue Night.
 - Avoid global element geometry overrides such as changing every `input[type='search']` padding.
+- Do not duplicate component geometry already represented by documented variables. In particular,
+  navigation child indentation and indentation-guide placement remain owned by Obsidian.
 
 ### 3.3 Keep assets offline
 
@@ -90,6 +92,24 @@ Blue Night exposes these Style Settings accent flavors:
 The preset selector is a `class-select`. Each preset class may set **only** the native
 `--accent-h`, `--accent-s`, and `--accent-l` primitives. It must not introduce a second accent
 system.
+
+Named presets may use mode-specific lightness values while preserving their hue/saturation identity
+and the same native HSL sink. In light mode the bundled presets use these contrast-tuned lightness
+values:
+
+| Accent | Light-mode `--accent-l` |
+| --- | ---: |
+| Blue Night | `40%` |
+| Sapphire | `29%` |
+| Lavender | `51%` |
+| Mauve | `46%` |
+| Teal | `25%` |
+| Pink | `34%` |
+| Peach | `30%` |
+
+This is not a second accent system: the light-mode rules still write only `--accent-l` and all
+consumers continue to resolve through the native `--accent-h/s/l` primitives. Custom remains
+user-controlled and therefore cannot be guaranteed to meet the bundled contrast targets.
 
 The custom picker is intentionally separate:
 
@@ -132,6 +152,7 @@ Canvas presets may alter background/base tokens but must never replace the selec
 | `--color-base-30` | `#232e45` | borders |
 | `--text-normal` | `#cdd9f0` | primary text |
 | `--text-muted` | `#9db0d0` | secondary text |
+| `--text-faint` | `#788bae` | subdued but readable text/icons |
 
 Dark canvas variants:
 
@@ -158,6 +179,7 @@ Reference surface tokens for the additional variants:
 | `--color-base-30` | `#d7e0ec` | borders |
 | `--text-normal` | `#1c2433` | primary text |
 | `--text-muted` | `#4b5a75` | secondary text |
+| `--text-faint` | `#54667f` | subdued but readable text/icons |
 
 Light canvas variants:
 
@@ -177,18 +199,19 @@ Blue Mist reference tokens:
 ### 5.3 Catppuccin-inspired supporting palette
 
 The supporting palette is part of Blue Night's visual identity and remains available regardless of
-the selected interactive accent:
+the selected interactive accent. Light mode uses darker counterparts rather than reusing pastel
+dark-mode values as text colors.
 
-| Token | Dark value | Typical role |
-| --- | --- | --- |
-| `--bn-blue` | `#8ab4fa` | functions, properties, blue semantic states |
-| `--bn-purple` | `#b4befe` | keywords, secondary emphasis |
-| `--bn-cyan` | `#8bd5ca` | operators, informational states |
-| `--bn-green` | `#a6da95` | strings, success |
-| `--bn-yellow` | `#eed49f` | warning/highlight |
-| `--bn-orange` | `#f5a97f` | values, important states |
-| `--bn-red` | `#f2879b` | errors/tags |
-| `--bn-pink` | `#f5bde6` | decorative/special states |
+| Token | Dark value | Light value | Typical role |
+| --- | --- | --- | --- |
+| `--bn-blue` | `#8ab4fa` | `#0a53e5` | functions, properties, blue semantic states |
+| `--bn-purple` | `#b4befe` | `#6f46c9` | keywords, secondary emphasis |
+| `--bn-cyan` | `#8bd5ca` | `#116c71` | operators, informational states |
+| `--bn-green` | `#a6da95` | `#24701e` | strings, success |
+| `--bn-yellow` | `#eed49f` | `#8d5400` | warning/highlight |
+| `--bn-orange` | `#f5a97f` | `#a54300` | values, important states |
+| `--bn-red` | `#f2879b` | `#c20e35` | errors/tags |
+| `--bn-pink` | `#f5bde6` | `#9f388b` | decorative/special states |
 
 Choosing Sapphire, Lavender, Mauve, Teal, Pink, Peach, or a custom accent changes the interactive
 accent family. It must not flatten syntax highlighting or semantic states into a single color.
@@ -202,6 +225,17 @@ light combinations. These are compositional combinations, not 64 separately main
 Canvas classes may override `--color-base-*` and directly related surface tokens such as
 `--code-background` and `--glass-bg`. Canvas classes must not set `--accent-h`, `--accent-s`, or
 `--accent-l`.
+
+### 5.5 Contrast targets
+
+For bundled presets, normal-sized text roles that Blue Night owns — including `--text-faint`,
+syntax comments, semantic support colors, and named interactive accents used as text — target at
+least **4.5:1** against the primary, secondary, and elevated surfaces on which they are used.
+Interactive outlines/icons that communicate state should also avoid disappearing into their
+surface; prefer already contrast-tuned semantic text tokens when a darker base token is too faint.
+
+The target applies to the bundled named accents and palettes. User-selected Custom accent values are
+explicitly outside that guarantee.
 
 ## 6. Component contracts
 
@@ -234,11 +268,24 @@ rgb(var(--callout-color))
 The theme must remain valid whether the app provides legacy or new callout internals by avoiding
 manual conversion of that variable.
 
-### 6.4 File explorer icons
+### 6.4 File explorer icons and indentation guides
 
 Folder/file/vault icons are optional SVG-mask enhancements. They may target current explorer DOM
 classes, but their failure must only remove the decoration. Core file/folder text, selection,
 indentation, and navigation must remain driven by Obsidian variables.
+
+Folder indentation guides must use Obsidian's documented navigation contract:
+
+```css
+--nav-item-children-padding-start
+--nav-item-children-margin-start
+--nav-indentation-guide-width
+--nav-indentation-guide-color
+```
+
+Blue Night must not reproduce the guide by assigning `margin-inline-start`, `padding-inline-start`,
+and `border-inline-start` directly to `.nav-folder-children`. The app owns that geometry so the guide
+stays aligned when File Explorer spacing changes upstream.
 
 ### 6.5 Custom task states
 
@@ -272,6 +319,16 @@ Scrollbar colors use:
 
 The theme/snippet may directly set scrollbar thickness because Obsidian does not expose a public
 width variable.
+
+### 6.8 Tables and bundled snippets
+
+Bundled snippets must use documented component variables when available. A direct selector is
+acceptable only for a narrowly scoped presentation property with no documented variable and must
+fail safely if upstream markup changes.
+
+For example, Obsidian exposes table line-height/text/header sizing variables but does not currently
+document cell-padding variables. `compact-tables.css` therefore uses the documented sizing
+variables and a narrow `th`/`td` padding rule instead of inventing unsupported custom-property names.
 
 ## 7. Style Settings contract
 
@@ -319,6 +376,8 @@ Plugin-specific selectors must not affect core Obsidian components when the plug
 - Hover-only features must also expose keyboard focus where applicable.
 - Mobile disables expensive backdrop blur and desktop-only floating status-bar positioning.
 - Text and interactive states must remain legible in dark and light palettes.
+- Bundled named accents and theme-owned normal-sized text colors target 4.5:1 on their intended
+  bundled surfaces.
 - Print/PDF mode uses an ink-friendly light surface.
 
 ## 10. Release contract
@@ -351,12 +410,17 @@ Before release, manually verify:
 - switching canvas variants without changing the selected accent;
 - representative cross-axis combinations: Midnight Navy + Sapphire, Storm Blue + Peach,
   Dark Charcoal/OLED + Mauve, Cozy Pastels + Teal, and Blue Mist + Pink;
+- bundled named accent text/selected-state contrast on every light canvas;
+- faint text, syntax comments, semantic support colors, and navigation icons on every canvas;
+- nested File Explorer folders with Folder Indent Guides enabled and disabled; guide position must
+  follow Obsidian's native indentation and remain centered at every nesting level;
 - supporting syntax/semantic colors remain multi-color under every accent flavor;
 - theme with Style Settings disabled;
 - Source mode, Live Preview, Reading view;
 - search inputs and clear buttons;
 - file explorer and navigation states;
 - tabs, ribbon, prompts, properties, tags, callouts, tasks, tables, Canvas, status bar;
+- every bundled snippet, including Reading/Live Preview coverage where relevant;
 - keyboard focus states;
 - mobile-responsive behavior;
 - reduced-motion mode;
@@ -373,6 +437,9 @@ Static review must also confirm:
 - no independently consumed duplicate accent source of truth;
 - no `rgb(var(--callout-color))`;
 - no broad global input padding override;
+- no manual `.nav-folder-children` indentation/guide geometry;
+- bundled snippets do not depend on undocumented custom properties when a documented contract is
+  available;
 - no Live Preview vertical-margin override.
 
 ## 12. References
@@ -380,6 +447,9 @@ Static review must also confirm:
 - Obsidian Developer Documentation — Theme guidelines
 - Obsidian Developer Documentation — Build a theme
 - Obsidian Developer Documentation — CSS variable reference
+- Obsidian Developer Documentation — Navigation CSS variables
+- Obsidian Developer Documentation — Table CSS variables
+- Obsidian Developer Documentation — Callout CSS variables
 - Obsidian Developer Documentation — Submit your theme
 - Style Settings — setting-definition documentation
 - Obsidian 1.13 developer changelog for the callout-color and CodeMirror changes
