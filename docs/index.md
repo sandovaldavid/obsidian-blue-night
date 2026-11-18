@@ -28,7 +28,7 @@ title: Blue Night
     </div>
     <div class="feature-card" data-accent="teal">
       <h3>Selectable accent flavors</h3>
-      <p>Choose Blue Night, Sapphire, Lavender, Mauve, Teal, Pink, Peach, or Custom. Every option converges on Obsidian's native <code>--accent-h</code>, <code>--accent-s</code>, and <code>--accent-l</code> variables; named light-mode presets use contrast-tuned lightness values.</p>
+      <p>Choose Blue Night, Sapphire, Lavender, Mauve, Teal, Pink, Peach, Kodev Mist, Kodev Pulse, or Custom. Every option converges on Obsidian's native <code>--accent-h</code>, <code>--accent-s</code>, and <code>--accent-l</code> variables; named light-mode presets use contrast-tuned lightness values.</p>
     </div>
     <div class="feature-card" data-accent="lavender">
       <h3>Catppuccin-inspired support colors</h3>
@@ -53,8 +53,10 @@ title: Blue Night
   <h2>Canvas and accent combinations</h2>
   <p class="section-lead">
     Canvas variants and accent flavors are independent. Dark mode offers Blue Night, Midnight Navy,
-    Storm Blue, OLED, and Cozy Pastels; light mode offers Clean Blue, Blue Mist, and Cozy Pastels
-    Light. Mix any of them with Blue Night, Sapphire, Lavender, Mauve, Teal, Pink, Peach, or your own custom accent.
+    Storm Blue, OLED, Cozy Pastels, Kodev Mist, Kodev Dusk, Kodev Pulse, and Kodev Nocturne; light
+    mode offers Clean Blue, Blue Mist, Cozy Pastels Light, and Kodev Light. Mix any of them with
+    Blue Night, Sapphire, Lavender, Mauve, Teal, Pink, Peach, Kodev Mist, Kodev Pulse, or your own
+    custom accent.
   </p>
   <div class="flavor-row">
     <div class="flavor">
@@ -109,6 +111,24 @@ title: Blue Night
       <div class="flavor-info">
         <h3>Blue Mist + Pink</h3>
         <p>A softer blue-tinted light canvas with contrast-tuned Pink and supporting colors for daylight work.</p>
+      </div>
+    </div>
+    <div class="flavor">
+      <div class="swatch" style="background:#0f172a">
+        <span style="background:#95b5d5"></span><span style="background:#8ab4fa"></span><span style="background:#8bd5ca"></span><span style="background:#b4befe"></span>
+      </div>
+      <div class="flavor-info">
+        <h3>Kodev Mist + Kodev Mist</h3>
+        <p>Calm slate/navy surfaces from the Kodev workstation family paired with the muted steel-blue Kodev Mist accent (alongside Dusk, Pulse, and Nocturne dark variants).</p>
+      </div>
+    </div>
+    <div class="flavor">
+      <div class="swatch" style="background:#f8fafc">
+        <span style="background:#005b85"></span><span style="background:#0a53e5"></span><span style="background:#116c71"></span><span style="background:#6f46c9"></span>
+      </div>
+      <div class="flavor-info">
+        <h3>Kodev Light + Kodev Pulse</h3>
+        <p>Crisp Slate light surfaces from the Kodev workstation family with contrast-tuned Kodev Pulse cyan for daylight legibility.</p>
       </div>
     </div>
   </div>

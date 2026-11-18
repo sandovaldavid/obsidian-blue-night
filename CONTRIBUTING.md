@@ -80,6 +80,8 @@ Style Settings exposes a `class-select` named `bn-accent-flavor` with these choi
 - `bn-accent-teal`;
 - `bn-accent-pink`;
 - `bn-accent-peach`;
+- `bn-accent-kodev-mist`;
+- `bn-accent-kodev-pulse`;
 - `bn-accent-custom`.
 
 Each preset class may set only the native `--accent-h`, `--accent-s`, and `--accent-l` primitives.
@@ -104,8 +106,8 @@ legible on their respective canvases.
 ### Canvas contract
 
 Canvas variants are independent from the selected accent. Dark variants are Blue Night, Midnight
-Navy, Storm Blue, Dark Charcoal/OLED, and Cozy Pastels. Light variants are Clean Blue, Blue Mist,
-and Cozy Pastels Light.
+Navy, Storm Blue, Dark Charcoal/OLED, Cozy Pastels, Kodev Mist, Kodev Dusk, Kodev Pulse, and Kodev
+Nocturne. Light variants are Clean Blue, Blue Mist, Cozy Pastels Light, and Kodev Light.
 
 A canvas class may override background/base palette tokens plus closely related surface tokens such
 as `--code-background` and `--glass-bg`. It must not write `--accent-h`, `--accent-s`, or
@@ -173,14 +175,17 @@ Reload Obsidian after CSS changes. Restart Obsidian after changing `manifest.jso
 Verify at minimum:
 
 - dark and light mode;
-- Blue Night, Midnight Navy, Storm Blue, Dark Charcoal/OLED, and Cozy Pastels dark canvases;
-- Clean Blue, Blue Mist, and Cozy Pastels Light light canvases;
-- Blue Night, Sapphire, Lavender, Mauve, Teal, Pink, and Peach accent flavors;
+- Blue Night, Midnight Navy, Storm Blue, Dark Charcoal/OLED, Cozy Pastels, Kodev Mist, Kodev Dusk,
+  Kodev Pulse, and Kodev Nocturne dark canvases;
+- Clean Blue, Blue Mist, Cozy Pastels Light, and Kodev Light light canvases;
+- Blue Night, Sapphire, Lavender, Mauve, Teal, Pink, Peach, Kodev Mist, and Kodev Pulse accent
+  flavors;
 - Custom accent flavor plus multiple custom picker values;
 - switching between preset accents and Custom without stale styles;
 - switching between canvas variants without changing the selected accent;
 - representative cross-axis combinations, including Midnight Navy + Sapphire, Storm Blue + Peach,
-  OLED + Mauve, Cozy Pastels + Teal, and Blue Mist + Pink;
+  OLED + Mauve, Cozy Pastels + Teal, Kodev Mist + Kodev Mist, Kodev Pulse + Kodev Pulse, and Blue
+  Mist + Pink;
 - named accent text/selected-state contrast across every light canvas;
 - `text-faint`, code comments, supporting semantic colors, checkboxes, and navigation icons across
   every bundled canvas;
