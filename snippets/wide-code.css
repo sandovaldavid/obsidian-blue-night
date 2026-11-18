@@ -1,26 +1,46 @@
 /* ==========================================================
    BLUE NIGHT — Wide Code & Tables Snippet
-   Lets code blocks, tables, and Dataview results extend beyond
-   the readable line width on desktop without contradictory
-   min/max-width rules.
+   Lets top-level code blocks, tables, and Dataview results
+   extend beyond readable line width without overflowing sidebars
+   or misaligning narrow tables.
    ========================================================== */
 
-body:not(.is-mobile) .markdown-rendered :is(pre, table, .block-language-dataview) {
-  --bn-wide-extra: min(18vw, 240px);
-  position: relative;
-  left: 50%;
-  width: min(1100px, calc(100% + var(--bn-wide-extra)));
-  max-width: calc(100vw - 48px);
-  transform: translateX(-50%);
-}
+@media screen {
+  body:not(.is-mobile)
+    .markdown-preview-view.is-readable-line-width:not(.markdown-embed .markdown-preview-view) {
+    container-type: inline-size;
+  }
 
-/* Keep overflow inside wide technical blocks rather than the page. */
-body:not(.is-mobile) .markdown-rendered pre,
-body:not(.is-mobile) .markdown-rendered .block-language-dataview {
-  overflow-x: auto;
-}
+  body:not(.is-mobile)
+    .markdown-preview-view.is-readable-line-width:not(.markdown-embed .markdown-preview-view)
+    .markdown-preview-sizer
+    > div
+    > :where(pre, table, .block-language-dataview) {
+    --bn-wide-extra: min(18cqi, 240px);
+    position: relative;
+    left: 50%;
+    max-width: min(1100px, 100cqi);
+    transform: translateX(-50%);
+  }
 
-body:not(.is-mobile) .markdown-rendered table {
-  display: block;
-  overflow-x: auto;
+  /* Keep overflow inside wide technical blocks rather than the page. */
+  body:not(.is-mobile)
+    .markdown-preview-view.is-readable-line-width:not(.markdown-embed .markdown-preview-view)
+    .markdown-preview-sizer
+    > div
+    > :is(pre, .block-language-dataview) {
+    width: min(1100px, calc(100% + var(--bn-wide-extra)));
+    overflow-x: auto;
+  }
+
+  body:not(.is-mobile)
+    .markdown-preview-view.is-readable-line-width:not(.markdown-embed .markdown-preview-view)
+    .markdown-preview-sizer
+    > div
+    > table {
+    display: block;
+    width: max-content;
+    min-width: 100%;
+    overflow-x: auto;
+  }
 }

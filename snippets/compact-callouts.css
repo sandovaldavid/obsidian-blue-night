@@ -9,13 +9,21 @@ body {
   --callout-title-padding: 0;
   --callout-content-padding: 4px 0 0;
   --callout-title-size: 0.9em;
-  --callout-radius: var(--radius-s, 6px);
+  --callout-radius: 0 var(--radius-s, 6px) var(--radius-s, 6px) 0;
 }
 
-.callout-content > :first-child {
+body:is(.mod-rtl, .is-rtl, .rtl),
+.callout:dir(rtl) {
+  --callout-padding: 8px 10px;
+  --callout-radius: var(--radius-s, 6px) 0 0 var(--radius-s, 6px);
+}
+
+.callout .callout-content > :first-child,
+.markdown-source-view.mod-cm6 .callout .callout-content > :first-child {
   margin-top: 0;
 }
 
-.callout-content > :last-child {
+.callout .callout-content > :last-child,
+.markdown-source-view.mod-cm6 .callout .callout-content > :last-child {
   margin-bottom: 0;
 }

@@ -2,7 +2,7 @@
 title: Blue Night Obsidian Theme Specification
 version: 4.3.0
 date_created: 2026-07-10
-date_updated: 2026-08-10
+date_updated: 2026-11-18
 tags: [design, app, theme, css, obsidian]
 ---
 
@@ -144,15 +144,15 @@ Canvas presets may alter background/base tokens but must never replace the selec
 
 ### 5.1 Dark default
 
-| Token             | Value     | Role                            |
-| ----------------- | --------- | ------------------------------- |
-| `--color-base-00` | `#0f1523` | editor/workspace canvas         |
-| `--color-base-10` | `#0b1019` | sidebars and recessed panels    |
-| `--color-base-20` | `#151d2e` | elevated surfaces               |
-| `--color-base-30` | `#232e45` | borders                         |
-| `--text-normal`   | `#cdd9f0` | primary text                    |
-| `--text-muted`    | `#9db0d0` | secondary text                  |
-| `--text-faint`    | `#788bae` | subdued but readable text/icons |
+| Token             | Value                                                        | Role                            |
+| ----------------- | ------------------------------------------------------------ | ------------------------------- |
+| `--color-base-00` | `#0f1523`                                                    | editor/workspace canvas         |
+| `--color-base-10` | `#0b1019`                                                    | sidebars and recessed panels    |
+| `--color-base-20` | `#151d2e`                                                    | elevated surfaces               |
+| `--color-base-30` | `#232e45`                                                    | borders                         |
+| `--text-normal`   | `var(--color-base-100)` (`#cdd9f0` default)                  | primary text                    |
+| `--text-muted`    | `var(--color-base-70)` (`#9db0d0` default)                   | secondary text                  |
+| `--text-faint`    | `color-mix` of `--color-base-70` / `-60` (`#8194b5` default) | subdued but readable text/icons |
 
 Dark canvas variants:
 
@@ -171,15 +171,15 @@ Reference surface tokens for the additional variants:
 
 ### 5.2 Light default
 
-| Token             | Value     | Role                            |
-| ----------------- | --------- | ------------------------------- |
-| `--color-base-00` | `#f7f9fc` | editor/workspace canvas         |
-| `--color-base-10` | `#eef2f8` | sidebars and recessed panels    |
-| `--color-base-20` | `#e5ebf4` | elevated surfaces               |
-| `--color-base-30` | `#d7e0ec` | borders                         |
-| `--text-normal`   | `#1c2433` | primary text                    |
-| `--text-muted`    | `#4b5a75` | secondary text                  |
-| `--text-faint`    | `#54667f` | subdued but readable text/icons |
+| Token             | Value                                                        | Role                            |
+| ----------------- | ------------------------------------------------------------ | ------------------------------- |
+| `--color-base-00` | `#f7f9fc`                                                    | editor/workspace canvas         |
+| `--color-base-10` | `#eef2f8`                                                    | sidebars and recessed panels    |
+| `--color-base-20` | `#e5ebf4`                                                    | elevated surfaces               |
+| `--color-base-30` | `#d7e0ec`                                                    | borders                         |
+| `--text-normal`   | `var(--color-base-100)` (`#1c2433` default)                  | primary text                    |
+| `--text-muted`    | `var(--color-base-70)` (`#4b5a75` default)                   | secondary text                  |
+| `--text-faint`    | `color-mix` of `--color-base-70` / `-60` (`#51617d` default) | subdued but readable text/icons |
 
 Light canvas variants:
 
@@ -309,16 +309,20 @@ replacing core prompt sizing behavior.
 
 ### 6.7 Scrollbars
 
-Scrollbar colors use:
+Scrollbar colors and geometry use Obsidian's public scrollbar variables:
 
 ```css
 --scrollbar-bg
 --scrollbar-thumb-bg
 --scrollbar-active-thumb-bg
+--scrollbar-width
+--scrollbar-height
+--scrollbar-border-width
+--scrollbar-radius
 ```
 
-The theme/snippet may directly set scrollbar thickness because Obsidian does not expose a public
-width variable.
+A scoped `body.styled-scrollbars ::-webkit-scrollbar` fallback supports earlier 1.12–1.14 builds
+without overriding native macOS overlay scrollbars.
 
 ### 6.8 Tables and bundled snippets
 
@@ -328,11 +332,12 @@ fail safely if upstream markup changes.
 
 For example, Obsidian exposes table line-height/text/header sizing variables but does not currently
 document cell-padding variables. `compact-tables.css` therefore uses the documented sizing
-variables and a narrow `th`/`td` padding rule instead of inventing unsupported custom-property names.
+variables and narrowly scoped `th`/`td` (Reading) and `.cm-table-widget .table-cell-wrapper`
+(Live Preview) padding rules instead of inventing unsupported custom-property names.
 
 ## 7. Style Settings contract
 
-Style Settings is optional. Blue Night must render correctly without the plugin.
+Style Settings is optional. Blue Night must render correctly without the plugin, including contrast-safe default Light mode lightness (`40%`) under `.theme-light`.
 
 The root Style Settings identifier is `kodev-blue-night`. Keep it stable to preserve persisted user
 preferences across theme updates.
@@ -378,7 +383,7 @@ Plugin-specific selectors must not affect core Obsidian components when the plug
 - Text and interactive states must remain legible in dark and light palettes.
 - Bundled named accents and theme-owned normal-sized text colors target 4.5:1 on their intended
   bundled surfaces.
-- Print/PDF mode uses an ink-friendly light surface.
+- Print/PDF mode resets `html, body` and `.print` under `@media print` with `color-scheme: light` to ensure ink-friendly output even when triggered from Dark mode.
 
 ## 10. Release contract
 

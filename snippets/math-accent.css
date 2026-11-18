@@ -14,10 +14,18 @@ body.theme-light {
 
 .markdown-rendered mjx-container,
 .markdown-rendered .math,
+.markdown-source-view.mod-cm6 mjx-container,
 .markdown-source-view.mod-cm6 .cm-math {
   color: var(--bn-math-accent, var(--text-accent));
 }
 
-.markdown-rendered mjx-container[display='true'] {
+.markdown-rendered mjx-container[display='true'],
+.markdown-source-view.mod-cm6 mjx-container[display='true'] {
   padding-block: 0.15em;
+}
+
+@media print {
+  .print {
+    --bn-math-accent: #116c71;
+  }
 }

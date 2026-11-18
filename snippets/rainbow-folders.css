@@ -1,8 +1,8 @@
 /* ==========================================================
    BLUE NIGHT — Rainbow Folders Snippet
    Tints each top-level folder with a different pastel.
-   Blue Night tokens are preferred in dark mode; sensible
-   standalone fallbacks keep the snippet portable.
+   Blue Night tokens are preferred when present; standalone
+   fallbacks keep the snippet portable across themes.
    ========================================================== */
 
 body.theme-dark {
@@ -20,46 +20,71 @@ body.theme-dark {
    counterparts so folder labels remain readable across Blue Night's
    Clean Blue, Blue Mist, and Cozy Pastels Light canvases. */
 body.theme-light {
-  --rf-blue: #0a53e5;
-  --rf-purple: #6f46c9;
-  --rf-cyan: #116c71;
-  --rf-green: #24701e;
-  --rf-yellow: #8d5400;
-  --rf-orange: #a54300;
-  --rf-red: #c20e35;
-  --rf-pink: #9f388b;
+  --rf-blue: var(--bn-blue, #0a53e5);
+  --rf-purple: var(--bn-purple, #6f46c9);
+  --rf-cyan: var(--bn-cyan, #116c71);
+  --rf-green: var(--bn-green, #24701e);
+  --rf-yellow: var(--bn-yellow, #8d5400);
+  --rf-orange: var(--bn-orange, #a54300);
+  --rf-red: var(--bn-red, #c20e35);
+  --rf-pink: var(--bn-pink, #9f388b);
 }
 
-/* Top-level folders cycle through 8 Blue Night/Catppuccin-inspired tints. */
-.nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 1) > .nav-folder-title {
+/* Top-level folders cycle through 8 Blue Night/Catppuccin-inspired tints
+   while preserving Obsidian's active, selected, and dragged states. */
+.nav-folder.mod-root
+  > .nav-folder-children
+  > .nav-folder:nth-child(8n + 1)
+  > .nav-folder-title:not(.is-active, .is-selected, .is-being-dragged) {
   color: var(--rf-blue);
 }
 
-.nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 2) > .nav-folder-title {
+.nav-folder.mod-root
+  > .nav-folder-children
+  > .nav-folder:nth-child(8n + 2)
+  > .nav-folder-title:not(.is-active, .is-selected, .is-being-dragged) {
   color: var(--rf-purple);
 }
 
-.nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 3) > .nav-folder-title {
+.nav-folder.mod-root
+  > .nav-folder-children
+  > .nav-folder:nth-child(8n + 3)
+  > .nav-folder-title:not(.is-active, .is-selected, .is-being-dragged) {
   color: var(--rf-cyan);
 }
 
-.nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 4) > .nav-folder-title {
+.nav-folder.mod-root
+  > .nav-folder-children
+  > .nav-folder:nth-child(8n + 4)
+  > .nav-folder-title:not(.is-active, .is-selected, .is-being-dragged) {
   color: var(--rf-green);
 }
 
-.nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 5) > .nav-folder-title {
+.nav-folder.mod-root
+  > .nav-folder-children
+  > .nav-folder:nth-child(8n + 5)
+  > .nav-folder-title:not(.is-active, .is-selected, .is-being-dragged) {
   color: var(--rf-yellow);
 }
 
-.nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 6) > .nav-folder-title {
+.nav-folder.mod-root
+  > .nav-folder-children
+  > .nav-folder:nth-child(8n + 6)
+  > .nav-folder-title:not(.is-active, .is-selected, .is-being-dragged) {
   color: var(--rf-orange);
 }
 
-.nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 7) > .nav-folder-title {
+.nav-folder.mod-root
+  > .nav-folder-children
+  > .nav-folder:nth-child(8n + 7)
+  > .nav-folder-title:not(.is-active, .is-selected, .is-being-dragged) {
   color: var(--rf-red);
 }
 
-.nav-folder.mod-root > .nav-folder-children > .nav-folder:nth-child(8n + 8) > .nav-folder-title {
+.nav-folder.mod-root
+  > .nav-folder-children
+  > .nav-folder:nth-child(8n + 8)
+  > .nav-folder-title:not(.is-active, .is-selected, .is-being-dragged) {
   color: var(--rf-pink);
 }
 

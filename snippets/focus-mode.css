@@ -5,14 +5,14 @@
    Works with any theme.
    ========================================================== */
 
-body:not(.is-mobile) .workspace-ribbon.mod-left,
+body:not(.is-mobile) .workspace-ribbon:is(.mod-left, .mod-primary),
 body:not(.is-mobile) .workspace-tab-header-container,
 body:not(.is-mobile) .status-bar {
   opacity: 0.08;
   transition: opacity 0.3s ease;
 }
 
-body:not(.is-mobile) .workspace-ribbon.mod-left:is(:hover, :focus-within),
+body:not(.is-mobile) .workspace-ribbon:is(.mod-left, .mod-primary):is(:hover, :focus-within),
 body:not(.is-mobile) .workspace-tab-header-container:is(:hover, :focus-within),
 body:not(.is-mobile) .status-bar:is(:hover, :focus-within) {
   opacity: 1;
@@ -29,7 +29,7 @@ body:not(.is-mobile) .view-header:is(:hover, :focus-within) {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body:not(.is-mobile) .workspace-ribbon.mod-left,
+  body:not(.is-mobile) .workspace-ribbon:is(.mod-left, .mod-primary),
   body:not(.is-mobile) .workspace-tab-header-container,
   body:not(.is-mobile) .status-bar,
   body:not(.is-mobile) .view-header {

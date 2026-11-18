@@ -1,21 +1,28 @@
 /* ==========================================================
    BLUE NIGHT — Minimal Scrollbar Snippet
-   Keeps scrollbar colors on Obsidian's public variables and
-   changes only the physical thickness directly.
+   Keeps scrollbar styling on Obsidian's public scrollbar
+   variables with a scoped WebKit fallback for older builds.
    ========================================================== */
 
 body {
+  --scrollbar-width: 6px;
+  --scrollbar-height: 6px;
+  --scrollbar-border-width: 1px;
+  --scrollbar-radius: 10px;
+}
+
+body:is(.theme-dark, .theme-light) {
   --scrollbar-bg: transparent;
-  --scrollbar-thumb-bg: var(--color-base-30, rgba(141, 161, 196, 0.2));
+  --scrollbar-thumb-bg: var(--color-base-40, rgba(141, 161, 196, 0.25));
   --scrollbar-active-thumb-bg: var(--text-accent, var(--interactive-accent));
 }
 
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+body.styled-scrollbars ::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+  height: var(--scrollbar-height);
 }
 
-::-webkit-scrollbar-thumb {
-  border: 1px solid transparent;
-  border-radius: 10px;
+body.styled-scrollbars ::-webkit-scrollbar-thumb {
+  border: var(--scrollbar-border-width) solid transparent;
+  border-radius: var(--scrollbar-radius);
 }
