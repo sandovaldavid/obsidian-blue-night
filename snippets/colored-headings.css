@@ -16,12 +16,23 @@ body.theme-dark {
 /* Darker light-mode counterparts keep every heading readable on all
    bundled light canvases while preserving the same hue families. */
 body.theme-light {
-  --h1-color: #0a53e5;
-  --h2-color: #6f46c9;
-  --h3-color: #116c71;
-  --h4-color: #24701e;
-  --h5-color: #8d5400;
-  --h6-color: #a54300;
+  --h1-color: var(--bn-blue, #0a53e5);
+  --h2-color: var(--bn-purple, #6f46c9);
+  --h3-color: var(--bn-cyan, #116c71);
+  --h4-color: var(--bn-green, #24701e);
+  --h5-color: var(--bn-yellow, #8d5400);
+  --h6-color: var(--bn-orange, #a54300);
+}
+
+@media print {
+  .print {
+    --h1-color: #0a53e5;
+    --h2-color: #6f46c9;
+    --h3-color: #116c71;
+    --h4-color: #24701e;
+    --h5-color: #8d5400;
+    --h6-color: #a54300;
+  }
 }
 
 /* Obsidian consumes the heading variables in Reading view and Live

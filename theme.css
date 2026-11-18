@@ -42,7 +42,7 @@ settings:
         value: bn-accent-custom
   - id: bn-custom-accent
     title: Custom Accent Color
-    description: Used only when Accent Flavor is set to Custom. Presets and custom colors share Obsidian's native accent HSL contract.
+    description: Used only when Accent Flavor is set to Custom. Default #8ab4fa is dark-tuned; lower lightness in Light Mode for contrast.
     type: variable-color
     format: hsl-split
     default: '#8ab4fa'
@@ -94,7 +94,7 @@ settings:
     level: 1
   - id: kodev-blue-night-enable-raycast-prompt
     title: Raycast Style Command Palette
-    description: Adds a centered floating treatment to prompts while preserving Obsidian prompt variables.
+    description: Adds a centered floating glass treatment to desktop prompts while preserving Obsidian prompt variables.
     type: class-toggle
     default: true
   - id: kodev-blue-night-enable-mac-explorer
@@ -104,7 +104,7 @@ settings:
     default: true
   - id: kodev-blue-night-enable-baseline-metadata
     title: Metadata Card
-    description: Adds a subtle card treatment to note properties.
+    description: Adds a subtle card treatment to note properties in the editor pane.
     type: class-toggle
     default: true
   - id: kodev-blue-night-enable-folder-guides
@@ -226,6 +226,195 @@ body {
   --bn-blue: #8ab4fa;
   --bn-purple: #b4befe;
   --bn-pink: #f5bde6;
+  --callout-quote: var(--text-muted);
+
+  /* Shared UI chrome & layout tokens (mode colors live under .theme-dark / .theme-light). */
+  --tab-background-active: var(--background-primary);
+  --tab-container-background: var(--background-secondary);
+  --tab-divider-color: var(--background-modifier-border);
+  --tab-outline-color: var(--background-modifier-border);
+  --tab-outline-width: 1px;
+  --tab-curve: 0px;
+  --tab-radius: var(--radius-m);
+  --tab-radius-active: var(--radius-m) var(--radius-m) 0 0;
+  --tab-text-color: var(--text-muted);
+  --tab-text-color-active: var(--text-normal);
+  --tab-text-color-focused-active: var(--text-normal);
+  --tab-text-color-focused-active-current: var(--text-normal);
+  --tab-font-size: 13px;
+  --tab-font-weight: 500;
+
+  --file-header-background: var(--background-primary);
+  --file-header-background-focused: var(--background-primary);
+  --file-header-border: var(--border-width, 1px) solid var(--background-modifier-border);
+
+  --titlebar-background: var(--background-secondary);
+  --titlebar-background-focused: var(--background-secondary);
+  --titlebar-border-width: 0px;
+  --titlebar-border-color: transparent;
+  --titlebar-text-color: var(--text-muted);
+  --titlebar-text-color-focused: var(--text-normal);
+
+  --nav-item-color: var(--text-muted);
+  --nav-item-color-hover: var(--text-normal);
+  --nav-item-color-active: var(--text-accent);
+  --nav-item-color-selected: var(--text-accent);
+  --nav-item-background-hover: var(--bn-accent-soft);
+  --nav-item-background-active: var(--bn-accent-soft);
+  --nav-item-background-selected: var(--bn-accent-medium);
+  --nav-item-weight: 400;
+  --nav-item-weight-hover: 400;
+  --nav-item-weight-active: 600;
+  --nav-indentation-guide-color: var(--color-base-30);
+  --nav-indentation-guide-width: 0px;
+  --nav-collapse-icon-color: var(--text-faint);
+  --nav-collapse-icon-color-collapsed: var(--text-faint);
+
+  --status-bar-background: var(--background-secondary);
+  --status-bar-border-color: var(--divider-color);
+  --status-bar-font-size: 11px;
+  --status-bar-text-color: var(--text-muted);
+
+  --scrollbar-bg: transparent;
+  --scrollbar-thumb-bg: var(--color-base-40);
+  --scrollbar-active-thumb-bg: var(--color-base-60);
+  --scrollbar-width: 6px;
+  --scrollbar-height: 6px;
+  --scrollbar-border-width: 1px;
+  --scrollbar-radius: 10px;
+
+  --menu-background: var(--background-secondary-alt);
+  --menu-border-color: var(--background-modifier-border);
+  --menu-radius: var(--radius-l);
+  --menu-shadow: var(--shadow-s);
+  --tooltip-radius: var(--radius-m);
+  --tooltip-shadow: var(--shadow-s);
+
+  --code-normal: var(--text-normal);
+  --code-size: 0.875em;
+  --code-comment: var(--text-faint);
+  --code-function: var(--bn-blue);
+  --code-important: var(--bn-orange);
+  --code-keyword: var(--bn-purple);
+  --code-operator: var(--bn-cyan);
+  --code-property: var(--bn-blue);
+  --code-punctuation: var(--text-muted);
+  --code-string: var(--bn-green);
+  --code-tag: var(--bn-red);
+  --code-value: var(--bn-orange);
+
+  --inline-title-color: var(--text-accent);
+  --inline-title-font: var(--font-interface);
+  --inline-title-size: 2.1em;
+  --inline-title-weight: 700;
+  --inline-title-line-height: 1.2;
+
+  --h1-color: var(--text-normal);
+  --h2-color: color-mix(in oklab, var(--text-normal) 85%, var(--text-muted));
+  --h3-color: var(--text-normal);
+  --h4-color: var(--text-muted);
+  --h5-color: var(--text-faint);
+  --h6-color: var(--text-faint);
+  --h1-size: 1.85em;
+  --h2-size: 1.5em;
+  --h3-size: 1.25em;
+  --h4-size: 1.125em;
+  --h5-size: 1.025em;
+  --h6-size: 0.95em;
+  --h1-weight: 600;
+  --h2-weight: 500;
+  --h3-weight: 500;
+  --h4-weight: 500;
+  --h5-weight: 500;
+  --h6-weight: 500;
+
+  --link-color: var(--text-accent);
+  --link-color-hover: var(--text-accent-hover);
+  --link-external-color: var(--bn-purple);
+  --link-unresolved-color: var(--text-faint);
+  --link-unresolved-opacity: 1;
+  --link-decoration: none;
+  --link-decoration-hover: underline;
+
+  --graph-text: var(--text-normal);
+  --graph-line: color-mix(in oklab, var(--color-base-50) 45%, var(--color-base-60));
+  --graph-node: var(--text-faint);
+  --graph-node-unresolved: var(--text-normal);
+  --graph-node-focused: var(--text-accent);
+  --graph-node-tag: var(--bn-purple);
+  --graph-node-attachment: var(--bn-cyan);
+
+  /* Properties baseline stays clean across editor and sidebars; card elevation
+     is applied selectively by body.kodev-blue-night-enable-baseline-metadata. */
+  --metadata-background: transparent;
+  --metadata-max-width: 100%;
+  --metadata-padding: var(--size-4-2, 8px) 0;
+  --metadata-border-color: var(--background-modifier-border);
+  --metadata-border-radius: var(--radius-m);
+  --metadata-border-width: 0px;
+  --metadata-gap: 2px;
+  --metadata-divider-color: var(--color-base-25);
+  --metadata-divider-color-hover: var(--color-base-35);
+  --metadata-divider-color-focus: var(--text-accent);
+  --metadata-property-padding: 0;
+  --metadata-property-radius: var(--radius-m);
+  --metadata-property-radius-hover: var(--radius-m);
+  --metadata-property-radius-focus: var(--radius-m);
+  --metadata-property-background: transparent;
+  --metadata-property-background-hover: var(--bn-accent-soft);
+  --metadata-property-background-active: var(--bn-accent-medium);
+  --metadata-label-background-hover: transparent;
+  --metadata-label-background-active: transparent;
+  --metadata-label-font-weight: 500;
+  --metadata-label-text-color: var(--text-muted);
+  --metadata-label-text-color-hover: var(--text-normal);
+  --metadata-input-text-color: var(--text-normal);
+  --metadata-input-background: transparent;
+  --metadata-input-background-hover: transparent;
+  --metadata-input-background-active: transparent;
+
+  --tag-color: var(--text-accent);
+  --tag-color-hover: var(--text-normal);
+  --tag-background: var(--bn-accent-soft);
+  --tag-background-hover: var(--bn-accent-medium);
+  --tag-border-color: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.18);
+  --tag-border-color-hover: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.36);
+  --tag-border-width: 1px;
+  --tag-radius: var(--radius-s);
+
+  --pill-color: var(--text-muted);
+  --pill-color-hover: var(--text-normal);
+  --pill-background: transparent;
+  --pill-background-hover: transparent;
+  --pill-border-color: var(--background-modifier-border);
+  --pill-border-color-hover: var(--text-accent);
+  --pill-border-width: 1px;
+  --pill-radius: 100px;
+
+  --checkbox-radius: var(--radius-s);
+  --checkbox-size: calc(var(--font-preferred-size, 15px) * 1.067);
+  --checkbox-border-color: var(--text-faint);
+  --checkbox-border-color-hover: var(--text-accent);
+  --checkbox-marker-color: var(--background-primary);
+  --checklist-done-decoration: line-through;
+  --checklist-done-color: var(--text-faint);
+
+  --table-background: transparent;
+  --table-border-width: 1px;
+  --table-border-color: var(--background-modifier-border);
+  --table-header-background: var(--background-secondary-alt);
+  --table-header-background-hover: var(--color-base-25);
+  --table-header-color: var(--text-muted);
+  --table-header-weight: 600;
+  --table-header-size: 0.85em;
+  --table-row-background-hover: var(--background-modifier-hover);
+  --table-row-alt-background: transparent;
+  --table-text-size: 0.95em;
+  --table-selection: var(--bn-accent-soft);
+  --table-selection-border-color: var(--text-accent);
+
+  --canvas-background: var(--background-primary);
+  --canvas-dot-pattern: var(--color-base-30);
 
   /* Local SVG assets only. Community themes must work offline. */
   --bn-icon-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
@@ -238,6 +427,18 @@ body {
   --bn-icon-folder-open: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2'/%3E%3C/svg%3E");
   --bn-icon-vault: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z'/%3E%3C/svg%3E");
   --bn-icon-file: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z'/%3E%3Cpath d='M14 2v6h6'/%3E%3C/svg%3E");
+}
+
+body:not(.is-mobile) {
+  --nav-item-size: 13px;
+}
+
+/* Default Light Mode lightness fallback when Style Settings is disabled;
+   named presets and Custom override this below. */
+.theme-light {
+  --accent-h: 218;
+  --accent-s: 92%;
+  --accent-l: 40%;
 }
 
 /* Accent flavors intentionally set only Obsidian's native accent
@@ -323,9 +524,13 @@ body.theme-light.bn-accent-peach {
 
 /* ==========================================================
    1. DARK PALETTE
+   Includes body.is-mobile.theme-dark so Obsidian's mobile dark
+   palette does not override Blue Night's default canvas.
    ========================================================== */
-.theme-dark {
+.theme-dark,
+body.is-mobile.theme-dark {
   --color-base-00: var(--dark-bg-main, #0f1523);
+  --color-base-05: #0d121e;
   --color-base-10: #0b1019;
   --color-base-20: #151d2e;
   --color-base-25: #1a2336;
@@ -337,195 +542,77 @@ body.theme-light.bn-accent-peach {
   --color-base-70: #9db0d0;
   --color-base-100: #cdd9f0;
 
+  --color-red: var(--bn-red);
+  --color-orange: var(--bn-orange);
+  --color-yellow: var(--bn-yellow);
+  --color-green: var(--bn-green);
+  --color-cyan: var(--bn-cyan);
+  --color-blue: var(--bn-blue);
+  --color-purple: var(--bn-purple);
+  --color-pink: var(--bn-pink);
+  --color-red-rgb: 242, 135, 155;
+  --color-orange-rgb: 245, 169, 127;
+  --color-yellow-rgb: 238, 212, 159;
+  --color-green-rgb: 166, 218, 149;
+  --color-cyan-rgb: 139, 213, 202;
+  --color-blue-rgb: 138, 180, 250;
+  --color-purple-rgb: 180, 190, 254;
+  --color-pink-rgb: 245, 189, 230;
+
   --background-primary: var(--color-base-00);
   --background-primary-alt: var(--color-base-10);
   --background-secondary: var(--color-base-10);
   --background-secondary-alt: var(--color-base-20);
   --background-modifier-border: var(--color-base-30);
   --background-modifier-border-hover: var(--color-base-35);
+  --background-modifier-border-focus: var(--bn-accent);
   --background-modifier-hover: var(--bn-accent-soft);
   --background-modifier-active-hover: var(--bn-accent-medium);
+  --background-modifier-message: var(--color-base-25);
 
-  --text-normal: #cdd9f0;
-  --text-muted: #9db0d0;
-  --text-faint: #788bae;
+  --text-normal: var(--color-base-100);
+  --text-muted: var(--color-base-70);
+  --text-faint: color-mix(in oklab, var(--color-base-70) 45%, var(--color-base-60));
   --text-accent: var(--bn-accent);
-  --text-accent-hover: hsl(var(--accent-h), var(--accent-s), 88%);
+  --text-accent-hover: hsl(var(--accent-h), var(--accent-s), min(94%, calc(var(--accent-l) + 10%)));
+  --text-on-accent: var(--color-base-10);
   --text-error: var(--bn-red);
   --text-success: var(--bn-green);
   --text-warning: var(--bn-yellow);
 
   --interactive-normal: var(--color-base-20);
   --interactive-hover: var(--color-base-30);
+  --interactive-accent: var(--bn-accent);
+  --interactive-accent-hover: var(--text-accent-hover);
+  --toggle-thumb-color: var(--color-base-100);
+  --tooltip-color: var(--text-normal);
 
-  --tab-background-active: var(--background-primary);
-  --tab-container-background: var(--background-secondary);
-  --tab-divider-color: var(--background-modifier-border);
-  --tab-outline-color: var(--background-modifier-border);
-  --tab-outline-width: 1px;
-  --tab-curve: 0px;
-  --tab-radius: var(--radius-m);
-  --tab-radius-active: var(--radius-m);
-  --tab-text-color: var(--text-muted);
-  --tab-text-color-active: var(--text-normal);
-  --tab-text-color-focused-active: var(--text-normal);
-  --tab-text-color-focused-active-current: var(--text-normal);
-  --tab-font-size: 13px;
-  --tab-font-weight: 500;
+  --setting-items-background: var(--color-base-20);
+  --setting-items-border-width: 1px;
 
-  --nav-item-size: 13px;
-  --nav-item-color: var(--text-muted);
-  --nav-item-color-hover: var(--text-normal);
-  --nav-item-color-active: var(--text-accent);
-  --nav-item-color-selected: var(--text-accent);
-  --nav-item-background-hover: var(--bn-accent-soft);
-  --nav-item-background-active: var(--bn-accent-soft);
-  --nav-item-background-selected: var(--bn-accent-medium);
-  --nav-item-weight: 400;
-  --nav-item-weight-hover: 400;
-  --nav-item-weight-active: 600;
-  --nav-item-padding: 4px 8px;
-  --nav-indentation-guide-color: var(--color-base-30);
-  --nav-indentation-guide-width: 0px;
-  --nav-collapse-icon-color: var(--text-faint);
-  --nav-collapse-icon-color-collapsed: var(--text-faint);
-
-  --status-bar-background: var(--background-secondary);
-  --status-bar-border-color: transparent;
-  --status-bar-border-width: 0px;
-  --status-bar-font-size: 11px;
-  --status-bar-text-color: var(--text-faint);
-
-  --scrollbar-bg: transparent;
-  --scrollbar-thumb-bg: var(--color-base-30);
-  --scrollbar-active-thumb-bg: var(--color-base-40);
-
-  --code-background: #121a2c;
-  --code-normal: #cdd9f0;
-  --code-size: 0.875em;
-  --code-comment: var(--text-faint);
-  --code-function: var(--bn-blue);
-  --code-important: var(--bn-orange);
-  --code-keyword: var(--bn-purple);
-  --code-operator: var(--bn-cyan);
-  --code-property: var(--bn-blue);
-  --code-punctuation: #9db0d0;
-  --code-string: var(--bn-green);
-  --code-tag: var(--bn-red);
-  --code-value: var(--bn-orange);
-
-  --inline-title-color: var(--text-accent);
-  --inline-title-font: var(--font-interface-theme);
-  --inline-title-size: 2em;
-  --inline-title-weight: 700;
-  --inline-title-line-height: 1.2;
-
-  --h1-color: var(--text-normal);
-  --h2-color: #b9c8e8;
-  --h3-color: var(--text-muted);
-  --h4-color: var(--text-muted);
-  --h5-color: var(--text-faint);
-  --h6-color: var(--text-faint);
-  --h1-size: 2.25rem;
-  --h2-size: 1.75rem;
-  --h3-size: 1.375rem;
-  --h1-weight: 400;
-  --h2-weight: 400;
-  --h3-weight: 400;
-  --h4-weight: 500;
-  --h5-weight: 500;
-  --h6-weight: 500;
-
-  --link-color: var(--text-accent);
-  --link-color-hover: var(--text-accent-hover);
-  --link-external-color: var(--bn-purple);
-  --link-external-color-hover: #c7cdff;
-  --link-unresolved-color: var(--text-faint);
-  --link-decoration: none;
-  --link-decoration-hover: underline;
-
-  --graph-text: var(--text-normal);
-  --graph-line: #2a3a5e;
-  --graph-node: var(--text-faint);
-  --graph-node-unresolved: #31405e;
-  --graph-node-focused: var(--bn-accent);
-  --graph-node-tag: var(--bn-purple);
-  --graph-node-attachment: var(--bn-cyan);
-
-  --titlebar-background: var(--background-secondary);
-  --titlebar-background-focused: var(--background-secondary);
-  --titlebar-border-width: 0px;
-  --titlebar-border-color: transparent;
-  --titlebar-text-color: var(--text-muted);
-  --titlebar-text-color-focused: var(--text-normal);
-
-  --metadata-background: var(--background-secondary);
-  --metadata-max-width: 100%;
-  --metadata-padding: 10px 14px;
-  --metadata-border-color: var(--background-modifier-border);
-  --metadata-border-radius: var(--radius-m);
-  --metadata-border-width: 1px;
-  --metadata-divider-color: var(--color-base-25);
-  --metadata-divider-color-hover: var(--color-base-35);
-  --metadata-divider-color-focus: var(--bn-accent);
-  --metadata-property-radius: var(--radius-s);
-  --metadata-property-radius-hover: var(--radius-m);
-  --metadata-property-radius-focus: var(--radius-m);
-  --metadata-property-background-hover: var(--bn-accent-soft);
-  --metadata-property-background-active: var(--bn-accent-medium);
-  --metadata-input-background: transparent;
-  --metadata-input-background-hover: var(--color-base-20);
-  --metadata-input-background-active: var(--color-base-20);
-
-  --tag-color: var(--text-accent);
-  --tag-color-hover: var(--text-normal);
   --tag-background: var(--bn-accent-soft);
-  --tag-background-hover: var(--bn-accent-medium);
-  --tag-border-color: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.18);
-  --tag-border-color-hover: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.36);
-  --tag-border-width: 1px;
-  --tag-radius: var(--radius-s);
+  --code-background: color-mix(in oklab, var(--color-base-00) 45%, var(--color-base-20));
+  --link-external-color-hover: #cbd2ff;
+  --text-highlight-bg: rgba(238, 212, 159, 0.24);
+  --glass-bg: color-mix(in srgb, var(--color-base-00) 94%, transparent);
+}
 
-  --pill-color: var(--text-accent);
-  --pill-color-hover: var(--text-normal);
-  --pill-background: var(--bn-accent-soft);
-  --pill-background-hover: var(--bn-accent-medium);
-  --pill-border-color: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.18);
-  --pill-border-color-hover: var(--bn-accent);
-  --pill-border-width: 1px;
-  --pill-radius: 100px;
-
-  --checkbox-radius: var(--radius-s);
-  --checkbox-size: 16px;
-  --checkbox-border-color: var(--text-faint);
-  --checkbox-border-color-hover: var(--bn-accent);
-  --checklist-done-decoration: line-through;
-  --checklist-done-color: var(--text-faint);
-
-  --table-background: transparent;
-  --table-border-width: 1px;
-  --table-border-color: var(--background-modifier-border);
-  --table-header-background: var(--background-secondary-alt);
-  --table-header-background-hover: var(--background-modifier-hover);
-  --table-header-color: var(--text-muted);
-  --table-header-weight: 600;
-  --table-header-size: 0.85em;
-  --table-row-background-hover: var(--background-modifier-hover);
-  --table-row-alt-background: transparent;
-  --table-text-size: 0.95em;
-  --table-selection: var(--bn-accent-soft);
-  --table-selection-border-color: var(--bn-accent);
-
-  --canvas-background: var(--background-primary);
-  --canvas-dot-pattern: var(--color-base-30);
-  --glass-bg: rgba(15, 21, 35, 0.88);
+.theme-dark .checkbox-container.is-enabled {
+  --toggle-thumb-color: var(--color-base-10);
 }
 
 /* ==========================================================
    2. LIGHT PALETTE
+   Uses relative accent alpha tokens while preserving preset and
+   custom accent overrides on both desktop and mobile.
    ========================================================== */
-.theme-light {
+.theme-light,
+body.is-mobile.theme-light {
+  --bn-accent-soft: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.08);
+  --bn-accent-medium: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.14);
+
   --color-base-00: var(--light-bg-main, #f7f9fc);
+  --color-base-05: #f3f6fb;
   --color-base-10: #eef2f8;
   --color-base-20: #e5ebf4;
   --color-base-25: #e1e8f2;
@@ -541,6 +628,7 @@ body.theme-light.bn-accent-peach {
      shadows preserve surface separation without making cards look detached. */
   --shadow-s: 0 1px 2px rgba(28, 36, 51, 0.04), 0 5px 16px rgba(28, 36, 51, 0.05);
   --shadow-l: 0 2px 5px rgba(28, 36, 51, 0.05), 0 10px 28px rgba(28, 36, 51, 0.07);
+  --shadow-prompt: 0 14px 40px rgba(28, 36, 51, 0.14), 0 2px 8px rgba(28, 36, 51, 0.08);
 
   /* Light-mode support colors preserve Blue Night's hue families but are
      darkened enough to remain readable on all bundled light canvases. */
@@ -553,202 +641,63 @@ body.theme-light.bn-accent-peach {
   --bn-purple: #6f46c9;
   --bn-pink: #9f388b;
 
+  --color-red: var(--bn-red);
+  --color-orange: var(--bn-orange);
+  --color-yellow: var(--bn-yellow);
+  --color-green: var(--bn-green);
+  --color-cyan: var(--bn-cyan);
+  --color-blue: var(--bn-blue);
+  --color-purple: var(--bn-purple);
+  --color-pink: var(--bn-pink);
+  --color-red-rgb: 194, 14, 53;
+  --color-orange-rgb: 165, 67, 0;
+  --color-yellow-rgb: 141, 84, 0;
+  --color-green-rgb: 36, 112, 30;
+  --color-cyan-rgb: 17, 108, 113;
+  --color-blue-rgb: 10, 83, 229;
+  --color-purple-rgb: 111, 70, 201;
+  --color-pink-rgb: 159, 56, 139;
+
   --background-primary: var(--color-base-00);
   --background-primary-alt: var(--color-base-10);
   --background-secondary: var(--color-base-10);
   --background-secondary-alt: var(--color-base-20);
   --background-modifier-border: var(--color-base-30);
   --background-modifier-border-hover: var(--color-base-35);
+  --background-modifier-border-focus: var(--bn-accent);
   --background-modifier-hover: var(--bn-accent-soft);
   --background-modifier-active-hover: var(--bn-accent-medium);
+  --background-modifier-message: var(--color-base-100);
 
-  --text-normal: #1c2433;
-  --text-muted: #4b5a75;
-  --text-faint: #54667f;
+  --text-normal: var(--color-base-100);
+  --text-muted: var(--color-base-70);
+  --text-faint: color-mix(in oklab, var(--color-base-70) 75%, var(--color-base-60));
   --text-accent: var(--bn-accent);
-  --text-accent-hover: hsl(var(--accent-h), var(--accent-s), calc(var(--accent-l) - 6%));
+  --text-accent-hover: hsl(var(--accent-h), var(--accent-s), max(14%, calc(var(--accent-l) - 6%)));
   --text-error: var(--bn-red);
   --text-success: var(--bn-green);
   --text-warning: var(--bn-yellow);
 
-  --interactive-normal: var(--color-base-20);
-  --interactive-hover: var(--color-base-30);
+  --interactive-normal: var(--color-base-00);
+  --interactive-hover: var(--color-base-20);
+  --interactive-accent: var(--bn-accent);
+  --interactive-accent-hover: var(--text-accent-hover);
+  --toggle-thumb-color: #ffffff;
+  --tooltip-color: #f7f9fc;
 
-  --tab-background-active: var(--background-primary);
-  --tab-container-background: var(--background-secondary);
-  --tab-divider-color: var(--background-modifier-border);
-  --tab-outline-color: var(--background-modifier-border);
-  --tab-outline-width: 1px;
-  --tab-curve: 0px;
-  --tab-radius: var(--radius-m);
-  --tab-radius-active: var(--radius-m);
-  --tab-text-color: var(--text-muted);
-  --tab-text-color-active: var(--text-normal);
-  --tab-text-color-focused-active: var(--text-normal);
-  --tab-text-color-focused-active-current: var(--text-normal);
-  --tab-font-size: 13px;
-  --tab-font-weight: 500;
+  --setting-items-border-width: 1px;
 
-  --nav-item-size: 13px;
-  --nav-item-color: var(--text-muted);
-  --nav-item-color-hover: var(--text-normal);
-  --nav-item-color-active: var(--text-accent);
-  --nav-item-color-selected: var(--text-accent);
-  --nav-item-background-hover: var(--bn-accent-soft);
-  --nav-item-background-active: var(--bn-accent-soft);
-  --nav-item-background-selected: var(--bn-accent-medium);
-  --nav-item-weight: 400;
-  --nav-item-weight-hover: 400;
-  --nav-item-weight-active: 600;
-  --nav-item-padding: 4px 8px;
-  --nav-indentation-guide-color: var(--color-base-30);
-  --nav-indentation-guide-width: 0px;
-  --nav-collapse-icon-color: var(--text-faint);
-  --nav-collapse-icon-color-collapsed: var(--text-faint);
-
-  --status-bar-background: var(--background-secondary);
-  --status-bar-border-color: var(--background-modifier-border);
-  --status-bar-border-width: 1px;
-  --status-bar-font-size: 11px;
-  --status-bar-text-color: var(--text-faint);
-
-  --scrollbar-bg: transparent;
-  --scrollbar-thumb-bg: var(--color-base-35);
-  --scrollbar-active-thumb-bg: var(--color-base-50);
-
-  --code-background: #eef2f8;
-  --code-normal: #1c2433;
-  --code-size: 0.875em;
-  --code-comment: var(--text-faint);
-  --code-function: var(--bn-blue);
-  --code-important: var(--bn-orange);
-  --code-keyword: var(--bn-purple);
-  --code-operator: var(--bn-cyan);
-  --code-property: var(--bn-blue);
-  --code-punctuation: var(--text-muted);
-  --code-string: var(--bn-green);
-  --code-tag: var(--bn-red);
-  --code-value: var(--bn-orange);
-
-  --inline-title-color: var(--text-accent);
-  --inline-title-font: var(--font-interface-theme);
-  --inline-title-size: 2em;
-  --inline-title-weight: 700;
-  --inline-title-line-height: 1.2;
-
-  --h1-color: var(--text-normal);
-  --h2-color: #2a3550;
-  --h3-color: var(--text-muted);
-  --h4-color: var(--text-muted);
-  --h5-color: var(--text-faint);
-  --h6-color: var(--text-faint);
-  --h1-size: 2.25rem;
-  --h2-size: 1.75rem;
-  --h3-size: 1.375rem;
-  --h1-weight: 400;
-  --h2-weight: 400;
-  --h3-weight: 400;
-  --h4-weight: 500;
-  --h5-weight: 500;
-  --h6-weight: 500;
-
-  --link-color: var(--text-accent);
-  --link-color-hover: var(--text-accent-hover);
-  --link-external-color: var(--bn-purple);
-  --link-external-color-hover: #4d58b7;
-  --link-unresolved-color: var(--text-faint);
-  --link-decoration: none;
-  --link-decoration-hover: underline;
-
-  --graph-text: var(--text-normal);
-  --graph-line: #c9d8f0;
-  --graph-node: var(--text-faint);
-  --graph-node-unresolved: #cbd7e8;
-  --graph-node-focused: var(--text-accent);
-  --graph-node-tag: var(--bn-purple);
-  --graph-node-attachment: var(--bn-cyan);
-
-  --titlebar-background: var(--background-secondary);
-  --titlebar-background-focused: var(--background-primary);
-  --titlebar-border-width: 1px;
-  --titlebar-border-color: var(--background-modifier-border);
-  --titlebar-text-color: var(--text-muted);
-  --titlebar-text-color-focused: var(--text-normal);
-
-  --metadata-background: var(--background-secondary);
-  --metadata-max-width: 100%;
-  --metadata-padding: 12px 14px;
-  --metadata-border-color: var(--background-modifier-border);
-  --metadata-border-radius: var(--radius-l);
-  --metadata-border-width: 1px;
-  --metadata-gap: 2px;
-  --metadata-divider-color: var(--color-base-25);
-  --metadata-divider-color-hover: var(--color-base-30);
-  --metadata-divider-color-focus: var(--text-accent);
-  --metadata-property-padding: 4px 6px;
-  --metadata-property-radius: var(--radius-m);
-  --metadata-property-radius-hover: var(--radius-m);
-  --metadata-property-radius-focus: var(--radius-m);
-  --metadata-property-background: transparent;
-  --metadata-property-background-hover: hsla(
-    var(--accent-h),
-    var(--accent-s),
-    var(--accent-l),
-    0.07
-  );
-  --metadata-property-background-active: var(--bn-accent-soft);
-  --metadata-label-background-hover: transparent;
-  --metadata-label-background-active: transparent;
-  --metadata-label-font-weight: 500;
-  --metadata-label-text-color: var(--text-muted);
-  --metadata-label-text-color-hover: var(--text-normal);
-  --metadata-input-text-color: var(--text-normal);
-  --metadata-input-background: transparent;
-  --metadata-input-background-hover: var(--color-base-20);
-  --metadata-input-background-active: var(--color-base-20);
-
-  --tag-color: var(--text-accent);
-  --tag-color-hover: var(--text-normal);
   --tag-background: var(--bn-accent-soft);
-  --tag-background-hover: var(--bn-accent-medium);
-  --tag-border-color: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.18);
-  --tag-border-color-hover: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.36);
-  --tag-border-width: 1px;
-  --tag-radius: var(--radius-s);
+  --code-background: color-mix(in oklab, var(--color-base-00) 40%, var(--color-base-10));
+  --link-external-color-hover: #4d58b7;
+  --text-highlight-bg: rgba(234, 179, 8, 0.28);
+  --glass-bg: color-mix(in srgb, var(--color-base-00) 94%, transparent);
+}
 
-  --pill-color: var(--text-accent);
-  --pill-color-hover: var(--text-normal);
-  --pill-background: var(--bn-accent-soft);
-  --pill-background-hover: var(--bn-accent-medium);
-  --pill-border-color: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.18);
-  --pill-border-color-hover: var(--text-accent);
-  --pill-border-width: 1px;
-  --pill-radius: 100px;
-
-  --checkbox-radius: var(--radius-s);
-  --checkbox-size: 16px;
-  --checkbox-border-color: var(--text-faint);
-  --checkbox-border-color-hover: var(--text-accent);
-  --checklist-done-decoration: line-through;
-  --checklist-done-color: var(--text-faint);
-
-  --table-background: transparent;
-  --table-border-width: 1px;
-  --table-border-color: var(--background-modifier-border);
-  --table-header-background: var(--background-secondary-alt);
-  --table-header-background-hover: var(--background-modifier-hover);
-  --table-header-color: var(--text-muted);
-  --table-header-weight: 600;
-  --table-header-size: 0.85em;
-  --table-row-background-hover: var(--background-modifier-hover);
-  --table-row-alt-background: transparent;
-  --table-text-size: 0.95em;
-  --table-selection: var(--bn-accent-soft);
-  --table-selection-border-color: var(--text-accent);
-
-  --canvas-background: var(--background-primary);
-  --canvas-dot-pattern: var(--color-base-30);
-  --glass-bg: rgba(247, 249, 252, 0.9);
+.theme-light .checkbox-container:not(.is-enabled) {
+  box-shadow:
+    var(--input-shadow),
+    inset 0 0 0 1px var(--color-base-50);
 }
 
 /* ==========================================================
@@ -758,6 +707,7 @@ body.theme-light.bn-accent-peach {
    ========================================================== */
 body.kodev-flavor-midnight-navy.theme-dark {
   --color-base-00: #080d18;
+  --color-base-05: #070b15;
   --color-base-10: #060a12;
   --color-base-20: #101827;
   --color-base-25: #131d2e;
@@ -769,11 +719,11 @@ body.kodev-flavor-midnight-navy.theme-dark {
   --color-base-70: #93a7c8;
   --color-base-100: #d1dcf0;
   --code-background: #0d1422;
-  --glass-bg: rgba(8, 13, 24, 0.9);
 }
 
 body.kodev-flavor-storm-blue.theme-dark {
   --color-base-00: #161b2a;
+  --color-base-05: #131826;
   --color-base-10: #111622;
   --color-base-20: #1d2435;
   --color-base-25: #242c40;
@@ -785,11 +735,11 @@ body.kodev-flavor-storm-blue.theme-dark {
   --color-base-70: #a3aec5;
   --color-base-100: #d9deeb;
   --code-background: #1a2131;
-  --glass-bg: rgba(22, 27, 42, 0.9);
 }
 
 body.kodev-flavor-dark-oled.theme-dark {
   --color-base-00: #000000;
+  --color-base-05: #030406;
   --color-base-10: #05070a;
   --color-base-20: #090c10;
   --color-base-25: #10141b;
@@ -800,12 +750,12 @@ body.kodev-flavor-dark-oled.theme-dark {
   --color-base-60: #627293;
   --color-base-70: #8da1c4;
   --color-base-100: #cbd5e1;
-  --code-background: #090c10;
-  --glass-bg: rgba(0, 0, 0, 0.82);
+  --code-background: #0c1018;
 }
 
 body.kodev-flavor-cozy-pastels.theme-dark {
   --color-base-00: #1b1924;
+  --color-base-05: #181620;
   --color-base-10: #15121c;
   --color-base-20: #221e2c;
   --color-base-25: #2c2738;
@@ -816,12 +766,12 @@ body.kodev-flavor-cozy-pastels.theme-dark {
   --color-base-60: #9385b2;
   --color-base-70: #b0a4cb;
   --color-base-100: #e3def2;
-  --code-background: #221e2c;
-  --glass-bg: rgba(27, 25, 36, 0.9);
+  --code-background: #262232;
 }
 
 body.kodev-light-flavor-blue-mist.theme-light {
   --color-base-00: #f1f5fb;
+  --color-base-05: #edf2f9;
   --color-base-10: #e8eef7;
   --color-base-20: #dde6f2;
   --color-base-25: #d5e0ed;
@@ -830,14 +780,13 @@ body.kodev-light-flavor-blue-mist.theme-light {
   --color-base-40: #acbdd4;
   --color-base-50: #879bb9;
   --color-base-60: #647895;
-  --color-base-70: #4e607a;
+  --color-base-70: #475873;
   --color-base-100: #20293a;
-  --code-background: #e8eef7;
-  --glass-bg: rgba(241, 245, 251, 0.92);
 }
 
 body.kodev-light-flavor-cozy-pastels-light.theme-light {
   --color-base-00: #faf4fc;
+  --color-base-05: #f6eff9;
   --color-base-10: #f2e9f5;
   --color-base-20: #eae0ee;
   --color-base-25: #e1d5e6;
@@ -846,10 +795,8 @@ body.kodev-light-flavor-cozy-pastels-light.theme-light {
   --color-base-40: #bfaec4;
   --color-base-50: #9c89a3;
   --color-base-60: #7e6c85;
-  --color-base-70: #67546d;
+  --color-base-70: #604e66;
   --color-base-100: #422f47;
-  --code-background: #f2e9f5;
-  --glass-bg: rgba(250, 244, 252, 0.92);
 }
 
 /* ==========================================================
@@ -861,28 +808,12 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-.workspace-split.mod-root,
-.workspace-leaf-content {
+.workspace-split.mod-root {
   background-color: var(--background-primary);
 }
 
-.workspace-ribbon.mod-left,
-.workspace-split.mod-left-split,
-.workspace-split.mod-right-split {
-  background-color: var(--background-secondary);
-}
-
-.workspace-split.mod-left-split {
-  border-inline-end: 1px solid var(--background-modifier-border);
-}
-
-.workspace-split.mod-right-split {
-  border-inline-start: 1px solid var(--background-modifier-border);
-}
-
-.workspace-ribbon .clickable-icon {
+.workspace-ribbon .clickable-icon:not(.is-active) {
   color: var(--text-faint);
-  transition: color var(--anim-duration-fast) var(--anim-ease);
 }
 
 .workspace-ribbon .clickable-icon:is(:hover, :focus-visible) {
@@ -898,42 +829,38 @@ button,
     box-shadow var(--anim-duration-fast) var(--anim-ease);
 }
 
-/* Avoid global input padding/border overrides. Obsidian owns input
-   geometry; Blue Night customizes it through public input variables. */
-.menu,
-.tooltip {
-  border: 1px solid var(--background-modifier-border);
-  box-shadow: var(--shadow-s);
-}
-
-.menu {
-  border-radius: var(--radius-l);
-  background-color: var(--background-secondary-alt);
-}
-
-.tooltip {
-  border-radius: var(--radius-m);
-  background-color: var(--background-secondary-alt);
-  color: var(--text-normal);
-}
-
 /* ==========================================================
    5. PROPERTIES
    ========================================================== */
-body.kodev-blue-night-enable-baseline-metadata {
-  --metadata-border-radius: var(--radius-l);
+body.kodev-blue-night-enable-baseline-metadata:not(.is-mobile)
+  .workspace-split.mod-root
+  .metadata-container {
+  --metadata-background: var(--background-secondary);
   --metadata-padding: 14px 18px;
   --metadata-border-width: 1px;
-}
-
-body.kodev-blue-night-enable-baseline-metadata .metadata-content {
-  margin-block: 1.5em 2em;
+  --metadata-border-radius: var(--radius-l);
+  transform: none;
   box-shadow: var(--shadow-s);
   transition: box-shadow var(--anim-duration-moderate) var(--anim-ease);
 }
 
-body.kodev-blue-night-enable-baseline-metadata .metadata-content:hover {
+body.kodev-blue-night-enable-baseline-metadata:not(.is-mobile)
+  .workspace-split.mod-root
+  .metadata-container:is(:hover, :focus-within) {
   box-shadow: var(--shadow-l);
+}
+
+body.kodev-blue-night-enable-baseline-metadata:not(.is-mobile)
+  .workspace-split.mod-root
+  .metadata-container
+  .metadata-properties-heading
+  .collapse-indicator {
+  inset-inline-start: -16px;
+  padding: 0 2px;
+}
+
+.metadata-error-container {
+  border-radius: var(--radius-s);
 }
 
 .metadata-property-icon,
@@ -949,7 +876,7 @@ body.kodev-blue-night-enable-baseline-metadata .metadata-content:hover {
   opacity: 0.75;
 }
 
-.metadata-property:is(:hover, :focus-within) .metadata-property-icon {
+.metadata-property:is(:hover, :focus-within) .metadata-property-icon:not([aria-disabled='true']) {
   color: var(--text-accent);
   opacity: 1;
 }
@@ -957,64 +884,55 @@ body.kodev-blue-night-enable-baseline-metadata .metadata-content:hover {
 /* ==========================================================
    6. TABS & VIEW HEADER
    ========================================================== */
-.workspace-tab-header-container {
-  background-color: var(--tab-container-background);
-  border-bottom: var(--tab-outline-width) solid var(--tab-divider-color);
-}
-
 .workspace-tab-header {
   transition:
     background-color var(--anim-duration-fast) var(--anim-ease),
     color var(--anim-duration-fast) var(--anim-ease);
 }
 
-.workspace-tab-header.is-active {
-  border-top: 2px solid var(--bn-accent);
-}
-
-.view-header {
-  background-color: var(--glass-bg);
-  border-bottom: 1px solid var(--background-modifier-border);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+.workspace-split.mod-root .workspace-tabs:not(.mod-stacked) .workspace-tab-header.is-active {
+  background-image: linear-gradient(var(--bn-accent), var(--bn-accent));
+  background-size: calc(100% - 16px) 2px;
+  background-position: top center;
+  background-repeat: no-repeat;
 }
 
 /* ==========================================================
    7. PROMPTS
    ========================================================== */
-body.kodev-blue-night-enable-raycast-prompt .prompt {
-  margin-top: 10vh;
+body.kodev-blue-night-enable-raycast-prompt:not(.is-mobile) {
+  --prompt-background: var(--glass-bg);
+  --prompt-backdrop-filter: blur(24px);
+}
+
+body.kodev-blue-night-enable-raycast-prompt:not(.is-mobile) .prompt {
   overflow: hidden;
   border-radius: var(--radius-xl);
-  background-color: var(--background-secondary);
   box-shadow: var(--shadow-prompt);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
 }
 
-body.kodev-blue-night-enable-raycast-prompt .prompt-input-container {
-  border-bottom: 1px solid var(--prompt-border-color);
-}
-
-body.kodev-blue-night-enable-raycast-prompt .prompt-input {
+body.kodev-blue-night-enable-raycast-prompt:not(.is-mobile) .prompt-input {
   background: transparent;
+  border-bottom: 1px solid var(--prompt-border-color);
   color: var(--text-normal);
   font-size: 1.08em;
 }
 
-body.kodev-blue-night-enable-raycast-prompt .suggestion-item {
-  margin: 2px 10px;
+body.kodev-blue-night-enable-raycast-prompt:not(.is-mobile) .prompt .suggestion-item {
+  margin: 2px 0;
   border-radius: var(--radius-m);
   color: var(--text-muted);
 }
 
-body.kodev-blue-night-enable-raycast-prompt .suggestion-item:is(:hover, .is-selected) {
+body.kodev-blue-night-enable-raycast-prompt:not(.is-mobile)
+  .prompt
+  .suggestion-item:is(:hover, .is-selected, :focus-within) {
   background-color: var(--background-modifier-hover);
   color: var(--text-normal);
 }
 
-body.kodev-blue-night-enable-raycast-prompt .suggestion-item.is-selected {
-  box-shadow: inset 2px 0 0 var(--bn-accent);
+body.kodev-blue-night-enable-raycast-prompt:not(.is-mobile) .prompt .suggestion-item.is-selected {
+  box-shadow: inset calc(2px * var(--direction, 1)) 0 0 var(--bn-accent);
 }
 
 .prompt .suggestion-highlight {
@@ -1027,35 +945,34 @@ body.kodev-blue-night-enable-raycast-prompt .suggestion-item.is-selected {
   color: var(--text-faint);
 }
 
+.prompt .suggestion-item:is(:hover, .is-selected, :focus-within) .suggestion-note,
+.prompt .suggestion-item:is(:hover, .is-selected, :focus-within) .suggestion-flair {
+  color: var(--text-muted);
+}
+
 /* ==========================================================
    8. FILE EXPLORER OPTIONAL ENHANCEMENTS
    ========================================================== */
-body.kodev-blue-night-enable-mac-explorer .nav-folder-title,
-body.kodev-blue-night-enable-mac-explorer .nav-file-title {
-  margin: 2px 8px;
-  border-radius: var(--radius-m);
+body.kodev-blue-night-enable-mac-explorer .nav-files-container {
+  --nav-item-margin-bottom: 2px;
+  --nav-item-radius: var(--radius-m);
+}
+
+body.kodev-blue-night-enable-mac-explorer .nav-files-container .nav-folder-title,
+body.kodev-blue-night-enable-mac-explorer .nav-files-container .nav-file-title {
   transition:
     background-color var(--anim-duration-fast) var(--anim-ease),
-    color var(--anim-duration-fast) var(--anim-ease),
-    transform var(--anim-duration-fast) var(--anim-ease);
+    color var(--anim-duration-fast) var(--anim-ease);
 }
 
-body.kodev-blue-night-enable-mac-explorer .nav-file-title:hover {
-  transform: translateX(2px);
-}
-
-body.kodev-blue-night-enable-mac-explorer .nav-file-title.is-active {
-  box-shadow: inset 2px 0 0 var(--bn-accent);
-}
-
-body.kodev-blue-night-enable-mac-explorer .nav-folder-title-content::before,
-body.kodev-blue-night-enable-mac-explorer .nav-file-title-content::before {
+body.kodev-blue-night-enable-mac-explorer .nav-files-container .nav-folder-title-content::before,
+body.kodev-blue-night-enable-mac-explorer .nav-files-container .nav-file-title-content::before {
   content: '';
   display: inline-block;
   width: 14px;
   height: 14px;
   margin-inline-end: 7px;
-  vertical-align: -2px;
+  vertical-align: -0.18em;
   background-color: var(--nav-collapse-icon-color);
   mask-repeat: no-repeat;
   mask-size: contain;
@@ -1066,6 +983,7 @@ body.kodev-blue-night-enable-mac-explorer .nav-file-title-content::before {
 }
 
 body.kodev-blue-night-enable-mac-explorer
+  .nav-files-container
   .nav-folder.is-collapsed
   > .nav-folder-title
   > .nav-folder-title-content::before {
@@ -1073,8 +991,8 @@ body.kodev-blue-night-enable-mac-explorer
   -webkit-mask-image: var(--bn-icon-folder);
 }
 
-body.kodev-blue-night-enable-mac-explorer
-  .nav-folder:not(.is-collapsed):not(.mod-root)
+:where(body.kodev-blue-night-enable-mac-explorer .nav-files-container)
+  .nav-folder:not(.is-collapsed)
   > .nav-folder-title
   > .nav-folder-title-content::before {
   background-color: var(--bn-accent);
@@ -1083,16 +1001,29 @@ body.kodev-blue-night-enable-mac-explorer
 }
 
 body.kodev-blue-night-enable-mac-explorer
+  .nav-files-container
   .nav-folder.mod-root
   > .nav-folder-title
-  > .nav-folder-title-content::before {
+  > .nav-folder-title-content::before,
+body.kodev-blue-night-enable-mac-explorer
+  .nav-files-container
+  .nav-file-icon
+  ~ .nav-file-title-content::before,
+body.kodev-blue-night-enable-mac-explorer .nav-files-container [contenteditable='true']::before {
   content: none;
 }
 
-body.kodev-blue-night-enable-mac-explorer .nav-file-title-content::before {
+body.kodev-blue-night-enable-mac-explorer .nav-files-container .nav-file-title-content::before {
   background-color: var(--text-faint);
   mask-image: var(--bn-icon-file);
   -webkit-mask-image: var(--bn-icon-file);
+}
+
+body.kodev-blue-night-enable-mac-explorer
+  .nav-files-container
+  .nav-file-title:is(:hover, .is-active, .is-selected, .is-being-dragged)
+  > .nav-file-title-content::before {
+  background-color: currentColor;
 }
 
 /* Let Obsidian own child indentation geometry. Its documented navigation
@@ -1109,7 +1040,6 @@ body.kodev-blue-night-enable-vault-icon .workspace-drawer-vault-switcher::before
   flex: 0 0 auto;
   width: 15px;
   height: 15px;
-  margin-inline-end: 7px;
   background-color: var(--bn-accent);
   mask-image: var(--bn-icon-vault);
   mask-repeat: no-repeat;
@@ -1124,42 +1054,59 @@ body.kodev-blue-night-enable-vault-icon .workspace-drawer-vault-switcher::before
 /* ==========================================================
    9. CONTENT
    ========================================================== */
-.markdown-source-view.mod-cm6 .cm-line,
 .markdown-rendered p,
 .markdown-rendered li {
   line-height: var(--line-height-normal);
 }
 
+body.kodev-blue-night-enable-premium-headers {
+  --h1-letter-spacing: -0.02em;
+  --h2-letter-spacing: -0.01em;
+}
+
 body.kodev-blue-night-enable-premium-headers .markdown-rendered h1 {
   padding-bottom: 8px;
   border-bottom: 1px solid var(--background-modifier-border);
-  letter-spacing: -0.02em;
 }
 
-body.kodev-blue-night-enable-premium-headers .markdown-rendered h2 {
-  letter-spacing: -0.01em;
+body.kodev-blue-night-enable-premium-headers .markdown-rendered h3 {
+  margin-top: 1.15em;
 }
 
-/* Live Preview: use padding, not vertical margin. Changing CodeMirror
-   line margins can break cursor geometry and virtualized layout. */
-body.kodev-blue-night-enable-premium-headers .cm-header-1 {
+/* Live Preview: use block-line padding, not vertical margin or inline span
+   borders. Changing CodeMirror line margins can break cursor geometry and
+   virtualized layout. :where() keeps Obsidian's blank-line reset intact. */
+body.kodev-blue-night-enable-premium-headers
+  :where(.markdown-source-view.mod-cm6.is-live-preview)
+  .cm-line.HyperMD-header-1 {
   padding-top: 1.2em;
+  padding-bottom: 8px;
   border-bottom: 1px solid var(--background-modifier-border);
-  letter-spacing: -0.02em;
 }
 
-body.kodev-blue-night-enable-premium-headers .cm-header-2 {
+body.kodev-blue-night-enable-premium-headers
+  :where(.markdown-source-view.mod-cm6.is-live-preview)
+  .cm-line.HyperMD-header-2 {
   padding-top: 1em;
-  letter-spacing: -0.01em;
 }
 
-body.kodev-blue-night-enable-premium-headers .cm-header-3 {
+body.kodev-blue-night-enable-premium-headers
+  :where(.markdown-source-view.mod-cm6.is-live-preview)
+  .cm-line.HyperMD-header-3 {
   padding-top: 0.8em;
 }
 
 .markdown-rendered code,
 .cm-s-obsidian .cm-inline-code {
   border-radius: var(--radius-s);
+}
+
+.markdown-rendered pre,
+.cm-s-obsidian
+  div:is(.HyperMD-codeblock-bg, .HyperMD-codeblock-begin-bg, .HyperMD-codeblock-end-bg) {
+  --code-border-width: 1px;
+  --code-border-color: var(--background-modifier-border);
+  --code-radius: var(--radius-m);
 }
 
 .markdown-rendered pre {
@@ -1169,9 +1116,9 @@ body.kodev-blue-night-enable-premium-headers .cm-header-3 {
 
 /* Optional enhancement: current Obsidian builds expose this class for
    language flair. Failure of this selector does not affect code blocks. */
-.code-block-flair {
+.markdown-source-view.mod-cm6 .code-block-flair {
   color: var(--text-muted);
-  font-family: var(--font-monospace-theme, monospace);
+  font-family: var(--font-monospace);
   font-size: 0.72rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -1190,17 +1137,41 @@ body {
   --callout-radius: 0 var(--radius-m) var(--radius-m) 0;
   --callout-title-size: 0.95em;
   --callout-title-weight: 600;
-  --callout-content-padding: 0;
+  --callout-content-padding: 6px 0 0;
+}
+
+body:is(.mod-rtl, .is-rtl, .rtl),
+.callout:dir(rtl) {
+  --callout-border-width: 0 3px 0 0;
+  --callout-radius: var(--radius-m) 0 0 var(--radius-m);
+}
+
+.callout-content:empty {
+  padding: 0;
+}
+
+.callout .callout-content > :first-child {
+  margin-top: 0;
+}
+
+.callout .callout-content > :last-child {
+  margin-bottom: 0;
 }
 
 /* ==========================================================
    11. TASKS
    ========================================================== */
-body.kodev-blue-night-enable-custom-checkboxes {
-  --checkbox-radius: 50%;
+body.kodev-blue-night-enable-custom-checkboxes .task-list-item-checkbox {
+  border-radius: 50%;
 }
 
-body.kodev-blue-night-enable-custom-checkboxes input[type='checkbox']:checked::after {
+.markdown-preview-view .task-list-item-checkbox {
+  top: -0.05em;
+  vertical-align: middle;
+}
+
+body.kodev-blue-night-enable-custom-checkboxes
+  input[type='checkbox'].task-list-item-checkbox:checked::after {
   mask-image: var(--bn-icon-check);
   mask-size: 76%;
   mask-repeat: no-repeat;
@@ -1211,35 +1182,141 @@ body.kodev-blue-night-enable-custom-checkboxes input[type='checkbox']:checked::a
   -webkit-mask-position: center;
 }
 
-body.kodev-blue-night-enable-custom-checkboxes input[data-task='-']:checked,
-body.kodev-blue-night-enable-custom-checkboxes li[data-task='-'] > input:checked,
-body.kodev-blue-night-enable-custom-checkboxes li[data-task='-'] > p > input:checked,
-body.kodev-blue-night-enable-custom-checkboxes input[data-task='/']:checked,
-body.kodev-blue-night-enable-custom-checkboxes li[data-task='/'] > input:checked,
-body.kodev-blue-night-enable-custom-checkboxes li[data-task='/'] > p > input:checked,
-body.kodev-blue-night-enable-custom-checkboxes input[data-task='?']:checked,
-body.kodev-blue-night-enable-custom-checkboxes li[data-task='?'] > input:checked,
-body.kodev-blue-night-enable-custom-checkboxes li[data-task='?'] > p > input:checked,
-body.kodev-blue-night-enable-custom-checkboxes input[data-task='!']:checked,
-body.kodev-blue-night-enable-custom-checkboxes li[data-task='!'] > input:checked,
-body.kodev-blue-night-enable-custom-checkboxes li[data-task='!'] > p > input:checked,
-body.kodev-blue-night-enable-custom-checkboxes input[data-task='>']:checked,
-body.kodev-blue-night-enable-custom-checkboxes li[data-task='>'] > input:checked,
-body.kodev-blue-night-enable-custom-checkboxes li[data-task='>'] > p > input:checked {
-  background-color: transparent;
+body.kodev-blue-night-enable-custom-checkboxes
+  :is(ul > li.task-list-item, .HyperMD-task-line)[data-task='-'] {
+  color: var(--checklist-done-color);
+  text-decoration: var(--checklist-done-decoration);
 }
 
-body.kodev-blue-night-enable-custom-checkboxes input[data-task='-']:checked::after,
-body.kodev-blue-night-enable-custom-checkboxes li[data-task='-'] > input:checked::after,
-body.kodev-blue-night-enable-custom-checkboxes li[data-task='-'] > p > input:checked::after {
+body.kodev-blue-night-enable-custom-checkboxes
+  :is(
+    input[data-task='-'],
+    li[data-task='-'] > input,
+    li[data-task='-'] > p > input,
+    .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task='-'] input.task-list-item-checkbox
+  ):checked {
+  background-color: transparent;
+  border-color: var(--text-faint);
+}
+
+body.kodev-blue-night-enable-custom-checkboxes
+  :is(
+    input[data-task='-'],
+    li[data-task='-'] > input,
+    li[data-task='-'] > p > input,
+    .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task='-'] input.task-list-item-checkbox
+  ):checked:hover {
+  background-color: var(--background-modifier-hover);
+  border-color: var(--text-muted);
+}
+
+body.kodev-blue-night-enable-custom-checkboxes
+  :is(
+    input[data-task='/'],
+    li[data-task='/'] > input,
+    li[data-task='/'] > p > input,
+    .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task='/'] input.task-list-item-checkbox
+  ):checked {
+  background-color: transparent;
+  border-color: var(--bn-accent);
+}
+
+body.kodev-blue-night-enable-custom-checkboxes
+  :is(
+    input[data-task='/'],
+    li[data-task='/'] > input,
+    li[data-task='/'] > p > input,
+    .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task='/'] input.task-list-item-checkbox
+  ):checked:hover {
+  background-color: var(--bn-accent-soft);
+  border-color: var(--text-accent-hover);
+}
+
+body.kodev-blue-night-enable-custom-checkboxes
+  :is(
+    input[data-task='?'],
+    li[data-task='?'] > input,
+    li[data-task='?'] > p > input,
+    .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task='?'] input.task-list-item-checkbox
+  ):checked {
+  background-color: transparent;
+  border-color: var(--bn-cyan);
+}
+
+body.kodev-blue-night-enable-custom-checkboxes
+  :is(
+    input[data-task='?'],
+    li[data-task='?'] > input,
+    li[data-task='?'] > p > input,
+    .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task='?'] input.task-list-item-checkbox
+  ):checked:hover {
+  background-color: var(--bn-accent-soft);
+  border-color: var(--bn-cyan);
+}
+
+body.kodev-blue-night-enable-custom-checkboxes
+  :is(
+    input[data-task='!'],
+    li[data-task='!'] > input,
+    li[data-task='!'] > p > input,
+    .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task='!'] input.task-list-item-checkbox
+  ):checked {
+  background-color: transparent;
+  border-color: var(--bn-orange);
+}
+
+body.kodev-blue-night-enable-custom-checkboxes
+  :is(
+    input[data-task='!'],
+    li[data-task='!'] > input,
+    li[data-task='!'] > p > input,
+    .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task='!'] input.task-list-item-checkbox
+  ):checked:hover {
+  background-color: var(--bn-accent-soft);
+  border-color: var(--bn-orange);
+}
+
+body.kodev-blue-night-enable-custom-checkboxes
+  :is(
+    input[data-task='>'],
+    li[data-task='>'] > input,
+    li[data-task='>'] > p > input,
+    .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task='>'] input.task-list-item-checkbox
+  ):checked {
+  background-color: transparent;
+  border-color: var(--bn-purple);
+}
+
+body.kodev-blue-night-enable-custom-checkboxes
+  :is(
+    input[data-task='>'],
+    li[data-task='>'] > input,
+    li[data-task='>'] > p > input,
+    .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task='>'] input.task-list-item-checkbox
+  ):checked:hover {
+  background-color: var(--bn-accent-soft);
+  border-color: var(--bn-purple);
+}
+
+body.kodev-blue-night-enable-custom-checkboxes
+  :is(
+    input[data-task='-'],
+    li[data-task='-'] > input,
+    li[data-task='-'] > p > input,
+    .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task='-'] input.task-list-item-checkbox
+  ):checked::after {
   background-color: var(--text-faint);
   mask-image: var(--bn-icon-minus);
   -webkit-mask-image: var(--bn-icon-minus);
 }
 
-body.kodev-blue-night-enable-custom-checkboxes input[data-task='/']:checked::after,
-body.kodev-blue-night-enable-custom-checkboxes li[data-task='/'] > input:checked::after,
-body.kodev-blue-night-enable-custom-checkboxes li[data-task='/'] > p > input:checked::after {
+body.kodev-blue-night-enable-custom-checkboxes
+  :is(
+    input[data-task='/'],
+    li[data-task='/'] > input,
+    li[data-task='/'] > p > input,
+    .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task='/'] input.task-list-item-checkbox
+  ):checked::after {
   background-color: var(--bn-accent);
   mask-image: var(--bn-icon-half);
   mask-size: 100%;
@@ -1247,25 +1324,37 @@ body.kodev-blue-night-enable-custom-checkboxes li[data-task='/'] > p > input:che
   -webkit-mask-size: 100%;
 }
 
-body.kodev-blue-night-enable-custom-checkboxes input[data-task='?']:checked::after,
-body.kodev-blue-night-enable-custom-checkboxes li[data-task='?'] > input:checked::after,
-body.kodev-blue-night-enable-custom-checkboxes li[data-task='?'] > p > input:checked::after {
+body.kodev-blue-night-enable-custom-checkboxes
+  :is(
+    input[data-task='?'],
+    li[data-task='?'] > input,
+    li[data-task='?'] > p > input,
+    .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task='?'] input.task-list-item-checkbox
+  ):checked::after {
   background-color: var(--bn-cyan);
   mask-image: var(--bn-icon-question);
   -webkit-mask-image: var(--bn-icon-question);
 }
 
-body.kodev-blue-night-enable-custom-checkboxes input[data-task='!']:checked::after,
-body.kodev-blue-night-enable-custom-checkboxes li[data-task='!'] > input:checked::after,
-body.kodev-blue-night-enable-custom-checkboxes li[data-task='!'] > p > input:checked::after {
+body.kodev-blue-night-enable-custom-checkboxes
+  :is(
+    input[data-task='!'],
+    li[data-task='!'] > input,
+    li[data-task='!'] > p > input,
+    .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task='!'] input.task-list-item-checkbox
+  ):checked::after {
   background-color: var(--bn-orange);
   mask-image: var(--bn-icon-exclamation);
   -webkit-mask-image: var(--bn-icon-exclamation);
 }
 
-body.kodev-blue-night-enable-custom-checkboxes input[data-task='>']:checked::after,
-body.kodev-blue-night-enable-custom-checkboxes li[data-task='>'] > input:checked::after,
-body.kodev-blue-night-enable-custom-checkboxes li[data-task='>'] > p > input:checked::after {
+body.kodev-blue-night-enable-custom-checkboxes
+  :is(
+    input[data-task='>'],
+    li[data-task='>'] > input,
+    li[data-task='>'] > p > input,
+    .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task='>'] input.task-list-item-checkbox
+  ):checked::after {
   background-color: var(--bn-purple);
   mask-image: var(--bn-icon-forward);
   -webkit-mask-image: var(--bn-icon-forward);
@@ -1274,27 +1363,37 @@ body.kodev-blue-night-enable-custom-checkboxes li[data-task='>'] > p > input:che
 /* ==========================================================
    12. LISTS, TAGS & BLOCKQUOTES
    ========================================================== */
-body.kodev-blue-night-enable-custom-bullets .list-bullet::after {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background-color: var(--bn-accent);
-  opacity: 0.72;
+body.kodev-blue-night-enable-custom-bullets {
+  --list-bullet-size: 0.33em;
+  --list-marker-color: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.72);
 }
 
 body.kodev-blue-night-enable-pill-tags {
   --tag-radius: 20px;
-  --tag-padding-x: 10px;
-  --tag-padding-y: 2px;
+  --tag-padding-x: 0.65em;
+  --tag-padding-y: 0.18em;
 }
 
-body.kodev-blue-night-enable-ide-blockquotes blockquote {
+body.kodev-blue-night-enable-ide-blockquotes {
+  --blockquote-border-thickness: 3px;
+  --blockquote-border-color: var(--bn-accent);
+  --blockquote-background-color: var(--background-secondary);
+}
+
+body.kodev-blue-night-enable-ide-blockquotes .markdown-rendered blockquote {
   margin-block: 1.2em;
   padding: 14px 18px;
-  border-inline-start: 3px solid var(--bn-accent);
-  border-radius: 0 var(--radius-m) var(--radius-m) 0;
-  background-color: var(--background-secondary);
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+  border-start-end-radius: var(--radius-m);
+  border-end-end-radius: var(--radius-m);
   box-shadow: var(--shadow-s);
+}
+
+body.kodev-blue-night-enable-ide-blockquotes
+  .markdown-source-view.mod-cm6.is-live-preview
+  .HyperMD-quote {
+  padding-inline: 18px;
 }
 
 /* ==========================================================
@@ -1302,11 +1401,12 @@ body.kodev-blue-night-enable-ide-blockquotes blockquote {
    ========================================================== */
 body.kodev-blue-night-enable-floating-statusbar:not(.is-mobile) .status-bar {
   position: fixed;
-  right: 12px;
-  bottom: 12px;
-  left: auto;
+  inset-inline-end: 18px;
+  inset-inline-start: auto;
+  bottom: 14px;
   width: max-content;
-  max-width: min(60vw, 720px);
+  max-width: min(50vw, 640px);
+  overflow: hidden;
   padding: 3px 14px;
   gap: 12px;
   border: 1px solid var(--background-modifier-border);
@@ -1317,48 +1417,49 @@ body.kodev-blue-night-enable-floating-statusbar:not(.is-mobile) .status-bar {
   -webkit-backdrop-filter: blur(16px);
 }
 
-body.kodev-blue-night-enable-minimal-statusbar .status-bar {
+body.kodev-blue-night-enable-minimal-statusbar:not(.is-mobile) .status-bar {
   opacity: 0.3;
   transition: opacity var(--anim-duration-moderate) var(--anim-ease);
 }
 
-body.kodev-blue-night-enable-minimal-statusbar .status-bar:is(:hover, :focus-within) {
+body.kodev-blue-night-enable-minimal-statusbar:not(.is-mobile)
+  .status-bar:is(:hover, :focus-within) {
   opacity: 1;
 }
 
 /* ==========================================================
    14. SCROLLBARS
-   Color comes from Obsidian's public scrollbar variables. Width is
-   the only direct scrollbar property Blue Night changes.
+   Uses Obsidian's public scrollbar variables with a scoped
+   WebKit fallback for older 1.12-1.14 builds.
    ========================================================== */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+body.styled-scrollbars ::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+  height: var(--scrollbar-height);
 }
 
-::-webkit-scrollbar-thumb {
-  border-radius: 10px;
+body.styled-scrollbars ::-webkit-scrollbar-thumb {
+  border: var(--scrollbar-border-width) solid transparent;
+  border-radius: var(--scrollbar-radius);
 }
 
 /* ==========================================================
    15. SEARCH, TABLES & CANVAS
    ========================================================== */
-body {
-  --text-highlight-bg: rgba(238, 212, 159, 0.24);
-  --text-highlight-bg-active: var(--bn-accent-medium);
-}
-
 .search-result-file-matched-text {
   border-radius: 2px;
-  background-color: var(--bn-accent-soft);
+  background-color: var(--text-highlight-bg);
   color: var(--text-normal);
 }
 
 /* Deliberately no search-input padding override. Obsidian owns the
    search icon and clear-button geometry; overriding global input
    padding was the source of the text/icon overlap in the old theme. */
-.canvas-node-container {
-  border-radius: var(--radius-l);
+.theme-dark .canvas-wrapper,
+.theme-light .canvas-wrapper {
+  --canvas-color: var(--color-base-40);
+}
+
+:where(.canvas-node:not(.canvas-node-group)) .canvas-node-container {
   box-shadow: var(--shadow-s);
 }
 
@@ -1373,27 +1474,44 @@ body {
 .markdown-rendered .dataview.inline-field-key,
 .cm-s-obsidian .dataview.inline-field-key {
   padding: 1px 6px;
-  border-radius: var(--radius-s) 0 0 var(--radius-s);
+  border-start-start-radius: var(--radius-s);
+  border-end-start-radius: var(--radius-s);
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
   background-color: var(--background-secondary-alt);
   color: var(--text-muted);
-  font-family: var(--font-monospace-theme);
+  font-family: var(--font-monospace);
   font-size: 0.85em;
+  line-height: 1.35;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 .markdown-rendered .dataview.inline-field-value,
 .cm-s-obsidian .dataview.inline-field-value {
   padding: 1px 6px;
-  border-radius: 0 var(--radius-s) var(--radius-s) 0;
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+  border-start-end-radius: var(--radius-s);
+  border-end-end-radius: var(--radius-s);
   background-color: var(--bn-accent-soft);
   color: var(--text-accent);
-  font-family: var(--font-monospace-theme);
+  font-family: var(--font-monospace);
   font-size: 0.85em;
+  line-height: 1.35;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 .prompt .qsp-path,
 .prompt .qsp-note {
   color: var(--text-faint);
   font-size: 0.85em;
+}
+
+.prompt .suggestion-item:is(:hover, .is-selected, :focus-within) .qsp-path,
+.prompt .suggestion-item:is(:hover, .is-selected, :focus-within) .qsp-note {
+  color: var(--text-muted);
 }
 
 .prompt .qsp-title {
@@ -1430,47 +1548,169 @@ body {
    17. MOBILE & ACCESSIBILITY
    ========================================================== */
 body.is-mobile {
-  --nav-item-padding: 7px 10px;
-  --checkbox-size: 18px;
-}
-
-body.is-mobile .view-header,
-body.is-mobile .prompt {
-  background-color: var(--background-secondary);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-
-body.is-mobile .nav-file-title:is(:hover, .is-active) {
-  transform: none;
+  --checkbox-size: max(20px, calc(var(--font-preferred-size, 15px) * 1.15));
+  --file-header-border: 0px solid transparent;
 }
 
 @media (prefers-reduced-motion: reduce) {
   body {
+    --anim-duration-superfast: 0ms;
     --anim-duration-fast: 0ms;
     --anim-duration-moderate: 0ms;
     --anim-duration-slow: 0ms;
-  }
-
-  body .nav-file-title:is(:hover, .is-active) {
-    transform: none;
   }
 }
 
 /* ==========================================================
    18. PRINT / PDF
+   Target .print inside @media print so print tokens override
+   body.theme-dark and flavor classes cleanly without !important.
    ========================================================== */
 @media print {
+  html,
   body {
-    --background-primary: #ffffff;
-    --background-secondary: #ffffff;
-    --text-normal: #1c2433;
-    --text-muted: #4b5a75;
-    --code-background: #f2f5fa;
+    color-scheme: light;
+    background-color: #ffffff;
+    color: #1c2433;
   }
 
-  .markdown-rendered pre,
-  .markdown-rendered code {
+  .print {
+    color-scheme: light;
+    --accent-h: 218;
+    --accent-s: 92%;
+    --accent-l: 40%;
+    --shadow-s: none;
+    --shadow-l: none;
+
+    --color-base-00: #ffffff;
+    --color-base-05: #f8fafd;
+    --color-base-10: #f2f5fa;
+    --color-base-20: #e5ebf4;
+    --color-base-25: #dde5f0;
+    --color-base-30: #d7e0ec;
+    --color-base-40: #b9c6d9;
+    --color-base-50: #8fa3c0;
+    --color-base-60: #657795;
+    --color-base-70: #4b5a75;
+    --color-base-100: #1c2433;
+
+    --background-primary: #ffffff;
+    --background-primary-alt: #f2f5fa;
+    --background-secondary: #f2f5fa;
+    --background-secondary-alt: #e5ebf4;
+    --background-modifier-border: #dde5f0;
+
+    --text-normal: #1c2433;
+    --text-muted: #4b5a75;
+    --text-faint: #54667f;
+    --bn-accent: hsl(218, 92%, 40%);
+    --bn-accent-soft: hsla(218, 92%, 40%, 0.08);
+    --bn-accent-medium: hsla(218, 92%, 40%, 0.14);
+    --text-accent: var(--bn-accent);
+    --interactive-accent: var(--bn-accent);
+    --text-on-accent: #ffffff;
+
+    --bn-red: #c20e35;
+    --bn-orange: #a54300;
+    --bn-yellow: #8d5400;
+    --bn-green: #24701e;
+    --bn-cyan: #116c71;
+    --bn-blue: #0a53e5;
+    --bn-purple: #6f46c9;
+    --bn-pink: #9f388b;
+
+    --text-error: var(--bn-red);
+    --text-success: var(--bn-green);
+    --text-warning: var(--bn-yellow);
+
+    --color-red: var(--bn-red);
+    --color-orange: var(--bn-orange);
+    --color-yellow: var(--bn-yellow);
+    --color-green: var(--bn-green);
+    --color-cyan: var(--bn-cyan);
+    --color-blue: var(--bn-blue);
+    --color-purple: var(--bn-purple);
+    --color-pink: var(--bn-pink);
+
+    --callout-default: var(--bn-blue);
+    --callout-info: var(--bn-blue);
+    --callout-todo: var(--bn-blue);
+    --callout-tip: var(--bn-cyan);
+    --callout-summary: var(--bn-cyan);
+    --callout-important: var(--bn-cyan);
+    --callout-success: var(--bn-green);
+    --callout-warning: var(--bn-orange);
+    --callout-question: var(--bn-orange);
+    --callout-bug: var(--bn-red);
+    --callout-error: var(--bn-red);
+    --callout-fail: var(--bn-red);
+    --callout-example: var(--bn-purple);
+    --callout-quote: #4b5a75;
+
+    --blockquote-border-color: var(--bn-accent);
+    --blockquote-background-color: #f2f5fa;
+
+    --inline-title-color: #1c2433;
+    --h1-color: #1c2433;
+    --h2-color: #2a3550;
+    --h3-color: #1c2433;
+    --h4-color: #4b5a75;
+    --h5-color: #54667f;
+    --h6-color: #54667f;
+
+    --code-background: #f2f5fa;
+    --code-normal: #1c2433;
+    --code-comment: #54667f;
+    --code-function: var(--bn-blue);
+    --code-important: var(--bn-orange);
+    --code-keyword: var(--bn-purple);
+    --code-operator: var(--bn-cyan);
+    --code-property: var(--bn-blue);
+    --code-punctuation: #4b5a75;
+    --code-string: var(--bn-green);
+    --code-tag: var(--bn-red);
+    --code-value: var(--bn-orange);
+    --text-highlight-bg: rgba(234, 179, 8, 0.32);
+
+    --link-color: #0a53e5;
+    --link-external-color: #6f46c9;
+    --link-unresolved-color: #54667f;
+    --link-decoration: underline;
+
+    --list-marker-color: hsla(218, 92%, 40%, 0.72);
+    --table-header-background: #eef2f8;
+    --table-header-color: #4b5a75;
+    --table-border-color: #dde5f0;
+    --tag-color: var(--bn-accent);
+    --tag-background: #eef2f8;
+    --tag-border-color: #cbd6e5;
+
+    --checkbox-color: var(--bn-accent);
+    --checkbox-marker-color: #ffffff;
+    --checkbox-border-color: #54667f;
+    --checklist-done-color: #54667f;
+
+    background-color: #ffffff;
+    color: #1c2433;
+  }
+
+  .print .markdown-preview-view {
+    background-color: #ffffff;
+    color: #1c2433;
+  }
+
+  .print .markdown-preview-view mark {
+    background-color: rgba(234, 179, 8, 0.32);
+    color: #1c2433;
+  }
+
+  .print .markdown-rendered pre,
+  .print .markdown-rendered code {
     border-color: #dde5f0;
+  }
+
+  .print .markdown-rendered blockquote,
+  .print .metadata-container {
+    box-shadow: none;
   }
 }

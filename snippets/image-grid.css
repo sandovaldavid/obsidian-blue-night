@@ -11,8 +11,9 @@
    it does not run across every rendered note in the vault.
    ========================================================== */
 
-.markdown-preview-view.image-grid p:has(> .image-embed + .image-embed),
-.markdown-preview-view.image-grid p:has(> img + img) {
+.markdown-preview-view.image-grid
+  p:has(> .image-embed ~ .image-embed):not(:has(> :not(.image-embed, br))),
+.markdown-preview-view.image-grid p:has(> img ~ img):not(:has(> :not(img, br))) {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
   gap: 8px;
@@ -20,8 +21,17 @@
   margin-block: 1.2em;
 }
 
-.markdown-preview-view.image-grid p:has(> .image-embed + .image-embed) > .image-embed,
-.markdown-preview-view.image-grid p:has(> img + img) > img {
+.markdown-preview-view.image-grid
+  p:has(> .image-embed ~ .image-embed):not(:has(> :not(.image-embed, br)))
+  > br,
+.markdown-preview-view.image-grid p:has(> img ~ img):not(:has(> :not(img, br))) > br {
+  display: none;
+}
+
+.markdown-preview-view.image-grid
+  p:has(> .image-embed ~ .image-embed):not(:has(> :not(.image-embed, br)))
+  > .image-embed,
+.markdown-preview-view.image-grid p:has(> img ~ img):not(:has(> :not(img, br))) > img {
   display: block;
   min-width: 0;
   max-width: 100%;
@@ -31,7 +41,10 @@
     box-shadow 0.2s ease;
 }
 
-.markdown-preview-view.image-grid p:has(> .image-embed + .image-embed) > .image-embed img {
+.markdown-preview-view.image-grid
+  p:has(> .image-embed ~ .image-embed):not(:has(> :not(.image-embed, br)))
+  > .image-embed
+  img {
   display: block;
   width: 100%;
   height: auto;
@@ -39,16 +52,27 @@
 }
 
 @media (hover: hover) {
-  .markdown-preview-view.image-grid p:has(> .image-embed + .image-embed) > .image-embed:hover,
-  .markdown-preview-view.image-grid p:has(> img + img) > img:hover {
+  .markdown-preview-view.image-grid
+    p:has(> .image-embed ~ .image-embed):not(:has(> :not(.image-embed, br)))
+    > .image-embed:is(:hover, :focus-within),
+  .markdown-preview-view.image-grid p:has(> img ~ img):not(:has(> :not(img, br))) > img:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-s, 0 8px 24px rgba(0, 0, 0, 0.14));
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .markdown-preview-view.image-grid p:has(> .image-embed + .image-embed) > .image-embed,
-  .markdown-preview-view.image-grid p:has(> img + img) > img {
+  .markdown-preview-view.image-grid
+    p:has(> .image-embed ~ .image-embed):not(:has(> :not(.image-embed, br)))
+    > .image-embed,
+  .markdown-preview-view.image-grid p:has(> img ~ img):not(:has(> :not(img, br))) > img {
     transition: none;
+  }
+
+  .markdown-preview-view.image-grid
+    p:has(> .image-embed ~ .image-embed):not(:has(> :not(.image-embed, br)))
+    > .image-embed:is(:hover, :focus-within),
+  .markdown-preview-view.image-grid p:has(> img ~ img):not(:has(> :not(img, br))) > img:hover {
+    transform: none;
   }
 }

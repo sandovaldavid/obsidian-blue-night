@@ -1,8 +1,8 @@
 /* ==========================================================
    BLUE NIGHT — Compact Tables Snippet
    Reduces table density through documented Obsidian table
-   variables, with one narrowly scoped padding fallback because
-   Obsidian does not expose a public cell-padding variable.
+   variables, with narrowly scoped padding selectors for
+   Reading view and Live Preview table cells.
    ========================================================== */
 
 body {
@@ -12,13 +12,14 @@ body {
 }
 
 /* Cell padding is not part of Obsidian's documented table-variable
-   contract, so keep this direct selector narrow and presentation-only. */
+   contract, so target Reading cells and Live Preview .table-cell-wrapper
+   without adding outer padding to .cm-table-widget td/th. */
 .markdown-rendered table :is(th, td),
-.markdown-source-view.mod-cm6 table :is(th, td) {
-  padding: 4px 8px;
+.markdown-source-view.mod-cm6 .cm-table-widget .table-cell-wrapper {
+  padding: 3px 6px;
 }
 
 body.is-mobile .markdown-rendered table :is(th, td),
-body.is-mobile .markdown-source-view.mod-cm6 table :is(th, td) {
-  padding-inline: 6px;
+body.is-mobile .markdown-source-view.mod-cm6 .cm-table-widget .table-cell-wrapper {
+  padding-inline: 5px;
 }

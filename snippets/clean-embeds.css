@@ -1,37 +1,43 @@
 /* ==========================================================
    BLUE NIGHT — Clean Embeds Snippet
    Removes border boxes, embedded titles, and inner spacing
-   while keeping the source-note link available on hover/focus.
+   on note embeds while keeping the source-note link accessible.
    ========================================================== */
 
-.markdown-rendered .internal-embed {
+.markdown-embed {
+  --embed-padding: 0;
+  --embed-border-start: none;
+  --embed-border-end: none;
+  --embed-border-top: none;
+  --embed-border-bottom: none;
+  --embed-background: transparent;
   margin: 0;
-  padding: 0;
-  border: 0;
-  background-color: transparent;
 }
 
-.markdown-rendered .internal-embed .markdown-embed-title {
+.markdown-embed > .markdown-embed-title {
   display: none;
 }
 
-.markdown-rendered .internal-embed .markdown-embed-content {
+.markdown-embed > .markdown-embed-content {
   margin: 0;
   padding: 0;
 }
 
-/* Preserve the affordance for opening the embedded source note. */
-.markdown-rendered .internal-embed .markdown-embed-link {
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
+/* Keep the source-note link subtle on pointer hover and keyboard focus,
+   while staying visible on touch devices without hover. */
+@media (hover: hover) {
+  .markdown-embed .markdown-embed-link {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
 
-.markdown-rendered .internal-embed:is(:hover, :focus-within) .markdown-embed-link {
-  opacity: 1;
+  .markdown-embed:is(:hover, :focus-within) .markdown-embed-link {
+    opacity: 1;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .markdown-rendered .internal-embed .markdown-embed-link {
+  .markdown-embed .markdown-embed-link {
     transition: none;
   }
 }
