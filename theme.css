@@ -38,6 +38,10 @@ settings:
         value: bn-accent-pink
       - label: Peach
         value: bn-accent-peach
+      - label: Kodev Mist
+        value: bn-accent-kodev-mist
+      - label: Kodev Pulse
+        value: bn-accent-kodev-pulse
       - label: Custom
         value: bn-accent-custom
   - id: bn-custom-accent
@@ -75,6 +79,14 @@ settings:
         value: kodev-flavor-dark-oled
       - label: Cozy Pastels
         value: kodev-flavor-cozy-pastels
+      - label: Kodev Mist
+        value: kodev-flavor-kodev-mist
+      - label: Kodev Dusk
+        value: kodev-flavor-kodev-dusk
+      - label: Kodev Pulse
+        value: kodev-flavor-kodev-pulse
+      - label: Kodev Nocturne
+        value: kodev-flavor-kodev-nocturne
   - id: kodev-light-theme-flavor
     title: Light Mode Variant
     description: Choose the light canvas and panel palette.
@@ -88,6 +100,8 @@ settings:
         value: kodev-light-flavor-blue-mist
       - label: Cozy Pastels Light
         value: kodev-light-flavor-cozy-pastels-light
+      - label: Kodev Light
+        value: kodev-light-flavor-kodev-light
   - id: ui-heading
     title: UI Features
     type: heading
@@ -485,6 +499,18 @@ body.bn-accent-peach {
   --accent-l: 73%;
 }
 
+body.bn-accent-kodev-mist {
+  --accent-h: 210;
+  --accent-s: 43%;
+  --accent-l: 71%;
+}
+
+body.bn-accent-kodev-pulse {
+  --accent-h: 199;
+  --accent-s: 100%;
+  --accent-l: 58%;
+}
+
 body.bn-accent-custom {
   --accent-h: var(--bn-custom-accent-h, 218);
   --accent-s: var(--bn-custom-accent-s, 92%);
@@ -520,6 +546,14 @@ body.theme-light.bn-accent-pink {
 
 body.theme-light.bn-accent-peach {
   --accent-l: 30%;
+}
+
+body.theme-light.bn-accent-kodev-mist {
+  --accent-l: 35%;
+}
+
+body.theme-light.bn-accent-kodev-pulse {
+  --accent-l: 26%;
 }
 
 /* ==========================================================
@@ -769,6 +803,70 @@ body.kodev-flavor-cozy-pastels.theme-dark {
   --code-background: #262232;
 }
 
+body.kodev-flavor-kodev-mist.theme-dark {
+  --color-base-00: #0f172a;
+  --color-base-05: #131c2e;
+  --color-base-10: #172033;
+  --color-base-20: #1e293b;
+  --color-base-25: #263347;
+  --color-base-30: #334155;
+  --color-base-35: #415066;
+  --color-base-40: #4e5f77;
+  --color-base-50: #64748b;
+  --color-base-60: #8493a8;
+  --color-base-70: #a8b3c5;
+  --color-base-100: #e2e8f0;
+  --code-background: #161f32;
+}
+
+body.kodev-flavor-kodev-dusk.theme-dark {
+  --color-base-00: #070b16;
+  --color-base-05: #091325;
+  --color-base-10: #0a1a33;
+  --color-base-20: #102543;
+  --color-base-25: #183050;
+  --color-base-30: #223b59;
+  --color-base-35: #2f4b6c;
+  --color-base-40: #3b597c;
+  --color-base-50: #4b6b8b;
+  --color-base-60: #738aa8;
+  --color-base-70: #91a5bd;
+  --color-base-100: #dde7f2;
+  --code-background: #0c192f;
+}
+
+body.kodev-flavor-kodev-pulse.theme-dark {
+  --color-base-00: #020408;
+  --color-base-05: #06090e;
+  --color-base-10: #0a0d14;
+  --color-base-20: #141b29;
+  --color-base-25: #1d2638;
+  --color-base-30: #334155;
+  --color-base-35: #415066;
+  --color-base-40: #4e5f77;
+  --color-base-50: #64748b;
+  --color-base-60: #7b8ba3;
+  --color-base-70: #94a3b8;
+  --color-base-100: #f1f5f9;
+  --code-background: #0b101b;
+}
+
+body.kodev-flavor-kodev-nocturne.theme-dark {
+  --color-base-00: #020408;
+  --color-base-05: #05070c;
+  --color-base-10: #070a10;
+  --color-base-20: #0c1119;
+  --color-base-25: #161d28;
+  --color-base-30: #2c3540;
+  --color-base-35: #374250;
+  --color-base-40: #445060;
+  --color-base-50: #556273;
+  --color-base-60: #737f8f;
+  --color-base-70: #7e8998;
+  --color-base-100: #cbd2dc;
+  --code-background: #090d14;
+}
+
 body.kodev-light-flavor-blue-mist.theme-light {
   --color-base-00: #f1f5fb;
   --color-base-05: #edf2f9;
@@ -797,6 +895,21 @@ body.kodev-light-flavor-cozy-pastels-light.theme-light {
   --color-base-60: #7e6c85;
   --color-base-70: #604e66;
   --color-base-100: #422f47;
+}
+
+body.kodev-light-flavor-kodev-light.theme-light {
+  --color-base-00: #f8fafc;
+  --color-base-05: #f3f7fb;
+  --color-base-10: #eff3f8;
+  --color-base-20: #e2e8f0;
+  --color-base-25: #d6dfe9;
+  --color-base-30: #cbd5e1;
+  --color-base-35: #b9c6d6;
+  --color-base-40: #a3b3c6;
+  --color-base-50: #64748b;
+  --color-base-60: #56647a;
+  --color-base-70: #475569;
+  --color-base-100: #0f172a;
 }
 
 /* ==========================================================

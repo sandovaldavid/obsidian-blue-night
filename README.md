@@ -20,17 +20,18 @@ with the CSS-color contract introduced in Obsidian 1.13.
 
 - **Night Blue Palette** — deep `#0f1523` canvas with pastel accents in dark mode and a crisp
   bluish slate palette in light mode.
-- **Selectable Accent Flavors** — Blue Night, Sapphire, Lavender, Mauve, Teal, Pink, Peach, or
-  Custom. Every choice feeds the same native `--accent-h`, `--accent-s`, and `--accent-l`
-  variables used by Obsidian, so tabs, links, graph focus, tags, prompts, and Blue Night
-  enhancements stay synchronized. Named light-mode presets keep their hue while using
+- **Selectable Accent Flavors** — Blue Night, Sapphire, Lavender, Mauve, Teal, Pink, Peach,
+  Kodev Mist, Kodev Pulse, or Custom. Every choice feeds the same native `--accent-h`, `--accent-s`,
+  and `--accent-l` variables used by Obsidian, so tabs, links, graph focus, tags, prompts, and Blue
+  Night enhancements stay synchronized. Named light-mode presets keep their hue while using
   contrast-tuned lightness values.
 - **Catppuccin-Inspired Supporting Palette** — blue, lavender, cyan, green, yellow, peach, red, and
   pink remain available for syntax highlighting and semantic states regardless of the selected
   interactive accent. Light mode uses darker counterparts so text-level uses stay readable.
 - **Preset Flavors** — dark canvas variants (Blue Night, Midnight Navy, Storm Blue, Dark
-  Charcoal/OLED, Cozy Pastels) and light variants (Clean Blue, Blue Mist, Cozy Pastels Light)
-  without replacing the selected accent.
+  Charcoal/OLED, Cozy Pastels, Kodev Mist, Kodev Dusk, Kodev Pulse, Kodev Nocturne) and light
+  variants (Clean Blue, Blue Mist, Cozy Pastels Light, Kodev Light) without replacing the selected
+  accent.
 - **Pastel Syntax Highlighting** — Catppuccin-inspired code colors tuned for both modes.
 - **Minimalist SVG Icons** — embedded, fully offline icons for task checkboxes, file-explorer
   folders/files, and the vault name. Callouts intentionally retain Obsidian's native icon system
@@ -65,19 +66,20 @@ published to the gallery.
 Install the [Style Settings](https://github.com/obsidian-community/obsidian-style-settings) plugin
 to customize:
 
-- Accent Flavor: Blue Night, Sapphire, Lavender, Mauve, Teal, Pink, Peach, or Custom
+- Accent Flavor: Blue Night, Sapphire, Lavender, Mauve, Teal, Pink, Peach, Kodev Mist, Kodev Pulse,
+  or Custom
 - Custom Accent Color, used only when `Accent Flavor = Custom`
 - Preset canvas variants — dark: Blue Night, Midnight Navy, Storm Blue, Dark Charcoal/OLED, Cozy
-  Pastels; light: Clean Blue, Blue Mist, Cozy Pastels Light — plus custom editor backgrounds per
-  mode
+  Pastels, Kodev Mist, Kodev Dusk, Kodev Pulse, Kodev Nocturne; light: Clean Blue, Blue Mist,
+  Cozy Pastels Light, Kodev Light — plus custom editor backgrounds per mode
 - UI features: Raycast prompt, minimalist explorer, metadata card, folder guides, vault name icon
 - Content: premium headers, accent bullets, pill tags, circular checkboxes, IDE blockquotes
 - Status bar: floating pill and optional fade-until-hover behavior
 
 Accent flavors and canvas variants are intentionally independent. For example, you can use
-Midnight Navy with Sapphire, Storm Blue with Peach, Dark Charcoal/OLED with Mauve, or Blue Mist
-with Teal. The selected accent changes interactive emphasis while the Catppuccin-inspired
-supporting palette remains multi-color.
+Midnight Navy with Sapphire, Storm Blue with Peach, Dark Charcoal/OLED with Mauve, Kodev Mist
+with Kodev Mist, or Blue Mist with Teal. The selected accent changes interactive emphasis while the
+Catppuccin-inspired supporting palette remains multi-color.
 
 Blue Night still works without Style Settings; the plugin only exposes the optional controls.
 
@@ -143,8 +145,8 @@ light mode while keeping the same native HSL contract. The Custom picker writes 
 selected.
 
 Canvas variants form a second, independent axis. They override background/base palette tokens only;
-they never redefine the selected accent. This keeps the theme maintainable while allowing 40 dark
-and 24 light canvas/accent combinations without implementing 64 separate themes.
+they never redefine the selected accent. This keeps the theme maintainable while allowing 90 dark
+and 40 light canvas/accent combinations without implementing 130 separate themes.
 
 ## Contributing
 

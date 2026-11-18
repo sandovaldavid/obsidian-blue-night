@@ -1,6 +1,6 @@
 ---
 title: Blue Night Obsidian Theme Specification
-version: 4.3.0
+version: 4.4.0
 date_created: 2026-07-10
 date_updated: 2026-11-18
 tags: [design, app, theme, css, obsidian]
@@ -87,7 +87,9 @@ Blue Night exposes these Style Settings accent flavors:
 5. Teal — `171 / 47% / 69%`.
 6. Pink — `316 / 74% / 85%`.
 7. Peach — `21 / 86% / 73%` (`#f5a97f`).
-8. Custom — user-selected HSL values.
+8. Kodev Mist — `210 / 43% / 71%` (`#95b5d5`, contrast-tuned lightness over Kodev Mist `#6a96c3` so tinted active/selected states keep `>= 4.5:1`).
+9. Kodev Pulse — `199 / 100% / 58%` (`#29bbff`, contrast-tuned lightness over Kodev Pulse `#00b0ff` so tinted active/selected states keep `>= 4.5:1`).
+10. Custom — user-selected HSL values.
 
 The preset selector is a `class-select`. Each preset class may set **only** the native
 `--accent-h`, `--accent-s`, and `--accent-l` primitives. It must not introduce a second accent
@@ -97,15 +99,17 @@ Named presets may use mode-specific lightness values while preserving their hue/
 and the same native HSL sink. In light mode the bundled presets use these contrast-tuned lightness
 values:
 
-| Accent     | Light-mode `--accent-l` |
-| ---------- | ----------------------: |
-| Blue Night |                   `40%` |
-| Sapphire   |                   `29%` |
-| Lavender   |                   `51%` |
-| Mauve      |                   `46%` |
-| Teal       |                   `25%` |
-| Pink       |                   `34%` |
-| Peach      |                   `30%` |
+| Accent      | Light-mode `--accent-l` |
+| ----------- | ----------------------: |
+| Blue Night  |                   `40%` |
+| Sapphire    |                   `29%` |
+| Lavender    |                   `51%` |
+| Mauve       |                   `46%` |
+| Teal        |                   `25%` |
+| Pink        |                   `34%` |
+| Peach       |                   `30%` |
+| Kodev Mist  |                   `35%` |
+| Kodev Pulse |                   `26%` |
 
 This is not a second accent system: the light-mode rules still write only `--accent-l` and all
 consumers continue to resolve through the native `--accent-h/s/l` primitives. Custom remains
@@ -161,13 +165,21 @@ Dark canvas variants:
 3. Storm Blue — desaturated blue-gray surfaces for reduced visual intensity.
 4. Dark Charcoal / OLED — black and near-black surfaces.
 5. Cozy Pastels — warm slate/lilac surfaces.
+6. Kodev Mist — calm slate/navy surfaces from the Kodev workstation family (`canvas #0f172a`, elevated sidebar `#172033`, elevated panel `#1e293b`).
+7. Kodev Dusk — deeper navy Kodev variant (`#070b16` canvas, `#0a1a33` sidebar, `#102543` panel).
+8. Kodev Pulse — high-contrast near-black Kodev baseline (`#020408` canvas, `#0a0d14` sidebar, `#141b29` panel).
+9. Kodev Nocturne — low-chroma graphite Kodev variant (`#020408` canvas, `#070a10` sidebar, `#0c1119` panel).
 
 Reference surface tokens for the additional variants:
 
-| Variant       | Canvas    | Sidebar   | Surface   | Border    |
-| ------------- | --------- | --------- | --------- | --------- |
-| Midnight Navy | `#080d18` | `#060a12` | `#101827` | `#1d2a40` |
-| Storm Blue    | `#161b2a` | `#111622` | `#1d2435` | `#313a52` |
+| Variant        | Canvas    | Sidebar   | Surface   | Border    |
+| -------------- | --------- | --------- | --------- | --------- |
+| Midnight Navy  | `#080d18` | `#060a12` | `#101827` | `#1d2a40` |
+| Storm Blue     | `#161b2a` | `#111622` | `#1d2435` | `#313a52` |
+| Kodev Mist     | `#0f172a` | `#172033` | `#1e293b` | `#334155` |
+| Kodev Dusk     | `#070b16` | `#0a1a33` | `#102543` | `#223b59` |
+| Kodev Pulse    | `#020408` | `#0a0d14` | `#141b29` | `#334155` |
+| Kodev Nocturne | `#020408` | `#070a10` | `#0c1119` | `#2c3540` |
 
 ### 5.2 Light default
 
@@ -186,6 +198,7 @@ Light canvas variants:
 1. Clean Blue — default bluish white palette.
 2. Blue Mist — softer blue-tinted surfaces for lower contrast against white surroundings.
 3. Cozy Pastels Light — soft lilac/cream surfaces.
+4. Kodev Light — crisp Tailwind Slate surfaces from the Kodev workstation family (`#f8fafc` canvas, `#eff3f8` sidebar, `#e2e8f0` panel, `#cbd5e1` border).
 
 Blue Mist reference tokens:
 
@@ -213,14 +226,16 @@ dark-mode values as text colors.
 | `--bn-red`    | `#f2879b`  | `#c20e35`   | errors/tags                                 |
 | `--bn-pink`   | `#f5bde6`  | `#9f388b`   | decorative/special states                   |
 
-Choosing Sapphire, Lavender, Mauve, Teal, Pink, Peach, or a custom accent changes the interactive
-accent family. It must not flatten syntax highlighting or semantic states into a single color.
+Choosing Sapphire, Lavender, Mauve, Teal, Pink, Peach, Kodev Mist, Kodev Pulse, or a custom accent
+changes the interactive accent family. It must not flatten syntax highlighting or semantic states
+into a single color.
 
 ### 5.4 Canvas/accent matrix
 
-Canvas and accent selection are independent axes. With five dark canvases and eight accents, Blue
-Night supports 40 dark combinations. With three light canvases and eight accents, it supports 24
-light combinations. These are compositional combinations, not 64 separately maintained themes.
+Canvas and accent selection are independent axes. With nine dark canvases and ten accent options,
+Blue Night supports 90 dark combinations. With four light canvases and ten accent options, it
+supports 40 light combinations. These are compositional combinations, not 130 separately maintained
+themes.
 
 Canvas classes may override `--color-base-*` and directly related surface tokens such as
 `--code-background` and `--glass-bg`. Canvas classes must not set `--accent-h`, `--accent-s`, or
@@ -344,11 +359,13 @@ preferences across theme updates.
 
 Exposed settings:
 
-- accent flavor: Blue Night, Sapphire, Lavender, Mauve, Teal, Pink, Peach, or Custom;
+- accent flavor: Blue Night, Sapphire, Lavender, Mauve, Teal, Pink, Peach, Kodev Mist, Kodev Pulse,
+  or Custom;
 - custom accent color, active only through the Custom accent class;
 - custom dark/light editor background;
-- dark canvas: Blue Night, Midnight Navy, Storm Blue, Dark Charcoal/OLED, or Cozy Pastels;
-- light canvas: Clean Blue, Blue Mist, or Cozy Pastels Light;
+- dark canvas: Blue Night, Midnight Navy, Storm Blue, Dark Charcoal/OLED, Cozy Pastels, Kodev Mist,
+  Kodev Dusk, Kodev Pulse, or Kodev Nocturne;
+- light canvas: Clean Blue, Blue Mist, Cozy Pastels Light, or Kodev Light;
 - Raycast prompt;
 - minimalist explorer;
 - metadata card;
@@ -407,14 +424,17 @@ Before release, manually verify:
 - latest public Obsidian build;
 - latest Catalyst build when relevant;
 - dark/light modes;
-- Blue Night, Midnight Navy, Storm Blue, Dark Charcoal/OLED, and Cozy Pastels dark canvases;
-- Clean Blue, Blue Mist, and Cozy Pastels Light light canvases;
-- Blue Night, Sapphire, Lavender, Mauve, Teal, Pink, and Peach accent flavors;
+- Blue Night, Midnight Navy, Storm Blue, Dark Charcoal/OLED, Cozy Pastels, Kodev Mist, Kodev Dusk,
+  Kodev Pulse, and Kodev Nocturne dark canvases;
+- Clean Blue, Blue Mist, Cozy Pastels Light, and Kodev Light light canvases;
+- Blue Night, Sapphire, Lavender, Mauve, Teal, Pink, Peach, Kodev Mist, and Kodev Pulse accent
+  flavors;
 - Custom accent selection and picker changes;
 - switching repeatedly between presets and Custom without stale accent variables;
 - switching canvas variants without changing the selected accent;
 - representative cross-axis combinations: Midnight Navy + Sapphire, Storm Blue + Peach,
-  Dark Charcoal/OLED + Mauve, Cozy Pastels + Teal, and Blue Mist + Pink;
+  Dark Charcoal/OLED + Mauve, Cozy Pastels + Teal, Kodev Mist + Kodev Mist, Kodev Pulse + Kodev
+  Pulse, and Blue Mist + Pink;
 - bundled named accent text/selected-state contrast on every light canvas;
 - faint text, syntax comments, semantic support colors, and navigation icons on every canvas;
 - nested File Explorer folders with Folder Indent Guides enabled and disabled; guide position must
